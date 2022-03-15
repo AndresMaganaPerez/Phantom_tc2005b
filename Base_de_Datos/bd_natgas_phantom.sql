@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-03-2022 a las 03:13:41
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.2
+-- Tiempo de generación: 15-03-2022 a las 17:58:55
+-- Versión del servidor: 10.4.21-MariaDB
+-- Versión de PHP: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bd_natgas_phantom`
+-- Base de datos: `phantom_natgas`
 --
 
 -- --------------------------------------------------------
@@ -163,6 +163,19 @@ INSERT INTO `empleado` (`idEmpleado`, `email`, `nombre`, `apellidoPaterno`, `ape
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `empleado_rol`
+--
+
+CREATE TABLE `empleado_rol` (
+  `idEmpleado` int(11) NOT NULL,
+  `idRol` int(11) NOT NULL,
+  `fechaInicio` date NOT NULL,
+  `fechaFin` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `indicador`
 --
 
@@ -188,12 +201,45 @@ CREATE TABLE `natgasblocks` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `privilegios`
+--
+
+CREATE TABLE `privilegios` (
+  `idPrivilegio` int(11) NOT NULL,
+  `accion` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `recurso_digital`
 --
 
 CREATE TABLE `recurso_digital` (
   `url` varchar(200) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles`
+--
+
+CREATE TABLE `roles` (
+  `idRol` int(3) NOT NULL,
+  `descripcionRol` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `roles_privilegios`
+--
+
+CREATE TABLE `roles_privilegios` (
+  `idRol` int(11) NOT NULL,
+  `idPrivilegio` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -300,6 +346,13 @@ ALTER TABLE `empleado`
   ADD PRIMARY KEY (`idEmpleado`);
 
 --
+-- Indices de la tabla `empleado_rol`
+--
+ALTER TABLE `empleado_rol`
+  ADD KEY `index_idEmpleado` (`idEmpleado`),
+  ADD KEY `index_idRol` (`idRol`);
+
+--
 -- Indices de la tabla `indicador`
 --
 ALTER TABLE `indicador`
@@ -313,10 +366,29 @@ ALTER TABLE `natgasblocks`
   ADD KEY `idEmpleado` (`idEmpleado`);
 
 --
+-- Indices de la tabla `privilegios`
+--
+ALTER TABLE `privilegios`
+  ADD PRIMARY KEY (`idPrivilegio`);
+
+--
 -- Indices de la tabla `recurso_digital`
 --
 ALTER TABLE `recurso_digital`
   ADD PRIMARY KEY (`url`);
+
+--
+-- Indices de la tabla `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`idRol`);
+
+--
+-- Indices de la tabla `roles_privilegios`
+--
+ALTER TABLE `roles_privilegios`
+  ADD KEY `index_idRol` (`idRol`),
+  ADD KEY `index_idPrivilegio` (`idPrivilegio`);
 
 --
 -- Indices de la tabla `solicitudvacaciones`
@@ -379,6 +451,18 @@ ALTER TABLE `natgasblocks`
   MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `privilegios`
+--
+ALTER TABLE `privilegios`
+  MODIFY `idPrivilegio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `idRol` int(3) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `solicitudvacaciones`
 --
 ALTER TABLE `solicitudvacaciones`
@@ -422,10 +506,24 @@ ALTER TABLE `dirige`
   ADD CONSTRAINT `dirige_ibfk_2` FOREIGN KEY (`idLider`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `empleado_rol`
+--
+ALTER TABLE `empleado_rol`
+  ADD CONSTRAINT `fk_Empleado_Rol` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Rol_Empleado` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
   ADD CONSTRAINT `natgasblocks_ibfk_1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `roles_privilegios`
+--
+ALTER TABLE `roles_privilegios`
+  ADD CONSTRAINT `fk_Privilegio_Rol` FOREIGN KEY (`idPrivilegio`) REFERENCES `privilegios` (`idPrivilegio`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Rol_Privilegio` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `solicitudvacaciones`
