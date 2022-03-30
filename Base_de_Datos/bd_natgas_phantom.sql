@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 11:53 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 31-03-2022 a las 00:37:33
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bd_natgas_phantom`
+-- Base de datos: `bd_natgas_phantom`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Estructura de tabla para la tabla `admin`
 --
 
 CREATE TABLE `admin` (
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anuncios`
+-- Estructura de tabla para la tabla `anuncios`
 --
 
 CREATE TABLE `anuncios` (
@@ -52,7 +52,7 @@ CREATE TABLE `anuncios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `anuncios`
+-- Volcado de datos para la tabla `anuncios`
 --
 
 INSERT INTO `anuncios` (`IdAnuncios`, `Fecha`, `Titulo`, `Pin`, `expiracion`, `texto`) VALUES
@@ -80,7 +80,7 @@ INSERT INTO `anuncios` (`IdAnuncios`, `Fecha`, `Titulo`, `Pin`, `expiracion`, `t
 -- --------------------------------------------------------
 
 --
--- Table structure for table `anuncios_recurso_digital`
+-- Estructura de tabla para la tabla `anuncios_recurso_digital`
 --
 
 CREATE TABLE `anuncios_recurso_digital` (
@@ -89,10 +89,50 @@ CREATE TABLE `anuncios_recurso_digital` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `anuncios_recurso_digital`
+-- Volcado de datos para la tabla `anuncios_recurso_digital`
 --
 
 INSERT INTO `anuncios_recurso_digital` (`idAnuncios`, `url`) VALUES
+(13, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
+(16, 'https://cdn.businessinsider.es/sites/navi.axelspringer.es/public/styles/bi_570/public/media/image/2021/02/bi-2238511.jpg?itok=QqcsF0YZ'),
+(13, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(17, 'https://www.youtube.com/watch?v=dmcNbsLCpBQ'),
+(20, 'https://tierragamer.com/wp-content/uploads/2021/05/shrek.jpg'),
+(16, 'https://www.youtube.com/watch?v=r8xfzeD0ZK4'),
+(8, 'https://m.media-amazon.com/images/I/51w7koDjFsL._AC_.jpg'),
+(7, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(18, 'https://www.youtube.com/watch?v=dmcNbsLCpBQ'),
+(17, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+(15, 'https://www.youtube.com/watch?v=r8xfzeD0ZK4'),
+(20, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
+(4, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(2, 'https://www.youtube.com/watch?v=feA64wXhbjo'),
+(18, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(4, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(17, 'https://tierragamer.com/wp-content/uploads/2021/05/shrek.jpg'),
+(10, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(2, 'https://www.youtube.com/watch?v=feA64wXhbjo'),
+(3, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(13, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
+(16, 'https://cdn.businessinsider.es/sites/navi.axelspringer.es/public/styles/bi_570/public/media/image/2021/02/bi-2238511.jpg?itok=QqcsF0YZ'),
+(13, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(17, 'https://www.youtube.com/watch?v=dmcNbsLCpBQ'),
+(20, 'https://tierragamer.com/wp-content/uploads/2021/05/shrek.jpg'),
+(16, 'https://www.youtube.com/watch?v=r8xfzeD0ZK4'),
+(8, 'https://m.media-amazon.com/images/I/51w7koDjFsL._AC_.jpg'),
+(7, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(18, 'https://www.youtube.com/watch?v=dmcNbsLCpBQ'),
+(17, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+(15, 'https://www.youtube.com/watch?v=r8xfzeD0ZK4'),
+(20, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
+(4, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(2, 'https://www.youtube.com/watch?v=feA64wXhbjo'),
+(18, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(4, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(17, 'https://tierragamer.com/wp-content/uploads/2021/05/shrek.jpg'),
+(10, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(2, 'https://www.youtube.com/watch?v=feA64wXhbjo'),
+(3, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
 (13, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
 (16, 'https://cdn.businessinsider.es/sites/navi.axelspringer.es/public/styles/bi_570/public/media/image/2021/02/bi-2238511.jpg?itok=QqcsF0YZ'),
 (13, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
@@ -117,7 +157,7 @@ INSERT INTO `anuncios_recurso_digital` (`idAnuncios`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `area`
+-- Estructura de tabla para la tabla `area`
 --
 
 CREATE TABLE `area` (
@@ -126,7 +166,7 @@ CREATE TABLE `area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `area`
+-- Volcado de datos para la tabla `area`
 --
 
 INSERT INTO `area` (`idArea`, `nombre`) VALUES
@@ -144,7 +184,7 @@ INSERT INTO `area` (`idArea`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `area_empleado`
+-- Estructura de tabla para la tabla `area_empleado`
 --
 
 CREATE TABLE `area_empleado` (
@@ -155,10 +195,50 @@ CREATE TABLE `area_empleado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `area_empleado`
+-- Volcado de datos para la tabla `area_empleado`
 --
 
 INSERT INTO `area_empleado` (`idArea`, `idEmpleado`, `fechaInicio`, `fechaFin`) VALUES
+(1, 90995, '2019-02-02', '0000-00-00'),
+(1, 90978, '2019-02-03', NULL),
+(1, 90987, '2019-02-04', NULL),
+(4, 90967, '2019-02-05', NULL),
+(1, 90976, '2019-02-06', NULL),
+(1, 90954, '2019-02-07', NULL),
+(1, 90958, '2019-02-08', NULL),
+(1, 90972, '2019-02-09', NULL),
+(1, 90961, '2019-02-10', NULL),
+(1, 90984, '2019-02-11', NULL),
+(2, 90977, '1999-09-25', NULL),
+(3, 90421, '2021-02-06', NULL),
+(5, 90541, '2019-02-06', NULL),
+(6, 40201, '2019-02-06', NULL),
+(7, 9092421, '2019-02-05', NULL),
+(8, 90521, '2019-02-06', NULL),
+(9, 9094287, '2019-02-05', NULL),
+(10, 90920, '2020-02-06', NULL),
+(5, 90122, '2019-02-06', NULL),
+(7, 90155, '2019-02-02', NULL),
+(1, 90995, '2019-02-02', '0000-00-00'),
+(1, 90978, '2019-02-03', NULL),
+(1, 90987, '2019-02-04', NULL),
+(4, 90967, '2019-02-05', NULL),
+(1, 90976, '2019-02-06', NULL),
+(1, 90954, '2019-02-07', NULL),
+(1, 90958, '2019-02-08', NULL),
+(1, 90972, '2019-02-09', NULL),
+(1, 90961, '2019-02-10', NULL),
+(1, 90984, '2019-02-11', NULL),
+(2, 90977, '1999-09-25', NULL),
+(3, 90421, '2021-02-06', NULL),
+(5, 90541, '2019-02-06', NULL),
+(6, 40201, '2019-02-06', NULL),
+(7, 9092421, '2019-02-05', NULL),
+(8, 90521, '2019-02-06', NULL),
+(9, 9094287, '2019-02-05', NULL),
+(10, 90920, '2020-02-06', NULL),
+(5, 90122, '2019-02-06', NULL),
+(7, 90155, '2019-02-02', NULL),
 (1, 90995, '2019-02-02', '0000-00-00'),
 (1, 90978, '2019-02-03', NULL),
 (1, 90987, '2019-02-04', NULL),
@@ -183,7 +263,7 @@ INSERT INTO `area_empleado` (`idArea`, `idEmpleado`, `fechaInicio`, `fechaFin`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banners`
+-- Estructura de tabla para la tabla `banners`
 --
 
 CREATE TABLE `banners` (
@@ -193,7 +273,7 @@ CREATE TABLE `banners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `banners`
+-- Volcado de datos para la tabla `banners`
 --
 
 INSERT INTO `banners` (`idBanner`, `expiracion`, `fecha`) VALUES
@@ -221,7 +301,7 @@ INSERT INTO `banners` (`idBanner`, `expiracion`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `banners_recurso_digital`
+-- Estructura de tabla para la tabla `banners_recurso_digital`
 --
 
 CREATE TABLE `banners_recurso_digital` (
@@ -230,10 +310,50 @@ CREATE TABLE `banners_recurso_digital` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `banners_recurso_digital`
+-- Volcado de datos para la tabla `banners_recurso_digital`
 --
 
 INSERT INTO `banners_recurso_digital` (`idBanner`, `url`) VALUES
+(1, 'https://assets.entrepreneur.com/content/3x2/2000/1627801865-shutterstock-747539488.jpg'),
+(2, 'https://lh3.googleusercontent.com/TfNN8HLZbAQhTIUkzCAJUipWqwbIzbpvI-TAffSvC8F3-yu5EMjeAq50vXC9EF6iXSxs7TE4zPlZErmy0VFmATJdxDau9VBYPqlT9rdBfIacyaEkBn4Du9uPHelJG6ic8OhHMIg'),
+(3, 'https://lh3.googleusercontent.com/TfNN8HLZbAQhTIUkzCAJUipWqwbIzbpvI-TAffSvC8F3-yu5EMjeAq50vXC9EF6iXSxs7TE4zPlZErmy0VFmATJdxDau9VBYPqlT9rdBfIacyaEkBn4Du9uPHelJG6ic8OhHMIg'),
+(4, 'https://m.media-amazon.com/images/I/51w7koDjFsL._AC_.jpg'),
+(5, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
+(6, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(7, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(8, 'https://tierragamer.com/wp-content/uploads/2021/05/shrek.jpg'),
+(9, 'https://www.ricardosalinas.com/blog/images/fotoblogene2709.png'),
+(10, 'https://www.youtube.com/watch?v=0mYBSayCsH0'),
+(11, 'https://www.youtube.com/watch?v=djV11Xbc914'),
+(12, 'https://www.youtube.com/watch?v=dmcNbsLCpBQ'),
+(13, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+(14, 'https://www.youtube.com/watch?v=feA64wXhbjo'),
+(15, 'https://www.youtube.com/watch?v=L_jWHffIx5E'),
+(16, 'https://www.youtube.com/watch?v=NQSCKWfJlXs'),
+(17, 'https://www.youtube.com/watch?v=r8xfzeD0ZK4'),
+(18, 'https://www.youtube.com/watch?v=wDgQdr8ZkTw&list=PLaSAJFZNxXNG2HpJxD62eIHnYbyn1lsp_'),
+(19, 'https://www.youtube.com/watch?v=wDgQdr8ZkTw&list=PLaSAJFZNxXNG2HpJxD62eIHnYbyn1lsp_'),
+(20, 'https://www.youtube.com/watch?v=wDgQdr8ZkTw&list=PLaSAJFZNxXNG2HpJxD62eIHnYbyn1lsp_'),
+(1, 'https://assets.entrepreneur.com/content/3x2/2000/1627801865-shutterstock-747539488.jpg'),
+(2, 'https://lh3.googleusercontent.com/TfNN8HLZbAQhTIUkzCAJUipWqwbIzbpvI-TAffSvC8F3-yu5EMjeAq50vXC9EF6iXSxs7TE4zPlZErmy0VFmATJdxDau9VBYPqlT9rdBfIacyaEkBn4Du9uPHelJG6ic8OhHMIg'),
+(3, 'https://lh3.googleusercontent.com/TfNN8HLZbAQhTIUkzCAJUipWqwbIzbpvI-TAffSvC8F3-yu5EMjeAq50vXC9EF6iXSxs7TE4zPlZErmy0VFmATJdxDau9VBYPqlT9rdBfIacyaEkBn4Du9uPHelJG6ic8OhHMIg'),
+(4, 'https://m.media-amazon.com/images/I/51w7koDjFsL._AC_.jpg'),
+(5, 'https://momentum-prod-uploads.s3.amazonaws.com/wp-content/uploads/2017/09/Captura-de-pantalla-2017-09-18-a-las-12.53.41.png'),
+(6, 'https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg'),
+(7, 'https://storage.googleapis.com/natgas/eds/eds-qro-5-febrero_large.jpg'),
+(8, 'https://tierragamer.com/wp-content/uploads/2021/05/shrek.jpg'),
+(9, 'https://www.ricardosalinas.com/blog/images/fotoblogene2709.png'),
+(10, 'https://www.youtube.com/watch?v=0mYBSayCsH0'),
+(11, 'https://www.youtube.com/watch?v=djV11Xbc914'),
+(12, 'https://www.youtube.com/watch?v=dmcNbsLCpBQ'),
+(13, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+(14, 'https://www.youtube.com/watch?v=feA64wXhbjo'),
+(15, 'https://www.youtube.com/watch?v=L_jWHffIx5E'),
+(16, 'https://www.youtube.com/watch?v=NQSCKWfJlXs'),
+(17, 'https://www.youtube.com/watch?v=r8xfzeD0ZK4'),
+(18, 'https://www.youtube.com/watch?v=wDgQdr8ZkTw&list=PLaSAJFZNxXNG2HpJxD62eIHnYbyn1lsp_'),
+(19, 'https://www.youtube.com/watch?v=wDgQdr8ZkTw&list=PLaSAJFZNxXNG2HpJxD62eIHnYbyn1lsp_'),
+(20, 'https://www.youtube.com/watch?v=wDgQdr8ZkTw&list=PLaSAJFZNxXNG2HpJxD62eIHnYbyn1lsp_'),
 (1, 'https://assets.entrepreneur.com/content/3x2/2000/1627801865-shutterstock-747539488.jpg'),
 (2, 'https://lh3.googleusercontent.com/TfNN8HLZbAQhTIUkzCAJUipWqwbIzbpvI-TAffSvC8F3-yu5EMjeAq50vXC9EF6iXSxs7TE4zPlZErmy0VFmATJdxDau9VBYPqlT9rdBfIacyaEkBn4Du9uPHelJG6ic8OhHMIg'),
 (3, 'https://lh3.googleusercontent.com/TfNN8HLZbAQhTIUkzCAJUipWqwbIzbpvI-TAffSvC8F3-yu5EMjeAq50vXC9EF6iXSxs7TE4zPlZErmy0VFmATJdxDau9VBYPqlT9rdBfIacyaEkBn4Du9uPHelJG6ic8OhHMIg'),
@@ -258,20 +378,46 @@ INSERT INTO `banners_recurso_digital` (`idBanner`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dirige`
+-- Estructura de tabla para la tabla `dirige`
 --
 
 CREATE TABLE `dirige` (
   `idOperador` int(11) NOT NULL,
   `idLider` int(11) NOT NULL,
   `fechaInicio` date NOT NULL,
-  `fechaFin` date NOT NULL
+  `fechaFin` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `dirige`
+--
+
+INSERT INTO `dirige` (`idOperador`, `idLider`, `fechaInicio`, `fechaFin`) VALUES
+(90995, 90978, '2022-04-14', '0000-00-00'),
+(90976, 90920, '2019-10-15', NULL),
+(90920, 90961, '2019-03-12', NULL),
+(90958, 9092421, '2019-03-14', NULL),
+(90972, 90978, '2019-03-12', NULL),
+(90976, 90978, '2019-03-12', NULL),
+(90541, 90978, '2020-03-18', NULL),
+(90977, 90978, '2018-03-14', NULL),
+(90155, 90958, '0000-00-00', NULL),
+(90976, 90987, '2014-03-27', NULL),
+(90958, 90122, '2018-03-21', NULL),
+(90920, 90978, '2022-03-01', NULL),
+(90972, 40201, '2019-03-19', NULL),
+(9094287, 90978, '2019-03-18', NULL),
+(90987, 90541, '2019-03-26', NULL),
+(90122, 90978, '2022-03-08', NULL),
+(90958, 90987, '2022-03-02', NULL),
+(90961, 90978, '2014-03-19', NULL),
+(90155, 90978, '2022-03-08', NULL),
+(90984, 90978, '2022-03-23', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `empleado`
+-- Estructura de tabla para la tabla `empleado`
 --
 
 CREATE TABLE `empleado` (
@@ -292,7 +438,7 @@ CREATE TABLE `empleado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `empleado`
+-- Volcado de datos para la tabla `empleado`
 --
 
 INSERT INTO `empleado` (`idEmpleado`, `email`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `fechaNac`, `fechaIngr`, `numTelefonico`, `cantidadNatgasBlocks`, `antigüedad`, `vacacionesTotales`, `numVacacionesLey`, `numVacacionesPremio`, `plaza`) VALUES
@@ -320,7 +466,7 @@ INSERT INTO `empleado` (`idEmpleado`, `email`, `nombre`, `apellidoPaterno`, `ape
 -- --------------------------------------------------------
 
 --
--- Table structure for table `empleado_rol`
+-- Estructura de tabla para la tabla `empleado_rol`
 --
 
 CREATE TABLE `empleado_rol` (
@@ -333,7 +479,7 @@ CREATE TABLE `empleado_rol` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `natgasblocks`
+-- Estructura de tabla para la tabla `natgasblocks`
 --
 
 CREATE TABLE `natgasblocks` (
@@ -343,7 +489,7 @@ CREATE TABLE `natgasblocks` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `natgasblocks`
+-- Volcado de datos para la tabla `natgasblocks`
 --
 
 INSERT INTO `natgasblocks` (`idNatgasBlocks`, `idEmpleado`, `fechaSolicitud`) VALUES
@@ -367,6 +513,16 @@ INSERT INTO `natgasblocks` (`idNatgasBlocks`, `idEmpleado`, `fechaSolicitud`) VA
 (18, 90987, '2022-01-10'),
 (19, 90976, '2022-03-31'),
 (20, 90155, '2022-01-26'),
+(21, 90421, '2022-03-30'),
+(22, 90421, '2022-03-30'),
+(23, 90961, '2022-04-13'),
+(24, 90541, '2022-04-20'),
+(25, 90987, '2022-04-20'),
+(26, 90920, '2022-03-31'),
+(27, 9094287, '2022-03-09'),
+(28, 9092421, '2022-04-13'),
+(29, 9094287, '2022-03-01'),
+(30, 90155, '2022-04-26'),
 (31, 90961, '2022-03-29'),
 (32, 90972, '2022-03-08'),
 (33, 90122, '2022-03-22'),
@@ -381,12 +537,17 @@ INSERT INTO `natgasblocks` (`idNatgasBlocks`, `idEmpleado`, `fechaSolicitud`) VA
 (42, 90421, '2022-01-19'),
 (43, 90122, '2022-02-03'),
 (44, 9092421, '2022-03-15'),
-(45, 90541, '2022-03-14');
+(45, 90541, '2022-03-14'),
+(46, 9094287, '2022-04-27'),
+(47, 90978, '2022-04-12'),
+(48, 90984, '2022-05-18'),
+(49, 90976, '2022-03-31'),
+(50, 90521, '2022-04-12');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `privilegios`
+-- Estructura de tabla para la tabla `privilegios`
 --
 
 CREATE TABLE `privilegios` (
@@ -397,7 +558,7 @@ CREATE TABLE `privilegios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `recurso_digital`
+-- Estructura de tabla para la tabla `recurso_digital`
 --
 
 CREATE TABLE `recurso_digital` (
@@ -405,7 +566,7 @@ CREATE TABLE `recurso_digital` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `recurso_digital`
+-- Volcado de datos para la tabla `recurso_digital`
 --
 
 INSERT INTO `recurso_digital` (`url`) VALUES
@@ -433,7 +594,7 @@ INSERT INTO `recurso_digital` (`url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles`
+-- Estructura de tabla para la tabla `roles`
 --
 
 CREATE TABLE `roles` (
@@ -444,7 +605,7 @@ CREATE TABLE `roles` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roles_privilegios`
+-- Estructura de tabla para la tabla `roles_privilegios`
 --
 
 CREATE TABLE `roles_privilegios` (
@@ -455,7 +616,7 @@ CREATE TABLE `roles_privilegios` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solicitudvacaciones`
+-- Estructura de tabla para la tabla `solicitudvacaciones`
 --
 
 CREATE TABLE `solicitudvacaciones` (
@@ -465,35 +626,35 @@ CREATE TABLE `solicitudvacaciones` (
   `fechaFin` date NOT NULL,
   `fechaReanudacion` date NOT NULL,
   `fechaSolicitud` date NOT NULL,
-  `solicitudAceptadaEstatus` tinyint(1) DEFAULT NULL,
-  `Nota` text COLLATE utf8_spanish2_ci DEFAULT NULL
+  `solicitudAceptadaEstatus` tinyint(1) NOT NULL,
+  `Nota` text COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `solicitudvacaciones`
+-- Volcado de datos para la tabla `solicitudvacaciones`
 --
 
 INSERT INTO `solicitudvacaciones` (`idSolicitud`, `idEmpleado`, `fechaInicio`, `fechaFin`, `fechaReanudacion`, `fechaSolicitud`, `solicitudAceptadaEstatus`, `Nota`) VALUES
-(1, 90954, '2022-04-15', '2022-04-19', '2022-04-20', '2022-03-29', NULL, NULL),
-(2, 90521, '2022-05-10', '2022-05-14', '2022-05-16', '2022-03-29', NULL, NULL),
-(3, 90421, '2022-02-08', '2022-03-11', '2022-03-14', '2022-02-03', NULL, NULL),
-(4, 90977, '2022-01-11', '2022-03-13', '2022-03-14', '2022-02-28', NULL, NULL),
-(5, 90920, '2022-07-02', '2022-07-08', '2022-07-11', '2022-03-29', NULL, NULL),
-(6, 90995, '2022-03-30', '2022-04-04', '2022-04-05', '2022-03-22', NULL, NULL),
-(7, 9094287, '2021-12-24', '2022-01-02', '2022-01-03', '2021-12-18', NULL, NULL),
-(8, 90976, '2022-04-01', '2022-04-04', '2022-04-05', '2022-03-31', NULL, NULL),
-(9, 90978, '2022-04-11', '2022-03-18', '2022-03-21', '2022-03-29', NULL, NULL),
-(10, 90155, '2022-04-25', '2022-04-29', '2022-05-02', '2022-03-29', NULL, NULL),
-(11, 90954, '2022-03-02', '2022-03-04', '2022-03-07', '2022-03-01', 1, NULL),
-(12, 90421, '2022-01-03', '2022-01-07', '2022-01-10', '2021-12-30', 1, NULL),
-(13, 90920, '2022-02-17', '2022-02-21', '2022-02-22', '2022-02-14', NULL, NULL),
-(14, 90995, '2022-01-21', '2022-01-24', '2022-01-25', '2022-01-19', 1, NULL),
-(15, 90976, '2022-03-30', '2022-04-04', '2022-04-05', '2022-03-29', NULL, NULL),
-(16, 90961, '2022-02-14', '2022-02-16', '2022-02-17', '2022-02-01', 1, NULL),
-(17, 90984, '2022-04-08', '2022-04-11', '2022-04-12', '2022-03-30', NULL, NULL),
+(1, 90954, '2022-04-15', '2022-04-19', '2022-04-20', '2022-03-29', 0, ''),
+(2, 90521, '2022-05-10', '2022-05-14', '2022-05-16', '2022-03-29', 0, ''),
+(3, 90421, '2022-02-08', '2022-03-11', '2022-03-14', '2022-02-03', 0, ''),
+(4, 90977, '2022-01-11', '2022-03-13', '2022-03-14', '2022-02-28', 0, ''),
+(5, 90920, '2022-07-02', '2022-07-08', '2022-07-11', '2022-03-29', 0, ''),
+(6, 90995, '2022-03-30', '2022-04-04', '2022-04-05', '2022-03-22', 0, ''),
+(7, 9094287, '2021-12-24', '2022-01-02', '2022-01-03', '2021-12-18', 0, ''),
+(8, 90976, '2022-04-01', '2022-04-04', '2022-04-05', '2022-03-31', 0, ''),
+(9, 90978, '2022-04-11', '2022-03-18', '2022-03-21', '2022-03-29', 0, ''),
+(10, 90155, '2022-04-25', '2022-04-29', '2022-05-02', '2022-03-29', 0, ''),
+(11, 90954, '2022-03-02', '2022-03-04', '2022-03-07', '2022-03-01', 1, ''),
+(12, 90421, '2022-01-03', '2022-01-07', '2022-01-10', '2021-12-30', 1, ''),
+(13, 90920, '2022-02-17', '2022-02-21', '2022-02-22', '2022-02-14', 0, ''),
+(14, 90995, '2022-01-21', '2022-01-24', '2022-01-25', '2022-01-19', 1, ''),
+(15, 90976, '2022-03-30', '2022-04-04', '2022-04-05', '2022-03-29', 0, ''),
+(16, 90961, '2022-02-14', '2022-02-16', '2022-02-17', '2022-02-01', 1, ''),
+(17, 90984, '2022-04-08', '2022-04-11', '2022-04-12', '2022-03-30', 0, ''),
 (18, 90987, '2021-12-16', '2021-12-21', '2021-12-22', '2021-12-13', 0, 'No hay suplentes disponibles'),
-(19, 90972, '2022-02-21', '2022-02-22', '2022-02-23', '2022-02-18', NULL, NULL),
-(20, 90122, '2022-01-28', '2022-01-28', '2022-01-31', '2022-01-24', NULL, NULL),
+(19, 90972, '2022-02-21', '2022-02-22', '2022-02-23', '2022-02-18', 0, ''),
+(20, 90122, '2022-01-28', '2022-01-28', '2022-01-31', '2022-01-24', 0, ''),
 (21, 90961, '2021-03-07', '2021-03-14', '2021-03-15', '2021-03-01', 1, ''),
 (22, 90521, '2021-03-10', '2021-03-16', '2021-03-18', '2021-03-04', 1, ''),
 (23, 90421, '2021-06-09', '2021-06-15', '2021-06-17', '2021-06-06', 1, ''),
@@ -504,26 +665,31 @@ INSERT INTO `solicitudvacaciones` (`idSolicitud`, `idEmpleado`, `fechaInicio`, `
 (28, 90155, '2022-02-02', '2022-02-08', '2022-02-10', '2022-01-30', 1, ''),
 (29, 90541, '2021-03-20', '2021-03-26', '2021-03-27', '2021-03-15', 1, ''),
 (30, 90972, '2021-07-08', '2021-07-14', '2021-07-15', '2021-07-02', 1, ''),
-(31, 90421, '2022-05-09', '2022-05-16', '2022-05-17', '2022-03-29', NULL, NULL),
-(32, 90977, '2022-06-22', '2022-06-29', '2022-06-30', '2022-03-29', NULL, NULL),
-(33, 9092421, '2021-12-13', '2021-12-17', '2021-12-20', '2021-12-08', NULL, NULL),
-(34, 9094287, '2022-04-04', '2022-04-08', '2022-04-11', '2022-03-29', NULL, NULL),
-(35, 90967, '2022-03-30', '2022-04-06', '2022-04-07', '2022-03-22', NULL, NULL),
-(36, 90976, '2022-04-12', '2022-04-19', '2022-04-20', '2022-03-29', NULL, NULL),
-(37, 90976, '2022-05-12', '2022-05-16', '2022-05-17', '2022-03-30', NULL, NULL),
-(38, 90984, '2022-03-08', '2022-03-15', '2022-03-16', '2022-03-01', NULL, NULL),
-(39, 90920, '2022-05-11', '2022-05-18', '2022-05-19', '2022-03-29', NULL, NULL),
-(40, 90978, '2022-03-29', '2022-04-04', '2022-04-05', '2022-03-22', NULL, NULL),
-(41, 90521, '2022-02-14', '2022-02-14', '2022-02-15', '2022-02-11', 1, NULL),
-(42, 90977, '2022-01-12', '2022-01-12', '2022-01-13', '2022-01-10', 1, NULL),
-(43, 90541, '2022-03-18', '2022-03-25', '2022-03-28', '2022-03-01', NULL, NULL),
-(44, 40201, '2022-02-28', '2022-03-02', '2022-03-03', '2022-02-23', NULL, NULL),
-(45, 90958, '2022-01-19', '2022-01-21', '2022-01-24', '2022-01-17', NULL, NULL);
+(31, 90421, '2022-05-09', '2022-05-16', '2022-05-17', '2022-03-29', 0, ''),
+(32, 90977, '2022-06-22', '2022-06-29', '2022-06-30', '2022-03-29', 0, ''),
+(33, 9092421, '2021-12-13', '2021-12-17', '2021-12-20', '2021-12-08', 0, ''),
+(34, 9094287, '2022-04-04', '2022-04-08', '2022-04-11', '2022-03-29', 0, ''),
+(35, 90967, '2022-03-30', '2022-04-06', '2022-04-07', '2022-03-22', 0, ''),
+(36, 90976, '2022-04-12', '2022-04-19', '2022-04-20', '2022-03-29', 0, ''),
+(37, 90976, '2022-05-12', '2022-05-16', '2022-05-17', '2022-03-30', 0, ''),
+(38, 90984, '2022-03-08', '2022-03-15', '2022-03-16', '2022-03-01', 0, ''),
+(39, 90920, '2022-05-11', '2022-05-18', '2022-05-19', '2022-03-29', 0, ''),
+(40, 90978, '2022-03-29', '2022-04-04', '2022-04-05', '2022-03-22', 0, ''),
+(41, 90521, '2022-02-14', '2022-02-14', '2022-02-15', '2022-02-11', 1, ''),
+(42, 90977, '2022-01-12', '2022-01-12', '2022-01-13', '2022-01-10', 1, ''),
+(43, 90541, '2022-03-18', '2022-03-25', '2022-03-28', '2022-03-01', 0, ''),
+(44, 40201, '2022-02-28', '2022-03-02', '2022-03-03', '2022-02-23', 0, ''),
+(45, 90958, '2022-01-19', '2022-01-21', '2022-01-24', '2022-01-17', 0, ''),
+(46, 90984, '2022-03-31', '2022-04-11', '2022-04-12', '2022-05-18', 0, ''),
+(47, 90967, '2022-04-01', '2022-04-08', '2022-04-11', '2022-03-30', 0, ''),
+(48, 90976, '2022-06-02', '2022-06-08', '2022-06-09', '2022-05-03', 0, ''),
+(49, 90987, '2022-04-11', '2022-04-15', '2022-04-18', '2022-03-30', 0, ''),
+(50, 40201, '2022-06-15', '2022-06-20', '2022-06-21', '2022-04-14', 0, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_indicador`
+-- Estructura de tabla para la tabla `tipo_indicador`
 --
 
 CREATE TABLE `tipo_indicador` (
@@ -532,7 +698,7 @@ CREATE TABLE `tipo_indicador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `tipo_indicador`
+-- Volcado de datos para la tabla `tipo_indicador`
 --
 
 INSERT INTO `tipo_indicador` (`TipoIndicadorID`, `Nombre`) VALUES
@@ -544,7 +710,7 @@ INSERT INTO `tipo_indicador` (`TipoIndicadorID`, `Nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vacacioneslft`
+-- Estructura de tabla para la tabla `vacacioneslft`
 --
 
 CREATE TABLE `vacacioneslft` (
@@ -555,7 +721,7 @@ CREATE TABLE `vacacioneslft` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `vacacioneslft`
+-- Volcado de datos para la tabla `vacacioneslft`
 --
 
 INSERT INTO `vacacioneslft` (`idVacacionesLFT`, `diasCorrespondientes`, `añoInicio`, `añoFin`) VALUES
@@ -570,7 +736,7 @@ INSERT INTO `vacacioneslft` (`idVacacionesLFT`, `diasCorrespondientes`, `añoIni
 -- --------------------------------------------------------
 
 --
--- Table structure for table `valor_indicador`
+-- Estructura de tabla para la tabla `valor_indicador`
 --
 
 CREATE TABLE `valor_indicador` (
@@ -581,7 +747,7 @@ CREATE TABLE `valor_indicador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Dumping data for table `valor_indicador`
+-- Volcado de datos para la tabla `valor_indicador`
 --
 
 INSERT INTO `valor_indicador` (`ValorIndicadorID`, `TipoIndicadorID`, `Valor`, `fecha`) VALUES
@@ -607,262 +773,262 @@ INSERT INTO `valor_indicador` (`ValorIndicadorID`, `TipoIndicadorID`, `Valor`, `
 (20, 2, 'ADM 60\r\nOPE 40', '2021-12-22');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `admin`
+-- Indices de la tabla `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`idAdmin`);
 
 --
--- Indexes for table `anuncios`
+-- Indices de la tabla `anuncios`
 --
 ALTER TABLE `anuncios`
   ADD PRIMARY KEY (`IdAnuncios`);
 
 --
--- Indexes for table `anuncios_recurso_digital`
+-- Indices de la tabla `anuncios_recurso_digital`
 --
 ALTER TABLE `anuncios_recurso_digital`
   ADD KEY `idAnuncios` (`idAnuncios`),
   ADD KEY `url` (`url`);
 
 --
--- Indexes for table `area`
+-- Indices de la tabla `area`
 --
 ALTER TABLE `area`
   ADD PRIMARY KEY (`idArea`);
 
 --
--- Indexes for table `area_empleado`
+-- Indices de la tabla `area_empleado`
 --
 ALTER TABLE `area_empleado`
   ADD KEY `idArea` (`idArea`),
   ADD KEY `area_empleado_ibfk_2` (`idEmpleado`);
 
 --
--- Indexes for table `banners`
+-- Indices de la tabla `banners`
 --
 ALTER TABLE `banners`
   ADD PRIMARY KEY (`idBanner`);
 
 --
--- Indexes for table `banners_recurso_digital`
+-- Indices de la tabla `banners_recurso_digital`
 --
 ALTER TABLE `banners_recurso_digital`
   ADD KEY `idBanner` (`idBanner`),
   ADD KEY `url` (`url`);
 
 --
--- Indexes for table `dirige`
+-- Indices de la tabla `dirige`
 --
 ALTER TABLE `dirige`
   ADD KEY `idOperador` (`idOperador`),
   ADD KEY `idLider` (`idLider`);
 
 --
--- Indexes for table `empleado`
+-- Indices de la tabla `empleado`
 --
 ALTER TABLE `empleado`
   ADD PRIMARY KEY (`idEmpleado`);
 
 --
--- Indexes for table `empleado_rol`
+-- Indices de la tabla `empleado_rol`
 --
 ALTER TABLE `empleado_rol`
   ADD KEY `index_idEmpleado` (`idEmpleado`),
   ADD KEY `index_idRol` (`idRol`);
 
 --
--- Indexes for table `natgasblocks`
+-- Indices de la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
   ADD PRIMARY KEY (`idNatgasBlocks`),
   ADD KEY `idEmpleado` (`idEmpleado`);
 
 --
--- Indexes for table `privilegios`
+-- Indices de la tabla `privilegios`
 --
 ALTER TABLE `privilegios`
   ADD PRIMARY KEY (`idPrivilegio`);
 
 --
--- Indexes for table `recurso_digital`
+-- Indices de la tabla `recurso_digital`
 --
 ALTER TABLE `recurso_digital`
   ADD PRIMARY KEY (`url`);
 
 --
--- Indexes for table `roles`
+-- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`idRol`);
 
 --
--- Indexes for table `roles_privilegios`
+-- Indices de la tabla `roles_privilegios`
 --
 ALTER TABLE `roles_privilegios`
   ADD KEY `index_idRol` (`idRol`),
   ADD KEY `index_idPrivilegio` (`idPrivilegio`);
 
 --
--- Indexes for table `solicitudvacaciones`
+-- Indices de la tabla `solicitudvacaciones`
 --
 ALTER TABLE `solicitudvacaciones`
   ADD PRIMARY KEY (`idSolicitud`),
   ADD KEY `idEmpleado` (`idEmpleado`);
 
 --
--- Indexes for table `tipo_indicador`
+-- Indices de la tabla `tipo_indicador`
 --
 ALTER TABLE `tipo_indicador`
   ADD PRIMARY KEY (`TipoIndicadorID`);
 
 --
--- Indexes for table `vacacioneslft`
+-- Indices de la tabla `vacacioneslft`
 --
 ALTER TABLE `vacacioneslft`
   ADD PRIMARY KEY (`idVacacionesLFT`);
 
 --
--- Indexes for table `valor_indicador`
+-- Indices de la tabla `valor_indicador`
 --
 ALTER TABLE `valor_indicador`
   ADD PRIMARY KEY (`ValorIndicadorID`),
   ADD KEY `valor_indicador_ibfk_1` (`TipoIndicadorID`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
   MODIFY `idAdmin` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `anuncios`
+-- AUTO_INCREMENT de la tabla `anuncios`
 --
 ALTER TABLE `anuncios`
   MODIFY `IdAnuncios` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `area`
+-- AUTO_INCREMENT de la tabla `area`
 --
 ALTER TABLE `area`
   MODIFY `idArea` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `banners`
+-- AUTO_INCREMENT de la tabla `banners`
 --
 ALTER TABLE `banners`
   MODIFY `idBanner` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT for table `natgasblocks`
+-- AUTO_INCREMENT de la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
-  MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `privilegios`
+-- AUTO_INCREMENT de la tabla `privilegios`
 --
 ALTER TABLE `privilegios`
   MODIFY `idPrivilegio` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `roles`
+-- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `idRol` int(3) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `solicitudvacaciones`
+-- AUTO_INCREMENT de la tabla `solicitudvacaciones`
 --
 ALTER TABLE `solicitudvacaciones`
-  MODIFY `idSolicitud` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idSolicitud` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `tipo_indicador`
+-- AUTO_INCREMENT de la tabla `tipo_indicador`
 --
 ALTER TABLE `tipo_indicador`
   MODIFY `TipoIndicadorID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `vacacioneslft`
+-- AUTO_INCREMENT de la tabla `vacacioneslft`
 --
 ALTER TABLE `vacacioneslft`
   MODIFY `idVacacionesLFT` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `valor_indicador`
+-- AUTO_INCREMENT de la tabla `valor_indicador`
 --
 ALTER TABLE `valor_indicador`
   MODIFY `ValorIndicadorID` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `anuncios_recurso_digital`
+-- Filtros para la tabla `anuncios_recurso_digital`
 --
 ALTER TABLE `anuncios_recurso_digital`
   ADD CONSTRAINT `anuncios_recurso_digital_ibfk_1` FOREIGN KEY (`idAnuncios`) REFERENCES `anuncios` (`IdAnuncios`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `anuncios_recurso_digital_ibfk_2` FOREIGN KEY (`url`) REFERENCES `recurso_digital` (`url`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `area_empleado`
+-- Filtros para la tabla `area_empleado`
 --
 ALTER TABLE `area_empleado`
   ADD CONSTRAINT `area_empleado_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `area` (`idArea`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `area_empleado_ibfk_2` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`);
 
 --
--- Constraints for table `banners_recurso_digital`
+-- Filtros para la tabla `banners_recurso_digital`
 --
 ALTER TABLE `banners_recurso_digital`
   ADD CONSTRAINT `banners_recurso_digital_ibfk_1` FOREIGN KEY (`idBanner`) REFERENCES `banners` (`idBanner`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `banners_recurso_digital_ibfk_2` FOREIGN KEY (`url`) REFERENCES `recurso_digital` (`url`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `dirige`
+-- Filtros para la tabla `dirige`
 --
 ALTER TABLE `dirige`
   ADD CONSTRAINT `dirige_ibfk_1` FOREIGN KEY (`idOperador`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `dirige_ibfk_2` FOREIGN KEY (`idLider`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `empleado_rol`
+-- Filtros para la tabla `empleado_rol`
 --
 ALTER TABLE `empleado_rol`
   ADD CONSTRAINT `fk_Empleado_Rol` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Rol_Empleado` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `natgasblocks`
+-- Filtros para la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
   ADD CONSTRAINT `natgasblocks_ibfk_1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `roles_privilegios`
+-- Filtros para la tabla `roles_privilegios`
 --
 ALTER TABLE `roles_privilegios`
   ADD CONSTRAINT `fk_Privilegio_Rol` FOREIGN KEY (`idPrivilegio`) REFERENCES `privilegios` (`idPrivilegio`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_Rol_Privilegio` FOREIGN KEY (`idRol`) REFERENCES `roles` (`idRol`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `solicitudvacaciones`
+-- Filtros para la tabla `solicitudvacaciones`
 --
 ALTER TABLE `solicitudvacaciones`
   ADD CONSTRAINT `solicitudvacaciones_ibfk_1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `valor_indicador`
+-- Filtros para la tabla `valor_indicador`
 --
 ALTER TABLE `valor_indicador`
   ADD CONSTRAINT `valor_indicador_ibfk_1` FOREIGN KEY (`TipoIndicadorID`) REFERENCES `tipo_indicador` (`TipoIndicadorID`) ON DELETE CASCADE ON UPDATE CASCADE;
