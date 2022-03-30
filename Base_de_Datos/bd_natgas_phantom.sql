@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2022 a las 00:37:33
+-- Tiempo de generación: 31-03-2022 a las 00:51:04
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -35,6 +35,17 @@ CREATE TABLE `admin` (
   `noTelefono` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `admin`
+--
+
+INSERT INTO `admin` (`idAdmin`, `nombre`, `apellidoMaterno`, `apellidoPaterno`, `noTelefono`, `email`) VALUES
+(90456, 'Said', 'Trujillo', 'Ortigoza', '4427854565', 'admin1@natgas.com.mx'),
+(90457, 'Alvin', 'Estrada', 'Gomez', '4425644578', 'alvinistrador@natgas.com.mx'),
+(90458, 'Mortimer', 'Derteano', 'Ardor', '4427654565', 'mortderardor@natgas.com.mx'),
+(90459, 'Elba', 'Surero', 'Rojas', '4425678908', 'esurero@natgas.com.mx'),
+(90460, 'Lola', 'Mento', 'Gomez', '4424568976', 'lolamento@nagas.com.mx');
 
 -- --------------------------------------------------------
 
@@ -907,7 +918,7 @@ ALTER TABLE `valor_indicador`
 -- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `idAdmin` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idAdmin` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90461;
 
 --
 -- AUTO_INCREMENT de la tabla `anuncios`
