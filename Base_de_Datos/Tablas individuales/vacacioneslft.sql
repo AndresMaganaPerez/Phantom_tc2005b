@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 29-03-2022 a las 19:33:35
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 8.1.2
+-- Host: 127.0.0.1
+-- Generation Time: Mar 30, 2022 at 11:52 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bd_natgas_phantom`
+-- Database: `bd_natgas_phantom`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `vacacioneslft`
+-- Table structure for table `vacacioneslft`
 --
 
 CREATE TABLE `vacacioneslft` (
@@ -35,7 +35,7 @@ CREATE TABLE `vacacioneslft` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
--- Volcado de datos para la tabla `vacacioneslft`
+-- Dumping data for table `vacacioneslft`
 --
 
 INSERT INTO `vacacioneslft` (`idVacacionesLFT`, `diasCorrespondientes`, `añoInicio`, `añoFin`) VALUES
@@ -48,21 +48,21 @@ INSERT INTO `vacacioneslft` (`idVacacionesLFT`, `diasCorrespondientes`, `añoIni
 (7, 20, 6, 7);
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `vacacioneslft`
+-- Indexes for table `vacacioneslft`
 --
 ALTER TABLE `vacacioneslft`
   ADD PRIMARY KEY (`idVacacionesLFT`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `vacacioneslft`
+-- AUTO_INCREMENT for table `vacacioneslft`
 --
 ALTER TABLE `vacacioneslft`
   MODIFY `idVacacionesLFT` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
