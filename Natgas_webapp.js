@@ -52,7 +52,7 @@ app.use('/vacaciones', rutasVacaciones);
 app.use('/natgas_blocks', rutasNGB);
 app.use('/reportes', rutasReportes);
 app.use('/anuncios', rutasAnuncios);
-
+app.use('/banners', rutasBanners);
 
 //Middlewares
 app.use((request, response, next) => {
