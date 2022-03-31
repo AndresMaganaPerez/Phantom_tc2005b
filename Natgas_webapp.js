@@ -47,9 +47,11 @@ app.use((request, response, next) => {
 */
 
 //app.use de las rutas
+app.use('/', rutasVistaGeneral);
 app.use('/vacaciones', rutasVacaciones);
 app.use('/natgas_blocks', rutasNGB);
-app.use('/', rutasVistaGeneral);
+app.use('/reportes', rutasReportes);
+
 
 //Middlewares
 app.use((request, response, next) => {
