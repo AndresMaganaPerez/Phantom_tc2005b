@@ -51,6 +51,7 @@ app.use('/', rutasVistaGeneral);
 app.use('/vacaciones', rutasVacaciones);
 app.use('/natgas_blocks', rutasNGB);
 app.use('/reportes', rutasReportes);
+app.use('/anuncios', rutasAnuncios);
 
 
 //Middlewares
