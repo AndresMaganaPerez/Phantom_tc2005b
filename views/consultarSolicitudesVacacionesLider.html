@@ -22,15 +22,15 @@
             </div>
             <div style="display: inline-flex;">
             <a href="#user"><i class="material-icons medium">account_circle</i></a>
-            <h5 style="padding-left: 20px;">Diego Rodriguez</h5>
+            <h5 style="padding-left: 20px;">Pablo Arroyo</h5>
             </div> 
             <br>
             <ul>
             <li><a href="#">General</a></li>
             <li><a href="#">Indicadores</a></li>
             <li><a href="#">Anuncios</a></li>
-            <li><a href="#">Banner</a></li>
-            <li><a href="#">Registrar Empleados</a></li>
+            <li><a href="#">Solicitudes NGB</a></li>
+            <li><a href="#">Solicitudes Vacaciones</a></li>
             </ul>
         </div>
         <br>
@@ -44,93 +44,124 @@
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons small" style="padding: 20px;">menu</i></a>
 
-    <h3 style="text-align: center;">SOLICITUDES DE VACACIONES</h3>
-    <div>
-        <div class="col s12 m2 l13" style="display: flex; justify-content: center; padding-top: 20px; padding-bottom: 20px;">
-            <a class="waves-effect waves-light btn-large blue lighten2" style="border-radius: 10px; width: 600px">Solicitar mis Vacaciones</a>
+    <h4 id = 'vacaciones'>Solicitudes de Vacaciones</h4>
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m8 l13">
+            <a class='btn-large blue' href='#'>Realizar Mi Solicitud</a>
         </div>
     </div>
-    <div>
-        <div class="col s12 m2 l13" style="display: flex; justify-content: center; padding-top: 20px; padding-bottom: 20px;">
-        <!-- Dropdown Trigger -->
-        <a class='dropdown-trigger btn-large blue' data-target='dropdown1' style="border-radius: 15px; margin-right: 50px;">Mes</a>
-        <a class='dropdown-trigger btn-large blue' data-target='dropdown2' style="border-radius: 15px;">Area</a>
-
-        <!-- Dropdown Structure -->
-        <ul id='dropdown1' class='dropdown-content'>
-            <li><a href="#!">Enero</a></li>
-            <li><a href="#!">Febrero</a></li>
-            <li><a href="#!">Marzo</a></li>
-            <li><a href="#!">Abril</a></li>
-            <li><a href="#!">Mayo</a></li>
-            <li><a href="#!">Junio</a></li>
-            <li><a href="#!">Julio</a></li>
-            <li><a href="#!">Agosto</a></li>
-            <li><a href="#!">Septiembre</a></li>
-            <li><a href="#!">Octubre</a></li>
-            <li><a href="#!">Noviembre</a></li>
-            <li><a href="#!">Diciembre</a></li>
-        </ul>
-        <ul id='dropdown2' class='dropdown-content'>
-            <li><a href="#!">TYC</a></li>
-            <li><a href="#!">NATDEV</a></li>
-            <li><a href="#!">Commercio</a></li>
-        </ul>
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m8 l13">
+            <div class="card" style="border-radius: 15px;">
+                <div class="card-content" style="padding: 10px;">
+                    <span class="card-title activator black-text text-darken-4 center "><h6 id = 'hr'>10:15</h6></span>
+                    <div class="row">
+                        <div class="col s12 m7 l13">
+                            <span class = 'txt'><h5>Solicitud Jul 12 - Jul 16</h5></span>
+                        </div>
+                        <div class="col s12 m2 l13">
+                            <a class="btn-large tooltipped green" data-position="bottom" data-tooltip="Rechazada">Aceptar</a>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m7 l13"></div>
+                        <div class="col s12 m2 l13">
+                            <a class="btn-large tooltipped red" data-position="bottom" data-tooltip="Rechazada">Rechazar</a>
+                        </div>
+                    </div>
+                    <span class = 'txt2'><h6>Jul 12 - Jul 16</h6></span> 
+                </div>
+                <div class="card-image waves-effect waves-block waves-light">
+                   
+                </div>
+                <!--<div class="card-content">
+                    <p><a href="#">Ver Reportes</a></p>
+                </div>-->
+            </div>
         </div>
     </div>
-<div class="row">
-    <div class="col s12 m2 l13"></div>
-        <div class="col s12 m8 l13">
-            <div class="card" style="border-radius: 15px;">
-                <p style="padding-top: 20px; padding-left: 20px;">10:35</p>
-                <div class="card-content" style="padding-top: 1px; display: flex;">
-                    <span class="card-title activator black-text text-darken-4"><h5 style="padding-right: 250px;">Solicitud Vacacion</h5></span>
-                    <a class="waves-effect waves-light btn-large green lighten2" style="border-radius: 10px;">Aprovar</a>
-                </div>
-                <div class="card-content" style="padding-top: 1px; display: flex;">
-                    <a class="waves-effect waves-light btn-large red lighten2" style="border-radius: 10px;">Rechazar</a>
-                </div>
-                <div class="card-content center" style="padding-top: 1px;">
-                    <p style="text-align: left;">Jul 15 - Jul 21</p>
-                </div>
-                
-            </div>
-        </div>      
-</div>
 
-<div class="row">
-    <div class="col s12 m2 l13"></div>
-        <div class="col s12 m8 l13">
-            <div class="card" style="border-radius: 15px;">
-                <p style="padding-top: 20px; padding-left: 20px;">10:35</p>
-                <div class="card-content" style="padding-top: 1px; display: flex;">
-                    <span class="card-title activator black-text text-darken-4"><h5 style="padding-right: 250px;">Solicitud Vacacion</h5></span>
-                    <a class="waves-effect waves-light btn-large red lighten2" style="border-radius: 10px;">Rechazar</a>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <div class="col s12 m8 l13">
+                <div class="card" style="border-radius: 15px;">
+                    <div class="card-content" style="padding: 10px;">
+                        <span class="card-title activator black-text text-darken-4 center "><h6 id = 'hr'>10:15</h6></span>
+                        <div class="row">
+                            <div class="col s12 m7 l13">
+                                <span class = 'txt'><h5>Solicitud Abr 10 - Abr 15</h5></span>
+                            </div>
+                            <div class="col s12 m2 l13">
+                                <a class="btn-large tooltipped green" data-position="bottom" data-tooltip="Aceptada">Aceptar</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m7 l13"></div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m7 l13"></div>
+                            <div class="col s12 m2 l13">
+                                <a class="btn-large tooltipped red" data-position="bottom" data-tooltip="Rechazada">Rechazar</a>
+                            </div>
+                        </div>
+                        <span class = 'txt2'><h6>Abr 10 - Abr 15</h6></span>
+                         
+                    </div>
+                    <div class="card-image waves-effect waves-block waves-light">
+                       
+                    </div>
+                    <!--<div class="card-content">
+                        <p><a href="#">Ver Reportes</a></p>
+                    </div>-->
                 </div>
-                <div class="card-content center" style="padding-top: 1px;">
-                    <p style="text-align: left;">Abr 2 -Abr 6</p>
-                </div>
-                
             </div>
-        </div>      
-</div>
+            <div class="col s12 m5 l13">
+                <div class="card blue darken-3" style="border-radius: 10px; margin-left: 60px;">
+                        <div class="card-image waves-effect waves-block waves-light">
+                    </div>
+                    <!--<div class="card-content">
+                        <p><a href="#">Ver Reportes</a></p>
+                    </div>-->
+                </div>
+            </div>
+        </div>
 
-<div class="row">
-    <div class="col s12 m2 l13"></div>
-        <div class="col s12 m8 l13">
-            <div class="card" style="border-radius: 15px;">
-                <p style="padding-top: 20px; padding-left: 20px;">10:35</p>
-                <div class="card-content" style="padding-top: 1px; display: flex;">
-                    <span class="card-title activator black-text text-darken-4"><h5 style="padding-right: 250px;">Solcitud Vacacion</h5></span>
-                    <a class="waves-effect waves-light btn-large green lighten2" style="border-radius: 10px;">Aprovar</a>
+
+            <div class="row">
+                <div class="col s12 m2 l13"></div>
+                <div class="col s12 m8 l13">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-content" style="padding: 10px;">
+                            <span class="card-title activator black-text text-darken-4 center "><h6 id = 'hr'>10:15</h6></span>
+                            <div class="row">
+                                <div class="col s12 m7 l13">
+                                    <span class = 'txt'><h5>Solicitud Feb 10 - Feb 15</h5></span>
+                                </div>
+                                <div class="col s12 m2 l13">
+                                    <a class="btn-large tooltipped green" data-position="bottom" data-tooltip="Rechazada">Aceptar</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m7 l13"></div>
+                                <div class="col s12 m2 l13">
+                                    <a class="btn-large tooltipped red" data-position="bottom" data-tooltip="Rechazada">Rechazar</a>
+                                </div>
+                            </div>
+                            <span class = 'txt2'><h6>Feb 10 - Feb 15</h6></span> 
+                        </div>
+                        <div class="card-image waves-effect waves-block waves-light">
+                           
+                        </div>
+                        <!--<div class="card-content">
+                            <p><a href="#">Ver Reportes</a></p>
+                        </div>-->
+                    </div>
                 </div>
-                <div class="card-content center" style="padding-top: 1px;">
-                    <p style="text-align: left;">May 22 - May 31</p>
-                </div>
-                
             </div>
-        </div>      
-</div>
 
     <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
