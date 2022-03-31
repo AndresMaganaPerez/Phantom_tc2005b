@@ -6,4 +6,5 @@ exports.solicitarVacaciones = (request, response, next) => {
 exports.solicitudesVacaciones = (request, response, next) => {
     console.log(request.body);
     console.log("Solicitudes de vacaciones");
+    response.render('consultarSolicitudesVacacionesAdmin');
 };
