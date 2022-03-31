@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
+    <!-- Sidebar Menu -->
     <ul id="slide-out" class="sidenav">
         <li>
         <div class="user-view">
@@ -41,36 +42,35 @@
     </ul>
     <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons small" style="padding: 20px;">menu</i></a>
 
-    <h3 style="text-align: center; padding-bottom: 15px;">MI SOLICITUD DE VACACIONES</h3>
-
-    <h5 style = "text-align: center;">Vacaciones disponibles:</h5>
-    <p style = "text-align: center;">7</p>
-
-    <h5 style = "text-align: center;">Fecha de la solicitud:</h5>
-    <p style = "text-align: center;">DD/MM/AAAA</p>
-
-    <main style = "display: flex; justify-content: space-around; margin-left: 150px; margin-right: 150px;">
+    <!-- Nueva Solicitud de Vacaciones -->
+    <div class="container">
+        <h3 style="text-align: center; padding-bottom: 15px;">MI SOLICITUD DE VACACIONES</h3>
+                <p style = "text-align: center">Fecha de la solicitud: dd/mm/aa</p>
+        <h5 style = "text-align: center">Vacaciones disponibles:</h5>
+        <h5 style = "text-align: center">7</h5>
         <div>
             <h5>Fecha inicio</h5>
             <input type="text" class="datepicker" placeholder="MM-DD-AAAA">
         </div>
-
         <div>
             <h5>Fecha fin</h5>
             <input type="text" class="datepicker" placeholder="MM-DD-AAAA">
         </div>
-
         <div>
             <h5>Fecha reanudación</h5>
             <input type="text" class="datepicker" placeholder="MM-DD-AAAA">
         </div>
-    </main>
+        <h5>Suplente:</h5>
+        <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate">
+        <br>
+        <br>
 
-    <h5 style="margin-left: 50px;">Suplente:</h5>
-    <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" style="width: 1230px; margin-left: 50px;">
-    <br>
-    <a class="waves-effect waves-light btn" style="margin-top: 20px; background-color: green; margin-left: 1200px;">Enviar</a>
-    
+        <div class="col s12 m8 l13"></div>
+        <div class="col s12 m2 l13">
+            <a class="waves-effect waves-light btn" style="background-color:green; margin-bottom: 50px">Enviar</a>
+        </div>
+    </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
