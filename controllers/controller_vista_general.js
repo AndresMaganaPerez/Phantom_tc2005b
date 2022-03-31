@@ -5,5 +5,5 @@ exports.vistaGeneral = (request, response, next) => {
 
 exports.perfil = (request, response, next) => {
     console.log(request.body);
-    response.render('vistaPerfilLider');
+    response.render('vistaPerfilAdmin');
 };
