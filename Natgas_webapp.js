@@ -17,6 +17,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
+//Importar las rutas
+const rutasVistaGeneral = require('./routes/routes_vista_general');
+const rutasVacaciones = require('./routes/routes_vacaciones');
+const rutasNGB = require ('./routes/routes_natgasBlock');
+const rutasReportes = require('./routes/routes_reportes');
+const rutasAnuncios = require('./routes/routes_anuncios');
+const rutasBanners = require('./routes/routes_banner');
+const { request } = require('http');
+const { response } = require('express');
+
+
 //Control de sesiones
 /*
 app.use(session({
@@ -35,6 +46,14 @@ app.use((request, response, next) => {
 }); 
 */
 
+//app.use de las rutas
+app.use('/', rutasVistaGeneral);
+app.use('/vacaciones', rutasVacaciones);
+app.use('/natgas_blocks', rutasNGB);
+app.use('/reportes', rutasReportes);
+app.use('/anuncios', rutasAnuncios);
+app.use('/banners', rutasBanners);
+
 //Middlewares
 app.use((request, response, next) => {
     next();
@@ -46,4 +65,4 @@ app.use((request, response, next) => {
     response.send('<h1>La ruta que buscas no existe</h1>');
 });
 
-app.listen(1500);
+app.listen(5000);
