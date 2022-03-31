@@ -19,6 +19,7 @@ app.set('views', 'views');
 
 //Importar las rutas
 const rutasVistaGeneral = require('./routes/routes_vista_general');
+const rutasPerfil = require('./routes/routes_perfil');
 const rutasVacaciones = require('./routes/routes_vacaciones');
 const rutasNGB = require ('./routes/routes_natgasBlock');
 const rutasReportes = require('./routes/routes_reportes');
@@ -48,6 +49,7 @@ app.use((request, response, next) => {
 
 //app.use de las rutas
 app.use('/', rutasVistaGeneral);
+app.use('/perfil', rutasPerfil);
 app.use('/vacaciones', rutasVacaciones);
 app.use('/natgas_blocks', rutasNGB);
 app.use('/reportes', rutasReportes);
