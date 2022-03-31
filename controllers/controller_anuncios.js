@@ -1,6 +1,6 @@
 exports.anuncios = (request, response, next) => {
     console.log("Anuncios");
-    response.render('anunciosAdmin');
+    response.render('anunciosOperador');
 };
 
 exports.nuevoAnuncio = (requrest, respone, next) => {
