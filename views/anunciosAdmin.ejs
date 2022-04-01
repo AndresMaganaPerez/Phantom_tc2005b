@@ -1,13 +1,41 @@
 <%- include('includes/sideBarAdmin.ejs') %>
+    <ul id="slide-out" class="sidenav">
+        <li>
+        <div class="user-view">
+            <div>
+            <img src="https://pbs.twimg.com/media/DSA7yP3VAAAsiUM.png" style="width: 201px; height: 85px; margin-bottom: 20px;">
+            </div>
+            <div style="display: inline-flex;">
+            <a href="#user"><i class="material-icons medium">account_circle</i></a>
+            <h5 style="padding-left: 20px;">Diego Rodriguez</h5>
+            </div> 
+            <br>
+            <ul>
+            <li><a href="#">General</a></li>
+            <li><a href="#">Indicadores</a></li>
+            <li><a href="#">Anuncios</a></li>
+            <li><a href="#">Banner</a></li>
+            <li><a href="#">Registrar Empleados</a></li>
+            </ul>
+        </div>
+        <br>
+        </li>
+        <div style="position: absolute; bottom: 10%;">
+        <a href="#" style="padding-left: 50px; display: inline-flex;">
+            <i class="material-icons small">exit_to_app</i>
+            <h6 style="padding-left: 5px;">Cerrar Sesión</h6>
+        </a>
+        </div>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons small" style="padding: 20px;">menu</i></a>
+
     <h3 style="text-align: center;">ANUNCIOS</h3>
 
 
     <div class="row" style="margin-bottom: 10px;">
         <div class="col s12 m8 l13"></div>
         <div class="col s12 m2 l13">
-            <a class="waves-effect waves-light btn-large blue"
-                style="border-radius: 10px; width: 200px; margin-bottom: 10px; margin-left: 20px;"><span
-                    style="font-weight: bolder; font-size: x-large;">+</span> Anuncio</a><br>
+            <a class="waves-effect waves-light btn-large blue" style="border-radius: 10px; width: 200px; margin-bottom: 10px; margin-left: 20px;"><span style="font-weight: bolder; font-size: x-large;">+</span> Anuncio</a><br>
         </div>
     </div>
 
@@ -18,31 +46,24 @@
             <div class="card" style="border-radius: 15px;">
                 <div class="card-content" style="padding: 10px;">
                     <div class="row" style="margin-bottom: 10px;">
-                        <div class="col s12 m8 l13">
-                            <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;">
-                                <h4>Titulo de Anuncio</h4>
-                            </span>
+                        <div class="col s8 m6 l6">
+                            <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4>Titulo de Anuncio</h4></span>
                         </div>
-                        <div class="col s12 m2 l13">
-                            <span class="card-title activator black-text text-darken-4"
-                                style="margin-top: 10px;margin-left: 180px;">
-                                <h8>3/30/2022</h8>
-                            </span>
+                        <div class="col s2 m4 l4"></div>
+                        <div class="col s2 m2 l2">
+                            <span class="card-title activator black-text text-darken-4" style="margin-top: 10px;"><h8 class="flow-text">3 / 30 / 2022</h8></span>
                         </div>
                     </div>
-
+                    
                 </div>
                 <div class="card-content" style="padding-top:0px; padding-left: 30px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum reiciendis aut ducimus itaque!
-                        Cupiditate omnis, nulla explicabo,
-                        laborum, dolore tenetur deserunt consequatur nam unde amet molestiae ratione odit numquam iure?
-                    </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum reiciendis aut ducimus itaque! Cupiditate omnis, nulla explicabo, 
+                        laborum, dolore tenetur deserunt consequatur nam unde amet molestiae ratione odit numquam iure?</p>
                 </div>
                 <div class="row" style="margin-bottom: 10px;">
-                    <div class="col s12 m8 l13"></div>
-                    <div class="col s12 m2 l13">
-                        <a class="waves-effect waves-light btn-large blue"
-                            style="border-radius: 10px; width: 200px; margin-bottom: 10px; margin-left: 100px;">Modificar</a><br>
+                    <!-- <div class="col s12 m9 l13"></div> -->
+                    <div class="col s12 m12 l13 center">
+                        <a class="waves-effect waves-light btn-large blue" style="border-radius: 10px; width: 200px; margin-bottom: 10px;">Modificar</a><br>
                     </div>
                 </div>
             </div>
@@ -56,36 +77,30 @@
             <div class="card" style="border-radius: 15px;">
                 <div class="card-content" style="padding: 10px;">
                     <div class="row" style="margin-bottom: 10px;">
-                        <div class="col s12 m8 l13">
-                            <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;">
-                                <h4>Titulo de Anuncio</h4>
-                            </span>
+                        <div class="col s8 m6 l6">
+                            <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4>Titulo de Anuncio</h4></span>
                         </div>
-                        <div class="col s12 m2 l13">
-                            <span class="card-title activator black-text text-darken-4"
-                                style="margin-top: 10px; margin-left: 180px;">
-                                <h8>3/30/2022</h8>
-                            </span>
+                        <div class="col s2 m4 l4"></div>
+                        <div class="col s2 m2 l2">
+                            <span class="card-title activator black-text text-darken-4" style="margin-top: 10px;"><h8 class="flow-text">3 / 30 / 2022</h8></span>
                         </div>
                     </div>
-
+                    
                 </div>
                 <div class="card-content" style="padding-top:0px; padding-left: 30px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum reiciendis aut ducimus itaque!
-                        Cupiditate omnis, nulla explicabo,
-                        laborum, dolore tenetur deserunt consequatur nam unde amet molestiae ratione odit numquam iure?
-                    </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum reiciendis aut ducimus itaque! Cupiditate omnis, nulla explicabo, 
+                        laborum, dolore tenetur deserunt consequatur nam unde amet molestiae ratione odit numquam iure?</p>
                 </div>
                 <div class="row" style="margin-bottom: 10px;">
-                    <div class="col s12 m8 l13"></div>
-                    <div class="col s12 m2 l13">
-                        <a class="waves-effect waves-light btn-large blue"
-                            style="border-radius: 10px; width: 200px; margin-bottom: 10px; margin-left: 100px;">Modificar</a><br>
+                    <!-- <div class="col s8 m9 l13"></div> -->
+                    <div class="col s12 m12 l13 center">
+                        <a class="waves-effect waves-light btn-large blue" style="border-radius: 10px; width: 200px; margin-bottom: 10px;">Modificar</a><br>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <div class="row">
@@ -94,35 +109,27 @@
             <div class="card" style="border-radius: 15px;">
                 <div class="card-content" style="padding: 10px;">
                     <div class="row" style="margin-bottom: 10px;">
-                        <div class="col s12 m8 l13">
-                            <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;">
-                                <h4>Titulo de Anuncio</h4>
-                            </span>
+                        <div class="col s8 m6 l6">
+                            <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4>Titulo de Anuncio</h4></span>
                         </div>
-                        <div class="col s12 m2 l13">
-                            <span class="card-title activator black-text text-darken-4"
-                                style="margin-top: 10px; margin-left: 180px;">
-                                <h8>3/30/2022</h8>
-                            </span>
+                        <div class="col s2 m4 l4"></div>
+                        <div class="col s2 m2 l2">
+                            <span class="card-title activator black-text text-darken-4" style="margin-top: 10px;"><h8 class="flow-text">3 / 30 / 2022</h8></span>
                         </div>
                     </div>
-
+                    
                 </div>
                 <div class="card-content" style="padding-top:0px; padding-left: 30px;">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum reiciendis aut ducimus itaque!
-                        Cupiditate omnis, nulla explicabo,
-                        laborum, dolore tenetur deserunt consequatur nam unde amet molestiae ratione odit numquam iure?
-                    </p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum reiciendis aut ducimus itaque! Cupiditate omnis, nulla explicabo, 
+                        laborum, dolore tenetur deserunt consequatur nam unde amet molestiae ratione odit numquam iure?</p>
                 </div>
                 <div class="row" style="margin-bottom: 10px;">
-                    <div class="col s12 m8 l13"></div>
-                    <div class="col s12 m2 l13">
-                        <a class="waves-effect waves-light btn-large blue"
-                            style="border-radius: 10px; width: 200px; margin-bottom: 10px; margin-left: 100px;">Modificar</a><br>
+                    <!-- <div class="col s8 m9 l13"></div> -->
+                    <div class="col s12 m12 l13 center">
+                        <a class="waves-effect waves-light btn-large blue" style="border-radius: 10px; width: 200px; margin-bottom: 10px;">Modificar</a><br>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 <%- include('includes/footer.ejs') %>
