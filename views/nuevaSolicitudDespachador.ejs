@@ -2,30 +2,42 @@
 
     <div class="container">
         <h3 style="text-align: center; padding-bottom: 15px;">MI SOLICITUD DE VACACIONES</h3>
-                <p style = "text-align: center">Fecha de la solicitud: dd/mm/aa</p>
-        <h5 style = "text-align: center">Vacaciones disponibles:</h5>
-        <h5 style = "text-align: center">7</h5>
-        <div>
-            <h5>Fecha inicio</h5>
-            <input type="text" class="datepicker" placeholder="MM-DD-AAAA">
-        </div>
-        <div>
-            <h5>Fecha fin</h5>
-            <input type="text" class="datepicker" placeholder="MM-DD-AAAA">
-        </div>
-        <div>
-            <h5>Fecha reanudación</h5>
-            <input type="text" class="datepicker" placeholder="MM-DD-AAAA">
-        </div>
-        <h5>Suplente:</h5>
-        <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate">
-        <br>
-        <br>
+        <p style="text-align: center">Fecha de la solicitud: dd/mm/aa</p>
+        <h5 style="text-align: center">Vacaciones disponibles:</h5>
+        <h5 style="text-align: center">7</h5>
 
-        <div class="col s12 m8 l13"></div>
-        <div class="col s12 m2 l13">
-            <a class="waves-effect waves-light btn" style="background-color:green; margin-bottom: 50px">Enviar</a>
-        </div>
+
+
+        <form action="/vacaciones/solicitudes_mis_vacaciones" method="POST">
+            <div>
+                <h5>Fecha inicio</h5>
+                <!-- <input type="text" class="datepicker" placeholder="MM-DD-AAAA" name="fechaInicio" required> -->
+                <input type="date" placeholder="AAAA-MM-DD" name="fechaInicio" required>
+            </div>
+            <div>
+                <h5>Fecha fin</h5>
+                <!-- <input type="text" class="datepicker" placeholder="MM-DD-AAAA" name="fechaFin" required> -->
+                <input type="date" placeholder="AAAA-MM-DD" name="fechaFin" required>
+            </div>
+            <!-- <div>
+                <h5>Fecha reanudación</h5> -->
+                <!-- <input type="text" class="datepicker" placeholder="MM-DD-AAAA" name="fechaReanudacion" required> -->
+                <!-- <input type="text" placeholder="AAAA-MM-DD" name="fechaReanudacion" required>
+            </div> -->
+            <h5>Suplente:</h5>
+            <!-- <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" name="suplente" required> -->
+            <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" name="suplente" required>
+            <br>
+            <br>
+    
+            <div class="col s12 m8 l13"></div>
+            <div class="col s12 m2 l13">
+                <input class="waves-effect waves-light btn green"  style="margin-bottom: 50px; " type="submit" value="Enviar">
+            </div>
+        </form>
+        
     </div>
+    
+
 
 <%- include('includes/footer.ejs') %>
