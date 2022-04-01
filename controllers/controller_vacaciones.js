@@ -9,7 +9,7 @@ exports.solicitarVacaciones = (request, response, next) => {
 
 exports.postSolicitarVacaciones = (request, response, next) => {
     const vacacion = new Solicitudes(request.body.fechaInicio, request.body.fechaFin, request.body.suplente);
-    vacacion.saveSolicitud()   
+    vacacion.saveSolicitud()
     .then(() => {
         response.redirect('/vacaciones/solicitudes_vacaciones/');
     })
@@ -19,7 +19,14 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 };
 
 exports.solicitudesVacaciones = (request, response, next) => {
-    console.log(request.bodys);
-    console.log("Solicitudes de vacaciones");
-    response.render('consultarSolicitudesVacacionesLider');
+    console.log(request.body);
+    Solicitudes.fetchAll().then(([rows, fieldData]) => {
+        console.log(rows);
+        response.render('estatusVacacionesDespachador', {
+            solicitudes: rows
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+
 };

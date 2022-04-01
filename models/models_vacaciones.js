@@ -12,18 +12,7 @@ module.exports = class solicitudVacaciones {
         return db.execute('INSERT INTO solicitudvacaciones (idEmpleado, fechaInicio, fechaFin, suplente) VALUES (?, ?, ?, ?)', [90954, this.fechaInicio, this.fechaFin, this.suplente]);
     }
 
-    // static fetchAllAdmin(){
-    //     return db.execute(
-    //         'SELECT * FROM solicitudvacaciones'
-    //     );
-    // }
-
-
-    // static fetchAllLider(){
-    //     return db.execute(
-    //     );
-    // }
-    
-
-
+    static fetchAll() {
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=?', [90954]);
+    }
 }
