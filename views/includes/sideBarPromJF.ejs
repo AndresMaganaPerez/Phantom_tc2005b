@@ -21,10 +21,10 @@
   <ul id="slide-out" class="sidenav">
     <li>
       <div class="user-view">
-        <div>
+        <div class="row">
           <img src="https://pbs.twimg.com/media/DSA7yP3VAAAsiUM.png" style="width: 201px; height: 85px; margin-bottom: 20px;">
         </div>
-        <div style="display: inline-flex;">
+        <div class="row" style="display: inline-flex;">
           <a href="#user"><i class="material-icons medium">account_circle</i></a>
           <h5 style="padding-left: 20px;">Alejandro Salinas</h5>
         </div> 
@@ -38,11 +38,14 @@
       </div>
       <br>
     </li>
-    <div style="position: absolute; bottom: 10%;">
+    <div class="row" style="position: absolute; bottom: 10%;"> 
+      <!-- El position absolute hace que se mire raro cuando se hace el height mas chiquito de la pantalla -->
       <a href="#" style="padding-left: 50px; display: inline-flex;">
         <i class="material-icons small">exit_to_app</i>
         <h6 style="padding-left: 5px;">Cerrar Sesión</h6>
       </a>
     </div>
+    
   </ul>
+  
   <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons small" style="padding: 20px;">menu</i></a>
