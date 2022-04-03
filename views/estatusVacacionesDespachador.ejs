@@ -18,13 +18,13 @@
                 <div class="col s12 m8 l13">
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-content" style="padding: 10px;">
-                            <span class="card-title activator black-text text-darken-4 center ">
+                            <!-- <span class="card-title activator black-text text-darken-4 center ">
                                 <h6 id='hr'>10:15</h6>
-                            </span>
+                            </span> -->
                             <div class="row">
                                 <div class="col s12 m7 l13">
                                     <span class='txt'>
-                                        <h5>Solicitud <%= solicitud.fechaSolicitud.toString().substring(0,15) %>
+                                        <h5>Fecha de solicitud: <%= solicitud.fechaSolicitud.toString().substring(4,15) %>
                                         </h5>
                                     </span>
                                 </div>
@@ -36,15 +36,19 @@
                                         <p style="padding:15px;">Aceptada</p>
                                     </div>
                                 </div>
+                                
                                 <div class="col s12 m2 l13">
-                                    <p style="padding-left: 15px">Aceptada por Pablo Arroyo</p>
+                                    
+                                    <!-- <div class="col s12 m2 l13">
+                                        <p style="padding-left: 15px">Acept</p>
+                                    </div> -->
                                 </div>
                             </div>
-                            <span class='txt2'>
+                            <div class="row">
                                 <h6>
-                                    <%= solicitud.fechaInicio.toString().substring(0,15) %> | <%= solicitud.fechaFin.toString().substring(0,15) %>
+                                    Fecha Inicio: <%= solicitud.fechaInicio.toString().substring(4,15) %> | Fecha Fin: <%= solicitud.fechaFin.toString().substring(4,15) %>
                                 </h6>
-                            </span>
+                            </div>     
                         </div>
                         <div class="card-image waves-effect waves-block waves-light"></div>
                         <!--<div class="card-content">
