@@ -14,9 +14,9 @@
     <% if (solicitudes.length> 0) { %>
         <% for (let solicitud of solicitudes) { %>
             <div class="row">
-                <div class="col s12 m2 l13"></div>
-                <div class="col s12 m8 l13">
-                    <div class="card" style="border-radius: 15px;">
+                <div class="col s12 m3 l13"></div>
+                <div class="col s12 m6 l13">
+                    <div class="card " style="border-radius: 15px;">
                         <div class="card-content" style="padding: 10px;">
                             <!-- <span class="card-title activator black-text text-darken-4 center ">
                                 <h6 id='hr'>10:15</h6>
@@ -24,18 +24,11 @@
                             <div class="row">
                                 <div class="col s12 m7 l13">
                                     <span class='txt'>
-                                        <h5>Fecha de solicitud: <%= solicitud.fechaSolicitud.toString().substring(4,15) %>
+                                        <h5 style="margin-left: 5%;">Fecha de solicitud: <%= solicitud.fechaSolicitud.toString().substring(4,15) %>
                                         </h5>
                                     </span>
                                 </div>
-                                <div class="col s12 m2 l13">
-                                    <div class="btn-large tooltipped green " data-position="bottom"
-                                        data-tooltip="Por Pablo Arroyo">Aceptada
-                                    </div>
-                                    <!-- <div class="green rectangle white-text center"  style="border-radius: 7px;">
-                                        <p style="padding:15px;">Aceptada</p>
-                                    </div> -->
-                                </div>
+                               
                                 
                                 <div class="col s12 m2 l13">
                                     
@@ -45,10 +38,26 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <h6>
-                                    Fecha Inicio: <%= solicitud.fechaInicio.toString().substring(4,15) %> | Fecha Fin: <%= solicitud.fechaFin.toString().substring(4,15) %>
-                                </h6>
+                                <div class="col s12 m7 l13">
+                                    <h6 style="margin-left: 4%;">
+                                        Fecha Inicio: <%= solicitud.fechaInicio.toString().substring(4,15) %> | Fecha Fin: <%= solicitud.fechaFin.toString().substring(4,15) %>
+                                    </h6>
+                                </div>
+                                <div class="col s12 m1 l13 "></div>
+                                <div class="col s12 m1 l13 ">
+                                    <div class="btn-large tooltipped green " data-position="bottom"
+                                        data-tooltip="Por Pablo Arroyo">Aceptada
+                                    </div>
+                                    <!-- <div class="green rectangle white-text center"  style="border-radius: 7px;">
+                                        <p style="padding:15px;">Aceptada</p>
+                                    </div> -->
+                                </div>
                             </div>     
+                            <div class="row">
+                                <h6 style="margin-left: 4%;">
+                                    ID: AQUI VA ID | Suplente: Camilo Chavez
+                                </h6>
+                            </div>   
                         </div>
                         <div class="card-image waves-effect waves-block waves-light"></div>
                         <!--<div class="card-content">
