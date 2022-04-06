@@ -1,0 +1,78 @@
+<body>
+
+    
+
+
+        <div class="col s12 m4 l13">
+            <div class="card medium" style="border-radius: 15px;">
+                <div class="card-content" style="padding: 10px;">
+                    <span class="card-title activator black-text text-darken-4 center ">
+                        <h4>Noticias</h4>
+                        <li class="divider"></li>
+                    </span>
+                    <div class="carousel carousel-slider" style="">
+                        <a class="carousel-item" href="#one!"><img class="imgBanner" src="http://blog.edmdesigner.com/content/images/2014/02/optimal-email-width-600px.png" ></a>
+                        <a class="carousel-item" href="#two!"><img class="imgBanner" src="https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg"></a>
+                        <a class="carousel-item" href="#three!"><img class="imgBanner" src="https://storage.googleapis.com/natgas/eds/eds-ags-jose-maria-chavez.jpg" ></a>
+                        <a class="carousel-item" href="#four!"><img class="imgBanner" src="https://storage.googleapis.com/natgas/eds/eds-qro-prolongacion-zaragoza_large.jpg"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+
+    <!-- <div class="hide-on-large-only">
+        <a class="center"><h5>Ver Banner</h5></a>
+    </div>
+     -->
+    
+    
+    
+    
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+  </body>
+
+  <style>
+      .carousel{
+          /* height: 200px !important;
+          margin-top: 25px !important; */
+      }
+      .carousel-item{
+          /* width: 400px !important;
+          height: 100px !important;
+          margin-top: 50px !important;
+          margin-bottom: 80px !important; */
+      }
+
+      .imgBanner{
+        /* box-shadow: 0 10px 10px rgb(0 0 0 / 0.2);
+        border-radius: 15px;
+        /* width: 200px; */
+        /* height: 200px;  */
+      }
+
+  </style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        M.AutoInit();
+    });
+
+    $(document).ready(function(){
+        $('.carousel').carousel();
+
+        setInterval(function(){
+            $('.carousel').carousel('next');
+        }, 4500);
+
+        $('.carousel.carousel-slider').carousel({
+            fullWidth: true
+        });
+
+    });
+</script>
