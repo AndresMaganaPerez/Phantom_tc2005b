@@ -13,7 +13,7 @@ module.exports = class Empleados{
         this.numTel = _numTel;
     }
 
-    save_usuario() {
+    save_empleado() {
         return bcrypt.hash(this.token, 12)
         .then((token_cifrado) => {
             return db.execute('INSERT INTO empleado (idEmpleado, email, token, nombre, apellidoPaterno, apellidoMaterno, fechaNac, numTelefonico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)' , [this.nomina, this.email, token_cifrado, this.nombre, this.apellidoPaterno, this.apellidoMaterno, this.fechaNac, this.numTel]);
@@ -25,11 +25,11 @@ module.exports = class Empleados{
     }
 
     static findEmpleado(usuario) {
-        return db.execute('SELECT * FROM empleado WHERE correo=?', [this.email]);
+        return db.execute('SELECT * FROM empleado WHERE email=?', [usuario]);
     }
 
     static findRol(nomina) {
-       return db.execute('SELECT descripcionRol FROM empleado e, roles r, empleado_rol eR, WHERE e.idEmpleado=eR.idEmpleado AND r.idRol=eR.idRol AND eR.idEmpleado=?', [nomina]);
+       return db.execute('SELECT descripcionRol FROM empleado e, roles r, empleado_rol eR WHERE e.idEmpleado=eR.idEmpleado AND r.idRol=eR.idRol AND eR.idEmpleado=?', [nomina]);
     }
 
     static findPrivilegio(rol) {

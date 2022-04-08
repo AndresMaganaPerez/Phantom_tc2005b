@@ -30,14 +30,14 @@ const { request } = require('http');
 const { response } = require('express');
 
 
-//Control de sesiones
-/*
+
+
 app.use(session({
     secret: 'asñldfjlñaksdjfoñksdajrioweuroiudasofhjasñofhjoeiwahfjadshfuñoewhafoñheadwfhñdsaohfoaewjhrñoaksdjfouegbñgjibnñvijnachasdñil', 
     resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
     saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
 }));
-*/
+
 
 //Proteccion csrf
 /*

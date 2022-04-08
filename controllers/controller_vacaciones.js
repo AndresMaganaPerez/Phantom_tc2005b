@@ -19,7 +19,7 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 };
 
 exports.solicitudesVacaciones = (request, response, next) => {
-    console.log(request.body);
+    //console.log(request.body);
     Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
         console.log(rows);
         response.render('estatusVacacionesDespachador', {
