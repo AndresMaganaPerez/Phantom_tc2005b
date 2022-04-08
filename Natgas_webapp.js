@@ -10,7 +10,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-//app.use(cookieParser());
+app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 

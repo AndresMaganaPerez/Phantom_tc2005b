@@ -16,4 +16,6 @@ module.exports = class solicitudVacaciones {
     static fetchAll(nomina) {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY idSolicitud DESC', [nomina]);
     }
+
+    
 }
