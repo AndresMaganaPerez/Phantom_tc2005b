@@ -25,6 +25,7 @@ const rutasNGB = require ('./routes/routes_natgasBlock');
 const rutasReportes = require('./routes/routes_reportes');
 const rutasAnuncios = require('./routes/routes_anuncios');
 const rutasBanners = require('./routes/routes_banner');
+const rutasLogin = require('./routes/routes_login');
 const { request } = require('http');
 const { response } = require('express');
 
@@ -48,13 +49,14 @@ app.use((request, response, next) => {
 */
 
 //app.use de las rutas
-app.use('/', rutasVistaGeneral);
+app.use('/general', rutasVistaGeneral);
 app.use('/perfil', rutasPerfil);
 app.use('/vacaciones', rutasVacaciones);
 app.use('/natgas_blocks', rutasNGB);
 app.use('/reportes', rutasReportes);
 app.use('/anuncios', rutasAnuncios);
 app.use('/banners', rutasBanners);
+app.use('/', rutasLogin);
 
 //Middlewares
 app.use((request, response, next) => {
