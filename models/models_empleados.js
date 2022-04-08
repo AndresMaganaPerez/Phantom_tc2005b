@@ -33,6 +33,6 @@ module.exports = class Empleados{
     }
 
     static findPrivilegio(rol) {
-        return db.execute('SELECT accion FROM roles_privilegios rp, privilegios p, roles r WHERE p.idPrivilegio = rp.idPrivilegio AND r.idRol = rp.idRol WHERE descripcionRol=?', [rol]);
+        return db.execute('SELECT accion FROM roles_privilegios rp, privilegios p, roles r WHERE p.idPrivilegio = rp.idPrivilegio AND r.idRol = rp.idRol AND descripcionRol=?', [rol]);
     }
 } 

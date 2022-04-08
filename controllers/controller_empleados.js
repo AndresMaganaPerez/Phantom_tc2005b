@@ -32,8 +32,21 @@ exports.login = (request, response, next) => {
                 if (doMatch) {
                     request.session.isLoggedIn = true;
                     request.session.empleado = empleado;
-                    return request.session.save(err => {
-                        response.redirect('/general');
+                    empleados.findRol(empleado.nomina)
+                    .then((rows, fieldData) => {
+                        request.session.rol = rows[0][0];
+                        empleados.findPrivilegio(request.session.rol.descripcionRol)
+                        .then((rows, fieldData) => {
+                            request.session.privilegios = rows[0];
+                            response.redirect('/general');
+                        }).catch((error) => {
+                            console.log(error);
+                        })
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                    return request.session.save(err => {   
                     });
                 }
                 response.redirect('/');
