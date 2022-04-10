@@ -2,11 +2,11 @@ const empleados = require('../models/models_empleados');
 const bcrypt = require('bcryptjs');
 
 exports.signup = (request, response, next) => {
-    response.render('signIn');
+    response.render('signup_login/signIn');
 };
 
 exports.getLogin = (request, response, next) => {
-    response.render('signIn');
+    response.render('signup_login/signIn');
 };
 
 exports.postSignUp = (request, response, next) => {

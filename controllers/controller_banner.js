@@ -2,10 +2,10 @@
 
 exports.banners = (request, response, next) => {
     console.log('Crear nuevo banner');
-    response.render('consultarBanners');
+    response.render('banner/consultarBanners');
 };
 
 exports.agregarBanner = (request, response, next) => {
     console.log('Crear nuevo banner');
-    response.render('agregarBanner');
+    response.render('banner/agregarBanner');
 };

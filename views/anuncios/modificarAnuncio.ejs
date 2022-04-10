@@ -1,0 +1,50 @@
+<%- include('../includes/sideBarAdmin.ejs') %>
+<h3 style="text-align: center;">Modificar Anuncio</h3>
+
+
+<div class="row">
+    <div class="col s12 m4 l13"></div>
+    <div class="col s12 m4 l13">
+        <div class="card " style="border-radius: 15px;">
+            <h3 class="center" style="padding-bottom: 0px; padding-top: 20px;">MODIFICACION DE ANUNCIO</h3>
+            <p class="center">Fecha Actual: dd/mm/aa</p>
+    
+            <form action="/vacaciones/solicitudes_mis_vacaciones" method="POST">
+                <div style="padding: 0px 120px">
+                    <label>
+                      <input type="checkbox" class="filled-in" checked="checked" nombre="pinned?">
+                      <span>Pinear el Anuncio?</span>
+                    </label>
+                </div>
+                <div style="padding: 0px 30px;">
+                    <h5>Titulo:</h5>
+                    <input placeholder="Ingresa el Titulo aquí" id="Titulo" type="text" class="validate" name="titulo" required>
+                </div>
+                <div class="input-field" style="padding: 0px 30px">
+                    <h5>Contenido:</h5>
+                    <textarea placeholder="Escriba aqui..." id="textareaTexto" class="materialize-textarea" name="announcement_body"></textarea>
+                </div>
+                <div style="padding: 0px 30px;">
+                    <h5>Fecha de Expiracion:</h5>
+                    <input type="date" placeholder="AAAA-MM-DD" name="fechaexp" required>
+                </div>
+                <div class="file-field input-field"style="padding: 0px 30px">
+                    <div class="btn blue">
+                      <span>Subir Imagen o Archivo</span>
+                      <input type="file" name="archivo">
+                    </div>
+                    <div class="file-path-wrapper">
+                      <input class="file-path validate" type="text">
+                    </div>
+                  </div>
+                <br>    
+                <div class="left-align" style="padding-left: 30px; ">
+                    <span style="font-weight: bold;">*</span> Recuerde que la Maxima fecha de expericacion es 2 Meses de la Fecha actual.
+                </div>
+                <div class="center" style="padding-top: 20px;">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Enviar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+
+<%- include('../includes/footer.ejs') %>

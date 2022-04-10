@@ -1,0 +1,76 @@
+<%- include('../includes/sideBarPromJF.ejs') %>
+    <h4 class="center"> Mis Solicitudes de Vacaciones</h4>
+
+    <div class="row center">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m8 l13">
+            <a class='btn-large blue' href='#'>
+                <span style="font-weight: bold; font-size: large;">+</span>Crear Mi Solicitud
+            </a>
+        </div>
+    </div>
+
+
+    <% if (solicitudes.length> 0) { %>
+        <% for (let solicitud of solicitudes) { %>
+            <div class="row">
+                <div class="col s12 m3 l13"></div>
+                <div class="col s12 m6 l13">
+                    <div class="card " style="border-radius: 15px;">
+                        <div class="card-content" style="padding: 10px;">
+                            <!-- <span class="card-title activator black-text text-darken-4 center ">
+                                <h6 id='hr'>10:15</h6>
+                            </span> -->
+                            <div class="row">
+                                <div class="col s12 m7 l13">
+                                    <span class='txt'>
+                                        <h5 style="margin-left: 5%;">Fecha de solicitud: <%= solicitud.fechaSolicitud.toString().substring(4,15) %>
+                                        </h5>
+                                    </span>
+                                </div>
+                               
+                                
+                                <div class="col s12 m2 l13">
+                                    
+                                    <!-- <div class="col s12 m2 l13">
+                                        <p style="padding-left: 15px">Acept</p>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m7 l13">
+                                    <h6 style="margin-left: 5%;">
+                                        <span style="font-weight: 600;">Fecha Inicio:</span> <%= solicitud.fechaInicio.toString().substring(4,15) %> 
+                                        | <span style="font-weight: 600;">Fecha Fin:</span> <%= solicitud.fechaFin.toString().substring(4,15) %>
+                                    </h6>
+                                </div>
+                                <div class="col s12 m1 l13 "></div>
+                                <div class="col s12 m1 l13 ">
+                                    <div class="btn-large tooltipped green " data-position="bottom"
+                                        data-tooltip="Por Pablo Arroyo" style="font-weight: 600;">Aceptada
+                                    </div>
+                                    <!-- <div class="green rectangle white-text center"  style="border-radius: 7px;">
+                                        <p style="padding:15px;">Aceptada</p>
+                                    </div> -->
+                                </div>
+                            </div>     
+                            <div class="row">
+                                <h6 style="margin-left: 5%;">
+                                    <span style="font-weight: 600;">ID:</span> AQUI VA ID 
+                                    | <span style="font-weight: 600;">Suplente:</span> Camilo Chavez
+                                </h6>
+                            </div>   
+                        </div>
+                        <div class="card-image waves-effect waves-block waves-light"></div>
+                        <!--<div class="card-content">
+                    <p><a href="#">Ver Reportes</a></p>
+                </div>-->
+                    </div>
+                </div>
+            </div>
+            <% } %>
+                <% } else { %>
+                    <h3>No tienes solicitudes de vacaciones</h3>
+                    <% } %>
+
+<%- include('../includes/footer.ejs') %>

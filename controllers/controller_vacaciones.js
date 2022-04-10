@@ -4,18 +4,18 @@ const Solicitudes = require('../models/models_vacaciones');
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
     console.log("solicitar mis Vacaciones");
-    response.render('nuevaSolicitudDespachador');
+    response.render('vacaciones/nuevaSolicitudDespachador');
 };
 
 exports.solicitudesVacaciones = (request, response, next) => {
-    response.render('consultarSolicitudesVacacionesAdmin');
+    response.render('vacaciones/consultarSolicitudesVacacionesAdmin');
 }
 
 exports.postSolicitarVacaciones = (request, response, next) => {
     const vacacion = new Solicitudes(90954, request.body.fechaInicio, request.body.fechaFin, request.body.suplente);
     vacacion.saveSolicitud()
     .then(() => {
-        response.redirect('/vacaciones/solicitudes_vacaciones/');
+        response.redirect('vacaciones/solicitudes_vacaciones/');
     })
     .catch((error) => {
         console.log(error);
@@ -26,7 +26,7 @@ exports.solicitudesMisVacaciones = (request, response, next) => {
     //console.log(request.body);
     Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
         console.log(rows);
-        response.render('estatusVacacionesDespachador', {
+        response.render('vacaciones/estatusVacacionesDespachador', {
             solicitudes: rows
         });
     }).catch((error) => {
