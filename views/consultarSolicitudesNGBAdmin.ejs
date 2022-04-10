@@ -1,10 +1,11 @@
 <%- include('includes/sideBarAdmin.ejs') %>
-<h4 id='vacaciones'  style="text-align: center; margin-bottom: 25px">Solicitudes de NGB</h4>
+<h4 class="center">Solicitudes de NGB</h4>
 <div class="row">
-    <div class="col s12 m4 l13"></div>
+    <div class="col s12 m2 l13"></div>
+
     <div class="col s12 m2 l13">
-        <a class='dropdown-trigger btn-large blue' href='#' data-target='dropdown1'>Fecha</a>
-        <ul id='dropdown1' class='dropdown-content'>
+        <a class='dropdown-trigger btn-large blue-grey darken' href='#' data-target='dropdown2'><span>Fecha </span><i class="material-icons right">arrow_drop_down</i></a>
+        <ul id='dropdown2' class='dropdown-content'>
             <li><a href="#!">Jan</a></li>
             <li><a href="#!">Feb</a></li>
             <li><a href="#!">Mar</a></li>
@@ -20,16 +21,18 @@
         </ul>
     </div>
     <div class="col s12 m2 l13">
-        <a class='dropdown-trigger btn-large blue' href='#' data-target='dropdown2'>Area</a>
-        <ul id='dropdown2' class='dropdown-content'>
+        <a class='dropdown-trigger btn-large blue-grey darken' href='#' data-target='dropdown3'><span>Area </span><i class="material-icons right">arrow_drop_down</i></a>
+        <ul id='dropdown3' class='dropdown-content'>
             <li><a href="#!">TYC</a></li>
             <li><a href="#!">NATDEV</a></li>
-            <li><a href="#!">Mantenimiento</a></li>
+            <li><a href="#!">Mant</a></li>
         </ul>
     </div>
+    <div class="col s12 m2 l13"></div>
     <div class="col s12 m4 l13">
-        <a href="#!">Descargar</a>
+        <a href="#!"><h5><i class="material-icons left">file_download</i> Reporte de NGB</h5></a>
     </div>
+    
 
 
 </div>
@@ -39,33 +42,38 @@
     <div class="col s12 m8 l13">
         <div class="card" style="border-radius: 15px;">
             <div class="card-content" style="padding: 10px;">
-                <span class="card-title activator black-text text-darken-4 center ">
-                    <h6 id='hr'>10:15</h6>
-                </span>
                 <div class="row">
                     <div class="col s12 m7 l13">
-                        <span class='txt'>
-                            <h5>Solicitud Jul 12</h5>
+                        <span class="txt">
+                            <h5 style="margin-left: 5%;">
+                                <span style="font-weight: 600;">Fecha de solicitud:</span> Apr 09 2022
+                            </h5>
                         </span>
                     </div>
-                    <div class="col s12 m2 l13">
-                        <a class="btn-large tooltipped green" data-position="bottom"
-                            data-tooltip="Rechazada">Aceptada</a>
+                    <div class="col s12 m2 l13"></div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m5 l13">
+                        <h6 style="margin-left: 7%;"><span style="font-weight: 600;">Fecha de uso:</span> Apr 09
+                            2022</h6>
                     </div>
-                    <div class="col s12 m2 l13">
-                        <p style="padding-left: 15px">Aceptada por Pablo Arroyo</p>
+                    <div class="col s12 m8 l2"></div>
+                    <div class="col s12 m1 l2">
+                        <span style="font-weight: 600;"><a class="btn-large green">Aceptada</a></span> 
+                    </div>
+                    <div class="col s12 m2 l2">
+                        <p>por Pablo Arroyo Montes Trejo</p>
                     </div>
                 </div>
-                <span class='txt2'>
-                    <h6>Jul 12</h6>
-                </span>
+                <div class="row">
+                    <h6 style="margin-left: 4%;">
+                        <span style="font-weight: 600;">Empleado que solicitó:</span> Alejandro Salinas
+                    </h6>
+                </div>
             </div>
             <div class="card-image waves-effect waves-block waves-light">
 
             </div>
-            <!--<div class="card-content">
-                <p><a href="#">Ver Reportes</a></p>
-            </div>-->
         </div>
     </div>
 </div>
@@ -75,81 +83,40 @@
     <div class="col s12 m8 l13">
         <div class="card" style="border-radius: 15px;">
             <div class="card-content" style="padding: 10px;">
-                <span class="card-title activator black-text text-darken-4 center ">
-                    <h6 id='hr'>10:15</h6>
-                </span>
                 <div class="row">
                     <div class="col s12 m7 l13">
-                        <span class='txt'>
-                            <h5>Solicitud Abril 10</h5>
+                        <span class="txt">
+                            <h5 style="margin-left: 5%;">
+                                <span style="font-weight: 600;">Fecha de solicitud:</span> Apr 09 2022
+                            </h5>
                         </span>
                     </div>
-                    <div class="col s12 m2 l13">
-                        <a class="btn-large tooltipped green" data-position="bottom"
-                            data-tooltip="Aceptada">Aceptada</a>
+                    <div class="col s12 m2 l13"></div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m5 l13">
+                        <h6 style="margin-left: 7%;"><span style="font-weight: 600;">Fecha de uso:</span> Apr 09
+                            2022</h6>
                     </div>
-                    <div class="col s12 m2 l13">
-                        <p style="padding-left: 15px">Aprobada por Pablo Arroyo</p>
+                    <div class="col s12 m8 l2"></div>
+                    <div class="col s12 m1 l2">
+                        <span style="font-weight: 600;"><a class="btn-large green">Aceptada</a></span> 
+                    </div>
+                    <div class="col s12 m2 l2">
+                        <p>por Pablo Arroyo Montes Trejo</p>
                     </div>
                 </div>
-                <span class='txt2'>
-                    <h6>Abr 10</h6>
-                </span>
-
+                <div class="row">
+                    <h6 style="margin-left: 4%;">
+                        <span style="font-weight: 600;">Empleado que solicitó:</span> Alejandro Salinas
+                    </h6>
+                </div>
             </div>
             <div class="card-image waves-effect waves-block waves-light">
 
             </div>
-            <!--<div class="card-content">
-                    <p><a href="#">Ver Reportes</a></p>
-                </div>-->
-        </div>
-    </div>
-    <div class="col s12 m5 l13">
-        <div class="card blue darken-3" style="border-radius: 10px; margin-left: 60px;">
-            <div class="card-image waves-effect waves-block waves-light">
-            </div>
-            <!--<div class="card-content">
-                    <p><a href="#">Ver Reportes</a></p>
-                </div>-->
         </div>
     </div>
 </div>
 
-
-<div class="row">
-    <div class="col s12 m2 l13"></div>
-    <div class="col s12 m8 l13">
-        <div class="card" style="border-radius: 15px;">
-            <div class="card-content" style="padding: 10px;">
-                <span class="card-title activator black-text text-darken-4 center ">
-                    <h6 id='hr'>10:15</h6>
-                </span>
-                <div class="row">
-                    <div class="col s12 m7 l13">
-                        <span class='txt'>
-                            <h5>Solicitud Feb 10</h5>
-                        </span>
-                    </div>
-                    <div class="col s12 m2 l13">
-                        <a class="btn-large tooltipped green" data-position="bottom"
-                            data-tooltip="Rechazada">Aceptada</a>
-                    </div>
-                    <div class="col s12 m2 l13">
-                        <p style="padding-left: 15px">Aprobada por Pablo Arroyo</p>
-                    </div>
-                </div>
-                <span class='txt2'>
-                    <h6>Feb 10</h6>
-                </span>
-            </div>
-            <div class="card-image waves-effect waves-block waves-light">
-
-            </div>
-            <!--<div class="card-content">
-                        <p><a href="#">Ver Reportes</a></p>
-                    </div>-->
-        </div>
-    </div>
-</div>
 <%- include('includes/footer.ejs') %>
