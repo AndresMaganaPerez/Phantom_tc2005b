@@ -9,4 +9,6 @@ router.get('/', isAuth, controllerAnuncios.anuncios);
 
 router.get('/crear_anuncio', isAuth, controllerAnuncios.nuevoAnuncio);
 
+router.get('/modificar', controllerAnuncios.modificar);
+
 module.exports = router;
