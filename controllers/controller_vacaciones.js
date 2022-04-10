@@ -7,6 +7,10 @@ exports.solicitarVacaciones = (request, response, next) => {
     response.render('nuevaSolicitudDespachador');
 };
 
+exports.solicitudesVacaciones = (request, response, next) => {
+    response.render('consultarSolicitudesVacacionesAdmin');
+}
+
 exports.postSolicitarVacaciones = (request, response, next) => {
     const vacacion = new Solicitudes(90954, request.body.fechaInicio, request.body.fechaFin, request.body.suplente);
     vacacion.saveSolicitud()
@@ -18,7 +22,7 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     });
 };
 
-exports.solicitudesVacaciones = (request, response, next) => {
+exports.solicitudesMisVacaciones = (request, response, next) => {
     //console.log(request.body);
     Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
         console.log(rows);

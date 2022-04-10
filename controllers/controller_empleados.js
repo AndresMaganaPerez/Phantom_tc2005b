@@ -37,7 +37,11 @@ exports.login = (request, response, next) => {
                         request.session.rol = rows[0][0];
                         empleados.findPrivilegio(request.session.rol.descripcionRol)
                         .then((rows, fieldData) => {
-                            request.session.privilegios = rows[0];
+                            const privilegios = [];
+                            for (let privilegio of rows[0]){
+                                privilegios.push(privilegio.accion);
+                            }
+                            request.session.privilegios = privilegios;
                             response.redirect('/general');
                         }).catch((error) => {
                             console.log(error);
