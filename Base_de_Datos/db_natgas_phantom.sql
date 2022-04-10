@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-04-2022 a las 16:18:50
+-- Tiempo de generación: 10-04-2022 a las 02:56:47
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -475,6 +475,7 @@ INSERT INTO `empleado` (`idEmpleado`, `email`, `token`, `nombre`, `apellidoPater
 (90978, 'jcpineda@natgas.com.mx\r\n', '', 'Juan Carlos ', 'Pineda ', 'Adaya', '1999-01-02', '2019-02-03', '4428787690', 5, 3, 14, 14, 0, 'QRO'),
 (90984, 'mvillanueva@natgas.com.mx\r\n', '', 'Marco Alejandro ', 'Villanueva ', 'Suarez ', '1999-01-10', '2019-02-11', '4421787645', 5, 3, 14, 14, 0, 'QRO\r\n'),
 (90987, 'orodriguez@natgas.com.mx \r\n', '', 'Oscar Daniel ', 'Rodriguez ', 'Amador ', '1999-01-03', '2019-02-04', '4422289879', 5, 3, 14, 14, 0, 'GDL\r\n'),
+(91900, 'ahernandez@natgas.com.mx', '$2a$12$zhxYc1RP.w5gzV6ZYP2v2ugfjkQnsZgOOHcRRcDPAzHhGcAIpOe1C', 'Alfonso', 'Hernández', 'Carrillo', '1984-11-29', NULL, '4441285948', NULL, NULL, NULL, NULL, NULL, NULL),
 (91901, 'pabloarroyo@natgas.com.mx', '$2a$12$3vYe6evSjTJJstBQuWzZs.xKZzDjOIQppQZrPUswliNs2zHjxkYyu', 'Pablo', 'Arroyo', 'Hernández', '1996-07-02', NULL, '4425481294', NULL, NULL, NULL, NULL, NULL, NULL),
 (91902, 'jmendoza@natgas.com.mx', '$2a$12$kBmXMaFFsQqXz2I7RSqMbOgwGie/lMpG6sZZV8AQoqH61icgTaJIy', 'Jorge', 'Mendoza', 'Pérez', '1990-07-09', NULL, '4425672839', NULL, NULL, NULL, NULL, NULL, NULL),
 (91903, 'asalinas@natgas.com.mx', '$2a$12$KNCeR3Ccw63R773cPa5In.KAamnqFcMAdqOOWePpL5H9z2SJsqBjO', 'Alejandro', 'Salinas', 'Trejo', '1995-06-12', NULL, '4425081492', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -499,10 +500,11 @@ CREATE TABLE `empleado_rol` (
 --
 
 INSERT INTO `empleado_rol` (`idEmpleado`, `idRol`, `fechaInicio`, `fechaFin`) VALUES
-(91901, 2, '2011-04-12', '0000-00-00'),
-(91902, 3, '2013-08-19', '0000-00-00'),
-(91904, 1, '2019-12-15', '0000-00-00'),
-(91903, 4, '2018-09-17', '0000-00-00');
+(91900, 1, '2011-04-12', '0000-00-00'),
+(91904, 2, '2021-08-19', '0000-00-00'),
+(91901, 3, '2019-12-15', '0000-00-00'),
+(91902, 4, '2018-09-17', '0000-00-00'),
+(91903, 5, '2020-04-16', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -578,13 +580,13 @@ CREATE TABLE `privilegios` (
 --
 
 INSERT INTO `privilegios` (`idPrivilegio`, `accion`) VALUES
-(1, 'generalAdmin'),
-(2, 'generalLider'),
-(3, 'generalOperador'),
-(4, 'generalPromJF'),
-(5, 'solicitudVacacion'),
-(6, 'anuncio'),
-(7, 'solicitudNGB');
+(1, 'registrarVacacion'),
+(2, 'consultarEstatusVacacion'),
+(3, 'registrarEstatusVacacion'),
+(4, 'registrarNGB'),
+(5, 'registrarEstatusNGB'),
+(6, 'consultarEstatusNGB'),
+(7, 'consultarAnuncio');
 
 -- --------------------------------------------------------
 
@@ -639,9 +641,10 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`idRol`, `descripcionRol`) VALUES
 (1, 'admin'),
-(2, 'lider'),
-(3, 'operador'),
-(4, 'despachador');
+(2, 'recursosHumanos'),
+(3, 'lider'),
+(4, 'operador'),
+(5, 'despachador');
 
 -- --------------------------------------------------------
 
@@ -1016,7 +1019,7 @@ ALTER TABLE `privilegios`
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `idRol` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idRol` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `solicitudvacaciones`
