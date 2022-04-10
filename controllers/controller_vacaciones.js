@@ -4,7 +4,11 @@ const Solicitudes = require('../models/models_vacaciones');
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
     console.log("solicitar mis Vacaciones");
-    response.render('vacaciones/nuevaSolicitudDespachador');
+    response.render('vacaciones/nuevaSolicitudDespachador',{
+        sesion: request.session.empleado,
+        rol: request.session.rol,
+        privilegios: request.session.privilegios
+    });
 };
 
 exports.solicitudesVacaciones = (request, response, next) => {
@@ -27,6 +31,9 @@ exports.solicitudesMisVacaciones = (request, response, next) => {
     Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
         console.log(rows);
         response.render('vacaciones/estatusVacacionesDespachador', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
             solicitudes: rows
         });
     }).catch((error) => {

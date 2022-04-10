@@ -34,8 +34,8 @@ exports.login = (request, response, next) => {
                     request.session.empleado = empleado;
                     empleados.findRol(empleado.nomina)
                     .then((rows, fieldData) => {
-                        request.session.rol = rows[0][0];
-                        empleados.findPrivilegio(request.session.rol.descripcionRol)
+                        request.session.rol = rows[0][0].descripcionRol;
+                        empleados.findPrivilegio(request.session.rol)
                         .then((rows, fieldData) => {
                             const privilegios = [];
                             for (let privilegio of rows[0]){

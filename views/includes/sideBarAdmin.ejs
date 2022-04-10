@@ -37,7 +37,7 @@
                 <li><a href="collapsible.html">Registrar Empleados</a></li>
             </ul>
             <ul class="right hide-on-med-and-down">
-                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Diego Rodriguez<i
+                <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><%= sesion.nombre + ' ' + sesion.apellidoPaterno %><i
                             class="material-icons right">arrow_drop_down</i></a></li>
             </ul>
         </div>
@@ -49,7 +49,7 @@
                 <div class="row">
                     <a href="#" style="display: inline-flex;">
                         <i class="material-icons medium">account_circle</i>
-                        <h5 style="padding-left: 20px;">Diego Rodriguez</h5>
+                        <h5 style="padding-left: 20px;"><%= sesion.nombre + ' ' + sesion.apellidoPaterno %></h5>
                     </a>
                 </div>
             </li>
