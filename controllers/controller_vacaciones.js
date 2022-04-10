@@ -12,7 +12,11 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.solicitudesVacaciones = (request, response, next) => {
-    response.render('vacaciones/consultarSolicitudesVacacionesAdmin');
+    response.render('vacaciones/consultarSolicitudesVacacionesLider',{
+        sesion: request.session.empleado,
+        rol: request.session.rol,
+        privilegios: request.session.privilegios,
+    });
 }
 
 exports.postSolicitarVacaciones = (request, response, next) => {
