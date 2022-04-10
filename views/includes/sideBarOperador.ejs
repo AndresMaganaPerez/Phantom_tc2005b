@@ -42,10 +42,7 @@
         <div class="user-view">
             <li>
                 <div class="row">
-                    <a href="#" style="display: inline-flex;">
-                        <i class="material-icons medium">account_circle</i>
-                        <h5 style="padding-left: 20px;"><%= sesion.nombre + ' ' + sesion.apellidoPaterno %></h5>
-                    </a>
+                    <%- include('botonesSidebar/botonPerfil.ejs') %>
                 </div>
             </li>
             <li><%- include('botonesSidebar/botonGeneral.ejs') %></li>
