@@ -34,7 +34,7 @@ exports.estatusVacaciones = (request, response, next) => {
     //console.log(request.body);
     Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
         console.log(rows);
-        response.render('vacaciones/estatusVacacionesDespachador', {
+        response.render('vacaciones/estatusVacaciones', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,
