@@ -13,9 +13,12 @@ module.exports = class solicitudVacaciones {
         return db.execute('INSERT INTO solicitudvacaciones (idEmpleado, fechaInicio, fechaFin, suplente) VALUES (?, ?, ?, ?)', [this.noNomina, this.fechaInicio, this.fechaFin, this.suplente]);
     }
 
+    static borrarSolicitud(idEmpleado, idSolicitud) {
+        return db.execute('DELETE FROM solicitudvacaciones WHERE idEmpleado=? AND idSolicitud=?', [idEmpleado, idSolicitud])
+    }
+
     static fetchAll(nomina) {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY idSolicitud DESC', [nomina]);
     }
 
-    
 }

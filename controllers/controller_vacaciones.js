@@ -1,3 +1,4 @@
+const { borrarSolicitud } = require('../models/models_vacaciones');
 const Solicitudes = require('../models/models_vacaciones');
 
 
@@ -45,3 +46,7 @@ exports.solicitudesMisVacaciones = (request, response, next) => {
     });
 
 };
+
+exports.cancelarSolicitud = (request, response, next) => {
+    borrarSolicitud(request.session.empleado.idEmpleado)
+}
