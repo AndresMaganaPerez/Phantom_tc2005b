@@ -14,6 +14,8 @@ router.post('/solicitar_mis_vacaciones', isAuth, controllerVacaciones.postSolici
 
 router.get('/solicitudes_estatus_vacaciones', isAuth, controllerVacaciones.estatusVacaciones);
 
+router.get('/estatus_mis_vacaciones', isAuth, controllerVacaciones.estatusMisVacaciones);
+
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
 module.exports = router;

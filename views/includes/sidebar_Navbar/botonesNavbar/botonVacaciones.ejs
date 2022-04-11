@@ -1,1 +1,5 @@
-<a href="/vacaciones/solicitudes_vacaciones ">Solicitudes Vacaciones</a>
+<a href="<% if (rol == 'lider') { %> 
+    /vacaciones/solicitudes_vacaciones 
+    <% } else { %>
+        /vacaciones/solicitudes_estatus_vacaciones
+    <% } %>">Solicitudes Vacaciones</a>
