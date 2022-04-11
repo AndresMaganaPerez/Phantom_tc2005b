@@ -6,17 +6,14 @@
 <% } %>
 
 <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
-    
+    <br>
+    <%- include ('componentes/bloques/bloqueDropdown_MesArea_BotonDescarga.ejs') %>
 <% } %>
 
-<% if (rol == 'admin') { %>
-
+<% if (solicitudes.length> 0) { %>
+    <%- include('componentes/cartaEstatusSolVac.ejs') %>
 <% } else { %>
-    <% if (solicitudes.length> 0) { %>
-        <%- include('componentes/cartaEstatusSolVac.ejs') %>
-    <% } else { %>
-        <h3>No tienes solicitudes de vacaciones</h3>
-    <% } %>
+    <h3>No tienes solicitudes de vacaciones</h3>
 <% } %>
 
 
