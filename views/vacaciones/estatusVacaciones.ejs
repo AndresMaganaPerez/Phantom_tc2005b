@@ -2,13 +2,21 @@
 
 <h4 class="center">Solicitudes de Vacaciones</h4>
 
-<% if (rol == 'lider' || rol == 'recursosHumanos') { %>
+<% if (rol == 'lider' || rol == 'recursosHumanos' || rol == 'operador' || rol == 'despachador') { %>
     <div class="row center">
         <div class="col s12 m2 l13"></div>
         <div class="col s12 m8 l13">
             <%- include('componentes/botonCrearSol.ejs') %>
-            <%- include('componentes/botonEstatusMisVac.ejs') %>
+            <% if (rol == 'lider' || rol == 'recursosHumanos') { %>
+                <%- include('componentes/botonEstatusMisVac.ejs') %>
+            <% } %>    
         </div>
+    </div>
+<% } %>
+
+<% if (rol == 'admin') { %>
+    <div class="center">
+        <%- include('componentes/botonAceptarSol.ejs') %>
     </div>
 <% } %>
 
