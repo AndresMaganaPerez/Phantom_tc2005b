@@ -8,13 +8,21 @@
             <p class="center">Fecha de la solicitud: <%= fechaSolicitud %></p>
             <h5 class="center">Vacaciones disponibles:</h5>
             <h6 class="center"><%= sesion.vacacionesTotales %> </h6>
+            <% if (sesion.vacacionesTotales == 0) { %> 
+                <h6 class="center" style="font-weight: 600; color: red;">No tienes vacaciones disponibles</h6>
+            <% } %>
             <form action="/vacaciones/solicitar_mis_vacaciones" method="POST">
                 <div style="padding: 0px 30px;">
                     <h5>Fecha inicio</h5>
                     <input type="date" id="FI" placeholder="AAAA-MM-DD" name="fechaInicio"
                     <% if (fechaInicio != '') { %>
                         value="<%= fechaInicio %>"
-                    <% } %>  required>
+                    <% } %> 
+                    
+                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                        disabled 
+                    <% } %> required>
+
                     <% if (flag == 'FII') { %>
                         <%- include('componentes/cartaErrorFI.ejs') %>
                     <% } %>
@@ -24,7 +32,11 @@
                     <input type="date" id="FF" placeholder="AAAA-MM-DD" name="fechaFin" 
                     <% if (fechaInicio != '') { %>
                         value="<%= fechaFin %>"
+                    <% } %> 
+                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                        disabled 
                     <% } %> required>
+
                     <% if (flag == 'FFI') { %>
                         <%- include('componentes/cartaErrorFF.ejs') %>
                     <% } %>
@@ -34,14 +46,21 @@
                     <input type="date" id="FR" placeholder="AAAA-MM-DD" name="fechaReanudacion" 
                     <% if (fechaInicio != '') { %>
                         value="<%= fechaReanudacion %>"
+                    <% } %> 
+                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                        disabled 
                     <% } %> required>
+
                     <% if (flag == 'FRI') { %>
                         <%- include('componentes/cartaErrorFR.ejs') %>
                     <% } %>
                 </div>
                 <div style="padding: 0px 30px;">
                     <h5>Suplente:</h5>
-                    <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" name="suplente" required>
+                    <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" name="suplente"
+                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                        disabled 
+                    <% } %> required>
                 </div>
                 <br>    
                 <div class="left-align" style="padding-left: 30px; ">
@@ -49,7 +68,10 @@
                 </div>
                 
                 <div class="center" style="padding-top: 20px;">
-                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Enviar
+                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;" <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                        disabled 
+                    <% } %>
+                    >Enviar
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
