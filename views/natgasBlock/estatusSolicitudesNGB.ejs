@@ -9,6 +9,8 @@
 
 <%- include('componentes/bloques/bloqueDropDown_MesArea_BotonDescarga.ejs') %>
 
-<%- include('componentes/cartaConsultarEstatus.ejs') %>
+<% if (solicitudes.length > 0) { %>
+    <%- include('componentes/cartaConsultarEstatus.ejs') %>
+<% } %>
 
 <%- include('../includes/footer.ejs') %>
