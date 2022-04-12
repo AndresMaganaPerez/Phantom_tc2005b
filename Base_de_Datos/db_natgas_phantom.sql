@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-04-2022 a las 23:56:46
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 8.0.10
+-- Tiempo de generación: 12-04-2022 a las 07:27:52
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -411,23 +411,12 @@ CREATE TABLE `dirige` (
 --
 
 INSERT INTO `dirige` (`idOperador`, `idLider`, `fechaInicio`, `fechaFin`) VALUES
-(90976, 90920, '2019-10-15', NULL),
-(90920, 90961, '2019-03-12', NULL),
-(90972, 90978, '2019-03-12', NULL),
-(90976, 90978, '2019-03-12', NULL),
-(90541, 90978, '2020-03-18', NULL),
-(90977, 90978, '2018-03-14', NULL),
-(90155, 90958, '0000-00-00', NULL),
-(90976, 90987, '2014-03-27', NULL),
-(90958, 90122, '2018-03-21', NULL),
-(90920, 90978, '2022-03-01', NULL),
-(90972, 40201, '2019-03-19', NULL),
-(90987, 90541, '2019-03-26', NULL),
-(90122, 90978, '2022-03-08', NULL),
-(90958, 90987, '2022-03-02', NULL),
-(90961, 90978, '2014-03-19', NULL),
-(90155, 90978, '2022-03-08', NULL),
-(90984, 90978, '2022-03-23', NULL);
+(16836, 90967, '2022-04-01', NULL),
+(90954, 91901, '2022-04-01', NULL),
+(91900, 91901, '2022-04-01', NULL),
+(90521, 91901, '2022-04-01', NULL),
+(91902, 90987, '2022-04-01', NULL),
+(90984, 90920, '2022-04-01', NULL);
 
 -- --------------------------------------------------------
 
@@ -458,6 +447,8 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`idEmpleado`, `email`, `token`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `fechaNac`, `fechaIngr`, `numTelefonico`, `cantidadNatgasBlocks`, `antiguedad`, `vacacionesTotales`, `numVacacionesLey`, `numVacacionesPremio`, `plaza`) VALUES
+(777, 'rcaceres1125@natgas.com.mx', '', 'Ricardo', 'Caceres', 'Villibord', '2001-11-25', '2022-01-01', '4613618880', 5, 1, 10, 8, 2, 'Queretaro'),
+(778, 'juanitoperez@natgas.com.mx', '', 'Juan', 'Alimania', 'Materno', '1970-04-11', '2022-04-10', '7288238271', 5, 0, 8, 8, 0, 'China'),
 (16836, 'A01610836@itesm.mx', '$2a$12$/u63aMaOyxrRhZEcckly5O6swTmyyxSro7RdWugov0XL94W/3yxJ2', 'Miguel Weiping', 'Tang', 'Feng', '2000-11-30', NULL, '4443073141', NULL, NULL, NULL, NULL, NULL, NULL),
 (40201, 'pilar1999@natgas.com.mx', '', 'Pilar', 'Garcia', 'Torrez', '1999-01-24', '2019-02-06', '4423743823', 5, 3, 14, 14, 0, 'QRO'),
 (90122, 'samperjes@natgas.com.mx', '', 'Jesus', 'Samper', 'Luna', '1999-01-24', '2019-02-06', '4422289412', 5, 3, 14, 14, 0, 'QRO'),
@@ -525,46 +516,12 @@ CREATE TABLE `natgasblocks` (
 --
 
 INSERT INTO `natgasblocks` (`idNatgasBlocks`, `idEmpleado`, `fechaSolicitud`, `fechaUsoNGB`) VALUES
-(1, 90967, '2022-02-09', NULL),
-(2, 90521, '2022-03-30', NULL),
-(3, 90958, '2022-03-31', NULL),
-(4, 90541, '2022-04-06', NULL),
-(7, 90972, '2022-03-21', NULL),
-(8, 40201, '2022-02-18', NULL),
-(10, 90967, '2022-02-15', NULL),
-(11, 90987, '2022-03-03', NULL),
-(12, 90977, '2022-03-01', NULL),
-(13, 90961, '2022-01-18', NULL),
-(14, 90954, '2022-03-22', NULL),
-(15, 90421, '2022-03-28', NULL),
-(16, 90972, '2022-03-11', NULL),
-(17, 90122, '2022-01-07', NULL),
-(18, 90987, '2022-01-10', NULL),
-(19, 90976, '2022-03-31', NULL),
-(20, 90155, '2022-01-26', NULL),
-(21, 90421, '2022-03-30', NULL),
-(22, 90421, '2022-03-30', NULL),
-(23, 90961, '2022-04-13', NULL),
-(24, 90541, '2022-04-20', NULL),
-(25, 90987, '2022-04-20', NULL),
-(26, 90920, '2022-03-31', NULL),
-(30, 90155, '2022-04-26', NULL),
-(31, 90961, '2022-03-29', NULL),
-(32, 90972, '2022-03-08', NULL),
-(33, 90122, '2022-03-22', NULL),
-(34, 90421, '2022-04-22', NULL),
-(35, 90977, '2022-04-21', NULL),
-(36, 90976, '2022-05-11', NULL),
-(37, 90984, '2022-05-18', NULL),
-(38, 90521, '2022-04-06', NULL),
-(40, 90541, '2022-06-15', NULL),
-(42, 90421, '2022-01-19', NULL),
-(43, 90122, '2022-02-03', NULL),
-(45, 90541, '2022-03-14', NULL),
-(47, 90978, '2022-04-12', NULL),
-(48, 90984, '2022-05-18', NULL),
-(49, 90976, '2022-03-31', NULL),
-(50, 90521, '2022-04-12', NULL);
+(52, 16836, '2022-04-01', '2022-04-02'),
+(53, 90954, '2022-04-02', '2022-04-03'),
+(54, 91900, '2022-04-03', '2022-04-04'),
+(55, 90521, '2022-04-04', '2022-04-05'),
+(56, 91902, '2022-04-06', '2022-04-07'),
+(57, 90984, '2022-04-02', '2022-04-10');
 
 -- --------------------------------------------------------
 
@@ -849,6 +806,58 @@ INSERT INTO `valor_indicador` (`ValorIndicadorID`, `TipoIndicadorID`, `Valor`, `
 (19, 2, 'ADM 80\r\nOPE 60', '2021-11-21'),
 (20, 2, 'ADM 60\r\nOPE 40', '2021-12-22');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `viewlider`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `viewlider` (
+`idEmpleado` int(11)
+,`fechaUsoNGB` date
+,`fechaSolicitud` date
+,`idLider` int(11)
+,`Lider` varchar(40)
+,`lApellidoPaterno` varchar(40)
+,`lApellidoMaterno` varchar(40)
+,`idNGB` int(3)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura Stand-in para la vista `viewquiensolicita`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `viewquiensolicita` (
+`idEmpleado` int(11)
+,`fechaUsoNGB` date
+,`fechaSolicitud` date
+,`idLider` int(11)
+,`Quien_Solicita` varchar(40)
+,`qsApellidoPaterno` varchar(40)
+,`qsApellidoMaterno` varchar(40)
+,`idNGB` int(3)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `viewlider`
+--
+DROP TABLE IF EXISTS `viewlider`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewlider`  AS   (select `ngb`.`idEmpleado` AS `idEmpleado`,`ngb`.`fechaUsoNGB` AS `fechaUsoNGB`,`ngb`.`fechaSolicitud` AS `fechaSolicitud`,`d`.`idLider` AS `idLider`,`e`.`nombre` AS `Lider`,`e`.`apellidoPaterno` AS `lApellidoPaterno`,`e`.`apellidoMaterno` AS `lApellidoMaterno`,`ngb`.`idNatgasBlocks` AS `idNGB` from ((`natgasblocks` `ngb` join `dirige` `d`) join `empleado` `e`) where `ngb`.`idEmpleado` = `d`.`idOperador` and `e`.`idEmpleado` = `d`.`idLider`)  ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `viewquiensolicita`
+--
+DROP TABLE IF EXISTS `viewquiensolicita`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `viewquiensolicita`  AS   (select `ngb`.`idEmpleado` AS `idEmpleado`,`ngb`.`fechaUsoNGB` AS `fechaUsoNGB`,`ngb`.`fechaSolicitud` AS `fechaSolicitud`,`d`.`idLider` AS `idLider`,`e`.`nombre` AS `Quien_Solicita`,`e`.`apellidoPaterno` AS `qsApellidoPaterno`,`e`.`apellidoMaterno` AS `qsApellidoMaterno`,`ngb`.`idNatgasBlocks` AS `idNGB` from ((`natgasblocks` `ngb` join `dirige` `d`) join `empleado` `e`) where `ngb`.`idEmpleado` = `d`.`idOperador` and `e`.`idEmpleado` = `ngb`.`idEmpleado`)  ;
+
 --
 -- Índices para tablas volcadas
 --
@@ -1008,7 +1017,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT de la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
-  MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de la tabla `privilegios`
@@ -1089,7 +1098,8 @@ ALTER TABLE `empleado_rol`
 -- Filtros para la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
-  ADD CONSTRAINT `natgasblocks_ibfk_1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `natgasblocks_ibfk_1` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `natgasblocks_ibfk_2` FOREIGN KEY (`idEmpleado`) REFERENCES `empleado` (`idEmpleado`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `roles_privilegios`
