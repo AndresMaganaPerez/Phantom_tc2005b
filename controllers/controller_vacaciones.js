@@ -10,7 +10,7 @@ exports.solicitarVacaciones = (request, response, next) => {
     const date = new Date();
     const fechaSolAux = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     let flag = '';
-    response.render('vacaciones/nuevaSolicitudVacacion',{
+    response.render('vacaciones/nuevaSolicitudVacacion', {
         sesion: request.session.empleado,
         rol: request.session.rol,
         privilegios: request.session.privilegios,
@@ -23,7 +23,7 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
-    response.render('vacaciones/aceptarVacaciones',{
+    response.render('vacaciones/aceptarVacaciones', {
         sesion: request.session.empleado,
         rol: request.session.rol,
         privilegios: request.session.privilegios,
@@ -32,26 +32,26 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
 
 exports.estatusMisVacaciones = (request, response, next) => {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
-    .then(([rows, fieldData]) => {
-        const misVacaciones = rows;
-        Solicitudes.fetchLider(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
-            const lider = rows[0];
-            console.log(lider);
-            response.render('vacaciones/estatusMisVacaciones', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                solicitudes: misVacaciones,
-                lider: lider
-            });
+            const misVacaciones = rows;
+            Solicitudes.fetchLider(request.session.empleado.idEmpleado)
+                .then(([rows, fieldData]) => {
+                    const lider = rows[0];
+                    console.log(lider);
+                    response.render('vacaciones/estatusMisVacaciones', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        solicitudes: misVacaciones,
+                        lider: lider
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+
         })
-        .catch((err) => {
-            console.log(err);
-        })
-        
-    })
-    .catch();
+        .catch();
 
 }
 
@@ -65,11 +65,14 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     const fechaSolicitud = aux.toISOString().split('T')[0].toString();
     let flag = '';
 
+    const fechaInicio = new Date(request.body.fechaInicio);
+    const fechaFin = new Date(request.body.fechaFin);
 
+    const vacacionesPedidas = fechaFin.getDate() - fechaInicio.getDate() + 1;
     if (request.body.fechaInicio <= fechaSolicitud) {
         flag = 'FII';
         console.log('primer falso');
-        response.render('vacaciones/nuevaSolicitudVacacion',{
+        response.render('vacaciones/nuevaSolicitudVacacion', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,
@@ -79,9 +82,9 @@ exports.postSolicitarVacaciones = (request, response, next) => {
             fechaReanudacion: request.body.fechaReanudacion,
             flag: flag
         });
-    } else if (request.body.fechaFin <= fechaSolicitud || request.body.fechaFin <= request.body.fechaInicio){
+    } else if (request.body.fechaFin <= fechaSolicitud || request.body.fechaFin < request.body.fechaInicio) {
         flag = 'FFI';
-        response.render('vacaciones/nuevaSolicitudVacacion',{
+        response.render('vacaciones/nuevaSolicitudVacacion', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,
@@ -91,9 +94,21 @@ exports.postSolicitarVacaciones = (request, response, next) => {
             fechaReanudacion: request.body.fechaReanudacion,
             flag: flag
         });
-    } else if (request.body.fechaReanudacion <= fechaSolicitud || request.body.fechaReanudacion <= request.body.fechaInicio || request.body.fechaReanudacion <= request.body.fechaFin){
+    } else if (vacacionesPedidas > request.session.empleado.vacacionesTotales) {
+        flag = 'NVI';
+        response.render('vacaciones/nuevaSolicitudVacacion', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            fechaSolicitud: fechaSolAux,
+            fechaInicio: request.body.fechaInicio,
+            fechaFin: request.body.fechaFin,
+            fechaReanudacion: request.body.fechaReanudacion,
+            flag: flag
+        });
+    } else if (request.body.fechaReanudacion <= fechaSolicitud || request.body.fechaReanudacion <= request.body.fechaInicio || request.body.fechaReanudacion <= request.body.fechaFin) {
         flag = 'FRI';
-        response.render('vacaciones/nuevaSolicitudVacacion',{
+        response.render('vacaciones/nuevaSolicitudVacacion', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,
@@ -104,13 +119,23 @@ exports.postSolicitarVacaciones = (request, response, next) => {
             flag: flag
         });
     } else {
-    vacacion.saveSolicitud()
-    .then(() => {
-        response.redirect('/vacaciones/estatus_mis_vacaciones/');
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+        flag = 'success';
+        vacacion.saveSolicitud()
+            .then(() => {
+                response.render('vacaciones/nuevaSolicitudVacacion', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    fechaSolicitud: fechaSolAux,
+                    fechaInicio: '',
+                    fechaFin: '',
+                    fechaReanudacion: '',
+                    flag: flag
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
 };
 
