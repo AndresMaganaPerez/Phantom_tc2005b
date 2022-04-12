@@ -21,4 +21,9 @@ module.exports = class NGB {
 static getNGBDeMisEmpleados(_nomina){
         return db.execute('SELECT * FROM natgasblocks WHERE idEmpleado IN (SELECT idOperador FROM DIRIGE D WHERE idLider =?)',[_nomina])
     }
+
+    static fetchAll(){
+        return db.execute('SELECT vqs.Quien_solicita, vqs.qsApellidoPaterno, vqs.qsApellidoMaterno, vl.Lider, vl.lApellidoPaterno, vl.lApellidoMaterno, ngb.idNatgasBlocks, ngb.fechaSolicitud, ngb.fechaUsoNGB FROM viewquiensolicita as vqs, viewlider vl, natgasblocks as ngb WHERE vqs.idNGB = vl.idNGB AND ngb.idNatgasBlocks = vqs.idNGB AND ngb.idNatgasBlocks = vl.idNGB;')
+    }
+
 }

@@ -46,10 +46,20 @@ exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
 };
 
 exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
-        console.log("Consultar Solicitudes NGB");
-    response.render('natgasBlock/estatusSolicitudesNGB', {
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios
-    });   
+    console.log("Consultar Solicitudes NGB");
+
+    NGB.fetchAll().then(([rows, fieldData]) => {
+        console.log("Mostrando la tabla que necesito")
+        console.log(rows);
+        response.render('natgasBlock/estatusSolicitudesNGB', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            solicitudes: rows,
+        })
+    }).catch((error) => {
+        console.log(error);
+    });
+
+
 };
