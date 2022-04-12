@@ -10,6 +10,8 @@ const isAuth = require('../controllers/is-auth');
 
 router.get('/solicitar_mi_natgas_block', isAuth, controllerNGB.solicitarNatgasBlock);
 
+router.post('/solicitar_mi_natgas_block', isAuth, controllerNGB.postDeSolicitud)
+
 router.get('/solicitudes_natgas_block', isAuth, controllerNGB.solicitudesAceptarNatgasBlock);
 
 router.get('/solicitudes_estatus_natgas_block', isAuth, controllerNGB.solicitudesEstatusNatgasBlock);
