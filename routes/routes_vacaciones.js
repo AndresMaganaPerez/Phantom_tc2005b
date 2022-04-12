@@ -18,4 +18,6 @@ router.get('/estatus_mis_vacaciones', isAuth, controllerVacaciones.estatusMisVac
 
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
+router.get('/solicitudes_estatus_vacaciones/:mes', isAuth, controllerVacaciones.filtraSolVacacionesMes);
+
 module.exports = router;

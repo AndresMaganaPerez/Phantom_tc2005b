@@ -1,7 +1,8 @@
 const { response } = require('express');
 const { request } = require('express');
+const session = require('express-session');
+const Empleados = require('../models/models_empleados');
 const Solicitudes = require('../models/models_vacaciones');
-
 
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
@@ -54,3 +55,19 @@ exports.estatusVacaciones = (request, response, next) => {
         console.log(error);
     });
 };
+
+// Funcion Filtrar solicitudes de vacaciones por Mes
+exports.filtraSolVacacionesMes = (request, response, next) => {
+    console.log("Filtrando vacaciones");
+    const month = request.params.mes;
+    Empleados.filtraSolVacacionesMes(month).then(([rows, fieldData]) => {
+        response.render('vacaciones/estatusVacaciones', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            solicitudes: rows
+        });
+    }).catch((error) => {
+        console.log(error);
+    })
+}
