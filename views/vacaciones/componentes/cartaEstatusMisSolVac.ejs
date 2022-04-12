@@ -13,9 +13,11 @@
                             </span>
                         </div>
                         <div class="col s12 m2 l13"></div>
-                        <div class="col s12 m2 l13" style="margin-left: 2vw;">
-                            <%- include('botonCancelar.ejs') %>
-                        </div>
+                        <% if (solicitud.solicitudAceptadaEstatus == 1 || solicitud.solicitudAceptadaEstatus == null) { %>
+                            <div class="col s12 m2 l13" style="margin-left: 1.7vw;">
+                                <%- include('botonCancelar.ejs') %>
+                            </div>
+                        <% } %>
                         <div class="col s12 m2 l13"></div>
                     </div>
                     <div class="row">
@@ -47,7 +49,7 @@
                         <div class="col s12 m3 l13"></div>
                         <% if (solicitud.solicitudAceptadaEstatus == 1 || solicitud.solicitudAceptadaEstatus == 0) { %>
                             <div class="col s12 m2 l13">
-                                Aceptada por Lider Lideraso Liderazgo Lider
+                                Por <%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %>
                             </div>
                         <% } %>
                     </div>

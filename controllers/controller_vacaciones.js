@@ -33,12 +33,23 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
 exports.estatusMisVacaciones = (request, response, next) => {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
     .then(([rows, fieldData]) => {
-        response.render('vacaciones/estatusMisVacaciones', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            solicitudes: rows
-        });
+        const misVacaciones = rows;
+        Solicitudes.fetchLider(request.session.empleado.idEmpleado)
+        .then(([rows, fieldData]) => {
+            const lider = rows[0];
+            console.log(lider);
+            response.render('vacaciones/estatusMisVacaciones', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                solicitudes: misVacaciones,
+                lider: lider
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        
     })
     .catch();
 
@@ -68,7 +79,6 @@ exports.postSolicitarVacaciones = (request, response, next) => {
             fechaReanudacion: request.body.fechaReanudacion,
             flag: flag
         });
-        response.redirect('vacaciones/solicitar_mis_vacaciones');
     } else if (request.body.fechaFin <= fechaSolicitud || request.body.fechaFin <= request.body.fechaInicio){
         flag = 'FFI';
         response.render('vacaciones/nuevaSolicitudVacacion',{
@@ -96,7 +106,7 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     } else {
     vacacion.saveSolicitud()
     .then(() => {
-        response.redirect('solicitudes_vacaciones/');
+        response.redirect('/vacaciones/estatus_mis_vacaciones/');
     })
     .catch((error) => {
         console.log(error);

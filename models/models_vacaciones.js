@@ -18,8 +18,12 @@ module.exports = class solicitudVacaciones {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY idSolicitud DESC', [nomina]);
     }
 
+    static fetchLider(nomina) {
+        return db.execute('SELECT d.idLider, nombre, apellidoPaterno, apellidoMaterno FROM empleado e, dirige d WHERE e.idEmpleado=d.idLider AND idOperador=?', [nomina]);
+    }
+
     static fetchMisVacaciones(nomina) {
-        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio DESC', [nomina]);
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio ASC', [nomina]);
     }
 
     
