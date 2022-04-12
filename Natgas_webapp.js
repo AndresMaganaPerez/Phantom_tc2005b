@@ -1,7 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 //const csrf = require('csurf');
@@ -10,7 +9,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(cookieParser());
+const cookieParser = require('cookie-parser');
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -49,6 +49,7 @@ app.use((request, response, next) => {
 */
 
 //app.use de las rutas
+app.use(cookieParser());
 app.use('/general', rutasVistaGeneral);
 app.use('/perfil', rutasPerfil);
 app.use('/vacaciones', rutasVacaciones);
