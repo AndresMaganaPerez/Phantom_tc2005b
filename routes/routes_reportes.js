@@ -3,6 +3,9 @@ const express = require('express');
 const router = express.Router();
 
 const controllerReportes = require('../controllers/controller_reportes');
+const isAuthAdminRH = require('../controllers/is-authAdminRH');
+const isAuthLider = require('../controllers/is-authLider');
+const isAuthOperador = require('../controllers/is-authOperador');
 const isAuth = require('../controllers/is-auth');
 
 router.get('/', isAuth, controllerReportes.reportes);

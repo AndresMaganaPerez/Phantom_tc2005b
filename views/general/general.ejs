@@ -1,0 +1,11 @@
+<% if (rol == 'admin') { %>
+    <%- include('generalRoles/generalAdmin.ejs') %>
+<% } else if (rol == 'recursosHumanos') { %>
+    <%- include('generalRoles/generalLider.ejs') %>
+<% } else if (rol == 'lider') { %>
+    <%- include('generalRoles/generalLider.ejs') %>
+<% } else if (rol == 'operador') { %>
+    <%- include('generalRoles/generalOperador.ejs') %>
+<% } else if (rol == 'despachador') { %>
+    <%- include('generalRoles/generalPromJF.ejs') %>
+<% } %>

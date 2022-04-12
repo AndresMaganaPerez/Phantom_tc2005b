@@ -1,0 +1,27 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+<h3 style="text-align: center; padding-bottom: 10px;">Editar Reporte</h3>
+
+<div class="row">
+    <div class="col s12 m4 l13"></div>
+    <div class="col s12 m4 l13">
+        <div class="card " style="border-radius: 15px;">
+            <form action="/reportes/nuevo" method="POST">
+                <div style="padding: 20px 30px;">
+                    <h5>Nombre:</h5>
+                    <input placeholder="Modifica el nombre aquí" id="Titulo" type="text" class="validate" name="nombre" required>
+                </div>
+                
+                <div class="input-field" style="padding: 0px 30px">
+                    <h5>Valor:</h5>
+                    <textarea placeholder="Modifica el valor aquí" id="textareaTexto" class="materialize-textarea" name="valor"></textarea>
+                </div>
+                
+                <br>    
+                
+                <div class="center" style="padding-top: 20px;">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Guardar
+                    </button>
+                </div>
+
+<%- include('../includes/footer.ejs') %>
