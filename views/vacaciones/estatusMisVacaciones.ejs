@@ -9,10 +9,8 @@
     </div>
 </div>
 
-
-<%- include('componentes/cartaEstatusSolVacAux.ejs') %>
-<%- include('componentes/cartaEstatusSolVacAux.ejs') %>
-<%- include('componentes/cartaEstatusSolVacAux.ejs') %>
-
+<% if (solicitudes.length > 0) { %>
+    <%- include('componentes/cartaEstatusMisSolVac.ejs') %>
+<% } %>
 
 <%- include('../includes/footer.ejs') %>

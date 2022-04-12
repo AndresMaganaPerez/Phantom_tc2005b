@@ -30,13 +30,13 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
 };
 
 exports.estatusMisVacaciones = (request, response, next) => {
-    Solicitudes.fetchAll(request.session.empleado.idEmpleado)
+    Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
     .then(([rows, fieldData]) => {
         response.render('vacaciones/estatusMisVacaciones', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,
-
+            solicitudes: rows
         });
     })
     .catch();
@@ -101,10 +101,6 @@ exports.postSolicitarVacaciones = (request, response, next) => {
         console.log(error);
     });
     }
-
-
-
-
 };
 
 exports.estatusVacaciones = (request, response, next) => {
