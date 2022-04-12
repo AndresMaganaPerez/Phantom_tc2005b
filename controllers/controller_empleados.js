@@ -27,8 +27,6 @@ exports.login = (request, response, next) => {
             return response.redirect('/');
         }
         const empleado = rows[0];
-        console.log(empleado.numTelefonico);
-        console.log(empleado.cantidadNatgasBlocks);
         bcrypt.compare(request.body.password_login, empleado.token)
             .then((doMatch) => {
                 if (doMatch) {

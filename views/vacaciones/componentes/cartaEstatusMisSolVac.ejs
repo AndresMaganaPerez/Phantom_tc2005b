@@ -1,0 +1,62 @@
+<% for (solicitud of solicitudes) { %>
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m8 l13">
+            <div class="card " style="border-radius: 15px;">
+                <div class="card-content" style="padding: 10px;">
+                    <div class="row">
+                        <div class="col s12 m7 l13">
+                            <span class='txt'>
+                                <h5 style="margin-left: 5%;"><span style="font-weight: 600;">Fecha de solicitud: </span> <%=
+                                    solicitud.fechaSolicitud.toString().substring(4,15) %>
+                                </h5>
+                            </span>
+                        </div>
+                        <div class="col s12 m2 l13"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m7 l13">
+                            <h6 style="margin-left: 5%;">
+                                <span style="font-weight: 600;">Fecha Inicio:</span>
+                                <%= solicitud.fechaInicio.toString().substring(4,15) %>
+                                |
+                                <span style="font-weight: 600;">Fecha Fin:</span>
+                                <%= solicitud.fechaFin.toString().substring(4,15) %>
+                            </h6>
+                        </div>
+                        <div class="col s12 m2 l13"></div>
+                        <% if (solicitud.solicitudAceptadaEstatus == null) { %>
+                            <%- include('bloques/componentesBloque/cartas/cartaSinStatus.ejs') %>
+                        <% } else if (solicitud.solicitudAceptadaEstatus == 1) { %>
+                            <%- include('bloques/componentesBloque/cartas/cartaAceptado.ejs') %>
+                        <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
+                            <%- include ('bloques/componentesBloque/cartas/cartaRechazado') %>
+                        <% } %>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 m7 l13">
+                            <h6 style="margin-left: 5%;">
+                                <span style="font-weight: 600;">Fecha Reanudación: </span> <%=
+                                solicitud.fechaReanudacion.toString().substring(4,15) %>
+                            </h6>
+                        </div>
+                        <div class="col s12 m2 l13"></div>
+                        <div class="col s12 m3 l13">
+                            Aceptada por Lider Lideraso Liderazgo Lider
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h6 style="margin-left: 4%;">
+                            <span style="font-weight: 600;">
+                                    No.Nómina:   
+                            </span>
+                                    <%= solicitud.idEmpleado %> | 
+                            <span style="font-weight: 600;">Suplente:</span> <%= solicitud.suplente %>
+                        </h6>
+                    </div>
+                </div>
+                <div class="card-image waves-effect waves-block waves-light"></div>
+            </div>
+        </div>
+    </div>
+<% } %>
