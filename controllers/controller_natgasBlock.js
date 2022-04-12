@@ -33,15 +33,15 @@ exports.postDeSolicitud = (request,response,next) => {
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
     NGB.getNGBDeMisEmpleados(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
-        console.log(request.body);
+        const ngbDeMisEmpleados = rows;
         console.log("Solicitudes para Aceptar de Natgas block");
-        response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
-            ngbsPorAceptar: rows,
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios
-        });
-    }).catch(err =>{console.log(err)})
+                response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
+                    ngbsPorAceptar: ngbDeMisEmpleados,
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                });
+            }).catch(err =>{console.log(err)})
 
 };
 

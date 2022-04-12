@@ -3,6 +3,7 @@ const { request } = require('express');
 const session = require('express-session');
 const Empleados = require('../models/models_empleados');
 const Solicitudes = require('../models/models_vacaciones');
+const fastcsv = require('fast-csv')
 
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
