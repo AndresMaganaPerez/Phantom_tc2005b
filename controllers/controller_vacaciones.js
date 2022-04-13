@@ -24,6 +24,10 @@ exports.solicitarVacaciones = (request, response, next) => {
     });
 };
 
+exports.descarga = (request, response, next) => {
+    const file = `${__dirname}/../public/Solicitudes.csv`;
+  response.download(file);
+}
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
     response.render('vacaciones/aceptarVacaciones',{
         sesion: request.session.empleado,
