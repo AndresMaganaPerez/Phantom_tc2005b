@@ -8,7 +8,7 @@
             <p class="center">Fecha de la solicitud: <%= fechaSolicitud %></p>
             <h5 class="center">Vacaciones disponibles:</h5>
             <h6 class="center"><%= sesion.vacacionesTotales %> </h6>
-            <% if (sesion.vacacionesTotales == 0) { %> 
+            <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %> 
                 <h6 class="center" style="font-weight: 600; color: red;">No tienes vacaciones disponibles</h6>
             <% } %>
 

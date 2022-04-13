@@ -52,7 +52,6 @@ exports.estatusMisVacaciones = (request, response, next) => {
 
         })
         .catch();
-
 }
 
 exports.postSolicitarVacaciones = (request, response, next) => {
@@ -141,8 +140,8 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 
 exports.estatusVacaciones = (request, response, next) => {
     //console.log(request.body);
-    Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
-        //console.log(rows);
+    Solicitudes.fetchAllVacaciones().then(([rows, fieldData]) => {
+        console.log(rows);
         response.render('vacaciones/estatusVacaciones', {
             sesion: request.session.empleado,
             rol: request.session.rol,
