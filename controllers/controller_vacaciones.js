@@ -75,10 +75,9 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     
     const fechaInicio = new Date(request.body.fechaInicio);
     const fechaFin = new Date(request.body.fechaFin);
-    const vacacionesPedidas = fechaFin.getDate() - fechaInicio.getDate() + 1;
-
-    //let flag = '';
-
+    const diffTiempo = fechaFin.getTime() - fechaInicio.getTime();
+    const vacacionesPedidas = (diffTiempo / (1000 * 3600 * 24)) + 1;
+ 
     const check1 = request.body.fechaInicio <= fechaSolicitud;
     const check2 = request.body.fechaFin <= fechaSolicitud || request.body.fechaFin < request.body.fechaInicio;
     const check3 = vacacionesPedidas > request.session.empleado.vacacionesTotales;
