@@ -26,13 +26,13 @@ exports.login = (request, response, next) => {
         if (rows.length < 1) {
             return response.redirect('/');
         }
-        const empleado = new empleados(rows[0].idEmpleado, rows[0].email, rows[0].token, rows[0].nombre, rows[0].apellidoPaterno, rows[0].apellidoMaterno, rows[0].fechaNac, rows[0].numTelefonico);
+        const empleado = rows[0];
         bcrypt.compare(request.body.password_login, empleado.token)
             .then((doMatch) => {
                 if (doMatch) {
                     request.session.isLoggedIn = true;
                     request.session.empleado = empleado;
-                    empleados.findRol(empleado.nomina)
+                    empleados.findRol(empleado.idEmpleado)
                     .then((rows, fieldData) => {
                         request.session.rol = rows[0][0].descripcionRol;
                         empleados.findPrivilegio(request.session.rol)

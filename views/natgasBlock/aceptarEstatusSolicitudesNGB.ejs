@@ -1,0 +1,13 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+<h4 class="center">Solicitudes de NGB</h4>
+
+<% if (rol == 'lider') { %>
+    <%- include('componentes/botonRealizarSol.ejs') %>
+<% } %>
+
+<% if (ngbsPorAceptar.length != 0){ %>
+    <%- include('componentes/cartaAceptarSol.ejs') %>
+<% } %>
+
+<%- include('../includes/footer.ejs') %>

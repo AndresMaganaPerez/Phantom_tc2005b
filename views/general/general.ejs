@@ -1,12 +1,11 @@
 <% if (rol == 'admin') { %>
-    <%- include('generalAdmin.ejs') %>
+    <%- include('generalRoles/generalAdmin.ejs') %>
 <% } else if (rol == 'recursosHumanos') { %>
-    <%- include('generalLider.ejs') %>
+    <%- include('generalRoles/generalLider.ejs') %>
 <% } else if (rol == 'lider') { %>
-    <% console.log('hola') %>
-    <%- include('generalLider.ejs') %>
+    <%- include('generalRoles/generalLider.ejs') %>
 <% } else if (rol == 'operador') { %>
-    <%- include('generalOperador.ejs') %>
+    <%- include('generalRoles/generalOperador.ejs') %>
 <% } else if (rol == 'despachador') { %>
-    <%- include('generalPromJF.ejs') %>
+    <%- include('generalRoles/generalPromJF.ejs') %>
 <% } %>

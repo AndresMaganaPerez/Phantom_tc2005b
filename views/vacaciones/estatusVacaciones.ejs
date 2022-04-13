@@ -1,0 +1,34 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+<h4 class="center">Solicitudes de Vacaciones</h4>
+
+<% if (rol == 'lider' || rol == 'recursosHumanos' || rol == 'operador' || rol == 'despachador') { %>
+    <div class="row center">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m8 l13">
+            <%- include('componentes/botonCrearSol.ejs') %>
+            <% if (rol == 'lider' || rol == 'recursosHumanos') { %>
+                <%- include('componentes/botonEstatusMisVac.ejs') %>
+            <% } %>    
+        </div>
+    </div>
+<% } %>
+
+<% if (rol == 'admin') { %>
+    <div class="center">
+        <%- include('componentes/botonAceptarSol.ejs') %>
+    </div>
+<% } %>
+
+<% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+    <br>
+    <%- include ('componentes/bloques/bloqueDropdown_MesArea_BotonDescarga.ejs') %>
+<% } %>
+
+<% if (solicitudes.length> 0) { %>
+    <%- include('componentes/cartaEstatusSolVac.ejs') %>
+<% } else { %>
+    <h3>No hay solicitudes de vacaciones</h3>
+<% } %>
+
+<%- include('../includes/footer.ejs') %>
