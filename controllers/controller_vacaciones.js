@@ -27,6 +27,10 @@ exports.cancelarSolicitud = (request, response, next) =>{
     console.log(request.body.delete);
 }
 
+exports.descarga = (request, response, next) => {
+    const file = `${__dirname}/../public/Solicitudes.csv`;
+  response.download(file);
+}
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
     response.render('vacaciones/aceptarVacaciones', {
         sesion: request.session.empleado,
