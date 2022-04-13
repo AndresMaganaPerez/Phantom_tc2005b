@@ -11,6 +11,7 @@ exports.solicitarNatgasBlock = (request, response, next) => {
     NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
         const ultimoNGB = rows[0].fechaSolicitud
+        console.log(rows);
     response.render('natgasBlock/nuevaSolicitudNGB', {
         sesion: request.session.empleado,
         rol: request.session.rol,
