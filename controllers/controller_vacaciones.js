@@ -4,6 +4,7 @@ const session = require('express-session');
 const Empleados = require('../models/models_empleados');
 const Solicitudes = require('../models/models_vacaciones');
 const fastcsv = require('fast-csv')
+const fs = require('fs');
 
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
@@ -108,13 +109,19 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 exports.estatusVacaciones = (request, response, next) => {
     //console.log(request.body);
     Solicitudes.fetchAll(90954).then(([rows, fieldData]) => {
-        //console.log(rows);
-        response.render('vacaciones/estatusVacaciones', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            solicitudes: rows
-        });
+        console.log(rows);
+        const data = rows;
+        var ws =fs.createWriteStream('public/Solicitudes.csv');
+        fastcsv
+        .write(data, {headers:true})
+        .on('finish',function(){
+            response.render('vacaciones/estatusVacaciones', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                solicitudes: rows
+            });
+        }).pipe(ws)
     }).catch((error) => {
         console.log(error);
     });
