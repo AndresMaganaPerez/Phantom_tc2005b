@@ -23,11 +23,25 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
-    response.render('vacaciones/aceptarVacaciones',{
+    console.log('Estatus Sol Vacas');
+    console.log(request.session.empleado.idEmpleado);
+    Solicitudes.fetchOpVac(request.session.empleado.idEmpleado)
+        .then(([rows, fieldData]) => {
+            console.log(rows);
+            response.render('vacaciones/aceptarVacaciones', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                solicitudes: rows});
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    /*response.render('vacaciones/aceptarVacaciones',{
         sesion: request.session.empleado,
         rol: request.session.rol,
         privilegios: request.session.privilegios,
-    });
+    });*/
 };
 
 exports.estatusMisVacaciones = (request, response, next) => {

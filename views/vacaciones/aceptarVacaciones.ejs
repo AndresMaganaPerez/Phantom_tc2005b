@@ -12,8 +12,13 @@
     </div>
     <% } %>
 
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
+    <% if (solicitudes.length > 0) { %>
+        <% for (let solicitud of solicitudes) { %>
+            <%- include('componentes/cartaAceptarEstatusSolVac.ejs', {solicitud: solicitud}) %>
+        <% } %>
+    <% } else { %>
+            <img src="/Images/empty_street.png" alt="Empty Street   ">
+            <h3 style="text-align-center">No hay solicitudes existentes</h3>
+    <% } %>
 
 <%- include('../includes/footer.ejs') %>

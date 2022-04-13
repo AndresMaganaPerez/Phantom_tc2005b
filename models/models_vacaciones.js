@@ -18,9 +18,15 @@ module.exports = class solicitudVacaciones {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY idSolicitud DESC', [nomina]);
     }
 
+    static fetchOpVac(nomina) {
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idLider=? ORDER BY fechaSolicitud DESC', [nomina]);
+    }
+
     static fetchMisVacaciones(nomina) {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio DESC', [nomina]);
     }
 
-    
+    static fetchEstatus(nomina){
+        return db.execute ('SELECT solicitudAceptadaEstatus FROM solicitudvacaciones WHERE solicitudAceptadaEstatus = NULL AND idEmpleado = ? ', [nomina]);
+    }
 }
