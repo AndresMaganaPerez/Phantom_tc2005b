@@ -66,5 +66,31 @@ module.exports = class Empleados{
     }
 
     // Funcion Filtrar solicitudes de Natgas Block por Mes
-    // filtraSolNGBMes
+    static filtraSolNGBMes(mes) {
+        if (mes == 'Enero') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-01-01" AND "2022-01-31"');
+        } else if (mes == 'Febrero') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-02-01" AND "2022-02-31"');
+        } else if (mes == 'Marzo') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-03-01" AND "2022-03-31"');
+        } else if (mes == 'Abril') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-04-01" AND "2022-04-31"');
+        } else if (mes == 'Mayo') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-05-01" AND "2022-05-31"');
+        } else if (mes == 'Junio') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-06-01" AND "2022-06-31"');
+        } else if (mes == 'Julio') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-07-01" AND "2022-07-31"');
+        } else if (mes == 'Agosto') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-08-01" AND "2022-08-31"');
+        } else if (mes == 'Septiembre') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-09-01" AND "2022-09-31"');
+        } else if (mes == 'Octubre') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-10-01" AND "2022-10-31"');
+        } else if (mes == 'Noviembre') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-11-01" AND "2022-11-31"');
+        } else if (mes == 'Diciembre') {
+            return db.execute('SELECT * FROM solicitudvacaciones WHERE fechaInicio BETWEEN "2022-12-01" AND "2022-12-31"');
+        }
+    }
 } 
