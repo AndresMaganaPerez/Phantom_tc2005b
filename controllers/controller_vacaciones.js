@@ -1,8 +1,5 @@
-const { response } = require('express');
-const { request } = require('express');
-const session = require('express-session');
-const Empleados = require('../models/models_empleados');
 const Solicitudes = require('../models/models_vacaciones');
+const Empleados = require('../models/models_empleados');
 const fastcsv = require('fast-csv')
 const fs = require('fs');
 const { formatWithOptions } = require('util');
@@ -30,6 +27,10 @@ exports.cancelarSolicitud = (request, response, next) =>{
     console.log(request.body.delete);
 }
 
+exports.descarga = (request, response, next) => {
+    const file = `${__dirname}/../public/Solicitudes.csv`;
+  response.download(file);
+}
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
     response.render('vacaciones/aceptarVacaciones', {
         sesion: request.session.empleado,
@@ -179,6 +180,8 @@ exports.filtraSolVacacionesMes = (request, response, next) => {
         });
     }).catch((error) => {
         console.log(error);
-    })
-}
+    });
+
+};
+
 
