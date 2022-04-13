@@ -60,7 +60,9 @@ exports.estatusMisVacaciones = (request, response, next) => {
                 })
 
         })
-        .catch();
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 exports.postSolicitarVacaciones = (request, response, next) => {
@@ -152,7 +154,6 @@ exports.filtraSolVacacionesMes = (request, response, next) => {
     }).catch((error) => {
         console.log(error);
     });
-
 };
 
 
