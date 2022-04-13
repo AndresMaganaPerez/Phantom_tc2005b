@@ -67,7 +67,11 @@
                     <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" name="suplente"
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
-                    <% } %> required>
+                    <% } %> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                        value="<%= suplente %>" 
+                    <% } %>
+                    required>
                 </div>
                 <br>    
                 <div class="left-align" style="padding-left: 30px; ">

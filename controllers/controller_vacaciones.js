@@ -70,64 +70,23 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     const fechaSolAux = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     const dateAux = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     const aux = new Date(dateAux);
-    const fechaSolicitud = aux.toISOString().split('T')[0].toString();
-    let flag = '';
 
+    const fechaSolicitud = aux.toISOString().split('T')[0].toString();
+    
     const fechaInicio = new Date(request.body.fechaInicio);
     const fechaFin = new Date(request.body.fechaFin);
-
     const vacacionesPedidas = fechaFin.getDate() - fechaInicio.getDate() + 1;
-    if (request.body.fechaInicio <= fechaSolicitud) {
-        flag = 'FII';
-        console.log('primer falso');
-        response.render('vacaciones/nuevaSolicitudVacacion', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            fechaSolicitud: fechaSolAux,
-            fechaInicio: request.body.fechaInicio,
-            fechaFin: request.body.fechaFin,
-            fechaReanudacion: request.body.fechaReanudacion,
-            flag: flag
-        });
-    } else if (request.body.fechaFin <= fechaSolicitud || request.body.fechaFin < request.body.fechaInicio) {
-        flag = 'FFI';
-        response.render('vacaciones/nuevaSolicitudVacacion', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            fechaSolicitud: fechaSolAux,
-            fechaInicio: request.body.fechaInicio,
-            fechaFin: request.body.fechaFin,
-            fechaReanudacion: request.body.fechaReanudacion,
-            flag: flag
-        });
-    } else if (vacacionesPedidas > request.session.empleado.vacacionesTotales) {
-        flag = 'NVI';
-        response.render('vacaciones/nuevaSolicitudVacacion', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            fechaSolicitud: fechaSolAux,
-            fechaInicio: request.body.fechaInicio,
-            fechaFin: request.body.fechaFin,
-            fechaReanudacion: request.body.fechaReanudacion,
-            flag: flag
-        });
-    } else if (request.body.fechaReanudacion <= fechaSolicitud || request.body.fechaReanudacion <= request.body.fechaInicio || request.body.fechaReanudacion <= request.body.fechaFin) {
-        flag = 'FRI';
-        response.render('vacaciones/nuevaSolicitudVacacion', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            fechaSolicitud: fechaSolAux,
-            fechaInicio: request.body.fechaInicio,
-            fechaFin: request.body.fechaFin,
-            fechaReanudacion: request.body.fechaReanudacion,
-            flag: flag
-        });
-    } else {
-        flag = 'success';
+
+    //let flag = '';
+
+    const check1 = request.body.fechaInicio <= fechaSolicitud;
+    const check2 = request.body.fechaFin <= fechaSolicitud || request.body.fechaFin < request.body.fechaInicio;
+    const check3 = vacacionesPedidas > request.session.empleado.vacacionesTotales;
+    const check4 = request.body.fechaReanudacion <= fechaSolicitud || request.body.fechaReanudacion <= request.body.fechaInicio || request.body.fechaReanudacion <= request.body.fechaFin;
+
+    const flag = check1 ? 'FII' : check2 ? 'FFI' : check3 ? 'NVI' : check4 ? 'FRI' : 'success';
+
+    if (flag == 'success') {
         vacacion.saveSolicitud()
             .then(() => {
                 response.render('vacaciones/nuevaSolicitudVacacion', {
@@ -138,12 +97,25 @@ exports.postSolicitarVacaciones = (request, response, next) => {
                     fechaInicio: '',
                     fechaFin: '',
                     fechaReanudacion: '',
+                    suplente: '',
                     flag: flag
                 });
             })
             .catch((error) => {
                 console.log(error);
             });
+    } else {
+        response.render('vacaciones/nuevaSolicitudVacacion', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            fechaSolicitud: fechaSolAux,
+            fechaInicio: request.body.fechaInicio,
+            fechaFin: request.body.fechaFin,
+            fechaReanudacion: request.body.fechaReanudacion,
+            suplente: request.body.suplente,
+            flag: flag
+        });
     }
 };
 
