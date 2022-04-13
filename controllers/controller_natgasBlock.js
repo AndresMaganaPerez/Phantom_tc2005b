@@ -93,7 +93,6 @@ exports.aceptarNGB = (request, response, next) => {
 exports.filtraSolNGBMes = (request, response, next) => {
     console.log("Filtrando NGB");
     const month = request.params.mes;
-    console.log(month);
     Empleados.filtraSolNGBMes(month).then(([rows, fieldData]) => {
         response.render('natgasBlock/estatusSolicitudesNGB', {
             sesion: request.session.empleado,
