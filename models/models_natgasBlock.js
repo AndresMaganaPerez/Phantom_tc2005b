@@ -29,11 +29,11 @@ static getNGBDeMisEmpleados(_nomina){
     }
 
     static fetchNGBPorAceptar(_nomina){
-        return db.execute('SELECT * FROM solicitudesngb as sngb WHERE Lider IN (SELECT e.nombre FROM DIRIGE d, empleado e WHERE d.idLider = e.idEmpleado AND d.idLider =?)',[_nomina])
+        return db.execute('SELECT * FROM solicitudesngb as sngb WHERE Lider IN (SELECT e.nombre FROM DIRIGE d, empleado e WHERE d.idLider = e.idEmpleado AND d.idLider =?) AND sngb.estatusNGB IS NULL;',[_nomina])
     }
 
-    static aceptarNGB(id){
-        return db.execute('DELETE FROM natgasblocks WHERE idNatgasBlocks = ?',[id])
+    static aceptarNGB(idqs, idngb){
+        return db.execute('CALL AceptarRestarNGB(?, ?)',[idqs, idngb])
     }
 
 }
