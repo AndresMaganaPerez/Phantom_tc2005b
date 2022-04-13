@@ -75,3 +75,15 @@ exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
 
 
 };
+
+exports.aceptarNGB = (request, response, next) => {
+    console.log("LE DIO CLICK AL BOTON de Aceptar");
+    console.log(request.body.aceptado);
+    console.log(request.body.idngb);
+    NGB.aceptarNGB(request.body.idngb).then(([rows, fieldData]) => {
+        response.redirect('/general')
+    }).catch((error) => {
+        console.log(error);
+    });
+
+};
