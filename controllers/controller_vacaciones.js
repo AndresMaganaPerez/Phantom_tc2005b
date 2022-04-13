@@ -24,7 +24,7 @@ exports.solicitarVacaciones = (request, response, next) => {
 
 // Controlador para desplegar las solicitudes enviadas al lider en sesión.
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
-    console.log('Estatus Sol Vacas');
+    console.log('Estatus Solicitud Vacaciones');
     console.log(request.session.empleado.idEmpleado);
     Solicitudes.fetchOpVac(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
@@ -42,7 +42,19 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
 
 // Controlador para actualizar los valores de las solicitudes en la bd
 exports.actualizarSolicitudesEstatus = (request, response, next) => {
-    Solicitudes.fetchSolicitud(request.solicitudId)
+    Solicitudes.updateSolicitud(request.solicitudId, request.estatus)
+        .then(([rows, fieldData]) => {
+            console.low(rows);
+            let respuesta = {
+                error: false,
+                codigo: 200,
+                mensaje: 'Modificación de estatus realizado.'
+            };
+            response.send(respuesta);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 }
 
 exports.estatusMisVacaciones = (request, response, next) => {

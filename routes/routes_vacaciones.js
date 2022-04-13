@@ -18,7 +18,7 @@ router.get('/estatus_mis_vacaciones', isAuth, controllerVacaciones.estatusMisVac
 
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
-router.put('/solicitudes_vacaciones', isAuth, controllerVacaciones.actualizarSolicitudesEstatus);
+router.post('/actualiza_estatus', isAuth, controllerVacaciones.actualizarSolicitudesEstatus);
 
 router.get('/solicitudes_estatus_vacaciones/:mes', isAuth, controllerVacaciones.filtraSolVacacionesMes);
 
