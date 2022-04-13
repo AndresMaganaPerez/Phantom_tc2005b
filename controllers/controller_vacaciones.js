@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-const { borrarSolicitud } = require('../models/models_vacaciones');
-=======
-const { response } = require('express');
-const { request } = require('express');
-const session = require('express-session');
-const Empleados = require('../models/models_empleados');
->>>>>>> 71a7827f3562ec8c4ad203e10fe855bfbae0f545
 const Solicitudes = require('../models/models_vacaciones');
 const fastcsv = require('fast-csv')
 const fs = require('fs');
@@ -29,6 +21,10 @@ exports.solicitarVacaciones = (request, response, next) => {
         flag: flag
     });
 };
+
+exports.cancelarSolicitud = (request, response, next) =>{
+    console.log(request.body.delete);
+}
 
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
     response.render('vacaciones/aceptarVacaciones', {
@@ -179,15 +175,8 @@ exports.filtraSolVacacionesMes = (request, response, next) => {
         });
     }).catch((error) => {
         console.log(error);
-<<<<<<< HEAD
     });
 
 };
 
-exports.cancelarSolicitud = (request, response, next) => {
-    borrarSolicitud(request.session.empleado.idEmpleado)
-}
-=======
-    })
-}
->>>>>>> 71a7827f3562ec8c4ad203e10fe855bfbae0f545
+

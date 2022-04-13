@@ -1,1 +1,6 @@
-<a href="#"><i class="medium material-icons red-text">delete</i></a>
+<form action="/vacaciones/estatus_mis_vacaciones" method="POST">
+    <input name="delete" type="hidden" value="<%= idSolicitud %>">
+    <button type="submit" style="background-color: white; border: 0; cursor: pointer;">
+        <i class="medium material-icons red-text" type="submit">delete</i>
+    </button>
+</form>
