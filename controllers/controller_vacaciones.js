@@ -10,15 +10,12 @@ exports.solicitarVacaciones = (request, response, next) => {
     console.log("solicitar mis Vacaciones");
     const date = new Date();
     const fechaSolAux = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
-    let flag = '';
+    const flag = '';
     response.render('vacaciones/nuevaSolicitudVacacion', {
         sesion: request.session.empleado,
         rol: request.session.rol,
         privilegios: request.session.privilegios,
         fechaSolicitud: fechaSolAux,
-        fechaInicio: '',
-        fechaFin: '',
-        fechaReanudacion: '',
         flag: flag
     });
 };
@@ -95,10 +92,6 @@ exports.postSolicitarVacaciones = (request, response, next) => {
                     rol: request.session.rol,
                     privilegios: request.session.privilegios,
                     fechaSolicitud: fechaSolAux,
-                    fechaInicio: '',
-                    fechaFin: '',
-                    fechaReanudacion: '',
-                    suplente: '',
                     flag: flag
                 });
             })

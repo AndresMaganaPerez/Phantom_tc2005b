@@ -20,9 +20,9 @@
                 <div style="padding: 0px 30px;">
                     <h5>Fecha inicio</h5>
                     <input type="date" id="FI" name="fechaInicio"
-                    <% if (fechaInicio != '') { %>
-                        value="<%= fechaInicio %>"
-                    <% } %> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                        value="<%= fechaInicio %>" 
+                    <% } %>
                     
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
@@ -35,9 +35,9 @@
                 <div style="padding: 0px 30px;">
                     <h5>Fecha fin</h5>
                     <input type="date" id="FF" name="fechaFin" 
-                    <% if (fechaInicio != '') { %>
-                        value="<%= fechaFin %>"
-                    <% } %> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                        value="<%= fechaFin %>" 
+                    <% } %>
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
@@ -51,9 +51,9 @@
                 <div style="padding: 0px 30px;">
                     <h5>Fecha reanudación</h5>
                     <input type="date" id="FR" name="fechaReanudacion" 
-                    <% if (fechaInicio != '') { %>
-                        value="<%= fechaReanudacion %>"
-                    <% } %> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                        value="<%= fechaReanudacion %>" 
+                    <% } %>
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
