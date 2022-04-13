@@ -19,7 +19,7 @@ exports.solicitarNatgasBlock = (request, response, next) => {
         fechaDeHoy: datetime,
         ultimoNGB: ultimoNGB
     })
-    }).catch(err =>{console.log(err)})
+    }).catch((err) =>{console.log(err)})
     
 };
 exports.postDeSolicitud = (request,response,next) => {
@@ -31,17 +31,28 @@ exports.postDeSolicitud = (request,response,next) => {
 }
 
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
+    NGB.fetchNGBPorAceptar(request.session.empleado.idEmpleado).then(([rows, fieldData]) => {
+        console.log("NGBS POR ACEPTAR CON NOMBRES");
+        console.log(rows)
+        filas = rows
+    }).catch((err) => {
+        console.log(err);
+    });
+
     NGB.getNGBDeMisEmpleados(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
-        const ngbDeMisEmpleados = rows;
+        // console.log(rows),
+        console.log(filas);
+        console.log(request.body);
         console.log("Solicitudes para Aceptar de Natgas block");
-                response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
-                    ngbsPorAceptar: ngbDeMisEmpleados,
-                    sesion: request.session.empleado,
-                    rol: request.session.rol,
-                    privilegios: request.session.privilegios,
-                });
-            }).catch(err =>{console.log(err)})
+        response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
+            // ngbsPorAceptar: rows, Lo comente porque el que me sirve es el de filas en la linea 49 porque ahi hay nombres
+            ngbsPorAceptar: filas,
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios
+        });
+    }).catch(err =>{console.log(err)})
 
 };
 
