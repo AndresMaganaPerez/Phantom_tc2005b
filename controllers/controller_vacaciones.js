@@ -26,6 +26,10 @@ exports.solicitarVacaciones = (request, response, next) => {
     });
 };
 
+exports.cancelarSolicitud = (request, response, next) =>{
+    console.log(request.body.delete);
+}
+
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
     response.render('vacaciones/aceptarVacaciones', {
         sesion: request.session.empleado,
@@ -177,3 +181,4 @@ exports.filtraSolVacacionesMes = (request, response, next) => {
         console.log(error);
     })
 }
+
