@@ -22,6 +22,7 @@ exports.solicitarVacaciones = (request, response, next) => {
     });
 };
 
+// Controlador para desplegar las solicitudes enviadas al lider en sesión.
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
     console.log('Estatus Sol Vacas');
     console.log(request.session.empleado.idEmpleado);
@@ -37,12 +38,12 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
         .catch(err => {
             console.log(err);
         });
-    /*response.render('vacaciones/aceptarVacaciones',{
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios,
-    });*/
 };
+
+// Controlador para actualizar los valores de las solicitudes en la bd
+exports.actualizarSolicitudesEstatus = (request, response, next) => {
+    Solicitudes.fetchSolicitud(request.solicitudId)
+}
 
 exports.estatusMisVacaciones = (request, response, next) => {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)

@@ -26,7 +26,7 @@ module.exports = class solicitudVacaciones {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio DESC', [nomina]);
     }
 
-    static fetchEstatus(nomina){
-        return db.execute ('SELECT solicitudAceptadaEstatus FROM solicitudvacaciones WHERE solicitudAceptadaEstatus = NULL AND idEmpleado = ? ', [nomina]);
+    static fetchSolicitud(solicitudId){
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idSolicitud = ?', [solicitudId]);
     }
 }
