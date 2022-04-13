@@ -26,4 +26,8 @@ static getNGBDeMisEmpleados(_nomina){
         return db.execute('SELECT vqs.Quien_solicita, vqs.qsApellidoPaterno, vqs.qsApellidoMaterno, vl.Lider, vl.lApellidoPaterno, vl.lApellidoMaterno, ngb.idNatgasBlocks, ngb.fechaSolicitud, ngb.fechaUsoNGB FROM viewquiensolicita as vqs, viewlider vl, natgasblocks as ngb WHERE vqs.idNGB = vl.idNGB AND ngb.idNatgasBlocks = vqs.idNGB AND ngb.idNatgasBlocks = vl.idNGB;')
     }
 
+    static fetchNGBPorAceptar(_nomina){
+        return db.execute('SELECT * FROM solicitudesngb as sngb WHERE Lider IN (SELECT e.nombre FROM DIRIGE d, empleado e WHERE d.idLider = e.idEmpleado AND d.idLider =?)',[_nomina])
+    }
+
 }
