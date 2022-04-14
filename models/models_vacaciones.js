@@ -14,23 +14,17 @@ module.exports = class solicitudVacaciones {
         return db.execute('INSERT INTO solicitudvacaciones (idEmpleado, fechaInicio, fechaFin, fechaReanudacion, suplente) VALUES (?, ?, ?, ?, ?)', [this.nomina, this.fechaInicio, this.fechaFin, this.fechaReanudacion, this.suplente]);
     }
 
+    static borrarSolicitud(idEmpleado, idSolicitud) {
+        return db.execute('DELETE FROM solicitudvacaciones WHERE idEmpleado=? AND idSolicitud=?', [idEmpleado, idSolicitud])
+    }
+
     static fetchAll(nomina) {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY idSolicitud DESC', [nomina]);
     }
 
-    static fetchOpVac(nomina) {
-        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idLider=? ORDER BY fechaSolicitud DESC', [nomina]);
-    }
-
     static fetchMisVacaciones(nomina) {
-        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio DESC', [nomina]);
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio ASC', [nomina]);
     }
 
-    static fetchSolicitud(solicitudId) {
-        return db.execute('SELECT * FROM solicitudvacaciones WHERE idSolicitud = ?', [solicitudId]);
-    }
-
-    static updateSolicitud(solicitudId, status) {
-        return db.execute('UPDATE solicitudes SET status = ? WHERE idSolicitud = ?', [status, solicitudId]);
-    }
+    
 }

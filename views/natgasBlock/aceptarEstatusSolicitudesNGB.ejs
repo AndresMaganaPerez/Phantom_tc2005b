@@ -6,7 +6,8 @@
     <%- include('componentes/botonRealizarSol.ejs') %>
 <% } %>
 
-<%- include('componentes/cartaAceptarSol.ejs') %>
-<%- include('componentes/cartaAceptarSol.ejs') %>
+<% if (ngbsPorAceptar.length != 0){ %>
+    <%- include('componentes/cartaAceptarSol.ejs') %>
+<% } %>
 
 <%- include('../includes/footer.ejs') %>

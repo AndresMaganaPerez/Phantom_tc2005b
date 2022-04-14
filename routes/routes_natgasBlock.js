@@ -16,4 +16,8 @@ router.get('/solicitudes_natgas_block', isAuth, controllerNGB.solicitudesAceptar
 
 router.get('/solicitudes_estatus_natgas_block', isAuth, controllerNGB.solicitudesEstatusNatgasBlock);
 
+router.post('/click_aceptar_ngb', isAuth, controllerNGB.aceptarNGB);
+
+router.get('/solicitudes_estatus_natgas_block/:mes', isAuth, controllerNGB.filtraSolNGBMes);
+
 module.exports = router;

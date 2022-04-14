@@ -16,10 +16,13 @@ router.get('/solicitudes_estatus_vacaciones', isAuth, controllerVacaciones.estat
 
 router.get('/estatus_mis_vacaciones', isAuth, controllerVacaciones.estatusMisVacaciones);
 
+router.post('/estatus_mis_vacaciones', isAuth, controllerVacaciones.cancelarSolicitud);
+
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
 router.post('/actualiza_estatus', isAuth, controllerVacaciones.actualizarSolicitudesEstatus);
 
 router.get('/solicitudes_estatus_vacaciones/:mes', isAuth, controllerVacaciones.filtraSolVacacionesMes);
 
+router.get('/descarga',isAuth, controllerVacaciones.descarga);
 module.exports = router;
