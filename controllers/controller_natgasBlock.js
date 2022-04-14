@@ -11,16 +11,28 @@ exports.solicitarNatgasBlock = (request, response, next) => {
     console.log("Solicitar mi Natgas Block");
     NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
-        const ultimoNGB = rows[0].fechaSolicitud
-        console.log(rows);
-    response.render('natgasBlock/nuevaSolicitudNGB', {
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios,
-        restantes: request.session.empleado.cantidadNatgasBlocks,
-        fechaDeHoy: datetime,
-        ultimoNGB: ultimoNGB
-    })
+        if(rows.length >= 1) {
+            const ultimoNGB = rows[0].fechaSolicitud
+            response.render('natgasBlock/nuevaSolicitudNGB', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                restantes: request.session.empleado.cantidadNatgasBlocks,
+                fechaDeHoy: datetime,
+                ultimoNGB: ultimoNGB.toString().substr(0,15)
+            })
+        } else{
+            const ultimoNGB = "No has solicitado ningun Natgas Block."
+            response.render('natgasBlock/nuevaSolicitudNGB', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                restantes: request.session.empleado.cantidadNatgasBlocks,
+                fechaDeHoy: datetime,
+                ultimoNGB: ultimoNGB
+            })
+        }
+        //console.log(rows);
     }).catch((err) =>{console.log(err)})
     
 };
