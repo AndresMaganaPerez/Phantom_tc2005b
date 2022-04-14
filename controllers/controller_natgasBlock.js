@@ -1,4 +1,5 @@
-const NGB = require('../models/models_natgasBlock')
+const NGB = require('../models/models_natgasBlock');
+const Empleados = require('../models/models_empleados');
 
 var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
 var datetime = currentdate.getDate() + "/"
@@ -10,16 +11,28 @@ exports.solicitarNatgasBlock = (request, response, next) => {
     console.log("Solicitar mi Natgas Block");
     NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
-        const ultimoNGB = rows[0].fechaSolicitud
-        console.log(rows);
-    response.render('natgasBlock/nuevaSolicitudNGB', {
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios,
-        restantes: request.session.empleado.cantidadNatgasBlocks,
-        fechaDeHoy: datetime,
-        ultimoNGB: ultimoNGB
-    })
+        if(rows.length >= 1) {
+            const ultimoNGB = rows[0].fechaSolicitud
+            response.render('natgasBlock/nuevaSolicitudNGB', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                restantes: request.session.empleado.cantidadNatgasBlocks,
+                fechaDeHoy: datetime,
+                ultimoNGB: ultimoNGB.toString().substr(0,15)
+            })
+        } else{
+            const ultimoNGB = "No has solicitado ningun Natgas Block."
+            response.render('natgasBlock/nuevaSolicitudNGB', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                restantes: request.session.empleado.cantidadNatgasBlocks,
+                fechaDeHoy: datetime,
+                ultimoNGB: ultimoNGB
+            })
+        }
+        //console.log(rows);
     }).catch((err) =>{console.log(err)})
     
 };
@@ -80,8 +93,25 @@ exports.aceptarNGB = (request, response, next) => {
     console.log("LE DIO CLICK AL BOTON de Aceptar");
     console.log(request.body.aceptado);
     console.log(request.body.idngb);
-    NGB.aceptarNGB(request.body.idngb).then(([rows, fieldData]) => {
+    NGB.aceptarNGB(request.body.idqs, request.body.idngb).then(([rows, fieldData]) => {
         response.redirect('/general')
+    }).catch((error) => {
+        console.log(error);
+    });
+
+};
+
+// Funcion Filtrar solicitudes de NGB por Mes
+exports.filtraSolNGBMes = (request, response, next) => {
+    console.log("Filtrando NGB");
+    const month = request.params.mes;
+    Empleados.filtraSolNGBMes(month).then(([rows, fieldData]) => {
+        response.render('natgasBlock/estatusSolicitudesNGB', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            solicitudes: rows,
+        });
     }).catch((error) => {
         console.log(error);
     });
