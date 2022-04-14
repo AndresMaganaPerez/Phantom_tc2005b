@@ -25,6 +25,4 @@ module.exports = class solicitudVacaciones {
     static fetchMisVacaciones(nomina) {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio ASC', [nomina]);
     }
-
-    
 }

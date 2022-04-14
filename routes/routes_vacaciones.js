@@ -15,8 +15,8 @@ router.post('/solicitar_mis_vacaciones', isAuth, controllerVacaciones.postSolici
 router.get('/solicitudes_estatus_vacaciones', isAuth, controllerVacaciones.estatusVacaciones);
 
 router.get('/estatus_mis_vacaciones', isAuth, controllerVacaciones.estatusMisVacaciones);
-
-router.post('/estatus_mis_vacaciones', isAuth, controllerVacaciones.cancelarSolicitud);
+//
+// router.post('/estatus_mis_vacaciones', isAuth, controllerVacaciones.cance);
 
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
@@ -24,5 +24,8 @@ router.post('/actualiza_estatus', isAuth, controllerVacaciones.actualizarSolicit
 
 router.get('/solicitudes_estatus_vacaciones/:mes', isAuth, controllerVacaciones.filtraSolVacacionesMes);
 
+router.get('/solicitudes_estatus_vacaciones/:area', isAuth, controllerVacaciones.filtraSolVacacionesArea);
+
 router.get('/descarga',isAuth, controllerVacaciones.descarga);
+
 module.exports = router;
