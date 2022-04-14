@@ -1,0 +1,15 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+    <h4 class="center">Aceptar nuevo usuario</h4>
+
+
+    <% if (rol == 'admin') { %>
+    <div class="row center">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m8 l13">
+            <h5>Paola Hernandez</h5>
+            <%- include('vacaciones/componentes/bloques/componentesBloque/botones/botonAceptado.ejs') %>
+        </div>
+    </div>
+    <% } %>
+
+<%- include('../includes/footer.ejs') %>
