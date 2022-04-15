@@ -60,7 +60,6 @@ exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
 
 exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
     console.log("Consultar Solicitudes NGB");
-
     NGB.fetchAll().then(([rows, fieldData]) => {
         console.log("Mostrando la tabla que necesito")
         console.log(rows);

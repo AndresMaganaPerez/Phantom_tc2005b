@@ -3,11 +3,11 @@
 <h4 class="center">Solicitudes de NGB</h4>
 
 <% if (rol == 'lider') { %>
-    <%- include('componentes/botonRealizarSol.ejs') %>
+    <%- include('componentes/botones/botonRealizarSol.ejs') %>
 <% } %>
 
 <% if (ngbsPorAceptar.length > 0){ %>
-    <%- include('componentes/cartaAceptarSol.ejs') %>
+    <%- include('componentes/cartas/cartaAceptarSol.ejs') %>
 <% } else { %>
     <h4 class="center">No hay Solicitudes de NGB</h4>
 <% } %>
