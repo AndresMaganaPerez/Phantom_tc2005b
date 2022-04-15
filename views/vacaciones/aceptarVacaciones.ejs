@@ -1,7 +1,5 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
     <h4 class="center">Solicitudes de Vacaciones</h4>
-
-
     <% if (rol == 'lider') { %>
     <div class="row center">
         <div class="col s12 m2 l13"></div>
@@ -12,8 +10,48 @@
     </div>
     <% } %>
 
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
+    <% if (solicitudes.length > 0) { %>
+        <% for (let solicitud of solicitudes) { %>
+            <%- include('componentes/cartaAceptarEstatusSolVac.ejs', {solicitud: solicitud}) %>
+        <% } %>
+    <% } else { %>
+            <img src="/Images/empty_street.png" alt="Empty Street">
+            <h3 style="text-align-center">No hay solicitudes existentes</h3>
+    <% } %>
+
+<!--      Script Botones Aceptar o Rechazar    -->
+    <script>
+        let botones = document.getElementsByClassName("js-btn");
+        for (let boton of botones) {
+            boton.addEventListener("click", () => {
+
+                let estatus = '';
+
+                let card = boton.closest('.card');
+                if(boton.classList.contains('red')) {
+                    console.log('Solicitud ' + card.dataset.solId + ' Rechazada');
+                    status = 0;
+                } else if(boton.classList.contains('green')) {
+                    console.log('Solicitud ' + card.dataset.solId + ' Aceptada');
+                    status = 1;
+                }
+
+                let url = '/vacaciones/actualiza_estatus';
+                let data = {
+                    solicitudId: card.dataset.solId,
+                    estatus: status
+                };
+
+                fetch(url, {method: 'POST', body: data})
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(err => { console.log(err)})
+
+                console.log(response);
+                // Borrar la tarjeta
+
+            });
+        };
+    </script>
 
 <%- include('../includes/footer.ejs') %>
