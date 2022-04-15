@@ -47,27 +47,16 @@ exports.postDeSolicitud = (request,response,next) => {
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
     NGB.fetchNGBPorAceptar(request.session.empleado.idEmpleado).then(([rows, fieldData]) => {
         console.log("NGBS POR ACEPTAR CON NOMBRES");
-        console.log(rows)
-        filas = rows
-    }).catch((err) => {
-        console.log(err);
-    });
-
-    NGB.getNGBDeMisEmpleados(request.session.empleado.idEmpleado)
-    .then(([rows,fieldData]) =>{
-        // console.log(rows),
-        console.log(filas);
-        console.log(request.body);
-        console.log("Solicitudes para Aceptar de Natgas block");
+        console.log(rows);
         response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
-            // ngbsPorAceptar: rows, Lo comente porque el que me sirve es el de filas en la linea 49 porque ahi hay nombres
-            ngbsPorAceptar: filas,
+            ngbsPorAceptar: rows,
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios
         });
-    }).catch(err =>{console.log(err)})
-
+    }).catch((err) => {
+        console.log(err);
+    });
 };
 
 exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
@@ -94,7 +83,7 @@ exports.aceptarNGB = (request, response, next) => {
     console.log(request.body.aceptado);
     console.log(request.body.idngb);
     NGB.aceptarNGB(request.body.idqs, request.body.idngb).then(([rows, fieldData]) => {
-        response.redirect('/general')
+        response.redirect('/natgas_blocks/solicitudes_natgas_block')
     }).catch((error) => {
         console.log(error);
     });
