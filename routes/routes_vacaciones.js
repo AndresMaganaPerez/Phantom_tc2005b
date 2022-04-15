@@ -15,16 +15,16 @@ router.post('/solicitar_mis_vacaciones', isAuth, controllerVacaciones.postSolici
 router.get('/solicitudes_estatus_vacaciones', isAuth, controllerVacaciones.estatusVacaciones);
 
 router.get('/estatus_mis_vacaciones', isAuth, controllerVacaciones.estatusMisVacaciones);
-//
-// router.post('/estatus_mis_vacaciones', isAuth, controllerVacaciones.cance);
+
+router.post('/estatus_mis_vacaciones', isAuth, controllerVacaciones.cancelarSolicitud);
 
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
-router.post('/actualiza_estatus', isAuth, controllerVacaciones.actualizarSolicitudesEstatus);
+router.post('/solicitudes_vacaciones/aceptar', isAuth, controllerVacaciones.aceptarSolicitudesEstatus);
 
-router.get('/solicitudes_estatus_vacaciones/:mes', isAuth, controllerVacaciones.filtraSolVacacionesMes);
+router.post('/solicitudes_vacaciones/rechazar', isAuth, controllerVacaciones.rechazarSolicitudesEstatus);
 
-router.get('/solicitudes_estatus_vacaciones/:area', isAuth, controllerVacaciones.filtraSolVacacionesArea);
+router.get('/solicitudes_estatus_vacaciones/:mesar', isAuth, controllerVacaciones.filtraSolVacaciones);
 
 router.get('/descarga',isAuth, controllerVacaciones.descarga);
 

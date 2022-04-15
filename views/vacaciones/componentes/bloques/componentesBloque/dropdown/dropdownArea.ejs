@@ -1,13 +1,8 @@
 <a class='dropdown-trigger btn-large blue-grey darken' href='#' data-target='dropdown3'><span>Area </span><i class="material-icons right">arrow_drop_down</i></a>
 <ul id='dropdown3' class='dropdown-content'>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/TYC">TYC</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/NATDEV">NATDEV</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/Mant">Mant</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/Comercial">Comercial</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/Finanzas">Finanzas</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/Operaciones">Operaciones</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/Proyectos">Proyectos</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/Ar">AR</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/SST">SST</a></li>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/DirTec">Dir. Tec.</a></li>
+        <% if (areas.length > 0) { %>
+            <% for (area of areas) { %>
+                <li><a href="/vacaciones/solicitudes_estatus_vacaciones/<%= area.idArea %>"><%= area.nombre %></a></li>
+            <% } %>
+        <% } %>
 </ul>
