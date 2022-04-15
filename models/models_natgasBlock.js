@@ -6,7 +6,7 @@ module.exports = class NGB {
         this.fecha = _fecha;
     }
     save_NGB() {
-        return db.execute('INSERT INTO natgasblocks (idEmpleado,fechaSolicitud) VALUES (?,?)',
+        return db.execute('INSERT INTO natgasblocks (idEmpleado,fechaUsoNGB) VALUES (?,?)',
         [this.nomina,this.fecha])
     }
     /*static getNGBRestantes(_nomina){
