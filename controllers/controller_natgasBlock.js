@@ -1,5 +1,4 @@
 const NGB = require('../models/models_natgasBlock');
-const Empleados = require('../models/models_empleados');
 
 var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
 var datetime = currentdate.getDate() + "/"
@@ -93,7 +92,7 @@ exports.aceptarNGB = (request, response, next) => {
 exports.filtraSolNGBMes = (request, response, next) => {
     console.log("Filtrando NGB");
     const month = request.params.mes;
-    Empleados.filtraSolNGBMes(month).then(([rows, fieldData]) => {
+    NGB.filtraSolNGBMes(month).then(([rows, fieldData]) => {
         response.render('natgasBlock/estatusSolicitudesNGB', {
             sesion: request.session.empleado,
             rol: request.session.rol,

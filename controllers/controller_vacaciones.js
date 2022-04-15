@@ -1,5 +1,4 @@
 const Solicitudes = require('../models/models_vacaciones');
-const Empleados = require('../models/models_empleados');
 const fastcsv = require('fast-csv')
 const fs = require('fs');
 const { formatWithOptions } = require('util');
@@ -28,13 +27,55 @@ exports.descarga = (request, response, next) => {
     const file = `${__dirname}/../public/Solicitudes.csv`;
   response.download(file);
 }
+
+// Controlador para desplegar las solicitudes enviadas al lider en sesión.
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
-    response.render('vacaciones/aceptarVacaciones', {
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios,
-    });
+    Solicitudes.fetchSolVacParaLider(request.session.empleado.idEmpleado)
+        .then(([rows, fieldData]) => {
+            const solicitudes = rows;
+            console.log(rows);
+            console.log('Consulta hecha con éxito');
+            response.render('vacaciones/aceptarVacaciones', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                solicitudes: solicitudes
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 };
+
+// Controlador para Aceptar Solicitudes de Vacaciones
+exports.aceptarSolicitudesEstatus = (request, response, next) => {
+    const fechaInicio = new Date(request.body.fechaInicio);
+    const fechaFin = new Date(request.body.fechaFin);
+    const diffTime = fechaFin.getTime() - fechaInicio.getTime();
+    const vacasUsadas = (diffTime/(1000*24*3600)) + 1;
+
+    Solicitudes.aceptarVacas(request.body.idSolicitud, vacasUsadas,request.body.idEmpleado)
+        .then(([rows, fieldData]) => {
+            console.log('Aceptación hecha con éxito');
+            response.redirect('/vacaciones/solicitudes_vacaciones');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+// Controlador para Rechazar Solicitudes de Vacaciones
+exports.rechazarSolicitudesEstatus = (request, response, next) => {
+    console.log('Rechazo Iniciado');
+    Solicitudes.rechazarVacas(request.body.idSolicitud, request.body.nota)
+        .then(([rows, fieldData]) => {
+            console.log('Rechazo hecho con éxito');
+            response.redirect('/vacaciones/solicitudes_vacaciones');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
 
 exports.estatusMisVacaciones = (request, response, next) => {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
@@ -114,30 +155,57 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 };
 
 exports.estatusVacaciones = (request, response, next) => {
-    //console.log(request.body);
     Solicitudes.fetchAllVacaciones().then(([rows, fieldData]) => {
         const data = rows;
-        var ws = fs.createWriteStream('public/Solicitudes.csv');
-        fastcsv
-        .write(data, {headers:true})
-        .on('finish', function() {
-            response.render('vacaciones/estatusVacaciones', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                solicitudes: rows
+        Solicitudes.fetchAreas()
+            .then(([areas, fieldData]) => {
+                const data = rows;
+                var ws = fs.createWriteStream('public/Solicitudes.csv');
+                fastcsv
+                    .write(data, {headers:true})
+                    .on('finish', function() {
+                        response.render('vacaciones/estatusVacaciones', {
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            solicitudes: rows,
+                            areas: areas
+                        })
+                    }).pipe(ws);
+            }).catch((error) => {
+                console.log(error);
             });
-        }).pipe(ws);
+        }).catch((error) => {
+            console.log(error);
+        });
+};
+
+// Funcion Filtrar solicitudes de vacaciones por Mes y Área
+exports.filtraSolVacaciones = (request, response, next) => {
+    console.log("Filtrando vacaciones");
+    const monar = request.params.mesar;
+    console.log(monar);
+    Solicitudes.filtraSolVacacionesMes(monar)
+        .then(([rows, fieldData]) => {
+        response.render('vacaciones/estatusVacaciones', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            solicitudes: rows,
+            areas: rows
+        });
     }).catch((error) => {
         console.log(error);
     });
 };
 
-// Funcion Filtrar solicitudes de vacaciones por Mes
-exports.filtraSolVacacionesMes = (request, response, next) => {
-    console.log("Filtrando vacaciones");
-    const month = request.params.mes;
-    Empleados.filtraSolVacacionesMes(month).then(([rows, fieldData]) => {
+/*// Funcion Filtrar solicitudes de vacaciones por Area
+exports.filtraSolVacacionesArea = (request, response, next) => {
+    console.log("Filtrando vacaciones por Área");
+    const variable = request.params.var;
+
+    Solicitudes.filtraSolVacacionesArea(variable)
+        .then(([rows, fieldData]) => {
         response.render('vacaciones/estatusVacaciones', {
             sesion: request.session.empleado,
             rol: request.session.rol,
@@ -147,6 +215,6 @@ exports.filtraSolVacacionesMes = (request, response, next) => {
     }).catch((error) => {
         console.log(error);
     });
-};
+};*/
 
 

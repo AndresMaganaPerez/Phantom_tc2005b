@@ -12,8 +12,14 @@
     </div>
     <% } %>
 
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
-    <%- include('componentes/cartaAceptarEstatusSolVac.ejs') %>
+    <% if (solicitudes.length > 0) { %>
+        <% for (solicitud of solicitudes) { %>
+            <%- include('componentes/cartaAceptarEstatusSolVac.ejs', {solicitud: solicitud}) %>
+        <% } %>
+    <% } else { %>
+        <h2 style="text-align-center">No hay solicitudes enviadas</h2>
+    <% } %>
 
+    <!--      Script Boton Rechazar    -->
+    <script type="text/javascript" src="/js/btn-rechazar.js"></script>
 <%- include('../includes/footer.ejs') %>
