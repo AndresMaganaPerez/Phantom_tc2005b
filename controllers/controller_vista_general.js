@@ -8,5 +8,4 @@ exports.vistaGeneral = (request, response, next) => {
         rol: request.session.rol,
         privilegios: request.session.privilegios
     });
-
 };

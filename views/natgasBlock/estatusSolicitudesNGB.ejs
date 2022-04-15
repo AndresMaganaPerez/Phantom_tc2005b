@@ -2,7 +2,7 @@
 <h4 class="center">Solicitudes de NGB</h4>
 
 <% if (rol == 'recursosHumanos') { %>
-    <%- include('componentes/botonRealizarSol') %>
+    <%- include('componentes/botones/botonRealizarSol') %>
 <% } %>
 
 <br>
@@ -10,7 +10,7 @@
 <%- include('componentes/bloques/bloqueDropDown_MesArea_BotonDescarga.ejs') %>
 
 <% if (solicitudes.length > 0) { %>
-    <%- include('componentes/cartaConsultarEstatus.ejs') %>
+    <%- include('componentes/cartas/cartaConsultarEstatus.ejs') %>
 <% } else{  %>
     <h4>No hay Solicitudes de NGB</h4>
     <% } %>

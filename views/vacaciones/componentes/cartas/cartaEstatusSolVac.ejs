@@ -27,9 +27,9 @@
                         </div>
                         <div class="col s12 m2 l13"></div>
                         <% if (solicitud.solicitudAceptadaEstatus == 1) { %>
-                            <%- include('bloques/componentesBloque/cartas/cartaAceptado.ejs') %>
+                            <%- include('../bloques/componentesBloque/cartas/cartaAceptado.ejs') %>
                         <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
-                            <%- include ('bloques/componentesBloque/cartas/cartaRechazado') %>
+                            <%- include ('../bloques/componentesBloque/cartas/cartaRechazado', {nota: solicitud.Nota}) %>
                         <% } %>
                     </div>
                     <div class="row">

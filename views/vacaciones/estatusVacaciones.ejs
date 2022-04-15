@@ -6,9 +6,9 @@
     <div class="row center">
         <div class="col s12 m2 l13"></div>
         <div class="col s12 m8 l13">
-            <%- include('componentes/botonCrearSol.ejs') %>
+            <%- include('componentes/botones/botonCrearSol.ejs') %>
             <% if (rol == 'lider' || rol == 'recursosHumanos') { %>
-                <%- include('componentes/botonEstatusMisVac.ejs') %>
+                <%- include('componentes/botones/botonEstatusMisVac.ejs') %>
             <% } %>    
         </div>
     </div>
@@ -16,7 +16,7 @@
 
 <% if (rol == 'admin') { %>
     <div class="center">
-        <%- include('componentes/botonAceptarSol.ejs') %>
+        <%- include('componentes/botones/botonAceptarSol.ejs') %>
     </div>
 <% } %>
 
@@ -26,9 +26,9 @@
 <% } %>
 
 <% if (solicitudes.length> 0) { %>
-    <%- include('componentes/cartaEstatusSolVac.ejs') %>
+    <%- include('componentes/cartas/cartaEstatusSolVac.ejs') %>
 <% } else { %>
-    <h3>No hay solicitudes de vacaciones</h3>
+    <h3 class="center">No hay solicitudes de vacaciones</h3>
 <% } %>
 
 <%- include('../includes/footer.ejs') %>
