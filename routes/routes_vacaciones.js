@@ -20,7 +20,12 @@ router.post('/estatus_mis_vacaciones', isAuth, controllerVacaciones.cancelarSoli
 
 router.get('/solicitudes_vacaciones', isAuth, controllerVacaciones.solicitudesVacacionesSinEstatus);
 
-router.get('/solicitudes_estatus_vacaciones/:mes', isAuth, controllerVacaciones.filtraSolVacacionesMes);
+router.post('/solicitudes_vacaciones/aceptar', isAuth, controllerVacaciones.aceptarSolicitudesEstatus);
+
+router.post('/solicitudes_vacaciones/rechazar', isAuth, controllerVacaciones.rechazarSolicitudesEstatus);
+
+router.get('/solicitudes_estatus_vacaciones/:mesar', isAuth, controllerVacaciones.filtraSolVacaciones);
 
 router.get('/descarga',isAuth, controllerVacaciones.descarga);
+
 module.exports = router;

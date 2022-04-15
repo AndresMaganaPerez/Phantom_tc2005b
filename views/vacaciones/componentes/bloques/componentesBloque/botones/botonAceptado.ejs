@@ -1,3 +1,10 @@
 <div class="col s12 m1 l13 ">
-    <span style="font-weight: 600;"><a class="btn-large green">Aceptar</a></span>
+    <form action="/vacaciones/solicitudes_vacaciones/aceptar" method="POST">
+        <input type="text" value="<%= solicitud.idEmpleado %>" name="idEmpleado" hidden>
+        <input type="text" value="<%= solicitud.fechaInicio %>" name="fechaInicio" hidden>
+        <input type="text" value="<%= solicitud.fechaFin %>" name="fechaFin" hidden>
+        <input type="text" value="<%= solicitud.idSolicitud %>" name="idSolicitud" hidden>
+        <input type="submit" class="btn-large green" style="color-white" value="Aceptar" name="b_aceptar">
+    </form>
 </div>
+
