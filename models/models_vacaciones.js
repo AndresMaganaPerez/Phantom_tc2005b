@@ -79,7 +79,7 @@ module.exports = class solicitudVacaciones {
                 "sv.fechaSolicitud, sv.solicitudAceptadaEstatus, sv.fechaInicio, sv.fechaFin, sv.fechaReanudacion, sv.suplente, " +
                 "d.idLider, l.nombre AS 'nomLider', l.apellidoPaterno AS 'apellidoPatLider', l.apellidoMaterno AS 'apellidoMatLider' " +
                 "FROM empleado e, empleado l, solicitudvacaciones sv, dirige d " +
-                "WHERE e.idEmpleado = sv.idEmpleado AND e.idEmpleado = d.idOperador AND l.idEmpleado = d.idLider AND sv.idEmpleado IN " +
+                "WHERE e.idEmpleado = sv.idEmpleado AND e.idEmpleado = d.idOperador AND solicitudAceptadaEstatus IS NOT NULL AND l.idEmpleado = d.idLider AND sv.idEmpleado IN " +
                 "(SELECT ae.idEmpleado " +
                 "FROM area_empleado ae, area a " +
                 "WHERE ae.idArea = a.idArea AND ae.idArea = ?)", [mesar]);

@@ -187,12 +187,15 @@ exports.filtraSolVacaciones = (request, response, next) => {
     console.log(monar);
     Solicitudes.filtraSolVacacionesMes(monar)
         .then(([rows, fieldData]) => {
-        response.render('vacaciones/estatusVacaciones', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            solicitudes: rows,
-            areas: rows
+            Solicitudes.fetchAreas()
+                .then(([areas, fieldData]) => {
+                    response.render('vacaciones/estatusVacaciones', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        solicitudes: rows,
+                        areas: areas
+                });
         });
     }).catch((error) => {
         console.log(error);
