@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-04-2022 a las 07:27:52
+-- Tiempo de generación: 15-04-2022 a las 08:14:34
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -25,6 +25,57 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AceptarRestarNGB` (IN `U_idqs` INT, IN `U_idNGB` INT)  MODIFIES SQL DATA
+BEGIN
+	
+    UPDATE natgasblocks SET estatusNGB = 1 WHERE idNatgasBlocks = U_idNGB;
+    
+    UPDATE empleado SET cantidadNatgasBlocks = cantidadNatgasBlocks - 1 WHERE idEmpleado = U_idqs;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Modificar_Estatus_Vacas_Aceptar` (IN `U_idSolicitud` INT, IN `U_vacasUsadas` INT, IN `U_empleado` INT)  BEGIN
+	UPDATE solicitudvacaciones    	
+    SET solicitudAceptadaEstatus = 1
+    WHERE idSolicitud = U_idSolicitud;
+    
+SET @vacPrem = 0;
+
+SET @vacasUsadas = U_vacasUsadas;
+
+SELECT numVacacionesPremio
+INTO @vacPrem
+FROM empleado
+WHERE idEmpleado = U_empleado;
+
+IF @vacPrem > 0 THEN
+	IF @vacPrem >= U_vacasUsadas THEN
+		UPDATE empleado
+    	SET numVacacionesPremio = numVacacionesPremio -U_vacasUsadas
+    	WHERE idEmpleado = U_empleado;
+	ELSE
+    	UPDATE empleado
+        SET numVacacionesPremio = 0
+      	WHERE idEmpleado = U_empleado;
+        
+        SET @vacasUsadas = @vacasUsadas - @vacPrem;
+        
+        UPDATE empleado
+        SET numVacacionesLey = numVacacionesLey - @vacasUsadas
+        WHERE idEmpleado = U_empleado;
+	END IF;
+ELSE 
+	UPDATE empleado
+    SET numVacacionesLey = numVacacionesLey - U_vacasUsadas
+    WHERE idEmpleado = U_empleado;
+END IF;
+    	
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Modificar_Estatus_Vacas_Rechazar` (IN `U_idSolicitud` INT, IN `U_nota` TEXT)  UPDATE solicitudvacaciones   	
+SET solicitudAceptadaEstatus = 0, Nota = U_nota
+WHERE idSolicitud = U_idSolicitud$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `mostrarSolVacAdmin` ()  SELECT *
 FROM solicitudvacaciones
 WHERE solicitudAceptadaEstatus = 1 OR solicitudAceptadaEstatus = 0$$
@@ -206,7 +257,8 @@ INSERT INTO `area` (`idArea`, `nombre`) VALUES
 (7, 'Mantenimiento '),
 (8, 'Asuntos Regulatorios '),
 (9, 'SST '),
-(10, 'Dirección Técnica ');
+(10, 'Dirección Técnica '),
+(11, 'Recursos Humanos');
 
 -- --------------------------------------------------------
 
@@ -226,57 +278,15 @@ CREATE TABLE `area_empleado` (
 --
 
 INSERT INTO `area_empleado` (`idArea`, `idEmpleado`, `fechaInicio`, `fechaFin`) VALUES
-(1, 90978, '2019-02-03', NULL),
-(1, 90987, '2019-02-04', NULL),
-(4, 90967, '2019-02-05', NULL),
-(1, 90976, '2019-02-06', NULL),
-(1, 90954, '2019-02-07', NULL),
-(1, 90958, '2019-02-08', NULL),
-(1, 90972, '2019-02-09', NULL),
-(1, 90961, '2019-02-10', NULL),
-(1, 90984, '2019-02-11', NULL),
-(2, 90977, '1999-09-25', NULL),
-(3, 90421, '2021-02-06', NULL),
-(5, 90541, '2019-02-06', NULL),
-(6, 40201, '2019-02-06', NULL),
-(8, 90521, '2019-02-06', NULL),
-(10, 90920, '2020-02-06', NULL),
-(5, 90122, '2019-02-06', NULL),
-(7, 90155, '2019-02-02', NULL),
-(1, 90978, '2019-02-03', NULL),
-(1, 90987, '2019-02-04', NULL),
-(4, 90967, '2019-02-05', NULL),
-(1, 90976, '2019-02-06', NULL),
-(1, 90954, '2019-02-07', NULL),
-(1, 90958, '2019-02-08', NULL),
-(1, 90972, '2019-02-09', NULL),
-(1, 90961, '2019-02-10', NULL),
-(1, 90984, '2019-02-11', NULL),
-(2, 90977, '1999-09-25', NULL),
-(3, 90421, '2021-02-06', NULL),
-(5, 90541, '2019-02-06', NULL),
-(6, 40201, '2019-02-06', NULL),
-(8, 90521, '2019-02-06', NULL),
-(10, 90920, '2020-02-06', NULL),
-(5, 90122, '2019-02-06', NULL),
-(7, 90155, '2019-02-02', NULL),
-(1, 90978, '2019-02-03', NULL),
-(1, 90987, '2019-02-04', NULL),
-(4, 90967, '2019-02-05', NULL),
-(1, 90976, '2019-02-06', NULL),
-(1, 90954, '2019-02-07', NULL),
-(1, 90958, '2019-02-08', NULL),
-(1, 90972, '2019-02-09', NULL),
-(1, 90961, '2019-02-10', NULL),
-(1, 90984, '2019-02-11', NULL),
-(2, 90977, '1999-09-25', NULL),
-(3, 90421, '2021-02-06', NULL),
-(5, 90541, '2019-02-06', NULL),
-(6, 40201, '2019-02-06', NULL),
-(8, 90521, '2019-02-06', NULL),
-(10, 90920, '2020-02-06', NULL),
-(5, 90122, '2019-02-06', NULL),
-(7, 90155, '2019-02-02', NULL);
+(4, 91901, '2022-04-01', NULL),
+(4, 16836, '2022-04-01', NULL),
+(4, 91902, '2022-04-01', NULL),
+(6, 91990, '2022-04-01', NULL),
+(6, 91991, '2022-04-01', NULL),
+(6, 91992, '2022-04-01', NULL),
+(11, 91904, '2022-04-01', NULL),
+(11, 91993, '2022-04-01', NULL),
+(4, 91994, '2022-04-01', NULL);
 
 -- --------------------------------------------------------
 
@@ -411,12 +421,14 @@ CREATE TABLE `dirige` (
 --
 
 INSERT INTO `dirige` (`idOperador`, `idLider`, `fechaInicio`, `fechaFin`) VALUES
-(16836, 90967, '2022-04-01', NULL),
-(90954, 91901, '2022-04-01', NULL),
-(91900, 91901, '2022-04-01', NULL),
-(90521, 91901, '2022-04-01', NULL),
-(91902, 90987, '2022-04-01', NULL),
-(90984, 90920, '2022-04-01', NULL);
+(16836, 91901, '2022-04-01', NULL),
+(91902, 91901, '2022-04-01', NULL),
+(91903, 91902, '2022-04-01', NULL),
+(91904, 91900, '2022-04-02', NULL),
+(91990, 91991, '2022-04-01', NULL),
+(91991, 91992, '2022-04-01', NULL),
+(91993, 91900, '2022-04-01', NULL),
+(91901, 91994, '2022-04-01', NULL);
 
 -- --------------------------------------------------------
 
@@ -447,31 +459,17 @@ CREATE TABLE `empleado` (
 --
 
 INSERT INTO `empleado` (`idEmpleado`, `email`, `token`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `fechaNac`, `fechaIngr`, `numTelefonico`, `cantidadNatgasBlocks`, `antiguedad`, `vacacionesTotales`, `numVacacionesLey`, `numVacacionesPremio`, `plaza`) VALUES
-(777, 'rcaceres1125@natgas.com.mx', '', 'Ricardo', 'Caceres', 'Villibord', '2001-11-25', '2022-01-01', '4613618880', 5, 1, 10, 8, 2, 'Queretaro'),
-(778, 'juanitoperez@natgas.com.mx', '', 'Juan', 'Alimania', 'Materno', '1970-04-11', '2022-04-10', '7288238271', 5, 0, 8, 8, 0, 'China'),
-(16836, 'A01610836@itesm.mx', '$2a$12$/u63aMaOyxrRhZEcckly5O6swTmyyxSro7RdWugov0XL94W/3yxJ2', 'Miguel Weiping', 'Tang', 'Feng', '2000-11-30', NULL, '4443073141', NULL, NULL, NULL, NULL, NULL, NULL),
-(40201, 'pilar1999@natgas.com.mx', '', 'Pilar', 'Garcia', 'Torrez', '1999-01-24', '2019-02-06', '4423743823', 5, 3, 14, 14, 0, 'QRO'),
-(90122, 'samperjes@natgas.com.mx', '', 'Jesus', 'Samper', 'Luna', '1999-01-24', '2019-02-06', '4422289412', 5, 3, 14, 14, 0, 'QRO'),
-(90155, 'jfortiz@natgas.com.mx', '', 'José Francisco ', 'Ortiz', 'Diaz', '1999-01-24', '2019-02-02', '4428787113', 5, 3, 14, 14, 0, 'QRO'),
-(90421, 'AMLedesma@natgas.com.mx', '', 'Andres', 'Martinez', 'Ledesma', '2001-01-05', '2021-02-06', '4422267512', 2, 1, 10, 10, 0, 'CDMX'),
-(90521, 'aleubeda@natgas.com.mx', '', 'Alejandra ', 'Ubeda', 'Beltran', '2000-01-05', '2019-02-06', '4422267202', 5, 3, 14, 14, 0, 'QRO'),
-(90541, 'Octaviusjuar@natgas.com.mx', '', 'Octavio', 'Juarez', 'Sanchez', '1999-05-21', '2019-02-06', '4422267468', 5, 3, 14, 14, 0, 'QRO'),
-(90920, 'davidcardenas@natgas.com.mx', '', 'David', 'Cardenas', 'Soza', '1997-01-20', '2020-02-06', '4422262049', 5, 2, 12, 12, 0, 'QRO'),
-(90954, 'aavila@natgas.com.mx \r\n', '', 'Adriana ', 'Avila ', 'Hernandez ', '1999-01-06', '2019-02-07', '4423743857', 5, 3, 14, 14, 0, 'QRO\r\n'),
-(90958, 'larenas@natgas.com.mx \r\n', '', 'Luis Fernando ', 'Arenas', 'Gomez ', '1999-01-07', '2019-02-08', '4433562535', 5, 3, 14, 14, 0, 'AGS\r\n'),
-(90961, 'kbarcenas@natgas.com.mx \r\n', '', 'Karen Cristell ', 'Barcenas ', 'Corona ', '1999-01-09', '2019-02-10', '4429876543', 5, 3, 14, 14, 0, 'QRO'),
-(90967, 'parroyo@natgas.com.mx \r\n', '', 'Pablo Estefano ', 'Arroyo', 'Garrido ', '1999-01-04', '2019-02-05', '4422781765', 5, 3, 14, 14, 0, 'QRO\r\n'),
-(90972, 'pfranco@natgas.com.mx \r\n', '', 'Paola ', 'Franco ', 'Ramirez ', '1999-01-08', '2019-02-09', '4435678876', 5, 3, 14, 14, 0, 'QRO\r\n'),
-(90976, 'fayala@natgas.com.mx \r\n', '', 'Brenda Fabiola ', 'Ayala', 'Mauricio ', '1999-01-05', '2019-02-06', '4422738746', 5, 3, 14, 14, 0, 'QRO\r\n'),
-(90977, 'belroseZac@natgas.com.mx', '', 'Zacarias', 'Belrose', 'Garrido ', '1999-09-25', '2019-02-06', '4422289765', 5, 3, 14, 14, 0, 'QRO'),
-(90978, 'jcpineda@natgas.com.mx\r\n', '', 'Juan Carlos ', 'Pineda ', 'Adaya', '1999-01-02', '2019-02-03', '4428787690', 5, 3, 14, 14, 0, 'QRO'),
-(90984, 'mvillanueva@natgas.com.mx\r\n', '', 'Marco Alejandro ', 'Villanueva ', 'Suarez ', '1999-01-10', '2019-02-11', '4421787645', 5, 3, 14, 14, 0, 'QRO\r\n'),
-(90987, 'orodriguez@natgas.com.mx \r\n', '', 'Oscar Daniel ', 'Rodriguez ', 'Amador ', '1999-01-03', '2019-02-04', '4422289879', 5, 3, 14, 14, 0, 'GDL\r\n'),
-(91900, 'ahernandez@natgas.com.mx', '$2a$12$zhxYc1RP.w5gzV6ZYP2v2ugfjkQnsZgOOHcRRcDPAzHhGcAIpOe1C', 'Alfonso', 'Hernández', 'Carrillo', '1984-11-29', NULL, '4441285948', NULL, NULL, NULL, NULL, NULL, NULL),
-(91901, 'pabloarroyo@natgas.com.mx', '$2a$12$3vYe6evSjTJJstBQuWzZs.xKZzDjOIQppQZrPUswliNs2zHjxkYyu', 'Pablo', 'Arroyo', 'Hernández', '1996-07-02', NULL, '4425481294', NULL, NULL, NULL, NULL, NULL, NULL),
-(91902, 'jmendoza@natgas.com.mx', '$2a$12$kBmXMaFFsQqXz2I7RSqMbOgwGie/lMpG6sZZV8AQoqH61icgTaJIy', 'Jorge', 'Mendoza', 'Pérez', '1990-07-09', NULL, '4425672839', NULL, NULL, NULL, NULL, NULL, NULL),
-(91903, 'asalinas@natgas.com.mx', '$2a$12$KNCeR3Ccw63R773cPa5In.KAamnqFcMAdqOOWePpL5H9z2SJsqBjO', 'Alejandro', 'Salinas', 'Trejo', '1995-06-12', NULL, '4425081492', NULL, NULL, NULL, NULL, NULL, NULL),
-(91904, 'drodríguez@natgas.com.mx', '$2a$12$ou7Vdd7zkM0w03HNzHK4Pen0cI6J7DTmoOwi9j0zfiuFJUU4IEpq.', 'Diego', 'Rodríguez', 'Palacio', '1996-11-05', NULL, '4441345678', NULL, NULL, NULL, NULL, NULL, NULL);
+(16836, 'A01610836@itesm.mx', '$2a$12$/u63aMaOyxrRhZEcckly5O6swTmyyxSro7RdWugov0XL94W/3yxJ2', 'Miguel Weiping', 'Tang', 'Feng', '2000-11-30', NULL, '4443073141', 5, NULL, 10, 8, 2, NULL),
+(91900, 'ahernandez@natgas.com.mx', '$2a$12$zhxYc1RP.w5gzV6ZYP2v2ugfjkQnsZgOOHcRRcDPAzHhGcAIpOe1C', 'Alfonso', 'Hernández', 'Carrillo', '1984-11-29', NULL, '4441285948', 5, NULL, 10, 6, 4, NULL),
+(91901, 'pabloarroyo@natgas.com.mx', '$2a$12$3vYe6evSjTJJstBQuWzZs.xKZzDjOIQppQZrPUswliNs2zHjxkYyu', 'Pablo', 'Arroyo', 'Hernández', '1996-07-02', NULL, '4425481294', 4, NULL, 12, 8, 1, NULL),
+(91902, 'jmendoza@natgas.com.mx', '$2a$12$kBmXMaFFsQqXz2I7RSqMbOgwGie/lMpG6sZZV8AQoqH61icgTaJIy', 'Jorge', 'Mendoza', 'Pérez', '1990-07-09', NULL, '4425672839', 5, NULL, 12, 10, 2, NULL),
+(91903, 'asalinas@natgas.com.mx', '$2a$12$KNCeR3Ccw63R773cPa5In.KAamnqFcMAdqOOWePpL5H9z2SJsqBjO', 'Alejandro', 'Salinas', 'Trejo', '1995-06-12', NULL, '4425081492', 5, NULL, 12, 12, NULL, NULL),
+(91904, 'drodríguez@natgas.com.mx', '$2a$12$ou7Vdd7zkM0w03HNzHK4Pen0cI6J7DTmoOwi9j0zfiuFJUU4IEpq.', 'Diego', 'Rodríguez', 'Palacio', '1996-11-05', NULL, '4441345678', 5, NULL, 8, 6, 2, NULL),
+(91990, 'pmartinez@natgas.com.mx', '$2a$12$d7R3QhwSvFz/i0ThlrLtwOyVZLE7DceFx15Fei.Wiw3nEa9SjCVZa', 'Pedro', 'Martinez', 'Bonilla', '1934-07-20', NULL, '2716482777', 5, NULL, 10, 8, 2, NULL),
+(91991, 'rfernandez@natgas.com.mx', '$2a$12$O3csy4ihi0qm2uohUGtWM.cygoTP4tusYhqhglEzbJWAAxpMT62Xm', 'Rafael', 'Fernandez', 'Tijerino', '2022-04-06', NULL, '2847775999', 5, NULL, 10, 9, 1, NULL),
+(91992, 'apsanchez@natgas.com.mx', '$2a$12$9JGkW8MCSkTgZQ3X8TOnnehIAuyhwPQKIQEIMhDqt10OsYSBFxi7y', 'Ana Paula', 'Sanchez', 'Molina', '2022-04-13', NULL, '5653786668', 5, NULL, 10, 7, 3, NULL),
+(91993, 'mhernandez@natgas.com.mx', '$2a$12$3R2Zja8t4eumaq4ft53fU.fyAtlHB/Uo2HLt/SQfeVD.z2Bw.fYpy', 'Maria', 'Hernandez', 'Canales', '2022-04-10', NULL, '7653287978', 5, NULL, 10, 8, 2, NULL),
+(91994, 'sgutierrez@natgas.com.mx', '$2a$12$RPE3R/ysrnKLWeuw3S6JTuIybiZA2Ne/wdB.Qa6HE9wvFNlmVeRui', 'Sebastian', 'Gutierrez', 'Mayorga', '2022-04-06', NULL, '9754345651', 5, NULL, 14, 10, 4, NULL);
 
 -- --------------------------------------------------------
 
@@ -496,7 +494,12 @@ INSERT INTO `empleado_rol` (`idEmpleado`, `idRol`, `fechaInicio`, `fechaFin`) VA
 (91901, 3, '2019-12-15', '0000-00-00'),
 (91902, 4, '2018-09-17', '0000-00-00'),
 (91903, 5, '2020-04-16', '0000-00-00'),
-(16836, 4, '2022-04-11', '0000-00-00');
+(16836, 4, '2022-04-11', '0000-00-00'),
+(91990, 4, '2022-04-01', '0000-00-00'),
+(91991, 3, '2022-04-01', '0000-00-00'),
+(91992, 3, '2022-04-01', '0000-00-00'),
+(91993, 2, '2022-04-01', '0000-00-00'),
+(91994, 3, '2022-04-01', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -507,21 +510,23 @@ INSERT INTO `empleado_rol` (`idEmpleado`, `idRol`, `fechaInicio`, `fechaFin`) VA
 CREATE TABLE `natgasblocks` (
   `idNatgasBlocks` int(3) NOT NULL,
   `idEmpleado` int(11) NOT NULL,
-  `fechaSolicitud` date NOT NULL,
-  `fechaUsoNGB` date DEFAULT NULL
+  `fechaSolicitud` timestamp NOT NULL DEFAULT current_timestamp(),
+  `fechaUsoNGB` date DEFAULT NULL,
+  `estatusNGB` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `natgasblocks`
 --
 
-INSERT INTO `natgasblocks` (`idNatgasBlocks`, `idEmpleado`, `fechaSolicitud`, `fechaUsoNGB`) VALUES
-(52, 16836, '2022-04-01', '2022-04-02'),
-(53, 90954, '2022-04-02', '2022-04-03'),
-(54, 91900, '2022-04-03', '2022-04-04'),
-(55, 90521, '2022-04-04', '2022-04-05'),
-(56, 91902, '2022-04-06', '2022-04-07'),
-(57, 90984, '2022-04-02', '2022-04-10');
+INSERT INTO `natgasblocks` (`idNatgasBlocks`, `idEmpleado`, `fechaSolicitud`, `fechaUsoNGB`, `estatusNGB`) VALUES
+(52, 16836, '2022-04-01 06:00:00', '2022-04-02', NULL),
+(56, 91902, '2022-04-06 05:00:00', '2022-04-07', NULL),
+(61, 91900, '2022-04-03 06:00:00', '2022-04-04', 1),
+(62, 91900, '2022-04-03 06:00:00', '2022-05-01', 1),
+(66, 91900, '2022-04-15 02:45:25', '2022-04-20', 1),
+(67, 91900, '2022-04-15 02:52:24', '2022-05-01', 1),
+(69, 91901, '2022-04-15 04:43:00', '2022-04-15', 1);
 
 -- --------------------------------------------------------
 
@@ -637,6 +642,26 @@ INSERT INTO `roles_privilegios` (`idRol`, `idPrivilegio`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura Stand-in para la vista `solicitudesngb`
+-- (Véase abajo para la vista actual)
+--
+CREATE TABLE `solicitudesngb` (
+`idqs` int(11)
+,`Quien_solicita` varchar(40)
+,`qsApellidoPaterno` varchar(40)
+,`qsApellidoMaterno` varchar(40)
+,`Lider` varchar(40)
+,`lApellidoPaterno` varchar(40)
+,`lApellidoMaterno` varchar(40)
+,`idNatgasBlocks` int(3)
+,`fechaSolicitud` timestamp
+,`fechaUsoNGB` date
+,`estatusNGB` tinyint(1)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `solicitudvacaciones`
 --
 
@@ -657,68 +682,12 @@ CREATE TABLE `solicitudvacaciones` (
 --
 
 INSERT INTO `solicitudvacaciones` (`idSolicitud`, `idEmpleado`, `fechaInicio`, `fechaFin`, `fechaReanudacion`, `fechaSolicitud`, `suplente`, `solicitudAceptadaEstatus`, `Nota`) VALUES
-(1, 90954, '2022-04-15', '2022-04-19', '2022-04-20', '2022-03-29', '', NULL, NULL),
-(2, 90521, '2022-05-10', '2022-05-14', '2022-05-16', '2022-03-29', '', 0, ''),
-(3, 90421, '2022-02-08', '2022-03-11', '2022-03-14', '2022-02-03', '', 0, ''),
-(4, 90977, '2022-01-11', '2022-03-13', '2022-03-14', '2022-02-28', '', NULL, NULL),
-(5, 90920, '2022-07-02', '2022-07-08', '2022-07-11', '2022-03-29', '', 0, ''),
-(8, 90976, '2022-04-01', '2022-04-04', '2022-04-05', '2022-03-31', '', NULL, NULL),
-(9, 90978, '2022-04-11', '2022-03-18', '2022-03-21', '2022-03-29', '', 0, ''),
-(10, 90155, '2022-04-25', '2022-04-29', '2022-05-02', '2022-03-29', '', NULL, NULL),
-(11, 90954, '2022-03-02', '2022-03-04', '2022-03-07', '2022-03-01', '', 1, ''),
-(12, 90421, '2022-01-03', '2022-01-07', '2022-01-10', '2021-12-30', '', 1, ''),
-(13, 90920, '2022-02-17', '2022-02-21', '2022-02-22', '2022-02-14', '', NULL, NULL),
-(15, 90976, '2022-03-30', '2022-04-04', '2022-04-05', '2022-03-29', '', NULL, NULL),
-(16, 90961, '2022-02-14', '2022-02-16', '2022-02-17', '2022-02-01', '', 1, ''),
-(17, 90984, '2022-04-08', '2022-04-11', '2022-04-12', '2022-03-30', '', NULL, NULL),
-(18, 90987, '2021-12-16', '2021-12-21', '2021-12-22', '2021-12-13', '', NULL, NULL),
-(19, 90972, '2022-02-21', '2022-02-22', '2022-02-23', '2022-02-18', '', 0, ''),
-(20, 90122, '2022-01-28', '2022-01-28', '2022-01-31', '2022-01-24', '', NULL, NULL),
-(21, 90961, '2021-03-07', '2021-03-14', '2021-03-15', '2021-03-01', '', 1, ''),
-(22, 90521, '2021-03-10', '2021-03-16', '2021-03-18', '2021-03-04', '', 1, ''),
-(23, 90421, '2021-06-09', '2021-06-15', '2021-06-17', '2021-06-06', '', 1, ''),
-(24, 90521, '2021-03-10', '2021-03-16', '2021-03-18', '2021-03-04', '', 1, ''),
-(25, 90920, '2021-04-10', '2021-04-15', '2021-04-16', '2021-04-03', '', 1, ''),
-(26, 90155, '2022-02-02', '2022-02-08', '2022-02-10', '2022-01-30', '', 1, ''),
-(27, 90920, '2021-04-10', '2021-04-15', '2021-04-16', '2021-04-03', '', 1, ''),
-(28, 90155, '2022-02-02', '2022-02-08', '2022-02-10', '2022-01-30', '', 1, ''),
-(29, 90541, '2021-03-20', '2021-03-26', '2021-03-27', '2021-03-15', '', 1, ''),
-(30, 90972, '2021-07-08', '2021-07-14', '2021-07-15', '2021-07-02', '', 1, ''),
-(31, 90421, '2022-05-09', '2022-05-16', '2022-05-17', '2022-03-29', '', 0, ''),
-(32, 90977, '2022-06-22', '2022-06-29', '2022-06-30', '2022-03-29', '', 0, ''),
-(35, 90967, '2022-03-30', '2022-04-06', '2022-04-07', '2022-03-22', '', 0, ''),
-(36, 90976, '2022-04-12', '2022-04-19', '2022-04-20', '2022-03-29', '', 0, ''),
-(37, 90976, '2022-05-12', '2022-05-16', '2022-05-17', '2022-03-30', '', 0, ''),
-(38, 90984, '2022-03-08', '2022-03-15', '2022-03-16', '2022-03-01', '', 0, ''),
-(39, 90920, '2022-05-11', '2022-05-18', '2022-05-19', '2022-03-29', '', 0, ''),
-(40, 90978, '2022-03-29', '2022-04-04', '2022-04-05', '2022-03-22', '', 0, ''),
-(41, 90521, '2022-02-14', '2022-02-14', '2022-02-15', '2022-02-11', '', 1, ''),
-(42, 90977, '2022-01-12', '2022-01-12', '2022-01-13', '2022-01-10', '', 1, ''),
-(43, 90541, '2022-03-18', '2022-03-25', '2022-03-28', '2022-03-01', '', 0, ''),
-(44, 40201, '2022-02-28', '2022-03-02', '2022-03-03', '2022-02-23', '', 0, ''),
-(45, 90958, '2022-01-19', '2022-01-21', '2022-01-24', '2022-01-17', '', 0, ''),
-(46, 90984, '2022-03-31', '2022-04-11', '2022-04-12', '2022-05-18', '', 0, ''),
-(47, 90967, '2022-04-01', '2022-04-08', '2022-04-11', '2022-03-30', '', 0, ''),
-(48, 90976, '2022-06-02', '2022-06-08', '2022-06-09', '2022-05-03', '', 0, ''),
-(49, 90987, '2022-04-11', '2022-04-15', '2022-04-18', '2022-03-30', '', 0, ''),
-(50, 40201, '2022-06-15', '2022-06-20', '2022-06-21', '2022-04-14', '', 0, ''),
-(60, 90954, '2022-04-14', '2022-04-22', '0000-00-00', '2022-04-01', 'Miguel', NULL, NULL),
-(61, 90954, '2022-04-14', '2022-04-21', '0000-00-00', '2022-04-01', 'Miguel', NULL, NULL),
-(62, 90954, '2022-04-16', '2022-04-13', '0000-00-00', '2022-04-01', 'Ricardo', NULL, NULL),
-(65, 90954, '2022-04-07', '2022-04-15', '0000-00-00', '2022-04-01', 'Miguel', NULL, NULL),
-(66, 90954, '2022-04-14', '2022-04-29', '0000-00-00', '2022-04-01', 'okdosakdpoksadas', NULL, NULL),
-(67, 90954, '2022-04-03', '2022-04-11', '0000-00-00', '2022-04-01', 'hoyViernes', NULL, NULL),
-(68, 90954, '2022-04-05', '2022-04-12', '0000-00-00', '2022-04-01', 'viernerHoy', NULL, NULL),
-(69, 90954, '2022-04-12', '2022-04-27', '0000-00-00', '2022-04-01', 'viernesHoyHoy', NULL, NULL),
-(70, 90954, '2022-04-01', '2022-04-02', '0000-00-00', '2022-04-01', 'viernehasdsadsa', NULL, NULL),
-(71, 90954, '2022-07-01', '2022-08-01', '0000-00-00', '2022-04-01', 'dsadsa', NULL, NULL),
-(72, 90954, '2022-08-18', '2022-09-30', '0000-00-00', '2022-04-01', 'asd', NULL, NULL),
-(73, 90954, '2022-08-18', '2022-09-30', '0000-00-00', '2022-04-01', 'asd', NULL, NULL),
-(74, 90954, '2022-08-18', '2022-09-30', '0000-00-00', '2022-04-01', 'asd', NULL, NULL),
-(75, 90954, '2022-04-01', '2022-11-25', '0000-00-00', '2022-04-01', 'dasdasdwqewq', NULL, NULL),
-(76, 90954, '2022-11-01', '2023-02-01', '0000-00-00', '2022-04-01', 'eqwewq', NULL, NULL),
-(77, 90954, '2022-08-31', '2022-11-10', '0000-00-00', '2022-04-03', 'Miguel', NULL, NULL),
-(78, 90954, '2022-04-21', '2022-04-27', '0000-00-00', '2022-04-10', 'Miguel', NULL, NULL);
+(80, 91901, '2022-04-15', '2022-04-21', '2022-04-25', '2022-04-14', 'Miguel', 1, NULL),
+(81, 91901, '2022-04-18', '2022-04-20', '2022-04-21', '2022-04-14', 'Ricardo', 1, NULL),
+(82, 91901, '2022-04-25', '2022-04-27', '2022-04-28', '2022-04-14', 'Andres', 0, NULL),
+(85, 91993, '2022-04-15', '2022-04-19', '2022-04-20', '2022-04-14', 'Ricardo', 1, NULL),
+(86, 91993, '2022-04-18', '2022-04-20', '2022-04-21', '2022-04-14', 'Miguel', 0, 'Por floja'),
+(87, 91993, '2022-04-25', '2022-04-27', '2022-04-28', '2022-04-14', 'Andres', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -815,7 +784,7 @@ INSERT INTO `valor_indicador` (`ValorIndicadorID`, `TipoIndicadorID`, `Valor`, `
 CREATE TABLE `viewlider` (
 `idEmpleado` int(11)
 ,`fechaUsoNGB` date
-,`fechaSolicitud` date
+,`fechaSolicitud` timestamp
 ,`idLider` int(11)
 ,`Lider` varchar(40)
 ,`lApellidoPaterno` varchar(40)
@@ -832,13 +801,22 @@ CREATE TABLE `viewlider` (
 CREATE TABLE `viewquiensolicita` (
 `idEmpleado` int(11)
 ,`fechaUsoNGB` date
-,`fechaSolicitud` date
+,`fechaSolicitud` timestamp
 ,`idLider` int(11)
 ,`Quien_Solicita` varchar(40)
 ,`qsApellidoPaterno` varchar(40)
 ,`qsApellidoMaterno` varchar(40)
 ,`idNGB` int(3)
 );
+
+-- --------------------------------------------------------
+
+--
+-- Estructura para la vista `solicitudesngb`
+--
+DROP TABLE IF EXISTS `solicitudesngb`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `solicitudesngb`  AS SELECT `vqs`.`idEmpleado` AS `idqs`, `vqs`.`Quien_Solicita` AS `Quien_solicita`, `vqs`.`qsApellidoPaterno` AS `qsApellidoPaterno`, `vqs`.`qsApellidoMaterno` AS `qsApellidoMaterno`, `vl`.`Lider` AS `Lider`, `vl`.`lApellidoPaterno` AS `lApellidoPaterno`, `vl`.`lApellidoMaterno` AS `lApellidoMaterno`, `ngb`.`idNatgasBlocks` AS `idNatgasBlocks`, `ngb`.`fechaSolicitud` AS `fechaSolicitud`, `ngb`.`fechaUsoNGB` AS `fechaUsoNGB`, `ngb`.`estatusNGB` AS `estatusNGB` FROM ((`viewquiensolicita` `vqs` join `viewlider` `vl`) join `natgasblocks` `ngb`) WHERE `vqs`.`idNGB` = `vl`.`idNGB` AND `ngb`.`idNatgasBlocks` = `vqs`.`idNGB` AND `ngb`.`idNatgasBlocks` = `vl`.`idNGB` ;
 
 -- --------------------------------------------------------
 
@@ -1005,7 +983,7 @@ ALTER TABLE `anuncios`
 -- AUTO_INCREMENT de la tabla `area`
 --
 ALTER TABLE `area`
-  MODIFY `idArea` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `idArea` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `banners`
@@ -1017,7 +995,7 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT de la tabla `natgasblocks`
 --
 ALTER TABLE `natgasblocks`
-  MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `idNatgasBlocks` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT de la tabla `privilegios`
@@ -1035,7 +1013,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `solicitudvacaciones`
 --
 ALTER TABLE `solicitudvacaciones`
-  MODIFY `idSolicitud` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `idSolicitud` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_indicador`
