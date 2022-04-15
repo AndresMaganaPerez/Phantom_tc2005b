@@ -4,15 +4,15 @@
     <div class="row center">
         <div class="col s12 m2 l13"></div>
         <div class="col s12 m8 l13">
-            <%- include('componentes/botonCrearSol.ejs') %>
-            <%- include('componentes/botonEstatusMisVac.ejs') %>
+            <%- include('componentes/botones/botonCrearSol.ejs') %>
+            <%- include('componentes/botones/botonEstatusMisVac.ejs') %>
         </div>
     </div>
     <% } %>
 
     <% if (solicitudes.length > 0) { %>
         <% for (solicitud of solicitudes) { %>
-            <%- include('componentes/cartaAceptarEstatusSolVac.ejs', {solicitud: solicitud}) %>
+            <%- include('componentes/cartas/cartaAceptarEstatusSolVac.ejs', {solicitud: solicitud}) %>
         <% } %>
     <% } else { %>
         <h2 class="center">No hay solicitudes enviadas</h2>

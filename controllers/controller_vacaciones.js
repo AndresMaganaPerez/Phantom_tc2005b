@@ -218,22 +218,4 @@ exports.filtraSolVacaciones = (request, response, next) => {
     });
 };
 
-/*// Funcion Filtrar solicitudes de vacaciones por Area
-exports.filtraSolVacacionesArea = (request, response, next) => {
-    console.log("Filtrando vacaciones por Área");
-    const variable = request.params.var;
-
-    Solicitudes.filtraSolVacacionesArea(variable)
-        .then(([rows, fieldData]) => {
-        response.render('vacaciones/estatusVacaciones', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            solicitudes: rows
-        });
-    }).catch((error) => {
-        console.log(error);
-    });
-};*/
-
 
