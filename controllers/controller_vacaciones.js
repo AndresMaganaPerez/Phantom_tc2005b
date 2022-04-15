@@ -21,7 +21,23 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.cancelarSolicitud = (request, response, next) =>{
-    console.log(request.body.delete);
+    console.log(request.body.delete); //llamar id de solicitud 
+    console.log("Eliminando solicitud");
+    const id = request.body.delete;
+    Solicitudes.borrarSolicitud(request.session.id)
+    .then(([rows, fieldData]) => {
+        const solicitudes = rows;
+        response.render('vacaciones/estatusMisVacaciones ', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            solicitudes: misVacaciones,
+        });
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+    .catch();  
 }
 
 exports.descarga = (request, response, next) => {
