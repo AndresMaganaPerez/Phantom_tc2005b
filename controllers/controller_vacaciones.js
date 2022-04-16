@@ -19,16 +19,41 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.cancelarSolicitud = (request, response, next) =>{
-    console.log(request.body.delete);
-    const id = request.body.delete;
+    console.log(request.body.idSol);
+    console.log(request.body.estatus);
+    console.log(request.body.fechaIn)
+    console.log(request.body.fechaF);
+
+    function diasVacaciones(fechaI, fechaF) {
+        let fechaInicio = new Date(fechaI);
+        const fechaFin = new Date(fechaF);
+    
+        let diasVacaciones = 1;
+        while (fechaInicio < fechaFin){
+            if (fechaInicio.getUTCDay() != 0){
+                if (fechaInicio.getUTCDay() != 6) {
+                    diasVacaciones = diasVacaciones + 1;
+                }
+            }
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+        }
+        return diasVacaciones;
+    }
+
+    const fechaInicio = new Date(request.body.fechaIn);
+    const fechaFin = new Date(request.body.fechaF);
+    const vacacionesUsadas = diasVacaciones(fechaInicio, fechaFin);
+
+    console.log(vacacionesUsadas);
+
+    /*
     Solicitudes.borrarSolicitud(request.session.empleado.idEmpleado, id)
     .then(() => {
         response.redirect('/vacaciones/estatus_mis_vacaciones')  
     })
     .catch((err) => {
         console.log(err)
-    })
-    .catch();  
+    })*/ 
 }
 
 exports.descarga = (request, response, next) => {
