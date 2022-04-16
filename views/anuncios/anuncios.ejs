@@ -1,0 +1,16 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+<h3 style="text-align: center;">Anuncios</h3>
+
+<% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+    <br>
+    <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>
+<% } %>
+
+<% if (anuncios.length> 0) { %>
+    <%- include('componentes/cartas/cartaAnuncio.ejs') %>
+<% } else { %>
+    <h3 class="center" style="text-align: center">No hay anuncios publicados</h3>
+<% } %>
+
+<%- include('../includes/footer.ejs') %>

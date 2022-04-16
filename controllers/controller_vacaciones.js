@@ -198,9 +198,7 @@ exports.estatusVacaciones = (request, response, next) => {
 
 // Funcion Filtrar solicitudes de vacaciones por Mes y Área
 exports.filtraSolVacaciones = (request, response, next) => {
-    console.log("Filtrando vacaciones");
     const monar = request.params.mesar;
-    console.log(monar);
     Solicitudes.filtraSolVacacionesMes(monar)
         .then(([rows, fieldData]) => {
             Solicitudes.fetchAreas()

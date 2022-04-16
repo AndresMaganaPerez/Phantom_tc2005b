@@ -10,8 +10,8 @@ const isAuth = require('../controllers/is-auth');
 
 router.get('/', isAuth, controllerAnuncios.anuncios);
 
-router.get('/crear_anuncio', isAuth, controllerAnuncios.nuevoAnuncio);
+router.get('/nuevo', isAuth, controllerAnuncios.nuevoAnuncio);
 
-router.get('/modificar', controllerAnuncios.modificar);
+router.get('/modificar', controllerAnuncios.modificarAnuncio);
 
 module.exports = router;
