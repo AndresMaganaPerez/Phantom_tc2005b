@@ -8,9 +8,11 @@
   <div class="modal-content">
     <h4>Motivo de Rechazo</h4>
     <form action="/vacaciones/solicitudes_vacaciones/rechazar" method="POST">
-        <input type="text" placeholder="Escribe aquí..." name="nota">
+        <textarea placeholder="Escribe aquí..." name="nota" style="height: 200px;" required></textarea>
         <input type="text" value="<%= solicitud.idSolicitud %>" name="idSolicitud" hidden>
-        <input type="submit" class="btn green" style="color: white;" value="Enviar" name="b_enviar">
+        <br><br><input type="submit" class="btn green" style="color: white;" value="Enviar" name="b_enviar">
+        <input type="submit" class="btn red" style="color: white;" value="Descartar" formnovalidate>
     </form>
+    
   </div>
 </div>

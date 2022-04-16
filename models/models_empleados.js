@@ -25,7 +25,7 @@ module.exports = class Empleados{
     }
 
     static findEmpleado(usuario) {
-        return db.execute('SELECT idEmpleado, nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza FROM empleado WHERE email=?', [usuario]);
+        return db.execute('SELECT idEmpleado, email, nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza FROM empleado WHERE email=?', [usuario]);
     }
 
     static getPassword(nomina) {

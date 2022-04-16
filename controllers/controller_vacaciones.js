@@ -6,7 +6,6 @@ const { on } = require('events');
 
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
-    console.log("solicitar mis Vacaciones");
     const date = new Date();
     const fechaSolAux = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
     const flag = '';
@@ -20,8 +19,7 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.cancelarSolicitud = (request, response, next) =>{
-    console.log(request.body.delete); //llamar id de solicitud 
-    console.log("Eliminando solicitud");
+    console.log(request.body.delete);
     const id = request.body.delete;
     Solicitudes.borrarSolicitud(request.session.empleado.idEmpleado, id)
     .then(() => {
@@ -82,7 +80,6 @@ exports.aceptarSolicitudesEstatus = (request, response, next) => {
 
     Solicitudes.aceptarVacas(request.body.idSolicitud, vacasUsadas,request.body.idEmpleado)
         .then(([rows, fieldData]) => {
-            console.log('Aceptación hecha con éxito');
             response.redirect('/vacaciones/solicitudes_vacaciones');
         })
         .catch((err) => {
@@ -92,8 +89,8 @@ exports.aceptarSolicitudesEstatus = (request, response, next) => {
 
 // Controlador para Rechazar Solicitudes de Vacaciones
 exports.rechazarSolicitudesEstatus = (request, response, next) => {
-    console.log('Rechazo Iniciado');
-    Solicitudes.rechazarVacas(request.body.idSolicitud, request.body.nota)
+    const nota = request.body.nota == '' ? null : request.body.nota;
+    Solicitudes.rechazarVacas(request.body.idSolicitud, nota)
         .then(([rows, fieldData]) => {
             console.log('Rechazo hecho con éxito');
             response.redirect('/vacaciones/solicitudes_vacaciones');
@@ -227,7 +224,6 @@ exports.estatusVacaciones = (request, response, next) => {
 
 // Funcion Filtrar solicitudes de vacaciones por Mes y Área
 exports.filtraSolVacaciones = (request, response, next) => {
-    console.log("Filtrando vacaciones");
     const monar = request.params.mesar;
     console.log(monar);
     Solicitudes.filtraSolVacacionesMes(monar)
