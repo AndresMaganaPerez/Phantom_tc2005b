@@ -1,0 +1,35 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+
+    </script>
+
+    <!-- Reportes -->
+    <div class=" row center">
+        <h3 style="margin-bottom:25px">Indicadores</h3>
+    </div>
+    <div class="row center">
+        <%- include('componentes/bloques/dropdowns/dropdownMes.ejs') %>
+    </div>
+    <div class="row center">
+        <!-- SOLO RECURSOS HUMANOS Y EL ADMIN PUEDEN AGREGAR UN INDICADOR  (mhernandez es rh y 91900 es admin)-->
+        <% if (rol == 'recursosHumanos' || sesion.idEmpleado == 91900) { %>
+            <%- include('componentes/botones/agregarIndicador.ejs') %>
+        <% } %>
+    </div>
+    <div class="row">
+        <% if (indicadores.length > 0) { %>
+            <%- include('componentes/bloques/cartas/cartaNPS.ejs') %>
+            <%- include('componentes/bloques/cartas/cartaENPS.ejs') %>
+        <% } else{  %>
+            <h4>Todavia no se ha agregado indicador para el Mes Presente</h4>
+            <% } %>
+    </div>
+    
+<%- include('../includes/footer.ejs') %>
