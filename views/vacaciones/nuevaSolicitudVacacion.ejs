@@ -20,7 +20,7 @@
                 <div style="padding: 0px 30px;">
                     <h5>Fecha inicio</h5>
                     <input type="date" id="FI" name="fechaInicio"
-                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI' || flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') { %> 
                         value="<%= fechaInicio %>" 
                     <% } %>
                     
@@ -28,21 +28,21 @@
                         disabled 
                     <% } %> required>
 
-                    <% if (flag == 'FII') { %>
+                    <% if (flag == 'FII' || flag == 'FISB') { %>
                         <%- include('componentes/cartas/cartaErrorFI.ejs') %>
                     <% } %>
                 </div>
                 <div style="padding: 0px 30px;">
                     <h5>Fecha fin</h5>
                     <input type="date" id="FF" name="fechaFin" 
-                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI'|| flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') { %> 
                         value="<%= fechaFin %>" 
                     <% } %>
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
 
-                    <% if (flag == 'FFI') { %>
+                    <% if (flag == 'FFI' || flag == 'FFSB') { %>
                         <%- include('componentes/cartas/cartaErrorFF.ejs') %>
                     <% } else if (flag == 'NVI') { %>
                         <%- include('componentes/cartas/cartaErrorNVI') %>
@@ -51,14 +51,14 @@
                 <div style="padding: 0px 30px;">
                     <h5>Fecha reanudación</h5>
                     <input type="date" id="FR" name="fechaReanudacion" 
-                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI'|| flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') {%> 
                         value="<%= fechaReanudacion %>" 
                     <% } %>
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
 
-                    <% if (flag == 'FRI') { %>
+                    <% if (flag == 'FRI' || flag == 'FRSB') { %>
                         <%- include('componentes/cartas/cartaErrorFR.ejs') %>
                     <% } %>
                 </div>
@@ -68,7 +68,7 @@
                     <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> 
-                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI') {%> 
+                    <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI' || flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') {%> 
                         value="<%= suplente %>" 
                     <% } %>
                     required>

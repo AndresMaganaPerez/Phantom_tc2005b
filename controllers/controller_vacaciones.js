@@ -157,15 +157,18 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     
     const fechaInicio = new Date(request.body.fechaInicio);
     const fechaFin = new Date(request.body.fechaFin);
+    const fechaReanudacion = new Date(request.body.fechaReanudacion);
     
     const vacacionesPedidas = diasVacaciones(fechaInicio, fechaFin);
 
     const check1 = request.body.fechaInicio <= fechaSolicitud;
-    const check2 = request.body.fechaFin <= fechaSolicitud || request.body.fechaFin < request.body.fechaInicio;
+    const check1_1 = fechaInicio.getUTCDay() == 0 || fechaInicio.getUTCDay() == 6;
+    const check2 = request.body.fechaFin < request.body.fechaInicio;
+    const check2_2 = fechaFin.getUTCDay() == 0 || fechaFin.getUTCDay() == 6;
     const check3 = vacacionesPedidas > request.session.empleado.vacacionesTotales;
     const check4 = request.body.fechaReanudacion <= fechaSolicitud || request.body.fechaReanudacion <= request.body.fechaInicio || request.body.fechaReanudacion <= request.body.fechaFin;
-
-    const flag = check1 ? 'FII' : check2 ? 'FFI' : check3 ? 'NVI' : check4 ? 'FRI' : 'success';
+    const check4_4 = fechaReanudacion.getUTCDay() == 0 || fechaReanudacion.getUTCDay() == 6;
+    const flag = check1 ? 'FII' : check1_1 ? 'FISB' : check2 ? 'FFI' : check2_2 ? 'FFSB' : check3 ? 'NVI' : check4 ? 'FRI' : check4_4 ? 'FRSB' : 'success';
 
     if (flag == 'success') {
         vacacion.saveSolicitud()
