@@ -6,15 +6,15 @@
     <div class="col s12 m2 l13"></div>
     <div class="col s12 m8 l13">
         <%- include('componentes/botones/botonCrearSol.ejs') %>
+        <% if (rol == 'lider') { %>
+            <%- include('componentes/botones/botonAceptarSol.ejs') %>
+        <% } %>   
     </div>
 </div>
 
 <% if (solicitudes.length > 0) { %>
     <%- include('componentes/cartas/cartaEstatusMisSolVac.ejs') %>
 <% } else { %>
-    <br>
-    <br>
-    <br>
-    <h5 class="center">No tienes solicitudes de vacaciones</h5>
+    <h3 class="center">No tienes solicitudes de vacaciones</h5>
 <% } %>
 <%- include('../includes/footer.ejs') %>
