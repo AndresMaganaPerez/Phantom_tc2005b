@@ -1,0 +1,12 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+<h4 class="center">Empleados Registrados</h4>
+
+<%- include('../includes/footer.ejs') %>
+
+<% if (empleados.length > 0) { %>
+    <%for (empleado of empleados) { %>
+        <%- include('componentes/cartaDeUsuario.ejs', {empleado: empleado})%>
+    <% } %>
+<% } else{  %>
+    <h4 class="center">No existen Empleados</h4>
+    <% } %>

@@ -18,6 +18,7 @@ app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //Importar las rutas
+const rutasConsultaUsuarios = require('./routes/routes_consultaUsuarios')
 const rutasVistaGeneral = require('./routes/routes_vista_general');
 const rutasPerfil = require('./routes/routes_perfil');
 const rutasVacaciones = require('./routes/routes_vacaciones');
@@ -57,6 +58,7 @@ app.use('/natgas_blocks', rutasNGB);
 app.use('/reportes', rutasReportes);
 app.use('/anuncios', rutasAnuncios);
 app.use('/banners', rutasBanners);
+app.use('/usuarios',rutasConsultaUsuarios);
 app.use('/', rutasLogin);
 
 //Middlewares

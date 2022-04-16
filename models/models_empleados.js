@@ -28,6 +28,10 @@ module.exports = class Empleados{
         return db.execute('SELECT * FROM empleado WHERE email=?', [usuario]);
     }
 
+    static fetchAll() {
+        return db.execute('SELECT * FROM empleado')
+    }
+
     static findRol(nomina) {
        return db.execute('SELECT descripcionRol FROM empleado e, roles r, empleado_rol eR WHERE e.idEmpleado=eR.idEmpleado AND r.idRol=eR.idRol AND eR.idEmpleado=?', [nomina]);
     }
