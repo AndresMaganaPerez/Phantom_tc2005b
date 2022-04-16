@@ -1,5 +1,17 @@
-<span style="font-weight: 450; color: red;">Fecha reanudación debe ser posterior a la fecha fin</span>
-<script>
-    let elemento = document.getElementById("FR");
-    elemento.style = ("border: 1px solid; border-color: red;");
-</script>
+<% if (flag == 'FRI') { %>
+    <span style="font-weight: 450; color: red;">
+        Fecha reanudación debe ser posterior a la fecha fin
+    </span>
+    <script>
+        let elemento = document.getElementById("FR");
+        elemento.style = ("border: 1px solid; border-color: red;");
+    </script>
+<% } else if (flag == 'FRSB') { %>
+    <span style="font-weight: 450; color: red;">
+    Fecha reanudación debe ser distinto de sábado o domingo 
+    </span>
+    <script>
+        let elemento = document.getElementById("FR");
+        elemento.style = ("border: 1px solid; border-color: red;");
+    </script>
+<% } %>

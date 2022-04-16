@@ -1,5 +1,17 @@
-<span style="font-weight: 450;color: red;">Fecha inicio debe ser posterior a la fecha de solicitud</span>
-<script>
-    let elemento = document.getElementById("FI");
-    elemento.style = ("border: 1px solid; border-color: red;");
-</script>
+<% if (flag == 'FII') { %>
+    <span style="font-weight: 450; color: red;">
+    Fecha inicio debe ser posterior a la fecha de solicitud
+    </span>
+    <script>
+        let elemento = document.getElementById("FI");
+        elemento.style = ("border: 1px solid; border-color: red;");
+    </script>
+<% } else if (flag == 'FISB') { %>
+    <span style="font-weight: 450; color: red;">
+        Fecha inicio debe ser distinto de sábado o domingo
+    </span>
+    <script>
+        let elemento = document.getElementById("FI");
+        elemento.style = ("border: 1px solid; border-color: red;");
+    </script>
+<% } %>

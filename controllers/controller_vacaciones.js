@@ -59,10 +59,26 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
 
 // Controlador para Aceptar Solicitudes de Vacaciones
 exports.aceptarSolicitudesEstatus = (request, response, next) => {
+    function diasVacaciones(fechaI, fechaF) {
+        let fechaInicio = new Date(fechaI);
+        const fechaFin = new Date(fechaF);
+    
+        let diasVacaciones = 1;
+        while (fechaInicio < fechaFin){
+            if (fechaInicio.getUTCDay() != 0){
+                if (fechaInicio.getUTCDay() != 6) {
+                    diasVacaciones = diasVacaciones + 1;
+                }
+            }
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+        }
+        return diasVacaciones;
+    }
+
     const fechaInicio = new Date(request.body.fechaInicio);
     const fechaFin = new Date(request.body.fechaFin);
-    const diffTime = fechaFin.getTime() - fechaInicio.getTime();
-    const vacasUsadas = (diffTime/(1000*24*3600)) + 1;
+
+    const vacasUsadas = diasVacaciones(fechaInicio, fechaFin);
 
     Solicitudes.aceptarVacas(request.body.idSolicitud, vacasUsadas,request.body.idEmpleado)
         .then(([rows, fieldData]) => {
@@ -115,6 +131,22 @@ exports.estatusMisVacaciones = (request, response, next) => {
 
 exports.postSolicitarVacaciones = (request, response, next) => {
     const vacacion = new Solicitudes(request.session.empleado.idEmpleado, request.body.fechaInicio, request.body.fechaFin, request.body.fechaReanudacion, request.body.suplente);
+    
+    function diasVacaciones(fechaI, fechaF) {
+        let fechaInicio = new Date(fechaI);
+        const fechaFin = new Date(fechaF);
+    
+        let diasVacaciones = 1;
+        while (fechaInicio < fechaFin){
+            if (fechaInicio.getUTCDay() != 0){
+                if (fechaInicio.getUTCDay() != 6) {
+                    diasVacaciones = diasVacaciones + 1;
+                }
+            }
+            fechaInicio.setDate(fechaInicio.getDate() + 1);
+        }
+        return diasVacaciones;
+    }
 
     const date = new Date();
     const fechaSolAux = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
@@ -125,15 +157,18 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     
     const fechaInicio = new Date(request.body.fechaInicio);
     const fechaFin = new Date(request.body.fechaFin);
-    const diffTiempo = fechaFin.getTime() - fechaInicio.getTime();
-    const vacacionesPedidas = (diffTiempo / (1000 * 3600 * 24)) + 1;
- 
+    const fechaReanudacion = new Date(request.body.fechaReanudacion);
+    
+    const vacacionesPedidas = diasVacaciones(fechaInicio, fechaFin);
+
     const check1 = request.body.fechaInicio <= fechaSolicitud;
-    const check2 = request.body.fechaFin <= fechaSolicitud || request.body.fechaFin < request.body.fechaInicio;
+    const check1_1 = fechaInicio.getUTCDay() == 0 || fechaInicio.getUTCDay() == 6;
+    const check2 = request.body.fechaFin < request.body.fechaInicio;
+    const check2_2 = fechaFin.getUTCDay() == 0 || fechaFin.getUTCDay() == 6;
     const check3 = vacacionesPedidas > request.session.empleado.vacacionesTotales;
     const check4 = request.body.fechaReanudacion <= fechaSolicitud || request.body.fechaReanudacion <= request.body.fechaInicio || request.body.fechaReanudacion <= request.body.fechaFin;
-
-    const flag = check1 ? 'FII' : check2 ? 'FFI' : check3 ? 'NVI' : check4 ? 'FRI' : 'success';
+    const check4_4 = fechaReanudacion.getUTCDay() == 0 || fechaReanudacion.getUTCDay() == 6;
+    const flag = check1 ? 'FII' : check1_1 ? 'FISB' : check2 ? 'FFI' : check2_2 ? 'FFSB' : check3 ? 'NVI' : check4 ? 'FRI' : check4_4 ? 'FRSB' : 'success';
 
     if (flag == 'success') {
         vacacion.saveSolicitud()
