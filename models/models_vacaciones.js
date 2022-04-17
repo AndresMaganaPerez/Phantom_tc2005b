@@ -22,8 +22,8 @@ module.exports = class solicitudVacaciones {
         return db.execute('CALL cancelarVacacionesAceptadas(?, ? ,?)', [idEmpleado, idSol, vacUsadas]);
     }
 
-    static borrarSolicitudSinStatus(idEmpleado, idSolicitud) {
-        return db.execute('DELETE FROM solicitudvacaciones WHERE idEmpleado=? AND idSolicitud=?', [idEmpleado, idSolicitud])
+    static borrarSolicitudSinStatus(idEmpleado, idSolicitud, vacUsadas) {
+        return db.execute('DELETE FROM solicitudvacaciones WHERE idEmpleado=? AND idSolicitud=?', [idEmpleado, idSolicitud, vacUsadas])
     }
 
     static fetchAll(nomina) {

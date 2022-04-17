@@ -150,19 +150,16 @@ exports.rechazarSolicitudesEstatus = (request, response, next) => {
     const fechaInicio = new Date(request.body.fechaIn);
     const fechaFin = new Date(request.body.fechaF);
     const vacacionesPedidas = diasVacaciones(fechaInicio, fechaFin);
-    console.log(vacacionesPedidas);
-    console.log(request.body.fechaIn);
-    console.log(request.body.fechaF);
 
     const nota = request.body.nota == '' ? null : request.body.nota;
-    // Solicitudes.rechazarVacas(request.body.idSolicitud, nota, vacacionesPedidas)
-    //     .then(([rows, fieldData]) => {
-    //         console.log('Rechazo hecho con éxito');
-    //         response.redirect('/vacaciones/solicitudes_vacaciones');
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
+    Solicitudes.rechazarVacas(request.body.idSolicitud, nota, vacacionesPedidas)
+        .then(([rows, fieldData]) => {
+            console.log('Rechazo hecho con éxito');
+            response.redirect('/vacaciones/solicitudes_vacaciones');
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 }
 
 exports.estatusMisVacaciones = (request, response, next) => {
