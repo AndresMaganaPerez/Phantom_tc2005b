@@ -12,6 +12,8 @@ router.get('/', isAuth, controllerReportes.reportes);
 
 router.get('/nuevo', isAuth, controllerReportes.nuevo_reporte);
 
+router.post('/nuevo', isAuth, controllerReportes.post_nuevo_reporte);
+
 router.get('/modificar', isAuth, controllerReportes.modificar_reporte);
 
 module.exports = router;
