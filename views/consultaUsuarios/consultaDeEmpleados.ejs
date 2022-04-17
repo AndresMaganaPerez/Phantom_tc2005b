@@ -1,0 +1,12 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+<h4 class="center">Empleados Registrados</h4>
+
+<%- include('../includes/footer.ejs') %>
+
+<div class="row" id="busqueda_ajax">
+<% if (empleados.length > 0) { %>
+    <%- include('componentes/cartaDeUsuario.ejs')%>
+<% } else{  %>
+    <h4 class="center">No existen Empleados</h4>
+    <% } %>
+</div>

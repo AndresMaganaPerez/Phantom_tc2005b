@@ -32,11 +32,25 @@ module.exports = class Empleados{
         return db.execute('SELECT token from empleado WHERE email=?', [nomina]);
     }
 
+    static fetchEmpleadoYRol() {
+        return db.execute('SELECT * FROM empleado,empleado_rol,roles, area_empleado, area WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea;')
+    }
+
     static findRol(nomina) {
        return db.execute('SELECT descripcionRol FROM empleado e, roles r, empleado_rol eR WHERE e.idEmpleado=eR.idEmpleado AND r.idRol=eR.idRol AND eR.idEmpleado=?', [nomina]);
     }
 
     static findPrivilegio(rol) {
         return db.execute('SELECT accion FROM roles_privilegios rp, privilegios p, roles r WHERE p.idPrivilegio = rp.idPrivilegio AND r.idRol = rp.idRol AND descripcionRol=?', [rol]);
+    }
+
+    static borrarEmpleado(_nomina){
+        return db.execute('DELETE FROM empleado WHERE idEmpleado=?',[_nomina]);
+    }
+
+    static fetchEmpleado(criterio) {
+        return db.execute(
+            'SELECT * FROM empleado WHERE nombre LIKE ? OR idEmpleado LIKE ?',
+            ['%'+ criterio +'%','%'+ criterio +'%'])
     }
 }
