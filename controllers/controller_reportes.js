@@ -11,12 +11,23 @@ exports.reportes = (request, response, next) => {
 
     Reportes.fetchAll(mes, year).then(([rows, fieldData]) => {
         console.log(rows);
-        response.render('reportes/consultarReportes',{
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            indicadores: rows
+        //Para sacar lo del mes anterior y hacer comparacion
+        Reportes.fetchAll(mes-1, year).then(([rowsAnterior, fieldData]) =>{
+            console.log("MES ANTERIOR");
+            console.log(rowsAnterior);
+            console.log(rowsAnterior[0].Valor)
+            response.render('reportes/consultarReportes',{
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                indicadores: rows,
+                mesAnterior: rowsAnterior,
+                valorAnterior: rowsAnterior[0].Valor
+            });
+        }).catch((error) => {
+            console.log(error);
         });
+        
     }).catch(err => {
         console.log(err)
     });
