@@ -1,32 +1,52 @@
 
 <% for (let indicador of indicadores) { %>
-    <% if (indicador.TipoIndicadorID == 3) { %>
-        <div class="col s12 m4 l13">
-            <div class="card" style="border-radius: 1rem;">
-                <h1 style="text-align: center; color: red; padding-top: 50px;">
-                    <span>↓</span>
-                    <%= indicador.Valor %>
-                </h1>
-                <div class="card-content">
-                    <h4 style="padding-bottom: 10px;">CO2</h4>
-                    <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+    <% for (let indicadorAnterior of mesAnterior) { %>
+        <% if (indicador.TipoIndicadorID == 3) { %>
+            <% if (indicadorAnterior.TipoIndicadorID == 3) { %>
+                <div class="col s12 m4 l13">
+                    <div class="card" style="border-radius: 1rem;">
+                        <% if (indicador.Valor < indicadorAnterior.Valor) { %>
+                            <h1 style="text-align: center; color: red; padding-top: 50px;">
+                                <span>↓</span>
+                                <%= indicador.Valor %>
+                            </h1>
+                        <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
+                            <h1 style="text-align: center; color: green; padding-top: 50px;">
+                                <span>↑</span>
+                                <%= indicador.Valor %>
+                            </h1>
+                        <% } %>
+                        <div class="card-content">
+                            <h4 style="padding-bottom: 10px;">CO2</h4>
+                            <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    <% } %>
-    <% if (indicador.TipoIndicadorID == 4) { %>
-        <div class="col s12 m4 l13">
-            <div class="card" style="border-radius: 1rem;">
-                <h1 style="text-align: center; color: red; padding-top: 50px;">
-                    <span>↓</span>
-                    <%= indicador.Valor %>
-                </h1>
-                <div class="card-content">
-                    <h4 style="padding-bottom: 10px;">Hombres/Mujeres</h4>
-                    <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+            <% } %>
+        <% } %>
+        <% if (indicador.TipoIndicadorID == 4) { %>
+            <% if (indicadorAnterior.TipoIndicadorID == 4) { %>
+                <div class="col s12 m4 l13">
+                    <div class="card" style="border-radius: 1rem;">
+                        <% if (indicador.Valor < indicadorAnterior.Valor) { %>
+                            <h1 style="text-align: center; color: red; padding-top: 50px;">
+                                <span>↓</span>
+                                <%= indicador.Valor %>
+                            </h1>
+                        <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
+                            <h1 style="text-align: center; color: green; padding-top: 50px;">
+                                <span>↑</span>
+                                <%= indicador.Valor %>
+                            </h1>
+                        <% } %>
+                        <div class="card-content">
+                            <h4 style="padding-bottom: 10px;">Hombres/Mujeres</h4>
+                            <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            <% } %>
+        <% } %>
     <% } %>
 <% } %>
 
