@@ -25,7 +25,7 @@ module.exports = class Empleados{
     }
 
     static findEmpleado(usuario) {
-        return db.execute('SELECT idEmpleado, email, nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza FROM empleado WHERE email=?', [usuario]);
+        return db.execute('SELECT e.idEmpleado, email, e.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, a.nombre AS "area" FROM empleado e, area a, area_empleado ae WHERE e.idEmpleado = ae.idEmpleado AND a.idArea = ae.idArea AND email=?', [usuario]);
     }
 
     static getPassword(nomina) {
@@ -52,5 +52,12 @@ module.exports = class Empleados{
         return db.execute(
             'SELECT * FROM empleado WHERE nombre LIKE ? OR idEmpleado LIKE ?',
             ['%'+ criterio +'%','%'+ criterio +'%'])
+        }
+    static saveTel(nomina, telefono) {
+        return db.execute('UPDATE empleado SET numTelefonico = ? WHERE idEmpleado = ?', [telefono, nomina]);
+    }
+
+    static fetchTel(nomina) {
+        return db.execute('SELECT numTelefonico FROM empleado WHERE idEmpleado = ?', [nomina]);
     }
 }

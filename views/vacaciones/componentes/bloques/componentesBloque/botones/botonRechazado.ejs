@@ -1,18 +1,19 @@
 <!-- Modal Trigger -->
 <div class="col s12 m1 l13">
-  <span style="font-weight: 600;"><a class="waves-effect waves-light btn-large modal-trigger red" href="#modal1">Rechazar</a></span>
+  <span style="font-weight: 600;"><a class="waves-effect waves-light btn-large modal-trigger red" href="#modal1?idSol=<%= solicitud.idSolicitud %>&fI=<%= solicitud.fechaInicio %>&fF=<%= solicitud.fechaFin %>">Rechazar</a></span>
 </div>
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
+<div id="modal1?idSol=<%= solicitud.idSolicitud %>&fI=<%= solicitud.fechaInicio %>&fF=<%= solicitud.fechaFin %>" class="modal">
   <div class="modal-content">
     <h4>Motivo de Rechazo</h4>
     <form action="/vacaciones/solicitudes_vacaciones/rechazar" method="POST">
         <textarea placeholder="Escribe aquí..." name="nota" style="height: 200px;" required></textarea>
         <input type="text" value="<%= solicitud.idSolicitud %>" name="idSolicitud" hidden>
+        <input type="text" value="<%= solicitud.fechaInicio %>" name="fechaIn" hidden>
+        <input type="text" value="<%= solicitud.fechaFin %>" name="fechaF" hidden>
         <br><br><input type="submit" class="btn green" style="color: white;" value="Enviar" name="b_enviar">
         <input type="submit" class="btn red" style="color: white;" value="Descartar" formnovalidate>
     </form>
-    
   </div>
 </div>

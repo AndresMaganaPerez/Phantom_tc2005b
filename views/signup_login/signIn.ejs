@@ -16,9 +16,6 @@
                 <h1>Crear Cuenta</h1>
                 <span style="margin-bottom: 10px; margin-top: 10px;">El Administrador Aceptara tu Solicitud de Registro</span>
                 <div class="social-container">
-                    <!-- <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a> -->
                     
                 </div>
                 <div style="display:inline-flex;">
@@ -27,7 +24,7 @@
                     <input style="margin-left: 10px;" type="text" placeholder="Apellido Materno" id="sign-up-email" name="apellidoM" required/>
                 </div>
                 <input type="number" placeholder="Nómina" id="sign-up-password" name="nomina" required/>
-                <input type="date" placeholder="Fecha Nacimiento" name="fechaNac" id="sign-up-password" required/>
+                <input id="fechaNac" type="date" placeholder="Fecha Nacimiento" name="fechaNac" required/>
                 <input type="text" placeholder="Teléfono" id="sign-up-email" name="telefono" required/>
                 <input type="text" placeholder="Email" id="sign-up-password" name="email" required/>
                 <input type="password" placeholder="Contraseña" id="confirm-password" name="password" required/>
@@ -41,17 +38,16 @@
                 <br>
                 <h1>Iniciar Sesión</h1>
                 <br>
-                <!-- <div class="social-container">
-                    <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                    <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
-                </div> -->
-                <!-- <span>or use your account</span> -->
 
-                <input type="text" for="nombre" name="email_login" placeholder="Email" required />
+                <input type="text" for="nombre" name="email_login" placeholder="Email" id="email" required />
                 <span id="sign-in-error" style="color: red;"></span>
                 <input type="password" for="passwd" name="password_login" placeholder="Contraseña" id="sign-in-password" required/>
-                <a href="#">Olvidaste Password?</a>
+                
+                <% if (flag == 'invalidCredentials') { %> 
+                    <%- include('componentes/cartas/cartaErrorCredenciales.ejs') %>
+                <% } %>
+                <br>
+                <!-- <a href="#">Olvidaste Password?</a> -->
                 <button type="submit" value="Enviar">Iniciar Sesión</button>
             </form>
         </div>
@@ -72,17 +68,8 @@
             </div>
         </div>
     </div>
-    
-    
+    <script type="text/javascript" src="/js/signin.js">
 
-
-    
-
-
-
-
-
-
-    <script type="text/javascript" src="/js/signin.js"></script>
+    </script>
 </body>
 </html>

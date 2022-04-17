@@ -2,10 +2,17 @@
     <div class="col s12 m4 l13">
         <% if (indicador.TipoIndicadorID == 2) { %>
             <div class="card" style="border-radius: 1rem;">
-                <h1 style="text-align: center; color: red; padding-top: 50px;">
-                    <span>↓</span>
-                    <%= indicador.Valor %>
-                </h1>
+                <% if (10 < 8) { %>
+                    <h1 style="text-align: center; color: red; padding-top: 50px;">
+                        <span>↓h</span>
+                        <%= indicador.Valor %>
+                    </h1>
+                <% } else if (indicador.Valor > valorAnterior) { %>
+                    <h1 style="text-align: center; color: green; padding-top: 50px;">
+                        <span>↑</span>
+                        <%= indicador.Valor %>
+                    </h1>
+                <% } %>
                 <div class="card-content">
                     <h4 style="padding-bottom: 10px;">ENPS</h4>
                     <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
@@ -13,4 +20,5 @@
             </div>
         <% } %>
     </div>
+    <div class="col s12 m2 l13"></div>
 <% } %>

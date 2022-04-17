@@ -13,7 +13,9 @@
 </div>
 
 <% if (solicitudes.length > 0) { %>
-    <%- include('componentes/cartas/cartaEstatusMisSolVac.ejs') %>
+    <% for (solicitud of solicitudes) { %>
+        <%- include('componentes/cartas/cartaEstatusMisSolVac.ejs', {solicitud: solicitud}) %>
+    <% } %>
 <% } else { %>
     <h3 class="center">No tienes solicitudes de vacaciones</h5>
 <% } %>

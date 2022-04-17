@@ -10,12 +10,20 @@ module.exports = class solicitudVacaciones {
         this.suplente = _suplente;
     }
 
-    saveSolicitud() {
-        return db.execute('INSERT INTO solicitudvacaciones (idEmpleado, fechaInicio, fechaFin, fechaReanudacion, suplente) VALUES (?, ?, ?, ?, ?)', [this.nomina, this.fechaInicio, this.fechaFin, this.fechaReanudacion, this.suplente]);
+    saveSolicitud(vacacionesUsadas) {
+        return db.execute('call enviarSolicitudVac(?, ?, ?, ?, ?, ?)', [this.nomina, this.fechaInicio, this.fechaFin, this.fechaReanudacion, this.suplente, vacacionesUsadas]);
     }
 
-    static borrarSolicitud(idEmpleado, idSolicitud) {
-        return db.execute('DELETE FROM solicitudvacaciones WHERE idEmpleado=? AND idSolicitud=?', [idEmpleado, idSolicitud])
+    static fetchVacacionesRestantes(nomina) {
+        return db.execute('SELECT vacacionesTotalesAux FROM empleado WHERE idEmpleado =?', [nomina]);
+    }
+
+    static borrarSolicitudConStatus(idEmpleado, idSol, vacUsadas){
+        return db.execute('CALL cancelarVacacionesAceptadas(?, ? ,?)', [idEmpleado, idSol, vacUsadas]);
+    }
+
+    static borrarSolicitudSinStatus(idEmpleado, idSolicitud, vacUsadas) {
+        return db.execute('CALL cancelarVacacionesSinEstatus(?, ?, ?)', [idEmpleado, idSolicitud, vacUsadas])
     }
 
     static fetchAll(nomina) {
@@ -48,8 +56,8 @@ module.exports = class solicitudVacaciones {
     static aceptarVacas(idSolicitud, vacasUsadas,idEmpleado){
         return db.execute('CALL Modificar_Estatus_Vacas_Aceptar(?,?,?)', [idSolicitud,vacasUsadas,idEmpleado]);
     }
-    static rechazarVacas(idSolicitud, nota){
-        return db.execute('CALL Modificar_Estatus_Vacas_Rechazar(?,?)', [idSolicitud, nota]);
+    static rechazarVacas(idSolicitud, nota, vacacionesUsadas){
+        return db.execute('CALL Modificar_Estatus_Vacas_Rechazar(?,?,?)', [idSolicitud, nota, vacacionesUsadas]);
     }
 
     // Funcion Filtrar solicitudes de vacaciones por Mes
