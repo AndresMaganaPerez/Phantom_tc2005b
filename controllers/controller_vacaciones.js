@@ -55,7 +55,7 @@ exports.cancelarSolicitud = (request, response, next) =>{
 
     console.log(vacacionesUsadas);
     if (request.body.estatus == '') {
-        Solicitudes.borrarSolicitudSinStatus(request.session.empleado.idEmpleado, request.body.idSol)
+        Solicitudes.borrarSolicitudSinStatus(request.session.empleado.idEmpleado, request.body.idSol, vacacionesUsadas)
         .then(() => {
             response.redirect('/vacaciones/estatus_mis_vacaciones');
         })
