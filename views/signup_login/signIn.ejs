@@ -39,9 +39,13 @@
                 <h1>Iniciar Sesión</h1>
                 <br>
 
-                <input type="text" for="nombre" name="email_login" placeholder="Email" required />
+                <input type="text" for="nombre" name="email_login" placeholder="Email" id="email" required />
                 <span id="sign-in-error" style="color: red;"></span>
                 <input type="password" for="passwd" name="password_login" placeholder="Contraseña" id="sign-in-password" required/>
+                
+                <% if (flag == 'invalidCredentials') { %> 
+                    <%- include('componentes/cartas/cartaErrorCredenciales.ejs') %>
+                <% } %>
                 <br>
                 <!-- <a href="#">Olvidaste Password?</a> -->
                 <button type="submit" value="Enviar">Iniciar Sesión</button>
