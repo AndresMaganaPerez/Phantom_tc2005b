@@ -1,36 +1,28 @@
 const NGB = require('../models/models_natgasBlock');
 
-var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
-var datetime = currentdate.getDate() + "/"
+const currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
+const datetime = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear()
+                + currentdate.getFullYear();
 
 exports.solicitarNatgasBlock = (request, response, next) => {
     console.log(request.body);
     console.log("Solicitar mi Natgas Block");
     NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
-        if(rows.length >= 1) {
-            const ultimoNGB = rows[0].fechaSolicitud
+        const fechaUltimaSolicitud = rows.length > 0 ? new Date(rows[0].fechaSolicitud) : '';
+        const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
+        const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
+        const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != fechaUltimaSolicitud.getMonth() ? 'pass' : 'invalid'; 
             response.render('natgasBlock/nuevaSolicitudNGB', {
                 sesion: request.session.empleado,
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
                 restantes: request.session.empleado.cantidadNatgasBlocks,
                 fechaDeHoy: datetime,
-                ultimoNGB: ultimoNGB.toString().substr(0,15)
+                ultimoNGB: condicionUltimoNGB,
+                limiteFecha : limiteFechaNGB
             })
-        } else{
-            const ultimoNGB = "No has solicitado ningun Natgas Block."
-            response.render('natgasBlock/nuevaSolicitudNGB', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                restantes: request.session.empleado.cantidadNatgasBlocks,
-                fechaDeHoy: datetime,
-                ultimoNGB: ultimoNGB
-            })
-        }
         //console.log(rows);
     }).catch((err) =>{console.log(err)})
     

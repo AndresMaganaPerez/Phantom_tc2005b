@@ -9,10 +9,10 @@
             <h5 class="center"><span style="font-weight: 600;">Natgas Block disponibles:</h5>
             <h6 class="center"><%=restantes %></h6>
             <h6 class="center"><span style="font-weight: 600;">Último Natgas Block solicitado:</span><%=ultimoNGB%></h6>
-            <br><br>
+            <% if (restantes == 0) { %> <h6 class='center' style='font-weight: 450; color: red; margin-top: 20px;'>No cuentas con Natgas Blocks Restantes.</h6> <% } %>
             <form action="/natgas_blocks/solicitar_mi_natgas_block" method="POST">
                 <div style="padding: 0px 30px;">
-                    <% if (restantes == 0) { %> <h6 class='center' style='font-weight: 450; color: red;'>No cuentas con Natgas Blocks Restantes.</h6> <% } %>
+                    
                     <h5>Fecha de uso del Natgas Block</h5>
                     <input type="date" <% if (restantes == 0) { %> disabled  <% } %>  name="fecha" required>
                 </div>
