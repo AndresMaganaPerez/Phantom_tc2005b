@@ -23,13 +23,19 @@
             <%- include('componentes/botones/agregarIndicador.ejs') %>
         <% } %>
     </div>
-    <div class="row">
-        <% if (indicadores.length > 0) { %>
-            <%- include('componentes/bloques/cartas/cartaNPS.ejs') %>
-            <%- include('componentes/bloques/cartas/cartaENPS.ejs') %>
-        <% } else{  %>
-            <h4>Todavia no se ha agregado indicador para el Mes Presente</h4>
-            <% } %>
-    </div>
+    
+    <% if(indicadores.length > 0) { %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartasIndicadores.ejs') %>
+        </div>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartasIndicadores2.ejs') %>
+        </div>
+    <% } else{ %>
+        <h4>No Hay ningun tipo de Indicador para este Mes</h4>
+        <% } %>
+    
     
 <%- include('../includes/footer.ejs') %>
