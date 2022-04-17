@@ -2,11 +2,15 @@ const empleados = require('../models/models_empleados');
 const bcrypt = require('bcryptjs');
 
 exports.signup = (request, response, next) => {
-    response.render('signup_login/signIn');
+    response.render('signup_login/signIn', {
+        flag: ''
+    });
 };
 
 exports.getLogin = (request, response, next) => {
-    response.render('signup_login/signIn');
+    response.render('signup_login/signIn', {
+        flag: ''
+    });
 };
 
 exports.postSignUp = (request, response, next) => {
@@ -24,7 +28,10 @@ exports.login = (request, response, next) => {
     empleados.findEmpleado(request.body.email_login)
     .then(([rows, fieldData]) => {
         if (rows.length < 1) {
-            return response.redirect('/');
+            const flag = 'invalidCredentials';
+            response.render('signup_login/signIn.ejs', {
+                flag: flag
+            });
         }
         const empleado = rows[0];
         empleados.getPassword(request.body.email_login)
@@ -55,7 +62,10 @@ exports.login = (request, response, next) => {
                         return request.session.save(err => {   
                         });
                     }
-                    response.redirect('/');
+                    const flag = 'invalidCredentials';
+                    response.render('signup_login/signIn.ejs', {
+                        flag: flag
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
