@@ -10,4 +10,6 @@ const isAuth = require('../controllers/is-auth');
 
 router.get('/', isAuth, controllerPerfil.perfil);
 
+router.post('/guardarNumeroTelefono', isAuth, controllerPerfil.guardarNumTelefono);
+
 module.exports = router;

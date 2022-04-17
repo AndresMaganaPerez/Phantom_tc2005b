@@ -39,4 +39,12 @@ module.exports = class Empleados{
     static findPrivilegio(rol) {
         return db.execute('SELECT accion FROM roles_privilegios rp, privilegios p, roles r WHERE p.idPrivilegio = rp.idPrivilegio AND r.idRol = rp.idRol AND descripcionRol=?', [rol]);
     }
+
+    static saveTel(nomina, telefono) {
+        return db.execute('UPDATE empleado SET numTelefonico = ? WHERE idEmpleado = ?', [telefono, nomina]);
+    }
+
+    static fetchTel(nomina) {
+        return db.execute('SELECT numTelefonico FROM empleado WHERE idEmpleado = ?', [nomina]);
+    }
 }
