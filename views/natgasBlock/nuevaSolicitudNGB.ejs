@@ -8,25 +8,35 @@
             <p class="center"><span style="font-weight: 600;">Fecha de la solicitud: <%= fechaDeHoy %></p>
             <h5 class="center"><span style="font-weight: 600;">Natgas Block disponibles:</h5>
             <h6 class="center"><%=restantes %></h6>
-            <h6 class="center"><span style="font-weight: 600;">Último Natgas Block solicitado:</span><%=ultimoNGB%></h6>
-            <% if (restantes == 0) { %> <h6 class='center' style='font-weight: 450; color: red; margin-top: 20px;'>No cuentas con Natgas Blocks Restantes.</h6> <% } %>
+            <h6 class="center"><span style="font-weight: 600;">Último Natgas Block solicitado:</span></h6>
+            <h6 class="center"><%=ultimoNGB%></h6>
+            <% if (limiteFecha == 'invalid') { %>
+                <h6 class="center" style='font-weight: 450; color: red; margin-top: 20px;'>No ha cambiado de mes desde tu ultima solicitud de natgas block</h6>
+            <% } %>
+            <% if (restantes == 0) { %> 
+                <h6 class='center' style='font-weight: 450; color: red; margin-top: 20px;'>No cuentas con Natgas Blocks Restantes.</h6> 
+            <% } %>
             <form action="/natgas_blocks/solicitar_mi_natgas_block" method="POST">
                 <div style="padding: 0px 30px;">
                     
                     <h5>Fecha de uso del Natgas Block</h5>
-                    <input type="date" <% if (restantes == 0) { %> disabled  <% } %>  name="fecha" required>
+                    <input type="date" 
+                    <% if (restantes == 0 || limiteFecha == 'invalid') { %> 
+                        disabled  
+                    <% } %>  
+                    name="fecha" required>
                 </div>
                 <br>   
                 
                 <div class="center" style="padding-top: 20px;">
-                    <button class="btn waves-effect waves-light green" <% if (restantes == 0) { %> disabled <% } %> type="submit" name="action" style="margin-bottom: 50px;">Enviar
-                        <i class="material-icons right">send</i>
+                    <button class="btn waves-effect waves-light green" 
+                    <% if (restantes == 0 || limiteFecha == 'invalid') { %> 
+                        disabled 
+                    <% } %> 
+                    type="submit" name="action" style="margin-bottom: 50px;">Enviar<i class="material-icons right">send</i>
                     </button>
                 </div>      
-                
-                
             </form>
-            
         </div>
     </div>
 </div>

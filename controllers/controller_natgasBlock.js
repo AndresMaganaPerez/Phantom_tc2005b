@@ -13,16 +13,16 @@ exports.solicitarNatgasBlock = (request, response, next) => {
         const fechaUltimaSolicitud = rows.length > 0 ? new Date(rows[0].fechaSolicitud) : '';
         const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
         const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
-        const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != fechaUltimaSolicitud.getMonth() ? 'pass' : 'invalid'; 
-            response.render('natgasBlock/nuevaSolicitudNGB', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                restantes: request.session.empleado.cantidadNatgasBlocks,
-                fechaDeHoy: datetime,
-                ultimoNGB: condicionUltimoNGB,
-                limiteFecha : limiteFechaNGB
-            })
+        const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != (fechaUltimaSolicitud.getMonth() + 1) ? 'pass' : 'invalid';
+        response.render('natgasBlock/nuevaSolicitudNGB', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            restantes: request.session.empleado.cantidadNatgasBlocks,
+            fechaDeHoy: datetime,
+            ultimoNGB: condicionUltimoNGB,
+            limiteFecha : limiteFechaNGB
+        });
         //console.log(rows);
     }).catch((err) =>{console.log(err)})
     
