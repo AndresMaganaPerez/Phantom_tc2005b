@@ -1,10 +1,8 @@
 <!--Modal trigger -->
     <a class="modal-trigger" href="#cancelarVacacion?idSol=<%= solicitud.idSolicitud %>&status=<%= solicitud.solicitudAceptadaEstatus %>&fI=<%= solicitud.fechaInicio %>&fF=<%= solicitud.fechaFin %>"><i class="medium material-icons red-text" type="submit">delete</i></a>
-    <%= solicitud.idSolicitud %>
 
 <!--Modal Structure -->
 <div id="cancelarVacacion?idSol=<%= solicitud.idSolicitud %>&status=<%= solicitud.solicitudAceptadaEstatus %>&fI=<%= solicitud.fechaInicio %>&fF=<%= solicitud.fechaFin %>" class="modal">
-    <%= solicitud.idSolicitud %>
     <div class="modal-content">
         <h4>¿Estás seguro de que quieres cancelar la solicitud de vacación?</h4>
         <form action="/vacaciones/estatus_mis_vacaciones/" method="POST">

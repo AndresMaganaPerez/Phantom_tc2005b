@@ -8,7 +8,7 @@
             <p class="center">Fecha de la solicitud: <%= fechaSolicitud %></p>
             <h5 class="center">Vacaciones disponibles:</h5>
             <h6 class="center"><%= sesion.vacacionesTotales %> </h6>
-            <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %> 
+            <% if (sesion.vacacionesTotales <= 0 || sesion.vacacionesTotales == null) { %> 
                 <h6 class="center" style="font-weight: 600; color: red;">No tienes vacaciones disponibles</h6>
             <% } %>
 
@@ -24,7 +24,7 @@
                         value="<%= fechaInicio %>" 
                     <% } %>
                     
-                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                    <% if (sesion.vacacionesTotales <= 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
 
@@ -38,7 +38,7 @@
                     <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI'|| flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') { %> 
                         value="<%= fechaFin %>" 
                     <% } %>
-                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                    <% if (sesion.vacacionesTotales <= 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
 
@@ -54,7 +54,7 @@
                     <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI'|| flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') {%> 
                         value="<%= fechaReanudacion %>" 
                     <% } %>
-                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                    <% if (sesion.vacacionesTotales <= 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> required>
 
@@ -65,7 +65,7 @@
                 <div style="padding: 0px 30px;">
                     <h5>Suplente:</h5>
                     <input placeholder="Ingresa el nombre aquí" id="first_name" type="text" class="validate" name="suplente"
-                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                    <% if (sesion.vacacionesTotales <= 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> 
                     <% if (flag == 'FII' || flag == 'FFI' || flag == 'FRI' || flag == 'NVI' || flag == 'FISB' || flag == 'FFSB' || flag == 'FRSB') {%> 
@@ -80,7 +80,7 @@
 
                 <div class="center" style="padding-top: 20px;">
                     <button class="btn waves-effect waves-light green" type="submit" style="margin-bottom: 50px;" 
-                    <% if (sesion.vacacionesTotales == 0 || sesion.vacacionesTotales == null) { %>
+                    <% if (sesion.vacacionesTotales <= 0 || sesion.vacacionesTotales == null) { %>
                         disabled 
                     <% } %> >Enviar
                         <i class="material-icons right">send</i>

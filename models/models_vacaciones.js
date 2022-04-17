@@ -14,7 +14,11 @@ module.exports = class solicitudVacaciones {
         return db.execute('INSERT INTO solicitudvacaciones (idEmpleado, fechaInicio, fechaFin, fechaReanudacion, suplente) VALUES (?, ?, ?, ?, ?)', [this.nomina, this.fechaInicio, this.fechaFin, this.fechaReanudacion, this.suplente]);
     }
 
-    static borrarSolicitud(idEmpleado, idSolicitud) {
+    static borrarSolicitudConStatus(idEmpleado, idSol, vacUsadas){
+        return db.execute('CALL cancelarVacacionesAceptadas(?, ? ,?)', [idEmpleado, idSol, vacUsadas]);
+    }
+
+    static borrarSolicitudSinStatus(idEmpleado, idSolicitud) {
         return db.execute('DELETE FROM solicitudvacaciones WHERE idEmpleado=? AND idSolicitud=?', [idEmpleado, idSolicitud])
     }
 

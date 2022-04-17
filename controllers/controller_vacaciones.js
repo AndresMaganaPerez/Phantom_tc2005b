@@ -45,15 +45,23 @@ exports.cancelarSolicitud = (request, response, next) =>{
     const vacacionesUsadas = diasVacaciones(fechaInicio, fechaFin);
 
     console.log(vacacionesUsadas);
-
-    /*
-    Solicitudes.borrarSolicitud(request.session.empleado.idEmpleado, id)
-    .then(() => {
-        response.redirect('/vacaciones/estatus_mis_vacaciones')  
-    })
-    .catch((err) => {
-        console.log(err)
-    })*/ 
+    if (request.body.estatus == '') {
+        Solicitudes.borrarSolicitudSinStatus(request.session.empleado.idEmpleado, request.body.idSol)
+        .then(() => {
+            response.redirect('/vacaciones/estatus_mis_vacaciones');
+        })
+        .catch((err) => {
+            console.log(err);
+        }) 
+    } else if (request.body.estatus == 1) {
+        Solicitudes.borrarSolicitudConStatus(request.session.empleado.idEmpleado, request.body.idSol, vacacionesUsadas)
+        .then(() => {
+            response.redirect('/vacaciones/estatus_mis_vacaciones');
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 }
 
 exports.descarga = (request, response, next) => {
