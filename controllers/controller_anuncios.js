@@ -28,10 +28,19 @@ exports.nuevoAnuncio = (request, response, next) => {
 };
 
 exports.postAnuncio = (request, response, next) => {
-    const ngb = new NGB(request.session.empleado.idEmpleado,request.body.fecha)
-    ngb.save_NGB()
+    console.log('Creando anuncio');
+
+    let date= new Date();
+    let mes = date.getMonth() + 1;
+    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+
+    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto);
+    console.log(anuncio);
+
+    anuncio.saveAnuncio()
     .then(() =>{
-        response.redirect('/general')
+        console.log("Anuncio creado")
+        response.redirect('/anuncios')
     }).catch(err=>{console.log(err)})
 };
 

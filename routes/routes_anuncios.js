@@ -12,6 +12,8 @@ router.get('/', isAuth, controllerAnuncios.anuncios);
 
 router.get('/nuevo', isAuth, controllerAnuncios.nuevoAnuncio);
 
+router.post('/nuevo', isAuth, controllerAnuncios.postAnuncio);
+
 router.get('/modificar', controllerAnuncios.modificarAnuncio);
 
 module.exports = router;

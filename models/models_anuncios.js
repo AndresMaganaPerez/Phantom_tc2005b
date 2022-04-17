@@ -1,8 +1,7 @@
 const db = require('../util/database');
 
 module.exports = class Anuncios {
-    constructor(_id, _fecha, _titulo, _pin, _expiracion, _texto) {
-        this.id = _id;
+    constructor(_fecha, _titulo, _pin, _expiracion, _texto) {
         this.fecha = _fecha;
         this.titulo = _titulo;
         this.pin = _pin;

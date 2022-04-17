@@ -1,17 +1,16 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
 <h3 style="text-align: center;">Crear Anuncio</h3>
 
-
 <div class="row">
     <div class="col s12 m4 l13"></div>
     <div class="col s12 m4 l13">
         <div class="card " style="border-radius: 15px;">
             <p class="center" style="padding-top: 30px;">Fecha Actual: <%= fechaDeHoy %></p>
     
-            <form action="/vacaciones/solicitudes_mis_vacaciones" method="POST">
+            <form action="/anuncios/nuevo" method="POST" enctype="multipart/form-data">
                 <div style="padding: 0px 120px">
                     <label>
-                      <input type="checkbox" class="filled-in" checked="checked" nombre="pinned?">
+                      <input type="checkbox" class="filled-in" checked="checked" name="pin">
                       <span>¿Pinear el anuncio?</span>
                     </label>
                 </div>
@@ -21,16 +20,16 @@
                 </div>
                 <div class="input-field" style="padding: 0px 30px">
                     <h5>Contenido:</h5>
-                    <textarea placeholder="Escriba aquí..." id="textareaTexto" class="materialize-textarea" name="announcement_body"></textarea>
+                    <textarea placeholder="Escriba aquí..." id="textareaTexto" class="materialize-textarea" name="texto"></textarea>
                 </div>
                 <div style="padding: 0px 30px;">
                     <h5>Fecha de expiración:</h5>
-                    <input type="date" placeholder="AAAA-MM-DD" name="fechaexp" required>
+                    <input type="date" placeholder="AAAA-MM-DD" name="expiracion" required>
                 </div>
                 <div class="file-field input-field"style="padding: 0px 30px">
                     <div class="btn blue">
-                      <span>Subir imagen o archivo</span>
-                      <input type="file" name="archivo">
+                      <span>Subir imagen</span>
+                      <input type="file" accept="image/png, image/jpg, image/jpeg" name="image">
                     </div>
                     <div class="file-path-wrapper">
                       <input class="file-path validate" type="text">
@@ -45,5 +44,6 @@
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
+            </form>
 
 <%- include('../includes/footer.ejs') %>

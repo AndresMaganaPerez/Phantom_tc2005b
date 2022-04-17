@@ -35,6 +35,7 @@ exports.solicitarNatgasBlock = (request, response, next) => {
     }).catch((err) =>{console.log(err)})
     
 };
+
 exports.postDeSolicitud = (request,response,next) => {
     const ngb = new NGB(request.session.empleado.idEmpleado,request.body.fecha)
     ngb.save_NGB()

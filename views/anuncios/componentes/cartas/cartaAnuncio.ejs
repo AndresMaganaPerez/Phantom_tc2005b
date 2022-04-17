@@ -10,13 +10,13 @@
                         </div>
                         <div class="col s2 m4 l4"></div>
                         <div class="col s2 m2 l2">
-                            <span class="card-title activator black-text text-darken-4" style="margin-top: 10px;"><h8 class="flow-text"><%= anuncio.Fecha.toString().substr(4,11) %></h8></span>
+                            <span style="margin-top: 10px;"><h8 class="flow-text"><%= anuncio.Fecha.toString().substr(4,11) %></h8></span>
                         </div>
                     </div>
                     
                 </div>
                 <div class="card-content" style="padding-top:0px; padding-left: 30px;">
-                    <p><%= anuncio.texto %></p>
+                    <p><%= anuncio.texto.toString().substr(0, 350) %>...</p>
                 </div>
                 <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
                     <br>
