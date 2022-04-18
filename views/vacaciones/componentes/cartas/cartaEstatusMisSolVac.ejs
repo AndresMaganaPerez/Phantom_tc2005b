@@ -12,7 +12,10 @@
                             </span>
                         </div>
                         <div class="col s12 m2 l13"></div>
-                        <% if (solicitud.solicitudAceptadaEstatus == 1 || solicitud.solicitudAceptadaEstatus == null) { %>
+                        <% console.log(solicitud.idSolicitud) %>
+                        <% console.log(solicitud.fechaInicio < diaActual) %>
+                        <% console.log('-----------------------------------------------------') %>
+                        <% if ((solicitud.solicitudAceptadaEstatus == 1 || solicitud.solicitudAceptadaEstatus == null) && solicitud.fechaInicio > diaActual) { %>
                             <div class="col s12 m2 l13" style="margin-left: 1.4vw;">
                                 <%- include('../botones/botonCancelar.ejs') %>
                             </div>
