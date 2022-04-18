@@ -14,6 +14,7 @@ exports.solicitarNatgasBlock = (request, response, next) => {
         const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
         const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
         const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != (fechaUltimaSolicitud.getMonth() + 1) ? 'pass' : 'invalid';
+        const flag = '';
         response.render('natgasBlock/nuevaSolicitudNGB', {
             sesion: request.session.empleado,
             rol: request.session.rol,
@@ -21,20 +22,55 @@ exports.solicitarNatgasBlock = (request, response, next) => {
             restantes: request.session.empleado.cantidadNatgasBlocks,
             fechaDeHoy: datetime,
             ultimoNGB: condicionUltimoNGB,
-            limiteFecha : limiteFechaNGB
+            limiteFecha : limiteFechaNGB,
+            flag: flag
         });
         //console.log(rows);
-    }).catch((err) =>{console.log(err)})
+    }).catch((err) =>{console.log(err)});
     
 };
 
 exports.postDeSolicitud = (request,response,next) => {
-    const ngb = new NGB(request.session.empleado.idEmpleado,request.body.fecha)
-    ngb.save_NGB()
-    .then(() =>{
-        response.redirect('/general')
-    }).catch(err=>{console.log(err)})
-}
+    const fechaUso = new Date(request.body.fecha);
+    const flag = fechaUso.getUTCDay() == 0 || fechaUso.getUTCDay() == 6 ? 'FUSB' : 'success';
+    NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
+    .then(([rows,fieldData]) =>{
+        const fechaUltimaSolicitud = rows.length > 0 ? new Date(rows[0].fechaSolicitud) : '';
+        const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
+        const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
+        const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != (fechaUltimaSolicitud.getMonth() + 1) ? 'pass' : 'invalid';
+        if (flag == 'success'){
+            const ngb = new NGB(request.session.empleado.idEmpleado,request.body.fecha);
+            ngb.save_NGB()
+            .then(() => {
+                response.render('natgasBlock/nuevaSolicitudNGB', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    restantes: request.session.empleado.cantidadNatgasBlocks,
+                    fechaDeHoy: datetime,
+                    ultimoNGB: condicionUltimoNGB,
+                    limiteFecha : limiteFechaNGB,
+                    flag: flag
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        } else{
+            response.render('natgasBlock/nuevaSolicitudNGB', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                restantes: request.session.empleado.cantidadNatgasBlocks,
+                fechaDeHoy: datetime,
+                ultimoNGB: condicionUltimoNGB,
+                limiteFecha : limiteFechaNGB,
+                fechaUso: request.body.fecha,
+                flag: flag
+            });
+        }
+    }).catch((err) =>{console.log(err)});
+};
 
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
     NGB.fetchNGBPorAceptar(request.session.empleado.idEmpleado).then(([rows, fieldData]) => {
