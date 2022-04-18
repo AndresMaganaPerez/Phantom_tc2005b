@@ -28,11 +28,6 @@ exports.solicitarVacaciones = (request, response, next) => {
 };
 
 exports.cancelarSolicitud = (request, response, next) =>{
-    console.log(request.body.idSol);
-    console.log(request.body.estatus);
-    console.log(request.body.fechaIn)
-    console.log(request.body.fechaF);
-
     function diasVacaciones(fechaI, fechaF) {
         let fechaInicio = new Date(fechaI);
         const fechaFin = new Date(fechaF);
@@ -166,6 +161,7 @@ exports.estatusMisVacaciones = (request, response, next) => {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
             const misVacaciones = rows;
+            const currentDate = new Date();
             Solicitudes.fetchLider(request.session.empleado.idEmpleado)
                 .then(([rows, fieldData]) => {
                     const lider = rows[0];
@@ -175,7 +171,8 @@ exports.estatusMisVacaciones = (request, response, next) => {
                         rol: request.session.rol,
                         privilegios: request.session.privilegios,
                         solicitudes: misVacaciones,
-                        lider: lider
+                        lider: lider,
+                        diaActual: currentDate
                     });
                 })
                 .catch((err) => {
