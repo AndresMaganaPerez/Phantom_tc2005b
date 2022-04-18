@@ -10,14 +10,31 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
+const multer = require('multer');
 
+//fileStorage: Es nuestra constante de configuración para manejar el almacenamiento
+const fileStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        //'uploads': Es el directorio del servidor donde se subirán los archivos
+        callback(null, 'uploads');
+    },
+    filename: (request, file, callback) => {
+        //aquí configuramos el nombre que queremos que tenga el archivo en el servidor,
+        //para que no haya problema si se suben 2 archivos con el mismo nombre concatenamos el timestamp
+        callback(null, new Date().getTime() + '-' + file.originalname);
+    },
+});
+
+app.use(multer({ storage: fileStorage }).single('image'));
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
 //Importar las rutas
+const rutasConsultaUsuarios = require('./routes/routes_consultaUsuarios')
 const rutasVistaGeneral = require('./routes/routes_vista_general');
 const rutasPerfil = require('./routes/routes_perfil');
 const rutasVacaciones = require('./routes/routes_vacaciones');
@@ -57,6 +74,7 @@ app.use('/natgas_blocks', rutasNGB);
 app.use('/reportes', rutasReportes);
 app.use('/anuncios', rutasAnuncios);
 app.use('/banners', rutasBanners);
+app.use('/usuarios',rutasConsultaUsuarios);
 app.use('/', rutasLogin);
 
 //Middlewares
