@@ -23,7 +23,10 @@
             <%- include('componentes/botones/agregarIndicador.ejs') %>
         <% } %>
     </div>
-    
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <h6>Mostrando Indicadores del Mes de <%= nombreMes %></h6>
+    </div>
     <% if(indicadores.length > 0) { %>
         <div class="row">
             <div class="col s12 m2 l13"></div>
@@ -32,6 +35,10 @@
         <div class="row">
             <div class="col s12 m2 l13"></div>
             <%- include('componentes/bloques/cartas/cartasIndicadores2.ejs') %>
+        </div>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartasIndicadores3.ejs') %>
         </div>
     <% } else{ %>
         <h4>No Hay ningun tipo de Indicador para este Mes</h4>
