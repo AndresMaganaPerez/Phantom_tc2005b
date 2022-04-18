@@ -4,16 +4,19 @@
             <% if (indicadorAnterior.TipoIndicadorID == 5) { %>
                 <div class="col s12 m4 l13">
                     <div class="card" style="border-radius: 1rem;">
+                        <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                        <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
                         <% if (indicador.Valor < indicadorAnterior.Valor) { %>
-                            <h1 style="text-align: center; color: red; padding-top: 50px;">
-                                <span>↓</span>
-                                <%= indicador.Valor %>
-                            </h1>
+                            <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                            <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                                <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                            </h6>
                         <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
-                            <h1 style="text-align: center; color: green; padding-top: 50px;">
-                                <span>↑</span>
-                                <%= indicador.Valor %>
-                            </h1>
+                            <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                            <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                                <span>+</span>
+                                <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                            </h6>
                         <% } %>
                         <div class="card-content">
                             <h4 style="padding-bottom: 10px;">Mujeres</h4>
