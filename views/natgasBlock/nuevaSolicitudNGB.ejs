@@ -25,7 +25,10 @@
                     <input type="date" 
                     <% if (restantes == 0 || limiteFecha == 'invalid') { %> 
                         disabled  
-                    <% } %>  
+                    <% } %>
+                    <% if (flag == 'FUSB') { %>
+                        value="<%= fechaUso %>"
+                    <% } %> 
                     name="fecha" id="fechaUso" required>
                     <% if (flag == 'FUSB') { %>
                         <%- include('componentes/cartas/cartaErrorFU.ejs') %>
