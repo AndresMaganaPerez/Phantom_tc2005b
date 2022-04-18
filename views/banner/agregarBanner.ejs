@@ -1,7 +1,7 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
     <h3 style="text-align: center;">Agregar Banner</h3>
 
-    <div class="row">
+    <!-- <div class="row">
         <div class="col s12 m2 l13"></div>
         <div class="col s12 m8 l13">
             <div class="right-align" style="padding-top: 20px;">
@@ -11,7 +11,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="row">
         <div class="col s12 m2 l13"></div>
@@ -19,7 +19,7 @@
             <div class="card"  style="border-radius: 15px; padding: 40px 40px;">
                 <div class="card-content center" style="padding: 10px; border: dashed grey;">
                     <h4>Subir Imagen</h4>
-                    <div class="form" action="#" method="POST">
+                    <form action="/banners/agregar_banner" method="POST" enctype="multipart/form-data">
                         <div class="file-field input-field">
                             <div class="row">
                                 <input type="file" accept="image/png, image/jpg, image/jpeg" name="image">
@@ -27,13 +27,13 @@
                             </div>
                         </div>
                         <label for="expiracion" style="font-weight: bold; color: black; margin-right: 10px;">Fecha de Expiración</label>
-                        <input type="date" class="" name="expiracion" required style="width: 200px; margin-top: 10px;">
+                        <input type="date" class="" name="expiracion" required style="width: 200px; margin-top: 10px;" value="<%= date %>">
                         <div class="center" style="padding-top: 20px;">
-                            <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Postear
+                            <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Subir
                                 <i class="material-icons right">send</i>
                             </button>
                         </div>
-                    </div>
+                    </form>
                     
                 </div>  
                 
