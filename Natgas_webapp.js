@@ -28,7 +28,7 @@ const fileStorage = multer.diskStorage({
 app.use(multer({ storage: fileStorage }).single('image'));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'upload')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
