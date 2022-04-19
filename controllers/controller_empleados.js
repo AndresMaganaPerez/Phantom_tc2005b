@@ -14,14 +14,59 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.postSignUp = (request, response, next) => {
-    const nuevoEmpleado = new empleados(request.body.nomina, request.body.email, request.body.password, request.body.nombre, request.body.apellidoP, request.body.apellidoM,request.body.fechaNac, request.body.telefono);
-    nuevoEmpleado.save_empleado()
-    .then(() => {
-        response.redirect('/');
+    empleados.verificarNomina(request.body.nomina)
+    .then(([nominas,fieldData]) => {
+        if(nominas.length < 1){
+            empleados.verificarEmail(request.body.email)
+            .then(([emails,fieldData]) => {
+                if (emails.length < 1){
+                    const nuevoEmpleado = new empleados(request.body.nomina, request.body.email, request.body.password, request.body.nombre, request.body.apellidoP, request.body.apellidoM,request.body.fechaNac, request.body.telefono);
+                    nuevoEmpleado.save_empleado()
+                    .then(() => {
+                        const flag = 'success';
+                        response.render('signup_login/signIn',{
+                            flag: flag
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+                } else {
+                    const flag = 'EmailExiste';
+                    response.render('signup_login/signIn',{
+                        flag: flag,
+                        nombre: request.body.nombre,
+                        apellidoPat: request.body.apellidoP,
+                        apellidoMat: request.body.apellidoM,
+                        nomina: request.body.nomina,
+                        fechaNac: request.body.fechaNac,
+                        tel: request.body.telefono,
+                        email: request.body.email
+                    });
+                    console.log('Existe email');
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        } else{
+            const flag = 'NominaExiste';
+            response.render('signup_login/signIn',{
+                flag: flag,
+                nombre: request.body.nombre,
+                apellidoPat: request.body.apellidoP,
+                apellidoMat: request.body.apellidoM,
+                nomina: request.body.nomina,
+                fechaNac: request.body.fechaNac,
+                tel: request.body.telefono,
+                email: request.body.email                
+            });
+            console.log('Existe nomina');
+        }
     })
-    .catch((err) => {
-        console.log(err);
-    });
+    .catch((error) => {
+        console.log(error);
+    })
 };
 
 exports.login = (request, response, next) => {

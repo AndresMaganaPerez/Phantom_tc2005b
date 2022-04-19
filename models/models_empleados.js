@@ -13,15 +13,22 @@ module.exports = class Empleados{
         this.numTel = _numTel;
     }
 
+    static verificarNomina(nomina){
+        return db.execute('SELECT * FROM empleado WHERE idEmpleado = ?', [nomina]);
+    }
+
+    static verificarEmail(email){
+        return db.execute('SELECT * FROM empleado WHERE email = ?', [email]);
+    }
+
     save_empleado() {
         return bcrypt.hash(this.token, 12)
         .then((token_cifrado) => {
-            return db.execute('INSERT INTO empleado (idEmpleado, email, token, nombre, apellidoPaterno, apellidoMaterno, fechaNac, numTelefonico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)' , [this.nomina, this.email, token_cifrado, this.nombre, this.apellidoPaterno, this.apellidoMaterno, this.fechaNac, this.numTel]);
+            return db.execute('INSERT INTO solicitudesregistroempleados (idEmpleado, email, token, nombre, apellidoPaterno, apellidoMaterno, fechaNac, numTelefonico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)' , [this.nomina, this.email, token_cifrado, this.nombre, this.apellidoPaterno, this.apellidoMaterno, this.fechaNac, this.numTel]);
         })
         .catch((error) => {
             console.log(error);
         });
-        
     }
 
     static findEmpleado(usuario) {
