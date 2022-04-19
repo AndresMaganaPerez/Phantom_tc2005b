@@ -56,6 +56,7 @@ const rutasReportes = require('./routes/routes_reportes');
 const rutasAnuncios = require('./routes/routes_anuncios');
 const rutasBanners = require('./routes/routes_banner');
 const rutasLogin = require('./routes/routes_login');
+const rutasEmpleados = require('./routes/routes_Empleados')
 const { request } = require('http');
 const { response } = require('express');
 
@@ -89,6 +90,7 @@ app.use('/anuncios', rutasAnuncios);
 app.use('/banners', rutasBanners);
 app.use('/usuarios',rutasConsultaUsuarios);
 app.use('/', rutasLogin);
+app.use('/empleados', rutasEmpleados);
 
 //Middlewares
 app.use((request, response, next) => {

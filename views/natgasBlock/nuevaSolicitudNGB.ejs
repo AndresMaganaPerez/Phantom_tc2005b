@@ -6,7 +6,14 @@
             <h3 class="center" style="padding-bottom: 0px; padding-top: 20px;">MI SOLICITUD DE NATGAS BLOCK</h3>
             <p class="center"><span style="font-weight: 600;">Fecha de la solicitud: <%= fechaDeHoy %></p>
             <h5 class="center"><span style="font-weight: 600;">Natgas Block disponibles:</h5>
-            <h6 class="center"><%=restantes %></h6>
+            <h6 class="center">
+            <%=restantes %>
+            <% if (restantes == 1) { %>
+                día
+            <% } else { %>
+                días
+            <% } %></h6>
+            </h6>
             <h6 class="center"><span style="font-weight: 600;">Último Natgas Block solicitado:</span></h6>
             <h6 class="center"><%=ultimoNGB%></h6>
             <% if (flag == 'success') { %>

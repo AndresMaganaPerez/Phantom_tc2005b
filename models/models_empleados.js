@@ -13,15 +13,30 @@ module.exports = class Empleados{
         this.numTel = _numTel;
     }
 
+    static verificarNomina(nomina){
+        return db.execute('SELECT * FROM empleado WHERE idEmpleado = ?', [nomina]);
+    }
+
+    static verificarEmail(email){
+        return db.execute('SELECT * FROM empleado WHERE email = ?', [email]);
+    }
+
+    static verificarNominaAux(nomina){
+        return db.execute('SELECT * FROM solicitudesregistroempleados WHERE idEmpleado = ?', [nomina]);
+    }
+
+    static verificarEmailAux(email){
+        return db.execute('SELECT * FROM solicitudesregistroempleados WHERE email = ?', [email]);
+    }
+
     save_empleado() {
         return bcrypt.hash(this.token, 12)
         .then((token_cifrado) => {
-            return db.execute('INSERT INTO empleado (idEmpleado, email, token, nombre, apellidoPaterno, apellidoMaterno, fechaNac, numTelefonico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)' , [this.nomina, this.email, token_cifrado, this.nombre, this.apellidoPaterno, this.apellidoMaterno, this.fechaNac, this.numTel]);
+            return db.execute('INSERT INTO solicitudesregistroempleados (idEmpleado, email, token, nombre, apellidoPaterno, apellidoMaterno, fechaNac, numTelefonico) VALUES (?, ?, ?, ?, ?, ?, ?, ?)' , [this.nomina, this.email, token_cifrado, this.nombre, this.apellidoPaterno, this.apellidoMaterno, this.fechaNac, this.numTel]);
         })
         .catch((error) => {
             console.log(error);
         });
-        
     }
 
     static findEmpleado(usuario) {
@@ -59,5 +74,37 @@ module.exports = class Empleados{
 
     static fetchTel(nomina) {
         return db.execute('SELECT numTelefonico FROM empleado WHERE idEmpleado = ?', [nomina]);
+    }
+
+    static fetchEmpleadosSinRegistrar() {
+        return db.execute('SELECT idEmpleado, nombre, apellidoPaterno, apellidoMaterno, fechaNac, numTelefonico, email, fechaSolicitud FROM solicitudesregistroempleados');
+    }
+
+    static fetchAreas() {
+        return db.execute('SELECT * FROM area');
+    }
+
+    static fetchRoles() {
+        return db.execute('SELECT * FROM roles');
+    }
+
+    static fetchLideres() {
+        return db.execute('SELECT d.idLider, nombre, apellidoPaterno, apellidoMaterno FROM dirige d, empleado e WHERE d.idLider = e.idEmpleado GROUP BY d.idLider');
+    }
+
+    static findRegistroEmpleado(nomina){
+        return db.execute('SELECT * FROM solicitudesregistroempleados WHERE idEmpleado = ?', [nomina]);
+    }
+
+    static registrarEmpleado(nomina, email, token, nombre, apellidoPat, apellidoMat, fechaNac, fechaIng, tel, cantidadNGB, antiguedad, vacTot, vacLey, vacPrem, plaza) {
+        return db.execute('CALL aceptarRegistroEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)', [nomina, email, token, nombre, apellidoPat, apellidoMat, fechaNac, fechaIng, tel, cantidadNGB, antiguedad, vacTot, vacTot, vacLey, vacPrem, plaza]);
+    }
+
+    static registrarInfoEmpleado(nomina, lider, area, rol){
+        return db.execute('CALL registrarInfoEmpleado(?,?,?,?)', [nomina, lider, area, rol]);
+    }
+
+    static cancelarRegistro(nomina) {
+        return db.execute('DELETE FROM solicitudesregistroempleados WHERE idEmpleado = ?', [nomina]);
     }
 }

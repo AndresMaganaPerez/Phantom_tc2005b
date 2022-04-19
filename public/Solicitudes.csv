@@ -2,6 +2,7 @@ idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaIn
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> Alex/ConsultarUsuarios
 80,91901,Pablo,Arroyo,Hernández,Fri Apr 15 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 21 2022 00:00:00 GMT-0500 (Central Daylight Time),Mon Apr 25 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 14 2022 00:00:00 GMT-0500 (Central Daylight Time),Miguel,1,91994,Sebastian,Gutierrez,Mayorga,
@@ -43,6 +44,8 @@ idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaIn
 >>>>>>> andres-banners
 >>>>>>> ab366cb62125ee39424b925edcb08463ee4aad01
 =======
+=======
+>>>>>>> miguel/moduloRegistroUsuario
 111,16836,Miguel Weiping,Tang,Feng,Mon Apr 18 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Sandra,0,91901,Pablo,Arroyo,Hernández,Probando la nota que está en el modal
 112,16836,Miguel Weiping,Tang,Feng,Tue Apr 19 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 25 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Pedro,0,91901,Pablo,Arroyo,Hernández,Ulises de suplente
 113,16836,Miguel Weiping,Tang,Feng,Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 27 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 28 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Ignacio,0,91901,Pablo,Arroyo,Hernández,Oscar de suplente
@@ -79,8 +82,12 @@ idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaIn
 107,91901,Pablo,Arroyo,Hernández,Thu Apr 28 2022 00:00:00 GMT-0500 (hora de verano central),Thu May 05 2022 00:00:00 GMT-0500 (hora de verano central),Fri May 06 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 15 2022 00:00:00 GMT-0500 (hora de verano central),Alberto,0,91994,Sebastian,Gutierrez,Mayorga,Requerimos que estés esos días
 108,91901,Pablo,Arroyo,Hernández,Tue May 03 2022 00:00:00 GMT-0500 (hora de verano central),Thu May 05 2022 00:00:00 GMT-0500 (hora de verano central),Fri May 06 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 15 2022 00:00:00 GMT-0500 (hora de verano central),Rodrigo,0,91994,Sebastian,Gutierrez,Mayorga,
 110,91901,Pablo,Arroyo,Hernández,Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 25 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Gerardo,1,91994,Sebastian,Gutierrez,Mayorga,
+<<<<<<< HEAD
 133,91901,Pablo,Arroyo,Hernández,Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 18 2022 00:00:00 GMT-0500 (hora de verano central),viernerHoy,0,91994,Sebastian,Gutierrez,Mayorga,
 >>>>>>> miguel/corregirCancelarVacLimiteEstatusAceptada
 =======
 87,91993,Maria,Hernandez,Canales,Mon Apr 25 2022 00:00:00 GMT-0500 (Central Daylight Time),Wed Apr 27 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 28 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 14 2022 00:00:00 GMT-0500 (Central Daylight Time),Andres,0,91900,Alfonso,Hernández,Carrillo,
 >>>>>>> Alex/ConsultarUsuarios
+=======
+133,91901,Pablo,Arroyo,Hernández,Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 18 2022 00:00:00 GMT-0500 (hora de verano central),viernerHoy,0,91994,Sebastian,Gutierrez,Mayorga,
+>>>>>>> miguel/moduloRegistroUsuario

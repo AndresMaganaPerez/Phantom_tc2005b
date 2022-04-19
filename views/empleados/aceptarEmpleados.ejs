@@ -1,0 +1,19 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+<h4 class="center">Solicitudes de registro de empleados</h4>
+<%- include('componentes/botones/botonConsultarEmpleados.ejs') %>
+
+<% if (flag == 'success') { %>
+    <%- include('componentes/cartas/cartaAceptarExitoso.ejs') %>
+    <br>
+<% } else if (flag == 'denySuccess') { %>
+    <%- include('componentes/cartas/cartaRechazoExitoso.ejs') %>
+    <br>
+<% } %>
+
+<% if (solicitudes.length > 0) { %>
+    <% for (let solicitud of solicitudes) { %>
+        <%- include('componentes/cartas/cartaEmpleadosSinRegistro.ejs', {solicitud: solicitud}) %>
+    <% } %>
+<% } %>
+
+<%- include('../includes/footer.ejs') %>
