@@ -1,4 +1,5 @@
 const { response } = require("express");
+const Anuncios = require("../models/models_anuncios");
 const Anuncio = require('../models/models_anuncios');
 
 var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
@@ -7,6 +8,7 @@ var datetime = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" +
 exports.anuncios = (request, response, next) => {
     Anuncio.fetchAll()
     .then(([rows, fieldData]) => {
+        Anuncios.fetchnopineados
         response.render('anuncios/anuncios',{
             sesion: request.session.empleado,
             rol: request.session.rol,
@@ -34,7 +36,7 @@ exports.postAnuncio = (request, response, next) => {
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
 
-    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file.filename);
+    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ?  request.file.filename : "");
     console.log(anuncio);
 
     anuncio.saveAnuncio()

@@ -4,7 +4,10 @@ module.exports = class Anuncios {
     constructor(_fecha, _titulo, _pin, _expiracion, _texto, _img) {
         this.fecha = _fecha;
         this.titulo = _titulo;
-        this.pin = _pin;
+        this.pin = 0;
+        if (_pin == 'on') {
+            this.pin = 1;
+        };
         this.expiracion = _expiracion;
         this.texto = _texto;
         this.image = _img;
