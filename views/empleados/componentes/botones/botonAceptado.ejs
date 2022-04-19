@@ -1,1 +1,65 @@
-<input type="submit" class="btn-large green" style="color: white;" value="Aceptar" name="b_aceptar">
+<span style="font-weight: 600;"><a href="#modal1?nom=solicitud.nombre&apPat=solicitud.apellidoPaterno&apMat=solicitud.apellidoMaterno&nomina=solicitud.idEmpleado" class="btn-large modal-trigger green">Aceptar</a></span>
+
+<div id="modal1?nom=solicitud.nombre&apPat=solicitud.apellidoPaterno&apMat=solicitud.apellidoMaterno&nomina=solicitud.idEmpleado" class="modal">
+    <div class="modal-content">
+        <form action="/empleados/registrar_empleados" method="POST">
+        <h4>Registro de empleado: <%= solicitud.nombre + ' ' + solicitud.apellidoPaterno + ' ' + solicitud.apellidoMaterno%></h4>
+            <div class="row">
+                <div class="input-field col s12 m12 l13">
+                    <input name="fechaIng" id="fechaIng" type="date" required>
+                    <label for="fechaIng">Fecha de ingreso a la empresa</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <input name="ngb" id="ngb" type="number" placeholder="5" min="0" max="5" required>
+                    <label for="ngb" >Cantidad de Natgas Blocks del empleado</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <input name="vacLey" id="vacLey" type="number" placeholder="8" min="0" required>
+                    <label for="vacLey" >Cantidad de vacaciones ley</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <input name="vacPremio" id="vacPremio" type="number" placeholder="2" min="0" required>
+                    <label for="vacPremio" >Cantidad de vacaciones premio</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <input name="plaza" id="plaza" type="text" placeholder="QRO" required>
+                    <label for="plaza">Plaza</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <select name="area" id="area">
+                        <option value="" disabled selected aria-required="true">Area</option>
+                        <% for (let area of areas) { %>
+                            <option value="<%= area.idArea %>"><%= area.nombre %></option>
+                        <% } %>
+                    </select>
+                    <label for="area">Area</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <select name="lider" id="lider">
+                        <option value="" disabled selected aria-required="true">Lider</option>
+                    <% for (let lider of lideres) { %>
+                        <option value="<%= lider.idLider %>"><%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %></option>
+                    <% } %> 
+                    </select>
+                    <label for="lider">Lider del empleado</label>
+                </div>
+                <div class="input-field col s12 m12 l13">
+                    <select name="rol" id="rol">
+                        <option value="" disabled selected aria-required="true">Rol</option>
+                        <% for (let rol of roles) { %>
+                            <option value="<%= rol.idRol %>"><%= rol.descripcionRol%></option>
+                        <% } %>
+                    </select> 
+                    <label for="rol">Rol del empleado en el sistema</label>
+                </div>
+                <div class="input-field col s12 m2 l13" style="display: inline-flex;">
+                    <input value="<%= solicitud.idEmpleado %>" name="idEmpleado" hidden>
+                    <input class="btn green" type="submit" value="registrar">
+                    <span style="margin-left: 1.6vw;"></span>
+                    <input class="btn red modal-close" type="button" value="Cancelar">
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</div>

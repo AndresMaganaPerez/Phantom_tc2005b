@@ -1,5 +1,7 @@
 const empleados = require('../models/models_empleados');
 const bcrypt = require('bcryptjs');
+const { parse } = require('fast-csv');
+const { findLider } = require('../models/models_empleados');
 
 exports.signup = (request, response, next) => {
     response.render('signup_login/signIn', {
@@ -132,16 +134,82 @@ exports.logout = (request,response,next) => {
     })
 }
 
-exports.registroEmpleados = (request, response, next) => {
-    console.log("Registrar empleado a plataforma")
-    response.render('empleados/aceptarEmpleados',{
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios,
+exports.formEmpleados = (request, response, next) => {
+    console.log("Registrar empleado a plataforma");
+    empleados.fetchEmpleadosSinRegistrar()
+    .then(([empleado, fieldData]) => {
+        empleados.fetchAreas()
+        .then(([areas, fieldData]) =>{
+            empleados.fetchLideres()
+            .then(([lideres, fieldData]) => {
+                empleados.fetchRoles()
+                .then(([roles, fieldData]) =>{
+                    response.render('empleados/aceptarEmpleados',{
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        solicitudes: empleado,
+                        areas: areas,
+                        lideres: lideres,
+                        roles: roles
+                    })
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }) 
+    .catch((error) => {
+        console.log(error);
+    }) 
+};
+
+exports.registrarEmpleado = (request, response, next) =>{
+    empleados.findRegistroEmpleado(request.body.idEmpleado)
+    .then(([empleado, fieldData]) =>{
+        const infoEmpleado = empleado[0];
+        const fechaIngreso = new Date(request.body.fechaIng);
+        const currentDate = new Date();
+        const antiguedad = currentDate.getFullYear() - fechaIngreso.getFullYear();
+        const ngb = parseInt(request.body.ngb);
+        const vacPremio = parseInt(request.body.vacPremio);
+        const vacLey = parseInt(request.body.vacLey);
+        const vacTot = vacLey + vacPremio;
+        const plaza = request.body.plaza.toString();
+        const lider = parseInt(request.body.lider);
+        const area = parseInt(request.body.area);
+        const rol = parseInt(request.body.rol);
+
+        empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
+        .then(() =>{
+            empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
+            .then(() => {
+                response.redirect('/empleados/registrar_empleados');
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
     })
-}
+    .catch((error) => {
+        console.log(error);
+    });
+};
+
+
 
 exports.empleadosExistentes = (request, response, next) => {
     console.log("Consultar empleados");
     response.render('empleados/empleadosExistentes.ejs');
-}
+};
