@@ -25,7 +25,7 @@ module.exports = class Empleados{
     }
 
     static findEmpleado(usuario) {
-        return db.execute('SELECT e.idEmpleado, email, e.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, a.nombre AS "area" FROM empleado e, area a, area_empleado ae WHERE e.idEmpleado = ae.idEmpleado AND a.idArea = ae.idArea AND email=?', [usuario]);
+        return db.execute('SELECT e.idEmpleado, email, e.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, a.nombreArea AS "area" FROM empleado e, area a, area_empleado ae WHERE e.idEmpleado = ae.idEmpleado AND a.idArea = ae.idArea AND email=?', [usuario]);
     }
 
     static getPassword(nomina) {
@@ -50,7 +50,7 @@ module.exports = class Empleados{
 
     static fetchEmpleado(criterio) {
         return db.execute(
-            'SELECT * FROM empleado WHERE nombre LIKE ? OR idEmpleado LIKE ?',
+            'SELECT * FROM empleado,empleado_rol,roles, area_empleado, area WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.nombre LIKE ? OR empleado.idEmpleado LIKE ?',
             ['%'+ criterio +'%','%'+ criterio +'%'])
         }
     static saveTel(nomina, telefono) {
