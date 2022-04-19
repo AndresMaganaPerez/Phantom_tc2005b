@@ -13,7 +13,8 @@ router.get('/registrar_empleados', isAuth, controller_empleado.formEmpleados);
 
 router.post('/registrar_empleados', isAuth, controller_empleado.registrarEmpleado);
 
+router.post('/registrar_empleados/rechazar', isAuth, controller_empleado.rechazarRegistroEmpleado);
+
 router.get('/empleados_registrados', isAuth, controller_empleado.empleadosExistentes);
 
-router.post('/rechazar_empleados', isAuth, controller_empleado.rechazarRegistroEmpleado);
 module.exports = router;
