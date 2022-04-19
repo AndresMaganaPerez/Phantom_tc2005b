@@ -227,6 +227,9 @@ exports.registrarEmpleado = (request, response, next) =>{
         const area = parseInt(request.body.area);
         const rol = parseInt(request.body.rol);
 
+        console.log(ngb);
+        console.log(vacTot);
+
         empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
         .then(() =>{
             empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
@@ -247,14 +250,13 @@ exports.registrarEmpleado = (request, response, next) =>{
 };
 
 exports.rechazarRegistroEmpleado = (request, response, next)  => {
-    empleados.cancelarRegistro(nomina)
+    empleados.cancelarRegistro(request.body.idEmpleado)
     .then(() => {
         response.redirect('/empleados/registrar_empleados');
     })
     .catch((error) => {
         console.log(error);
     })
-    console.log(request.body.idEmpleado);
 };
 
 exports.empleadosExistentes = (request, response, next) => {

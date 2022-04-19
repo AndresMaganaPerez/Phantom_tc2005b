@@ -26,8 +26,7 @@
                     <label for="plaza">Plaza</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <select name="area" id="area">
-                        <option value="" disabled selected aria-required="true">Area</option>
+                    <select name="area" id="area" required>
                         <% for (let area of areas) { %>
                             <option value="<%= area.idArea %>"><%= area.nombre %></option>
                         <% } %>
@@ -35,8 +34,7 @@
                     <label for="area">Area</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <select name="lider" id="lider">
-                        <option value="" disabled selected aria-required="true">Lider</option>
+                    <select name="lider" id="lider" required>
                     <% for (let lider of lideres) { %>
                         <option value="<%= lider.idLider %>"><%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %></option>
                     <% } %> 
@@ -44,8 +42,7 @@
                     <label for="lider">Lider del empleado</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <select name="rol" id="rol">
-                        <option value="" disabled selected aria-required="true">Rol</option>
+                    <select name="rol" id="rol" required>
                         <% for (let rol of roles) { %>
                             <option value="<%= rol.idRol %>"><%= rol.descripcionRol%></option>
                         <% } %>
@@ -54,11 +51,11 @@
                 </div>
                 <div class="input-field col s12 m2 l13" style="display: inline-flex;">
                     <input value="<%= solicitud.idEmpleado %>" name="idEmpleado" hidden>
-                    <input class="btn green" type="submit" value="registrar">
+                    <input id="registrar" class="btn green" type="submit" value="registrar">
                     <span style="margin-left: 1.6vw;"></span>
-                    <input class="btn red modal-close" type="button" value="Cancelar">
+                    <input class="btn red modal-close" type="button" value="Cancelar"
+                    >
                 </div>
-                
             </div>
         </form>
     </div>
