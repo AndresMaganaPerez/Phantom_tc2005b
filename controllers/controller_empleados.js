@@ -22,20 +22,57 @@ exports.postSignUp = (request, response, next) => {
             empleados.verificarEmail(request.body.email)
             .then(([emails,fieldData]) => {
                 if (emails.length < 1){
-                    const nuevoEmpleado = new empleados(request.body.nomina, request.body.email, request.body.password, request.body.nombre, request.body.apellidoP, request.body.apellidoM,request.body.fechaNac, request.body.telefono);
-                    // empleados.verificarNominaAux()
-                    // .then()
-                    // .catch()
-                    nuevoEmpleado.save_empleado()
-                    .then(() => {
-                        const flag = 'success';
-                        response.render('signup_login/signIn',{
-                            flag: flag
-                        });
+                    empleados.verificarNominaAux(request.body.nomina)
+                    .then(([nominaAux,fieldData]) => {
+                        if (nominaAux.length < 1) {
+                            empleados.verificarEmailAux(request.body.email)
+                            .then(([emailAux,fieldData]) => {
+                                if (emailAux.length < 1) {
+                                    const nuevoEmpleado = new empleados(request.body.nomina, request.body.email, request.body.password, request.body.nombre, request.body.apellidoP, request.body.apellidoM,request.body.fechaNac, request.body.telefono);
+                                    nuevoEmpleado.save_empleado()
+                                    .then(() => {
+                                        const flag = 'success';
+                                        response.render('signup_login/signIn',{
+                                            flag: flag
+                                        });
+                                    })
+                                    .catch((err) => {
+                                        console.log(err);
+                                    });
+                                } else {
+                                    const flag = 'ExisteEmailAux';
+                                    response.render('signup_login/signIn',{
+                                        flag: flag,
+                                        nombre: request.body.nombre,
+                                        apellidoPat: request.body.apellidoP,
+                                        apellidoMat: request.body.apellidoM,
+                                        nomina: request.body.nomina,
+                                        fechaNac: request.body.fechaNac,
+                                        tel: request.body.telefono,
+                                        email: request.body.email
+                                    });
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            })
+                        } else {
+                            const flag = 'ExisteNominaAux';
+                            response.render('signup_login/signIn',{
+                                flag: flag,
+                                nombre: request.body.nombre,
+                                apellidoPat: request.body.apellidoP,
+                                apellidoMat: request.body.apellidoM,
+                                nomina: request.body.nomina,
+                                fechaNac: request.body.fechaNac,
+                                tel: request.body.telefono,
+                                email: request.body.email
+                            });
+                        }
                     })
-                    .catch((err) => {
-                        console.log(err);
-                    });
+                    .catch((error) => {
+                        console.log(error);
+                    })
                 } else {
                     const flag = 'EmailExiste';
                     response.render('signup_login/signIn',{
@@ -190,21 +227,19 @@ exports.registrarEmpleado = (request, response, next) =>{
         const area = parseInt(request.body.area);
         const rol = parseInt(request.body.rol);
 
-        
-
-        // empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
-        // .then(() =>{
-        //     empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
-        //     .then(() => {
-        //         response.redirect('/empleados/registrar_empleados');
-        //     })
-        //     .catch((error) => {
-        //         console.log(error);
-        //     })
-        // })
-        // .catch((error) => {
-        //     console.log(error);
-        // });
+        empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
+        .then(() =>{
+            empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
+            .then(() => {
+                response.redirect('/empleados/registrar_empleados');
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     })
     .catch((error) => {
         console.log(error);
