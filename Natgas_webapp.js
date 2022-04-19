@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
+const multer = require('multer');
 
 //const csrf = require('csurf');
 //const csrfProtection = csrf();
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
 
+<<<<<<< HEAD
 //fileStorage: Es nuestra constante de configuración para manejar el almacenamiento
 const fileStorage = multer.diskStorage({
     destination: (request, file, callback) => {
@@ -21,11 +23,22 @@ const fileStorage = multer.diskStorage({
     filename: (request, file, callback) => {
         //aquí configuramos el nombre que queremos que tenga el archivo en el servidor,
         //para que no haya problema si se suben 2 archivos con el mismo nombre concatenamos el timestamp
+=======
+const fileStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        callback(null, 'uploads');
+    },
+    filename: (request, file, callback) => {
+>>>>>>> said2
         callback(null, new Date().getTime() + '-' + file.originalname);
     },
 });
 
+<<<<<<< HEAD
 app.use(multer({ storage: fileStorage }).single('image'));
+=======
+app.use(multer({ storage: fileStorage }).single('image')); 
+>>>>>>> said2
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));

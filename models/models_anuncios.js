@@ -1,16 +1,17 @@
 const db = require('../util/database');
 
 module.exports = class Anuncios {
-    constructor(_fecha, _titulo, _pin, _expiracion, _texto) {
+    constructor(_fecha, _titulo, _pin, _expiracion, _texto, _img) {
         this.fecha = _fecha;
         this.titulo = _titulo;
         this.pin = _pin;
         this.expiracion = _expiracion;
         this.texto = _texto;
+        this.image = _img;
     }
 
     saveAnuncio() {
-        return db.execute('INSERT INTO anuncios (Fecha, Titulo, Pin, expiracion, texto) VALUES (?, ?, ?, ?, ?)', [this.fecha, this.titulo, this.pin, this.expiracion, this.texto]);
+        return db.execute('CALL agregarAnuncio(?, ?, ?, ?, ?, ?)', [this.fecha, this.titulo, this.pin, this.expiracion, this.texto, this.image]);
     }
 
     static borrarAnuncio(idAnuncio) {
