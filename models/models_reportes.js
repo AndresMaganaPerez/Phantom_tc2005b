@@ -21,11 +21,7 @@ module.exports = class Reportes {
 
 
     static fetchAll(mes, anio) {
-<<<<<<< HEAD
         return db.execute("SELECT * FROM valor_indicador WHERE fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' AND TipoIndicadorID = 1 or TipoIndicadorID = 2 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' or TipoIndicadorID = 3 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' or TipoIndicadorID = 4 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' or TipoIndicadorID = 5 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31';");
-=======
-        return db.execute("SELECT * FROM valor_indicador WHERE fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' AND TipoIndicadorID = 1 or TipoIndicadorID = 2 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' or TipoIndicadorID = 3 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' or TipoIndicadorID = 4 AND fecha BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31';");
->>>>>>> Alex/ConsultarUsuarios
 
 
         // if (mes == '01') {
