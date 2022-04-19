@@ -34,7 +34,7 @@ exports.postAnuncio = (request, response, next) => {
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
 
-    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto);
+    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file.filename);
     console.log(anuncio);
 
     anuncio.saveAnuncio()

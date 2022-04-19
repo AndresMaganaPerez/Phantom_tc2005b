@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const session = require('express-session');
+const multer = require('multer');
 
 //const csrf = require('csurf');
 //const csrfProtection = csrf();
@@ -11,8 +12,19 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
 
+const fileStorage = multer.diskStorage({
+    destination: (request, file, callback) => {
+        callback(null, 'uploads');
+    },
+    filename: (request, file, callback) => {
+        callback(null, new Date().getTime() + '-' + file.originalname);
+    },
+});
+
+app.use(multer({ storage: fileStorage }).single('image')); 
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
