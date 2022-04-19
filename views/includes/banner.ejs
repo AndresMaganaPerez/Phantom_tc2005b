@@ -1,8 +1,4 @@
 <body>
-
-    
-
-
         <div class="col s12 m4 l13">
             <div class="card medium" style="border-radius: 15px;">
                 <div class="card-content" style="padding: 10px;">
@@ -11,11 +7,14 @@
                         <li class="divider"></li>
                     </span>
                     <div class="carousel carousel-slider">
-                        <a class="carousel-item" href="#one!"><img class="imgBanner" src="http://blog.edmdesigner.com/content/images/2014/02/optimal-email-width-600px.png" ></a>
-                        <a class="carousel-item" href="#two!"><img class="imgBanner" src="https://storage.googleapis.com/natgas/eds/eds-gto-mexico-japon_large.jpg"></a>
-                        <a class="carousel-item" href="#three!"><img class="imgBanner" src="https://storage.googleapis.com/natgas/eds/eds-ags-jose-maria-chavez.jpg" ></a>
-                        <a class="carousel-item" href="#four!"><img class="imgBanner" src="https://storage.googleapis.com/natgas/eds/eds-qro-prolongacion-zaragoza_large.jpg"></a>
-                    </div>
+                        <% if (banners.length > 0) { %>
+                                <% for (banner of banners) { %>
+                                    <a class="carousel-item" href="#"><img class="imgBanner" src="/<%= banner.recursoDigital %>" ></a>
+                                <% } %>
+                            <% } else { %>
+                                <h3 class="center">No hay banners existentes</h2>
+                            <% } %>
+                       </div>
                 </div>
             </div>
         </div>
