@@ -9,7 +9,9 @@
                     <div class="carousel carousel-slider">
                         <% if (banners.length > 0) { %>
                                 <% for (banner of banners) { %>
-                                    <a class="carousel-item" href="#"><img class="imgBanner" src="/<%= banner.recursoDigital %>" ></a>
+                                    <% if (today <= banner.expiracion) { %>
+                                        <a class="carousel-item" href="#"><img class="imgBanner" src="/<%= banner.recursoDigital %>" ></a>
+                                    <% } %>
                                 <% } %>
                             <% } else { %>
                                 <h3 class="center">No hay banners existentes</h2>
