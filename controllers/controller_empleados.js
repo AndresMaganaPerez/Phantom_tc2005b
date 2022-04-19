@@ -23,6 +23,9 @@ exports.postSignUp = (request, response, next) => {
             .then(([emails,fieldData]) => {
                 if (emails.length < 1){
                     const nuevoEmpleado = new empleados(request.body.nomina, request.body.email, request.body.password, request.body.nombre, request.body.apellidoP, request.body.apellidoM,request.body.fechaNac, request.body.telefono);
+                    // empleados.verificarNominaAux()
+                    // .then()
+                    // .catch()
                     nuevoEmpleado.save_empleado()
                     .then(() => {
                         const flag = 'success';
@@ -187,27 +190,37 @@ exports.registrarEmpleado = (request, response, next) =>{
         const area = parseInt(request.body.area);
         const rol = parseInt(request.body.rol);
 
-        empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
-        .then(() =>{
-            empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
-            .then(() => {
-                response.redirect('/empleados/registrar_empleados');
-            })
-            .catch((error) => {
-                console.log(error);
-            })
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+        
 
+        // empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
+        // .then(() =>{
+        //     empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
+        //     .then(() => {
+        //         response.redirect('/empleados/registrar_empleados');
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     })
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        // });
     })
     .catch((error) => {
         console.log(error);
     });
 };
 
-
+exports.rechazarRegistroEmpleado = (request, response, next)  => {
+    empleados.cancelarRegistro(nomina)
+    .then(() => {
+        response.redirect('/empleados/registrar_empleados');
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+    console.log(request.body.idEmpleado);
+};
 
 exports.empleadosExistentes = (request, response, next) => {
     console.log("Consultar empleados");

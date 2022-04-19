@@ -21,6 +21,14 @@ module.exports = class Empleados{
         return db.execute('SELECT * FROM empleado WHERE email = ?', [email]);
     }
 
+    static verificarNominaAux(nomina){
+        return db.execute('SELECT * FROM solicitudesregistroempleados WHERE idEmpleado = ?', [nomina]);
+    }
+
+    static verificarEmailAux(email){
+        return db.execute('SELECT * FROM solicitudesregistroempleados WHERE email = ?', [email]);
+    }
+
     save_empleado() {
         return bcrypt.hash(this.token, 12)
         .then((token_cifrado) => {
@@ -94,5 +102,9 @@ module.exports = class Empleados{
 
     static registrarInfoEmpleado(nomina, lider, area, rol){
         return db.execute('CALL registrarInfoEmpleado(?,?,?,?)', [nomina, lider, area, rol]);
+    }
+
+    static cancelarRegistro(nomina) {
+        return db.execute('DELETE FROM solicitudesregistroempleados WHERE idEmpleado = ?', [nomina]);
     }
 }

@@ -1,6 +1,6 @@
-<span style="font-weight: 600;"><a href="#modal1?nom=solicitud.nombre&apPat=solicitud.apellidoPaterno&apMat=solicitud.apellidoMaterno&nomina=solicitud.idEmpleado" class="btn-large modal-trigger green">Aceptar</a></span>
+<span style="font-weight: 600;"><a href="#modal1?nom=<%= solicitud.nombre %>&apPat= <%= solicitud.apellidoPaterno %>&apMat=<%= solicitud.apellidoMaterno %>&nomina=<%=solicitud.idEmpleado%>" class="btn-large modal-trigger green">Aceptar</a></span>
 
-<div id="modal1?nom=solicitud.nombre&apPat=solicitud.apellidoPaterno&apMat=solicitud.apellidoMaterno&nomina=solicitud.idEmpleado" class="modal">
+<div id="modal1?nom=<%= solicitud.nombre %>&apPat= <%= solicitud.apellidoPaterno %>&apMat=<%= solicitud.apellidoMaterno %>&nomina=<%=solicitud.idEmpleado%>" class="modal">
     <div class="modal-content">
         <form action="/empleados/registrar_empleados" method="POST">
         <h4>Registro de empleado: <%= solicitud.nombre + ' ' + solicitud.apellidoPaterno + ' ' + solicitud.apellidoMaterno%></h4>
