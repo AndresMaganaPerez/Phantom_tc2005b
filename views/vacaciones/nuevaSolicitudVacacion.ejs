@@ -7,7 +7,12 @@
             <h3 class="center" style="padding-bottom: 0px; padding-top: 20px;">MI SOLICITUD DE VACACIONES</h3>
             <p class="center">Fecha de la solicitud: <%= fechaSolicitud %></p>
             <h5 class="center">Vacaciones disponibles:</h5>
-            <h6 class="center"><%= vacacionesRestantes %> </h6>
+            <h6 class="center"><%= vacacionesRestantes %>
+            <% if (vacacionesRestantes == 1) { %>
+                día
+            <% } else { %>
+                días
+            <% } %></h6>
             <% if (vacacionesRestantes <= 0 || vacacionesRestantes == null) { %> 
                 <h6 class="center" style="font-weight: 600; color: red;">No tienes vacaciones disponibles</h6>
             <% } %>

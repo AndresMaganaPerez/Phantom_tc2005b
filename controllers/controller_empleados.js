@@ -131,3 +131,17 @@ exports.logout = (request,response,next) => {
         response.redirect('/');
     })
 }
+
+exports.registroEmpleados = (request, response, next) => {
+    console.log("Registrar empleado a plataforma")
+    response.render('empleados/aceptarEmpleados',{
+        sesion: request.session.empleado,
+        rol: request.session.rol,
+        privilegios: request.session.privilegios,
+    })
+}
+
+exports.empleadosExistentes = (request, response, next) => {
+    console.log("Consultar empleados");
+    response.render('empleados/empleadosExistentes.ejs');
+}
