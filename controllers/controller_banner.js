@@ -5,6 +5,8 @@ const { formatWithOptions } = require('util');
 const { on } = require('events');
 
 exports.banners = (request, response, next) => {
+    let today = new Date.now();
+    let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
     Banners.fetchAllBanners()
         .then(([rows, fieldData]) => {
             const banners = rows;
@@ -13,28 +15,11 @@ exports.banners = (request, response, next) => {
                 sesion: request.session.empleado,
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
-                banners: banners
+                banners: banners,
+                today: dateStr
             });
         })
 };
-
-/*exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
-    Solicitudes.fetchSolVacParaLider(request.session.empleado.idEmpleado)
-        .then(([rows, fieldData]) => {
-            const banners = rows;
-            console.log(rows);
-            console.log('Consulta hecha con éxito');
-            response.render('vacaciones/aceptarVacaciones', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                banners: banners
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-};*/
 
 exports.vistaAgregarBanner = (request, response, next) => {
     console.log('Crear nuevo banner');
@@ -57,7 +42,7 @@ exports.agregarBanner = (request, response, next) => {
     let date= new Date();
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
-    const banner = new Banners(request.file.filename, request.body.expiracion, dateStr);
+    const banner = new Banners(request.file.filename, request.body.expiracion);
     console.log(banner);
     banner.saveBanners()
         .then(() => {
