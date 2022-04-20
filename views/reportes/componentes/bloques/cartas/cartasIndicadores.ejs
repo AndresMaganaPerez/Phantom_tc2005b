@@ -1,59 +1,88 @@
-
-<% for (let indicador of indicadores) { %>
-    <% for (let indicadorAnterior of mesAnterior) { %>
-        <% if (indicador.TipoIndicadorID == 1) { %>
-            <% if (indicadorAnterior.TipoIndicadorID == 1) { %>
-                <div class="col s12 m4 l13">
-                    <div class="card" style="border-radius: 1rem;">
-                        <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
-                        <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
-                        <% if (indicador.Valor < indicadorAnterior.Valor) { %>
-                            <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                            <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
-                                <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                            </h6>
-                        <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
-                            <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                            <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
-                                <span>+</span>
-                                <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                            </h6>
-                        <% } %>
-                        <div class="divider" style="margin-top: 20px;"></div>
-                        <div class="card-content">
-                            <h4 style="padding-bottom: 10px;">NPS</h4>
-                            <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+<% if (mesAnterior.length > 0) { %>
+    <% for (let indicador of indicadores) { %>
+        <% for (let indicadorAnterior of mesAnterior) { %>
+            <% if (indicador.TipoIndicadorID == 1) { %>
+                <% if (indicadorAnterior.TipoIndicadorID == 1) { %>
+                    <div class="col s12 m4 l13">
+                        <div class="card" style="border-radius: 1rem;">
+                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
+                            <% if (indicador.Valor < indicadorAnterior.Valor) { %>
+                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                                <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                </h6>
+                            <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
+                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                                <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                                    <span>+</span>
+                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                </h6>
+                            <% } %>
+                            <div class="divider" style="margin-top: 20px;"></div>
+                            <div class="card-content">
+                                <h4 style="padding-bottom: 10px;">NPS</h4>
+                                <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <% } %>
+            <% } %>
+            <% if (indicador.TipoIndicadorID == 2) { %>
+                <% if (indicadorAnterior.TipoIndicadorID == 2) { %>
+                    <div class="col s12 m4 l13">
+                        <div class="card" style="border-radius: 1rem;">
+                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
+                            <% if (indicador.Valor < indicadorAnterior.Valor) { %>
+                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                                <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                </h6>
+                            <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
+                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                                <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                                    <span>+</span>
+                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                </h6>
+                            <% } %>
+                            <div class="divider" style="margin-top: 20px;"></div>
+                            <div class="card-content">
+                                <h4 style="padding-bottom: 10px;">ENPS</h4>
+                                <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
             <% } %>
         <% } %>
-        <% if (indicador.TipoIndicadorID == 2) { %>
-            <% if (indicadorAnterior.TipoIndicadorID == 2) { %>
-                <div class="col s12 m4 l13">
-                    <div class="card" style="border-radius: 1rem;">
-                        <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
-                        <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
-                        <% if (indicador.Valor < indicadorAnterior.Valor) { %>
-                            <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                            <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
-                                <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                            </h6>
-                        <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
-                            <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                            <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
-                                <span>+</span>
-                                <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                            </h6>
-                        <% } %>
-                        <div class="divider" style="margin-top: 20px;"></div>
-                        <div class="card-content">
-                            <h4 style="padding-bottom: 10px;">ENPS</h4>
-                            <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
-                        </div>
+    <% } %>
+    <!--QUE PASA SI NO HAY VALORES DE MES ANTERIOR-->
+<% } else if (mesAnterior.length < 1) { %>
+    <% for (let indicador of indicadores) { %>
+        <% if (indicador.TipoIndicadorID == 1) { %>
+            <div class="col s12 m4 l13">
+                <div class="card" style="border-radius: 1rem;">
+                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                    <div class="divider" style="margin-top: 20px;"></div>
+                    <div class="card-content">
+                        <h4 style="padding-bottom: 10px;">NPS</h4>
+                        <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
                     </div>
                 </div>
-            <% } %>
+            </div>
+        <% } %>
+        <% if (indicador.TipoIndicadorID == 2) { %>
+            <div class="col s12 m4 l13">
+                <div class="card" style="border-radius: 1rem;">
+                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                    <div class="divider" style="margin-top: 20px;"></div>
+                    <div class="card-content">
+                        <h4 style="padding-bottom: 10px;">ENPS</h4>
+                        <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                    </div>
+                </div>
+            </div>
         <% } %>
     <% } %>
 <% } %>

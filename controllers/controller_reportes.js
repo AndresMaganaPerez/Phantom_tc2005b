@@ -6,6 +6,12 @@ exports.reportes = (request, response, next) => {
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const d = new Date();
     let mes = month[d.getMonth()];
+    let previousMonth = mes -1;
+    if(month[d.getMonth()] == 01){
+        previousMonth = 12;
+    }
+    
+    console.log("El mes anterior es: "+mes)
     let nombreMes = meses[d.getMonth()];
 
     const y = new Date();
@@ -14,17 +20,16 @@ exports.reportes = (request, response, next) => {
     Reportes.fetchAll(mes, year).then(([rows, fieldData]) => {
         console.log(rows);
         //Para sacar lo del mes anterior y hacer comparacion
-        Reportes.fetchAll(mes-1, year).then(([rowsAnterior, fieldData]) =>{
+        Reportes.fetchAll(previousMonth, year).then(([rowsAnterior, fieldData]) =>{
             console.log("MES ANTERIOR");
             console.log(rowsAnterior);
-            console.log(rowsAnterior[0].Valor)
+            // console.log(rowsAnterior[0].Valor)
             response.render('reportes/consultarReportes',{
                 sesion: request.session.empleado,
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
                 indicadores: rows,
                 mesAnterior: rowsAnterior,
-                valorAnterior: rowsAnterior[0].Valor,
                 nombreMes: nombreMes
             });
         }).catch((error) => {
