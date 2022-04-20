@@ -6,6 +6,10 @@
     <%- include('componentes/botones/botonRealizarSol.ejs') %>
 <% } %>
 
+<% if (flag == 'ngbAceptada') { %> 
+    <%- include('componentes/cartas/cartaRetroAceptarNGB.ejs') %>
+<% } %>
+
 <% if (ngbsPorAceptar.length > 0){ %>
     <%- include('componentes/cartas/cartaAceptarSol.ejs') %>
 <% } else { %>
