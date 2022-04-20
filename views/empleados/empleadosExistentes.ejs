@@ -14,7 +14,7 @@
     <% for (empleado of empleados) { %>
         <%- include('componentes/cartas/cartaEmpleado.ejs', {empleado: empleado})%>
     <% } %>
-<% } else{  %>
+<% } else {  %>
     <h4 class="center">No existen empleados registrados en la plataforma</h4>
     <% } %>
 </div>

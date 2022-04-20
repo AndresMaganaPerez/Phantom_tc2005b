@@ -17,25 +17,27 @@
 </head>
 
 <body style="background-color: #f8f9fe">
-    <nav style="background-color: #002b49;">
-        <div class="nav-wrapper">
-            <a href="#!" class="brand-logo center">
-                <img src="../../Images/LogoTest.png" style="width: 150px; height:50px; padding-top: 10px;">
-            </a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="left hide-on-med-and-down">
-                <li><%- include('botonesNavbar/botonGeneral.ejs') %></li>
-                <li><%- include('botonesNavbar/botonIndicador.ejs') %></li>
-                <li><%- include('botonesNavbar/botonAnuncios.ejs') %></li>
-                <li><%- include('botonesNavbar/botonBanner.ejs') %></li>
-                <li><%- include('dropdown/dropDownSolicitudes.ejs') %></li>
-                <li><%- include('botonesNavbar/botonRegistrarEmpleados.ejs') %></li>
-            </ul>
-            <ul class="right hide-on-med-and-down">
-                <li><%- include('botonesNavbar/botonLogout.ejs') %></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="navbar-fixed">
+        <nav style="background-color: #002b49; ">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center">
+                    <img src="../../Images/LogoTest.png" style="width: 150px; height:50px; padding-top: 10px;">
+                </a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li><%- include('botonesNavbar/botonGeneral.ejs') %></li>
+                    <li><%- include('botonesNavbar/botonIndicador.ejs') %></li>
+                    <li><%- include('botonesNavbar/botonAnuncios.ejs') %></li>
+                    <li><%- include('botonesNavbar/botonBanner.ejs') %></li>
+                    <li><%- include('dropdown/dropDownSolicitudes.ejs') %></li>
+                    <li><%- include('botonesNavbar/botonRegistrarEmpleados.ejs') %></li>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    <li><%- include('botonesNavbar/botonLogout.ejs') %></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
     <ul class="sidenav" id="mobile-demo">
         <div class="user-view">
