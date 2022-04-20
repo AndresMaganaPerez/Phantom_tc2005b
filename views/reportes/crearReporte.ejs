@@ -21,19 +21,27 @@
                                 <option><%= indicador.TipoIndicadorID +" - " + indicador.Nombre %></option>
                             <% } %>
                         <% } else { %>
-                            <option>No hay tipos de indicadores Registrados</option>
+                            <option value="" selected disabled>No hay tipos de indicadores Registrados</option>
                             <% } %>
                     </select>
                 </div>
                 <div class="input-field" style="padding: 0px 30px">
                     <h5>Valor:</h5>
-                    <textarea placeholder="Ingresa el valor aquí" id="textareaTexto" class="materialize-textarea" name="valorIndicador" required></textarea>
+                    <textarea placeholder="Ingresa el valor aquí" id="textareaTexto" class="materialize-textarea" name="valorIndicador" 
+                    <% if (indicadores.length < 1) { %>
+                        disabled
+                    <% } %> 
+                    required></textarea>
                 </div>
                 
                 <br>    
                 
                 <div class="center" style="padding-top: 10px;">
-                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Enviar
+                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;"
+                    <% if (indicadores.length < 1) { %>
+                        disabled
+                    <% } %>
+                    >Enviar
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
