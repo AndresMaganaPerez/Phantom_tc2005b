@@ -15,6 +15,10 @@ router.post('/registrar_empleados', isAuth, controller_empleado.registrarEmplead
 
 router.post('/registrar_empleados/rechazar', isAuth, controller_empleado.rechazarRegistroEmpleado);
 
-router.get('/empleados_registrados', isAuth, controller_empleado.empleadosExistentes);
+router.get('/empleados_registrados',isAuth,controller_empleado.usuarios);
+
+router.post('/empleados_registrados',isAuth, controller_empleado.borrarUsuario);
+
+router.get('/buscar/:criterio',isAuth,controller_empleado.buscarUsuario);
 
 module.exports = router;

@@ -328,7 +328,36 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
     })
 };
 
-exports.empleadosExistentes = (request, response, next) => {
-    console.log("Consultar empleados");
-    response.render('empleados/empleadosExistentes.ejs');
+exports.usuarios = (request,response,next) =>{
+    empleados.fetchEmpleadoYRol()
+    .then(([rows,fieldData]) =>{
+        response.render('empleados/empleadosExistentes', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            empleados: rows
+        })
+
+    }).catch((error) => {
+        console.log(error);
+    });
 };
+
+exports.buscarUsuario = (request, response, next) => {
+    empleados.fetchEmpleado(request.params.criterio)
+    .then(([rows,FieldData]) => {
+        response.status(200).json(rows);
+    }).catch(error =>{console.log(error);})
+}
+
+exports.borrarUsuario = (request, response, next) => {
+    const id = request.body.delete
+    console.log(id)
+    // borrarEmpleado(id)
+    // .then(() => {
+    //     response.redirect('/usuarios')  
+    // })
+    // .catch((err) => {
+    //     console.log(err)
+    // })
+}
