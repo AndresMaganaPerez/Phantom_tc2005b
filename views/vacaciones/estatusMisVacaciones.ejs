@@ -12,6 +12,10 @@
     </div>
 </div>
 
+<% if (flag == 'solicitudCancelada') { %>
+    <%- include('componentes/cartas/cartaRetroCancelar.ejs') %> <br>
+<% } %>
+
 <% if (solicitudes.length > 0) { %>
     <% for (solicitud of solicitudes) { %>
         <%- include('componentes/cartas/cartaEstatusMisSolVac.ejs', {solicitud: solicitud}) %>
