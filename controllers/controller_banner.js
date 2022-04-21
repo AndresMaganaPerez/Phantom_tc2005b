@@ -5,8 +5,8 @@ const { formatWithOptions } = require('util');
 const { on } = require('events');
 
 exports.banners = (request, response, next) => {
-    let today = new Date.now();
-    let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
+    // let today = new Date.now();
+    // let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
     Banners.fetchAllBanners()
         .then(([rows, fieldData]) => {
             const banners = rows;
@@ -16,7 +16,7 @@ exports.banners = (request, response, next) => {
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
                 banners: banners,
-                today: dateStr
+                // today: dateStr
             });
         })
 };
