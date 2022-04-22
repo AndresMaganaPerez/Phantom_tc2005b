@@ -9,7 +9,7 @@
                             <span class="txt">
                                 <h5 style="margin-left: 5%;">
                                     <span style="font-weight: 600;">Fecha de solicitud:</span>
-                                    <%= solicitud.fechaSolicitud.toString().substring(4,15) %>
+                                    <%= solicitud.fechaSolicitud.getDay() + '/' + solicitud.fechaSolicitud.getMonth() + '/' + solicitud.fechaSolicitud.getFullYear() %>
                                 </h5>
                             </span>
                         </div>
@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="col s12 m5 l13">
                             <h6 style="margin-left: 7%;"><span style="font-weight: 600;">Fecha de uso:</span>
-                                <%= solicitud.fechaUsoNGB.toString().substring(4,15) %> 
+                                <%= solicitud.fechaSolicitud.getDay() + '/' + solicitud.fechaSolicitud.getMonth() + '/' + solicitud.fechaSolicitud.getFullYear() %> 
                                 
                             </h6>
                         </div>
