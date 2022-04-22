@@ -1,5 +1,12 @@
 idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaInicio,fechaFin,fechaReanudacion,fechaSolicitud,suplente,solicitudAceptadaEstatus,idLider,nomLider,apellidoPatLider,apellidoMatLider,Nota
 <<<<<<< HEAD
+<<<<<<< HEAD
+146,91902,Jorge,Mendoza,Pérez,Mon May 23 2022 00:00:00 GMT-0500 (Central Daylight Time),Tue May 31 2022 00:00:00 GMT-0500 (Central Daylight Time),Wed Jun 01 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 21 2022 00:00:00 GMT-0500 (Central Daylight Time),Jorge,0,91901,Pablo,Arroyo,Hernández,Falta de personal.
+150,91902,Jorge,Mendoza,Pérez,Mon Jun 13 2022 00:00:00 GMT-0500 (Central Daylight Time),Fri Jun 24 2022 00:00:00 GMT-0500 (Central Daylight Time),Mon Jun 27 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 21 2022 00:00:00 GMT-0500 (Central Daylight Time),Alex,0,91901,Pablo,Arroyo,Hernández,Falta de Personal durante estas fechas.
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> miguel/correcionFecha
 111,16836,Miguel Weiping,Tang,Feng,Mon Apr 18 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Sandra,0,91901,Pablo,Arroyo,Hernández,Probando la nota que está en el modal
 112,16836,Miguel Weiping,Tang,Feng,Tue Apr 19 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 25 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Pedro,0,91901,Pablo,Arroyo,Hernández,Ulises de suplente
 113,16836,Miguel Weiping,Tang,Feng,Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 27 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 28 2022 00:00:00 GMT-0500 (hora de verano central),Sat Apr 16 2022 00:00:00 GMT-0500 (hora de verano central),Ignacio,0,91901,Pablo,Arroyo,Hernández,Oscar de suplente
@@ -19,6 +26,7 @@ idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaIn
 154,16836,Miguel Weiping,Tang,Feng,Fri Apr 29 2022 00:00:00 GMT-0500 (hora de verano central),Thu May 05 2022 00:00:00 GMT-0500 (hora de verano central),Fri May 06 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Ignacio,0,91901,Pablo,Arroyo,Hernández,"Suplente Ignacio, 29 abr al 5 mayo"
 161,91902,Jorge,Mendoza,Pérez,Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 27 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 28 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Oscar,0,91901,Pablo,Arroyo,Hernández,Falta personal durante esos días
 162,91902,Jorge,Mendoza,Pérez,Thu May 05 2022 00:00:00 GMT-0500 (hora de verano central),Tue May 10 2022 00:00:00 GMT-0500 (hora de verano central),Wed May 11 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Alejandro,0,91901,Pablo,Arroyo,Hernández,
+164,91902,Jorge,Mendoza,Pérez,Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Thu May 05 2022 00:00:00 GMT-0500 (hora de verano central),Fri May 06 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Oscar,1,91901,Pablo,Arroyo,Hernández,
 163,91904,Diego,Rodríguez,Palacio,Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Ignacio,0,91900,Alfonso,Hernández,Carrillo,
 85,91993,Maria,Hernandez,Canales,Fri Apr 15 2022 00:00:00 GMT-0500 (hora de verano central),Tue Apr 19 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 14 2022 00:00:00 GMT-0500 (hora de verano central),Ricardo,1,91900,Alfonso,Hernández,Carrillo,
 86,91993,Maria,Hernandez,Canales,Mon Apr 18 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 14 2022 00:00:00 GMT-0500 (hora de verano central),Miguel,0,91900,Alfonso,Hernández,Carrillo,Por floja
@@ -44,6 +52,7 @@ idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaIn
 133,91901,Pablo,Arroyo,Hernández,Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 21 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 18 2022 00:00:00 GMT-0500 (hora de verano central),viernerHoy,0,91994,Sebastian,Gutierrez,Mayorga,
 159,91901,Pablo,Arroyo,Hernández,Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Tue Apr 26 2022 00:00:00 GMT-0500 (hora de verano central),Thu Apr 28 2022 00:00:00 GMT-0500 (hora de verano central),Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Rodrigo,0,91994,Sebastian,Gutierrez,Mayorga,
 138,1,Diego,Reséndiz,Fernández,Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 25 2022 00:00:00 GMT-0500 (hora de verano central),Tue Apr 26 2022 00:00:00 GMT-0500 (hora de verano central),Tue Apr 19 2022 00:00:00 GMT-0500 (hora de verano central),Miguel,0,91901,Pablo,Arroyo,Hernández,Ya pediste vacaciones en estos mismos dias
+<<<<<<< HEAD
 139,1,Diego,Reséndiz,Fernández,Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 25 2022 00:00:00 GMT-0500 (hora de verano central),Tue Apr 19 2022 00:00:00 GMT-0500 (hora de verano central),Miguel,0,91901,Pablo,Arroyo,Hernández,
 =======
 <<<<<<< HEAD
@@ -90,3 +99,7 @@ idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaIn
 139,1,Diego,Reséndiz,Fernández,Wed Apr 20 2022 00:00:00 GMT-0500 (Central Daylight Time),Fri Apr 22 2022 00:00:00 GMT-0500 (Central Daylight Time),Mon Apr 25 2022 00:00:00 GMT-0500 (Central Daylight Time),Tue Apr 19 2022 00:00:00 GMT-0500 (Central Daylight Time),Miguel,0,91901,Pablo,Arroyo,Hernández,
 >>>>>>> ed055bcc91637595331e235777f4481f0f938b42
 >>>>>>> 8e6f2b5d48d929ba0f9e027915a2470aa5c7c1b6
+>>>>>>> 650ab36a339e777d35ca0af5a686ef8efa67dbd9
+=======
+139,1,Diego,Reséndiz,Fernández,Wed Apr 20 2022 00:00:00 GMT-0500 (hora de verano central),Fri Apr 22 2022 00:00:00 GMT-0500 (hora de verano central),Mon Apr 25 2022 00:00:00 GMT-0500 (hora de verano central),Tue Apr 19 2022 00:00:00 GMT-0500 (hora de verano central),Miguel,0,91901,Pablo,Arroyo,Hernández,
+>>>>>>> miguel/correcionFecha
