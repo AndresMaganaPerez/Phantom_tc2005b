@@ -12,6 +12,6 @@ router.get('/consultar_banners', isAuth, controllerBanner.banners);
 
 router.get('/agregar_banner', isAuth, controllerBanner.vistaAgregarBanner);
 
-router.post('/agregar_banner', isAuth, controllerBanner.agregarBanner);
+router.post('/agregar_banner', controllerBanner.agregarBanner);
 
 module.exports = router;

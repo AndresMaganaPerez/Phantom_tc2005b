@@ -1,5 +1,8 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
     <h3 style="text-align: center;">Agregar Banner</h3>
+    <% if (flag == 'success') { %>
+        <%- include('componentes/cartas/cartaExitoBanner.ejs') %>
+    <% } %>
 
     <!-- <div class="row">
         <div class="col s12 m2 l13"></div>
@@ -22,12 +25,19 @@
                     <form action="/banners/agregar_banner" method="POST" enctype="multipart/form-data">
                         <div class="file-field input-field">
                             <div class="row">
-                                <input type="file" accept="image/png, image/jpg, image/jpeg" name="image">
+                                <input type="file" accept="image/png, image/jpg, image/jpeg" name="image" required
+                                <% if (flag == 'fail') { %>
+                                    value = "<%= imagen %>"
+                                <% } %>
+                                >
                                 <img src="https://cdn.picpng.com/icon/upload-files-icon-66763.png" style="width: 100px; height: 100px; margin-top: 10px;">
                             </div>
                         </div>
                         <label for="expiracion" style="font-weight: bold; color: black; margin-right: 10px;">Fecha de Expiración</label>
-                        <input type="date" class="" name="expiracion" required style="width: 200px; margin-top: 10px;" value="<%= date %>">
+                        <input id= "expiracion" type="date" class="" name="expiracion" required style="width: 200px; margin-top: 10px;" value="<%= date %>">
+                        <% if (flag == 'fail') { %>
+                            <%- include('componentes/cartas/cartaErrorBanner.ejs') %>
+                        <% } %>
                         <div class="center" style="padding-top: 20px;">
                             <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Subir
                                 <i class="material-icons right">send</i>

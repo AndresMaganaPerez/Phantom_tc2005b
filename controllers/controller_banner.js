@@ -28,29 +28,57 @@ exports.vistaAgregarBanner = (request, response, next) => {
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
     console.log(dateStr);
+    const flag = '';
 
     response.render('banner/agregarBanner',{
         sesion: request.session.empleado,
         rol: request.session.rol,
         privilegios: request.session.privilegios,
-        date: dateStr
+        date: dateStr,
+        flag: flag
     });
 };
 
 exports.agregarBanner = (request, response, next) => {
     console.log('Creación en proceso');
     let date= new Date();
+    let today = Date.now();
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
     const banner = new Banners(request.file.filename, request.body.expiracion);
     console.log(banner);
-    banner.saveBanners()
-        .then(() => {
-            console.log('Se creó nuevo banner.');
-            response.redirect('/banners/consultar_banners/');
-        })
-        .catch(err => {
-            console.log(err);
+    if (request.body.expiracion > today) {
+        const flag = 'success';
+        banner.saveBanners()
+            .then(() => {
+                console.log('Se creó nuevo banner.');
+                response.render('agregarBanner', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    flag: flag
+                });
+            })
+            .catch(err => {
+                console.log(err);
 
-        })
+            })
+    } else {
+        const flag = 'fail';
+        console.log('No ingresó correctamente la fecha');
+        let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
+        date.setMonth(date.getMonth() + 2);
+        let mes = date.getMonth() + 1;
+        let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+        console.log(dateStr);
+        response.render('banner/agregarBanner', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            imagen: request.file.filename,
+            expiracion: request.body.expiracion,
+            date: dateStr,
+            flag: flag
+        });
+    }
 };
