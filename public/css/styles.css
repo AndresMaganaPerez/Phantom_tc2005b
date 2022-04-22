@@ -1,0 +1,39 @@
+@font-face {
+    font-family: "Gilroy-Light";
+    src: url(../fonts/Gilroy-Light.otf);
+}
+
+body{
+    font-family: 'Gilroy-Light' !important;
+}
+
+h1{
+    font-family: 'Gilroy-Light';
+    font-weight: 900;
+}
+
+h2{
+    font-family: 'Gilroy-Light';
+    font-weight: 500;
+}
+
+h3{
+    font-family: 'Gilroy-Light';
+    font-weight: 500;
+}
+
+h4{
+    font-family: 'Gilroy-Light';
+    font-weight: 500;
+}
+
+h5{
+    font-family: 'Gilroy-Light';
+    font-weight: 500;
+}
+
+h6{
+    font-family: 'Gilroy-Light';
+    font-weight: 500;
+}
+
