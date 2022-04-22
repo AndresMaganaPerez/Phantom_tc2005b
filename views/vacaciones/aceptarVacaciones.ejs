@@ -10,6 +10,12 @@
     </div>
     <% } %>
 
+    <% if (flag == 'solicitudAceptada') { %> 
+        <%- include('componentes/cartas/cartaRetroAceptar.ejs') %> <br>
+    <% } else if (flag == 'solicitudRechazada') { %>
+        <%- include('componentes/cartas/cartaRetroRechazar.ejs') %>
+    <% } %>
+
     <% if (solicitudes.length > 0) { %>
         <% for (solicitud of solicitudes) { %>
             <%- include('componentes/cartas/cartaAceptarEstatusSolVac.ejs', {solicitud: solicitud}) %>

@@ -51,7 +51,7 @@ module.exports = class solicitudVacaciones {
         return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio ASC', [nomina]);
     }
     static fetchSolicitud(solicitudId){
-        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idSolicitud = ?', [solicitudId]);
+        return db.execute ('SELECT idSolicitud, e.idEmpleado, fechaInicio, fechaFin, fechaReanudacion, fechaSolicitud, suplente, solicitudAceptadaEstatus, Nota, nombre, apellidoPaterno, apellidoMaterno FROM solicitudvacaciones sv, empleado e WHERE sv.idEmpleado = e.idEmpleado AND idSolicitud = ?', [solicitudId]);
     }
     static aceptarVacas(idSolicitud, vacasUsadas,idEmpleado){
         return db.execute('CALL Modificar_Estatus_Vacas_Aceptar(?,?,?)', [idSolicitud,vacasUsadas,idEmpleado]);

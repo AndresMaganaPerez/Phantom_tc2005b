@@ -3,6 +3,7 @@ const fastcsv = require('fast-csv')
 const fs = require('fs');
 const { formatWithOptions } = require('util');
 const { on } = require('events');
+const { info } = require('console');
 
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
@@ -47,24 +48,86 @@ exports.cancelarSolicitud = (request, response, next) =>{
     const fechaInicio = new Date(request.body.fechaIn);
     const fechaFin = new Date(request.body.fechaF);
     const vacacionesUsadas = diasVacaciones(fechaInicio, fechaFin);
+    const flag = 'solicitudCancelada';
 
-    console.log(vacacionesUsadas);
     if (request.body.estatus == '') {
-        Solicitudes.borrarSolicitudSinStatus(request.session.empleado.idEmpleado, request.body.idSol, vacacionesUsadas)
-        .then(() => {
-            response.redirect('/vacaciones/estatus_mis_vacaciones');
-        })
-        .catch((err) => {
-            console.log(err);
-        }) 
-    } else if (request.body.estatus == 1) {
-        Solicitudes.borrarSolicitudConStatus(request.session.empleado.idEmpleado, request.body.idSol, vacacionesUsadas)
-        .then(() => {
-            response.redirect('/vacaciones/estatus_mis_vacaciones');
+        Solicitudes.fetchSolicitud(request.body.idSol)
+        .then(([solicitud, fieldData]) => {
+            const infoSolicitud = solicitud[0];
+            Solicitudes.borrarSolicitudSinStatus(request.session.empleado.idEmpleado, request.body.idSol, vacacionesUsadas)
+            .then(() => {
+                Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
+                .then(([vacaciones, fieldData]) => {
+                    const misVacaciones = vacaciones;
+                    const currentDate = new Date();
+                    Solicitudes.fetchLider(request.session.empleado.idEmpleado)
+                    .then(([miLider, fieldData]) => {
+                        const lider = miLider[0];
+                        response.render('vacaciones/estatusMisVacaciones', {
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            solicitudes: misVacaciones,
+                            lider: lider,
+                            diaActual: currentDate,
+                            flag: flag,
+                            infoSolicitud: infoSolicitud
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            }) 
         })
         .catch((error) => {
             console.log(error);
         })
+    } else if (request.body.estatus == 1) {
+        Solicitudes.fetchSolicitud(request.body.idSol)
+        .then(([solicitud, fieldData]) => {
+            const infoSolicitud = solicitud[0];
+            Solicitudes.borrarSolicitudConStatus(request.session.empleado.idEmpleado, request.body.idSol, vacacionesUsadas)
+            .then(() => {
+                Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
+                .then(([rows, fieldData]) => {
+                    const misVacaciones = rows;
+                    const currentDate = new Date();
+                    Solicitudes.fetchLider(request.session.empleado.idEmpleado)
+                    .then(([rows, fieldData]) => {
+                        const lider = rows[0];
+                        response.render('vacaciones/estatusMisVacaciones', {
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            solicitudes: misVacaciones,
+                            lider: lider,
+                            diaActual: currentDate,
+                            flag: flag,
+                            infoSolicitud: infoSolicitud
+                        });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    })
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }
 }
 
@@ -75,20 +138,21 @@ exports.descarga = (request, response, next) => {
 
 // Controlador para desplegar las solicitudes enviadas al lider en sesión.
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
+    const flag = '';
     Solicitudes.fetchSolVacParaLider(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
             const solicitudes = rows;
-            console.log(rows);
             console.log('Consulta hecha con éxito');
             response.render('vacaciones/aceptarVacaciones', {
                 sesion: request.session.empleado,
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
-                solicitudes: solicitudes
+                solicitudes: solicitudes,
+                flag: flag
             });
         })
         .catch((err) => {
-            console.log(err);
+            cnsole.log(err);
         });
 };
 
@@ -115,13 +179,36 @@ exports.aceptarSolicitudesEstatus = (request, response, next) => {
 
     const vacasUsadas = diasVacaciones(fechaInicio, fechaFin);
 
+    const flag = 'solicitudAceptada';
+
     Solicitudes.aceptarVacas(request.body.idSolicitud, vacasUsadas,request.body.idEmpleado)
-        .then(([rows, fieldData]) => {
-            response.redirect('/vacaciones/solicitudes_vacaciones');
+    .then(() => {
+        Solicitudes.fetchSolicitud(request.body.idSolicitud)
+        .then(([solicitud, fieldData]) => {
+            const infoSolicitud = solicitud[0];
+            Solicitudes.fetchSolVacParaLider(request.session.empleado.idEmpleado)
+            .then(([rows, fieldData]) => {
+                const solicitudes = rows;
+                response.render('vacaciones/aceptarVacaciones', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    solicitudes: solicitudes,
+                    infoSolicitud: infoSolicitud,
+                    flag: flag
+                });
+            })
+            .catch((err) => {
+                cnsole.log(err);
+            });
         })
-        .catch((err) => {
-            console.log(err);
-        });
+        .catch((error) => {
+            console.log(error);
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 }
 
 // Controlador para Rechazar Solicitudes de Vacaciones
@@ -145,12 +232,34 @@ exports.rechazarSolicitudesEstatus = (request, response, next) => {
     const fechaInicio = new Date(request.body.fechaIn);
     const fechaFin = new Date(request.body.fechaF);
     const vacacionesPedidas = diasVacaciones(fechaInicio, fechaFin);
+    
+    const flag = 'solicitudRechazada';
 
     const nota = request.body.nota == '' ? null : request.body.nota;
     Solicitudes.rechazarVacas(request.body.idSolicitud, nota, vacacionesPedidas)
         .then(([rows, fieldData]) => {
-            console.log('Rechazo hecho con éxito');
-            response.redirect('/vacaciones/solicitudes_vacaciones');
+            Solicitudes.fetchSolicitud(request.body.idSolicitud)
+            .then(([solicitud, fieldData]) => {
+                const infoSolicitud = solicitud[0];
+                Solicitudes.fetchSolVacParaLider(request.session.empleado.idEmpleado)
+                .then(([rows, fieldData]) => {
+                    const solicitudes = rows;
+                    response.render('vacaciones/aceptarVacaciones', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        solicitudes: solicitudes,
+                        infoSolicitud: infoSolicitud,
+                        flag: flag
+                    });
+                })
+                .catch((err) => {
+                    cnsole.log(err);
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
         })
         .catch((err) => {
             console.log(err);
@@ -165,14 +274,15 @@ exports.estatusMisVacaciones = (request, response, next) => {
             Solicitudes.fetchLider(request.session.empleado.idEmpleado)
                 .then(([rows, fieldData]) => {
                     const lider = rows[0];
-                    console.log(lider);
+                    const flag = '';
                     response.render('vacaciones/estatusMisVacaciones', {
                         sesion: request.session.empleado,
                         rol: request.session.rol,
                         privilegios: request.session.privilegios,
                         solicitudes: misVacaciones,
                         lider: lider,
-                        diaActual: currentDate
+                        diaActual: currentDate,
+                        flag: flag
                     });
                 })
                 .catch((err) => {

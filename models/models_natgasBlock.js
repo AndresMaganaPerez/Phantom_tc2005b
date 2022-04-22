@@ -36,6 +36,10 @@ module.exports = class NGB {
         return db.execute('CALL AceptarRestarNGB(?, ?)', [idqs, idngb])
     }
 
+    static getNGBInfo (idngb) {
+        return db.execute('SELECT idNatgasBlocks, ngb.idEmpleado, fechaSolicitud, fechaUsoNGB, estatusNGB, nombre, apellidoPaterno, apellidoMaterno FROM natgasblocks ngb, empleado e WHERE ngb.idEmpleado = e.idEmpleado AND idNatgasBlocks = ?', [idngb]);
+    }
+
     // Funcion Filtrar solicitudes de Natgas Block por Mes
     static filtraSolNGBMes(mes) {
         if (mes == 'Enero') {

@@ -74,13 +74,13 @@ exports.postDeSolicitud = (request,response,next) => {
 
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
     NGB.fetchNGBPorAceptar(request.session.empleado.idEmpleado).then(([rows, fieldData]) => {
-        console.log("NGBS POR ACEPTAR CON NOMBRES");
-        console.log(rows);
+        const flag = '';
         response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
             ngbsPorAceptar: rows,
             sesion: request.session.empleado,
             rol: request.session.rol,
-            privilegios: request.session.privilegios
+            privilegios: request.session.privilegios,
+            flag: flag
         });
     }).catch((err) => {
         console.log(err);
@@ -106,15 +106,32 @@ exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
 };
 
 exports.aceptarNGB = (request, response, next) => {
-    console.log("LE DIO CLICK AL BOTON de Aceptar");
-    console.log(request.body.aceptado);
-    console.log(request.body.idngb);
-    NGB.aceptarNGB(request.body.idqs, request.body.idngb).then(([rows, fieldData]) => {
-        response.redirect('/natgas_blocks/solicitudes_natgas_block')
-    }).catch((error) => {
+    const flag = 'ngbAceptada';
+    NGB.getNGBInfo(request.body.idngb)
+    .then(([ngb,fieldData]) => {
+        const infoNGB = ngb[0];
+        NGB.aceptarNGB(request.body.idqs, request.body.idngb)
+        .then(() => {
+            NGB.fetchNGBPorAceptar(request.session.empleado.idEmpleado)
+            .then(([rows, fieldData]) => {
+                response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
+                    ngbsPorAceptar: rows,
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    infoNGB: infoNGB,
+                    flag: flag                    
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        }).catch((error) => {
+            console.log(error);
+        });
+    })
+    .catch((error) => {
         console.log(error);
-    });
-
+    })
 };
 
 // Funcion Filtrar solicitudes de NGB por Mes
