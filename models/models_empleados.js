@@ -65,8 +65,8 @@ module.exports = class Empleados{
 
     static fetchEmpleado(criterio) {
         return db.execute(
-            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, roles.idRol, descripcionRol, area.idArea, area.nombre AS "nombreArea" FROM empleado, empleado_rol, roles, area_empleado, area WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR plaza LIKE ? OR descripcionRol LIKE ?);',
-            ['%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%']);
+            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, roles.idRol, descripcionRol, area.idArea, area.nombre AS "nombreArea" FROM empleado, empleado_rol, roles, area_empleado, area WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR plaza LIKE ? OR descripcionRol LIKE ? OR empleado.idEmpleado LIKE ?);',
+            ['%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%']);
     }
 
     static saveTel(nomina, telefono) {
