@@ -16,6 +16,7 @@ exports.getLogin = (request, response, next) => {
 };
 
 exports.postSignUp = (request, response, next) => {
+    console.log(request.body.telefono);
     empleados.verificarNomina(request.body.nomina)
         .then(([nominas, fieldData]) => {
             if (nominas.length < 1) {

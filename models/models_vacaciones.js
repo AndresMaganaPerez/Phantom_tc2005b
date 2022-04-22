@@ -31,7 +31,7 @@ module.exports = class solicitudVacaciones {
     }
 
     static fetchAllVacaciones() {
-        return db.execute ("SELECT idSolicitud, e.idEmpleado AS 'solicita', e.nombre AS 'nomSolicita', e.apellidoPaterno AS 'apellidoPatSolicita', e.apellidoMaterno AS 'apellidoMatSolicita', sv.fechaInicio, sv.fechaFin, sv.fechaReanudacion, sv.fechaSolicitud, sv.suplente, sv.solicitudAceptadaEstatus, d.idLider, f.nombre AS 'nomLider', f.apellidoPaterno AS 'apellidoPatLider', f.apellidoMaterno AS 'apellidoMatLider', Nota FROM solicitudvacaciones sv, empleado e, empleado f, dirige d WHERE sv.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND solicitudAceptadaEstatus IS NOT NULL;");
+        return db.execute ("SELECT idSolicitud, e.idEmpleado AS 'solicita', e.nombre AS 'nomSolicita', e.apellidoPaterno AS 'apellidoPatSolicita', e.apellidoMaterno AS 'apellidoMatSolicita', sv.fechaInicio, sv.fechaFin, sv.fechaReanudacion, sv.fechaSolicitud, sv.suplente, sv.solicitudAceptadaEstatus, d.idLider, f.nombre AS 'nomLider', f.apellidoPaterno AS 'apellidoPatLider', f.apellidoMaterno AS 'apellidoMatLider', Nota FROM solicitudvacaciones sv, empleado e, empleado f, dirige d WHERE sv.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND solicitudAceptadaEstatus IS NOT NULL ORDER BY fechaSolicitud DESC;");
     }
 
     static fetchLider(nomina) {
@@ -48,14 +48,17 @@ module.exports = class solicitudVacaciones {
     }
 
     static fetchMisVacaciones(nomina) {
-        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaInicio ASC', [nomina]);
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaSolicitud ASC', [nomina]);
     }
+
     static fetchSolicitud(solicitudId){
         return db.execute ('SELECT idSolicitud, e.idEmpleado, fechaInicio, fechaFin, fechaReanudacion, fechaSolicitud, suplente, solicitudAceptadaEstatus, Nota, nombre, apellidoPaterno, apellidoMaterno FROM solicitudvacaciones sv, empleado e WHERE sv.idEmpleado = e.idEmpleado AND idSolicitud = ?', [solicitudId]);
     }
+
     static aceptarVacas(idSolicitud, vacasUsadas,idEmpleado){
         return db.execute('CALL Modificar_Estatus_Vacas_Aceptar(?,?,?)', [idSolicitud,vacasUsadas,idEmpleado]);
     }
+
     static rechazarVacas(idSolicitud, nota, vacacionesUsadas){
         return db.execute('CALL Modificar_Estatus_Vacas_Rechazar(?,?,?)', [idSolicitud, nota, vacacionesUsadas]);
     }
