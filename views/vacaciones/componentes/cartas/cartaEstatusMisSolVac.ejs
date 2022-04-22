@@ -6,8 +6,8 @@
                     <div class="row">
                         <div class="col s12 m7 l13">
                             <span class='txt'>
-                                <h5 style="margin-left: 1.8vw;"><span style="font-weight: 600;">Fecha de solicitud: </span> <%=
-                                    solicitud.fechaSolicitud.toString().substring(4,15) %>
+                                <h5 style="margin-left: 1.8vw;"><span style="font-weight: 600;">Fecha de solicitud: </span> <%= solicitud.fechaSolicitud.getDate() + '/' + 
+                                    solicitud.fechaSolicitud.getMonth() + '/' + solicitud.fechaSolicitud.getFullYear() %>
                                 </h5>
                             </span>
                         </div>
@@ -23,10 +23,10 @@
                         <div class="col s12 m7 l13">
                             <h6 style="margin-left: 1.8vw;">
                                 <span style="font-weight: 600;">Fecha Inicio:</span>
-                                <%= solicitud.fechaInicio.toString().substring(4,15) %>
+                                <%= solicitud.fechaInicio.getDate() + '/' + solicitud.fechaInicio.getMonth() + '/' + solicitud.fechaInicio.getFullYear() %>
                                 |
                                 <span style="font-weight: 600;">Fecha Fin:</span>
-                                <%= solicitud.fechaFin.toString().substring(4,15) %>
+                                <%= solicitud.fechaFin.getDate() + '/' + solicitud.fechaFin.getMonth() + '/' + solicitud.fechaFin.getFullYear()%>
                             </h6>
                         </div>
                         <div class="col s12 m2 l13"></div>
@@ -42,7 +42,7 @@
                         <div class="col s12 m6 l13">
                             <h6 style="margin-left: 1.8vw;">
                                 <span style="font-weight: 600;">Fecha Reanudación: </span> <%=
-                                solicitud.fechaReanudacion.toString().substring(4,15) %>
+                                solicitud.fechaReanudacion.getDate() + '/' + solicitud.fechaReanudacion.getMonth() + '/' + solicitud.fechaReanudacion.getFullYear() %>
                             </h6>
                         </div>
                         <div class="col s12 m2 l13"></div>
