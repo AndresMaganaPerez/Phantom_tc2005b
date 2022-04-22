@@ -44,7 +44,9 @@
                 <div class="input-field col s12 m12 l13">
                     <select name="rol" id="rol" required>
                         <% for (let rol of roles) { %>
-                            <option value="<%= rol.idRol %>"><%= rol.descripcionRol%></option>
+                            <% if (rol.descripcionRol != 'admin') { %>
+                                <option value="<%= rol.idRol %>"><%= rol.descripcionRol%></option>
+                            <% } %>
                         <% } %>
                     </select> 
                     <label for="rol">Rol del empleado en el sistema</label>
