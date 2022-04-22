@@ -215,72 +215,72 @@ exports.formEmpleados = (request, response, next) => {
 
 exports.registrarEmpleado = (request, response, next) => {
     empleados.findRegistroEmpleado(request.body.idEmpleado)
-        .then(([empleado, fieldData]) => {
-            const infoEmpleado = empleado[0];
-            const fechaIngreso = new Date(request.body.fechaIng);
-            const currentDate = new Date();
-            const antiguedad = currentDate.getFullYear() - fechaIngreso.getFullYear();
-            const ngb = parseInt(request.body.ngb);
-            const vacPremio = parseInt(request.body.vacPremio);
-            const vacLey = parseInt(request.body.vacLey);
-            const vacTot = vacLey + vacPremio;
-            const plaza = request.body.plaza.toString();
-            const lider = parseInt(request.body.lider);
-            const area = parseInt(request.body.area);
-            const rol = parseInt(request.body.rol);
+    .then(([empleado, fieldData]) => {
+        const infoEmpleado = empleado[0];
+        const fechaIngreso = new Date(request.body.fechaIng);
+        const currentDate = new Date();
+        const antiguedad = currentDate.getFullYear() - fechaIngreso.getFullYear();
+        const ngb = parseInt(request.body.ngb);
+        const vacPremio = parseInt(request.body.vacPremio);
+        const vacLey = parseInt(request.body.vacLey);
+        const vacTot = vacLey + vacPremio;
+        const plaza = request.body.plaza.toString();
+        const lider = parseInt(request.body.lider);
+        const area = parseInt(request.body.area);
+        const rol = parseInt(request.body.rol);
 
-            empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
-                .then(() => {
-                    empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
-                        .then(() => {
-                            const flag = 'success';
-                            empleados.fetchEmpleadosSinRegistrar()
-                                .then(([empleado, fieldData]) => {
-                                    empleados.fetchAreas()
-                                        .then(([areas, fieldData]) => {
-                                            empleados.fetchLideres()
-                                                .then(([lideres, fieldData]) => {
-                                                    empleados.fetchRoles()
-                                                        .then(([roles, fieldData]) => {
-                                                            response.render('empleados/aceptarEmpleados', {
-                                                                sesion: request.session.empleado,
-                                                                rol: request.session.rol,
-                                                                privilegios: request.session.privilegios,
-                                                                solicitudes: empleado,
-                                                                areas: areas,
-                                                                lideres: lideres,
-                                                                roles: roles,
-                                                                flag: flag,
-                                                                infoEmpleado: infoEmpleado
-                                                            })
-                                                        })
-                                                        .catch((error) => {
-                                                            console.log(error);
-                                                        })
-                                                })
-                                                .catch((error) => {
-                                                    console.log(error)
-                                                })
-                                        })
-                                        .catch((error) => {
-                                            console.log(error);
-                                        });
+        empleados.registrarEmpleado(infoEmpleado.idEmpleado, infoEmpleado.email, infoEmpleado.token, infoEmpleado.nombre, infoEmpleado.apellidoPaterno, infoEmpleado.apellidoMaterno, infoEmpleado.fechaNac, request.body.fechaIng, infoEmpleado.numTelefonico, ngb, antiguedad, vacTot, vacLey, vacPremio, plaza)
+        .then(() => {
+            const flag = 'success';
+            empleados.fetchEmpleadosSinRegistrar()
+                .then(([empleado, fieldData]) => {
+                    empleados.fetchAreas()
+                    .then(([areas, fieldData]) => {
+                        empleados.fetchLideres()
+                        .then(([lideres, fieldData]) => {
+                            empleados.fetchRoles()
+                            .then(([roles, fieldData]) => {
+                                empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
+                                .then(() => {
+                                    response.render('empleados/aceptarEmpleados', {
+                                        sesion: request.session.empleado,
+                                        rol: request.session.rol,
+                                        privilegios: request.session.privilegios,
+                                        solicitudes: empleado,
+                                        areas: areas,
+                                        lideres: lideres,
+                                        roles: roles,
+                                        flag: flag,
+                                        infoEmpleado: infoEmpleado
+                                    }) //END RENDER        
                                 })
                                 .catch((error) => {
                                     console.log(error);
-                                });
+                                });        
+                            })
+                            .catch((error) => {
+                            console.log(error);
+                            })
                         })
                         .catch((error) => {
-                            console.log(error);
+                            console.log(error)
                         })
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
                 });
         })
         .catch((error) => {
-            console.log(error);
+        console.log(error);
         });
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 };
 
 exports.rechazarRegistroEmpleado = (request, response, next) => {

@@ -35,6 +35,7 @@
                 </div>
                 <div class="input-field col s12 m12 l13">
                     <select name="lider" id="lider" required>
+                        <option value="0">No tiene lider</option>
                     <% for (let lider of lideres) { %>
                         <option value="<%= lider.idLider %>"><%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %></option>
                     <% } %> 
