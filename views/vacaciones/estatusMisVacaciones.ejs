@@ -8,7 +8,10 @@
         <%- include('componentes/botones/botonCrearSol.ejs') %>
         <% if (rol == 'lider') { %>
             <%- include('componentes/botones/botonAceptarSol.ejs') %>
-        <% } %>   
+        <% } %>
+        <% if (rol == 'recursosHumanos') { %>
+            <%- include('componentes/botones/botonConsultarVac.ejs') %>
+        <% } %>
     </div>
 </div>
 
