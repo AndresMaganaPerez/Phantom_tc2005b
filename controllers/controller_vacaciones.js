@@ -405,8 +405,43 @@ exports.estatusVacaciones = (request, response, next) => {
 
 // Funcion Filtrar solicitudes de vacaciones por Mes y Área
 exports.filtraSolVacaciones = (request, response, next) => {
+    // Variable correspondiente a mes o area
     const monar = request.params.mesar;
-    Solicitudes.filtraSolVacacionesMes(monar)
+    let mes = 0;
+
+    if (monar == 'Enero') {
+        mes = 01;
+    } else if (monar == 'Febrero') {
+        mes = 02;
+    } else if (monar == 'Marzo') {
+        mes = 03;
+    } else if (monar == 'Abril') {
+        mes = 04;
+    } else if (monar == 'Mayo') {
+        mes = 05;
+    } else if (monar == 'Junio') {
+        mes = 06;
+    } else if (monar == 'Julio') {
+        mes = 07;
+    } else if (monar == 'Agosto') {
+        mes = 08;
+    } else if (monar == 'Septiembre') {
+        mes = 09;
+    } else if (monar == 'Octubre') {
+        mes = 10;
+    } else if (monar == 'Noviembre') {
+        mes = 11;
+    } else if (monar == 'Diciembre') {
+        mes = 12;
+    }
+
+    // Variable que obtiene el año actual
+    const y = new Date();
+    let year = y.getFullYear();
+    console.log(mes);
+    console.log(year);
+
+    Solicitudes.filtraSolVacacionesMes(year, mes, monar)
         .then(([rows, fieldData]) => {
             Solicitudes.fetchAreas()
                 .then(([areas, fieldData]) => {
