@@ -48,7 +48,7 @@ module.exports = class Empleados{
     }
 
     static fetchEmpleadoYRol() {
-        return db.execute('SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea" FROM empleado, empleado_rol, roles, area_empleado, area WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea;')
+        return db.execute('SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza;')
     }
 
     static findRol(nomina) {
@@ -65,7 +65,7 @@ module.exports = class Empleados{
 
     static fetchEmpleado(criterio) {
         return db.execute(
-            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea" FROM empleado, empleado_rol, roles, area_empleado, area WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR plaza LIKE ? OR nombreRolEmpresa LIKE ? OR empleado.idEmpleado LIKE ?);',
+            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR nombrePlaza LIKE ? OR nombreRolEmpresa LIKE ? OR empleado.idEmpleado LIKE ?);',
             ['%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%']);
     }
 
@@ -87,6 +87,10 @@ module.exports = class Empleados{
 
     static fetchRoles() {
         return db.execute('SELECT * FROM roles');
+    }
+
+    static fetchPlazas() {
+        return db.execute('SELECT * FROM plaza');
     }
 
     static fetchLideres() {

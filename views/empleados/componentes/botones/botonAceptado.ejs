@@ -22,7 +22,11 @@
                     <label for="vacPremio" >Cantidad de vacaciones premio</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <input name="plaza" id="plaza" type="text" placeholder="" required>
+                    <select name="plaza" id="plaza" required>
+                        <% for (let plaza of plazas) { %>
+                            <option value="<%= plaza.idPlaza %>"><%= plaza.nombrePlaza %></option>
+                        <% } %>
+                    </select>
                     <label for="plaza">Plaza</label>
                 </div>
                 <div class="input-field col s12 m12 l13">

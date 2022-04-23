@@ -181,40 +181,47 @@ exports.logout = (request, response, next) => {
 
 exports.formEmpleados = (request, response, next) => {
     empleados.fetchEmpleadosSinRegistrar()
-        .then(([empleado, fieldData]) => {
-            empleados.fetchAreas()
-                .then(([areas, fieldData]) => {
-                    empleados.fetchLideres()
-                        .then(([lideres, fieldData]) => {
-                            empleados.fetchRoles()
-                                .then(([roles, fieldData]) => {
-                                    const flag = '';
-                                    response.render('empleados/aceptarEmpleados', {
-                                        sesion: request.session.empleado,
-                                        rol: request.session.rol,
-                                        privilegios: request.session.privilegios,
-                                        solicitudes: empleado,
-                                        areas: areas,
-                                        lideres: lideres,
-                                        roles: roles,
-                                        flag: flag
-                                    })
-                                })
-                                .catch((error) => {
-                                    console.log(error);
-                                })
+    .then(([empleado, fieldData]) => {
+        empleados.fetchAreas()
+        .then(([areas, fieldData]) => {
+            empleados.fetchLideres()
+            .then(([lideres, fieldData]) => {
+                empleados.fetchRoles()
+                .then(([roles, fieldData]) => {
+                    empleados.fetchPlazas()
+                    .then(([plazas, fieldData]) => {
+                        const flag = '';
+                        response.render('empleados/aceptarEmpleados', {
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            solicitudes: empleado,
+                            areas: areas,
+                            lideres: lideres,
+                            roles: roles,
+                            flag: flag,
+                            plazas: plazas
                         })
-                        .catch((error) => {
-                            console.log(error)
-                        })
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
                 })
                 .catch((error) => {
                     console.log(error);
-                });
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
         })
         .catch((error) => {
             console.log(error);
         });
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 };
 
 exports.registrarEmpleado = (request, response, next) => {
