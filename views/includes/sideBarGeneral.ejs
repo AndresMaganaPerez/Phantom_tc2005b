@@ -1,11 +1,80 @@
-<% if (rol == 'admin') { %>
-    <%- include('../includes/sidebar_Navbar/sideBarAdmin.ejs') %>
-<% } else if (rol == 'recursosHumanos') { %>
-    <%- include('../includes/sidebar_Navbar/sideBarRH.ejs') %>
-<% } else if (rol == 'lider') { %>
-    <%- include('../includes/sidebar_Navbar/sideBarLider.ejs') %>
-<% } else if (rol == 'operador') { %>
-    <%- include('../includes/sidebar_Navbar/sideBarOperador.ejs') %>
-<% } else if (rol == 'despachador') { %>
-    <%- include('../includes/sidebar_Navbar/sideBarPromJF.ejs') %>
-<% } %>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natgas</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+
+
+
+</head>
+
+<body style="background-color: #f8f9fe">
+    <div class="navbar-fixed">
+        <nav style="background-color: #002b49; ">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo center" style="pointer-events: none;">
+                    <img src="../../Images/LogoTest.png" style="width: 150px; height:50px; padding-top: 10px;">
+                </a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="left hide-on-med-and-down">
+                    <li><%- include('sidebar_Navbar/botonesNavbar/botonGeneral.ejs') %></li>
+                    <li><%- include('sidebar_Navbar/botonesNavbar/botonIndicador.ejs') %></li>
+                    <li><%- include('sidebar_Navbar/botonesNavbar/botonAnuncios.ejs') %></li>
+                    <% if (rol == 'admin' || rol == 'recursosHumanos') { %> 
+                        <li><%- include('sidebar_Navbar/botonesNavbar/botonBanner.ejs') %></li>
+                        <li><%- include('sidebar_Navbar/dropdown/dropDownSolicitudes.ejs') %></li> 
+                    <% } else if (rol == 'lider' || rol == 'operador') { %>
+                        <li><%- include('sidebar_Navbar/botonesNavbar/botonNGB.ejs') %></li>
+                    <% } %> 
+                    <% if (rol == 'lider' || rol == 'operador' || rol == 'despachador') { %>
+                        <li><%- include('sidebar_Navbar/botonesNavbar/botonVacaciones.ejs') %></li>
+                    <% } %>
+                    <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+                        <li><%- include('sidebar_Navbar/botonesNavbar/botonRegistrarEmpleados.ejs') %></li>
+                    <% } %>
+                </ul>
+                <ul class="right hide-on-med-and-down">
+                    <li><%- include('sidebar_Navbar/botonesNavbar/botonLogout.ejs') %></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <ul class="sidenav" id="mobile-demo">
+        <div class="user-view">
+            <li>
+                <div class="row">
+                    <%- include('sidebar_Navbar/botonesSidebar/botonPerfil.ejs') %>
+                </div>
+            </li>
+            <li><%- include('sidebar_Navbar/botonesSidebar/botonGeneral.ejs') %></li>
+            <li><%- include('sidebar_Navbar/botonesSidebar/botonIndicador.ejs') %></li>
+            <li><%- include('sidebar_Navbar/botonesSidebar/botonAnuncios.ejs') %></li>
+            <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+                <li><%- include('sidebar_Navbar/botonesSidebar/botonBanner.ejs') %></li>
+            <% } %>
+            <% if (rol != 'despachador') { %>
+                <li><%- include('sidebar_Navbar/botonesSidebar/botonNGB.ejs') %></li>
+            <% } %>
+            <li><%- include('sidebar_Navbar/botonesSidebar/botonVacaciones.ejs') %></li>
+            <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+                <li><%- include('sidebar_Navbar/botonesSidebar/botonRegistrarEmpleados.ejs') %></li>
+            <% } %>
+            <li>
+                <%- include('sidebar_Navbar/botonesSidebar/botonLogout.ejs') %>
+            </li>
+        </div>
+    </ul>
+</body>
+
+</html>
