@@ -1,6 +1,6 @@
 <div class="center">
     <div
         style="background-color:  #b3e5fc; width: fit-content; border-radius: 5px; padding-left: 9.3vw; padding-right: 9.3vw; padding-top: 10px; padding-bottom: 10px; border: 1px solid; border-color: #01579b; display: inline-flex;">
-        <span style="font-weight: 600; color: #01579b;"> Has RECHAZADO la solicitud de vacación de <%= infoSolicitud.nombre + ' ' + infoSolicitud.apellidoPaterno + ' ' + infoSolicitud.apellidoMaterno %> con fecha de inicio: <%= infoSolicitud.fechaInicio.getDate() + '/' + infoSolicitud.fechaInicio.getMonth() + '/' + infoSolicitud.fechaInicio.getFullYear() %> y fecha fin: <%= infoSolicitud.fechaFin.getDate() + '/' + infoSolicitud.fechaFin.getMonth() + '/' + infoSolicitud.fechaFin.getFullYear() %> </span> <br>
+        <span style="font-weight: 600; color: #01579b;"> Has RECHAZADO la solicitud de vacación de <%= infoSolicitud.nombre + ' ' + infoSolicitud.apellidoPaterno + ' ' + infoSolicitud.apellidoMaterno %> con fecha de inicio: <%= infoSolicitud.fechaInicio.getDate() + '/' + (infoSolicitud.fechaInicio.getMonth() + 1) + '/' + infoSolicitud.fechaInicio.getFullYear() %> y fecha fin: <%= infoSolicitud.fechaFin.getDate() + '/' + (infoSolicitud.fechaFin.getMonth() + 1) + '/' + infoSolicitud.fechaFin.getFullYear() %> </span> <br>
     </div>
 </div>
