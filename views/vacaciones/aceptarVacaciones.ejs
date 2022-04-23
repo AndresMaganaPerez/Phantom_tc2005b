@@ -1,7 +1,6 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
 
     <h4 class="center">Solicitudes de Vacaciones</h4>
-
     <% if (rol == 'lider') { %>
     <div class="row center">
         <div class="col s12 m2 l13"></div>
@@ -20,7 +19,7 @@
     <% } %>
 
     <% if (flag == 'solicitudAceptada') { %> 
-        <%- include('componentes/cartas/cartaRetroAceptar.ejs') %> <br>
+        <%- include('componentes/cartas/cartaRetroAceptar.ejs') %>
     <% } else if (flag == 'solicitudRechazada') { %>
         <%- include('componentes/cartas/cartaRetroRechazar.ejs') %>
     <% } %>

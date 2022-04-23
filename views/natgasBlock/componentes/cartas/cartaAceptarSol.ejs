@@ -9,7 +9,7 @@
                             <span class="txt">
                                 <h5 style="margin-left: 1.9vw;">
                                     <span style="font-weight: 600;">Fecha de solicitud:</span>
-                                    <%= ngb.getDay() + '/' + ngb.getMonth() + '/' + ngb.getFullYear() %>
+                                    <%= ngb.fechaSolicitud.getDate() + '/' + ngb.fechaSolicitud.getMonth() + '/' + ngb.fechaSolicitud.getFullYear() %>
                                 </h5>
                             </span>
                         </div>
@@ -19,7 +19,7 @@
                     <div class="row">
                         <div class="col s12 m7 l13">
                             <h6 style="margin-left: 5%;"><span style="font-weight: 600;">Fecha de uso:</span>
-                                <%= ngb.fechaUsoNGB.getDay() + ngb.fechaUsoNGB.getMonth() + ngb.fechaUsoNGB.getFullYear() %>
+                                <%= ngb.fechaUsoNGB.getDate() + '/' + ngb.fechaUsoNGB.getMonth() + '/' + ngb.fechaUsoNGB.getFullYear() %>
                             </h6>
                         </div>
                         <div class="col s12 m2 l13"></div>
