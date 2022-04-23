@@ -40,7 +40,7 @@ module.exports = class Empleados{
     }
 
     static findEmpleado(usuario) {
-        return db.execute('SELECT e.idEmpleado, email, e.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, a.nombre AS "area" FROM empleado e, area a, area_empleado ae WHERE e.idEmpleado = ae.idEmpleado AND a.idArea = ae.idArea AND email=?', [usuario]);
+        return db.execute('SELECT e.idEmpleado, email, e.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, plaza, a.nombre AS "area", estatusEmpleado FROM empleado e, area a, area_empleado ae WHERE e.idEmpleado = ae.idEmpleado AND a.idArea = ae.idArea AND email=?', [usuario]);
     }
 
     static getPassword(nomina) {

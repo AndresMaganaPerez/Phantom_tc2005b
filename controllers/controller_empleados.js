@@ -111,59 +111,66 @@ exports.postSignUp = (request, response, next) => {
 
 exports.login = (request, response, next) => {
     empleados.findEmpleado(request.body.email_login)
-        .then(([rows, fieldData]) => {
-            if (rows.length < 1) {
-                const flag = 'invalidCredentials';
-                response.render('signup_login/signIn.ejs', {
-                    flag: flag
-                });
-            }
-            const empleado = rows[0];
+    .then(([rows, fieldData]) => {
+        if (rows.length < 1) {
+            const flag = 'invalidCredentials';
+            response.render('signup_login/signIn.ejs', {
+                flag: flag
+            });
+        }
+        const empleado = rows[0];
+        if (empleado.estatusEmpleado == 0){
+            const flag = 'invalidCredentials';
+            response.render('signup_login/signIn.ejs', {
+                flag: flag
+            });
+        } else if (empleado.estatusEmpleado == 1){
             empleados.getPassword(request.body.email_login)
-                .then(([passw, fieldData]) => {
-                    bcrypt.compare(request.body.password_login, passw[0].token)
-                        .then((doMatch) => {
-                            if (doMatch) {
-                                request.session.isLoggedIn = true;
-                                request.session.empleado = empleado;
-                                empleados.findRol(empleado.idEmpleado)
-                                    .then((rows, fieldData) => {
-                                        request.session.rol = rows[0][0].descripcionRol;
-                                        empleados.findPrivilegio(request.session.rol)
-                                            .then((rows, fieldData) => {
-                                                const privilegios = [];
-                                                for (let privilegio of rows[0]) {
-                                                    privilegios.push(privilegio.accion);
-                                                }
-                                                request.session.privilegios = privilegios;
-                                                response.redirect('/general');
-                                            }).catch((error) => {
-                                                console.log(error);
-                                            })
-                                    })
-                                    .catch((error) => {
-                                        console.log(error);
-                                    });
-                                return request.session.save(err => {
-                                });
-                            }
-                            const flag = 'invalidCredentials';
-                            response.render('signup_login/signIn.ejs', {
-                                flag: flag
-                            });
+            .then(([passw, fieldData]) => {
+                bcrypt.compare(request.body.password_login, passw[0].token)
+                .then((doMatch) => {
+                    if (doMatch) {
+                        request.session.isLoggedIn = true;
+                        request.session.empleado = empleado;
+                        empleados.findRol(empleado.idEmpleado)
+                        .then((rows, fieldData) => {
+                            request.session.rol = rows[0][0].descripcionRol;
+                            empleados.findPrivilegio(request.session.rol)
+                            .then((rows, fieldData) => {
+                                const privilegios = [];
+                                for (let privilegio of rows[0]) {
+                                    privilegios.push(privilegio.accion);
+                                }
+                                request.session.privilegios = privilegios;
+                                response.redirect('/general');
+                            }).catch((error) => {
+                                console.log(error);
+                            })
                         })
                         .catch((error) => {
                             console.log(error);
-                            response.redirect('/');
                         });
+                    return request.session.save(err => {
+                    });
+                    }
+                    const flag = 'invalidCredentials';
+                    response.render('signup_login/signIn.ejs', {
+                        flag: flag
+                    });
                 })
                 .catch((error) => {
                     console.log(error);
-                })
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+                    response.redirect('/');
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }   
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 }
 
 exports.logout = (request, response, next) => {
