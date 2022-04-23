@@ -1,6 +1,10 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
 
-<h4 class="center">Solicitudes de Vacaciones</h4>
+<% if (rol != 'admin') { %>
+    <h4 class="center">Solicitudes de Vacaciones</h4>
+<% } else { %>
+    <h4 class="center">Estatus de Solicitudes de Vacaciones</h4>
+<% } %>
 
 <% if (rol == 'lider' || rol == 'recursosHumanos' || rol == 'operador' || rol == 'despachador') { %>
     <div class="row center">

@@ -1,5 +1,7 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
+
     <h4 class="center">Solicitudes de Vacaciones</h4>
+
     <% if (rol == 'lider') { %>
     <div class="row center">
         <div class="col s12 m2 l13"></div>
@@ -8,6 +10,13 @@
             <%- include('componentes/botones/botonEstatusMisVac.ejs') %>
         </div>
     </div>
+    <% } %>
+
+    <% if (rol == 'admin') { %>
+        <div class="center">
+            <%- include('componentes/botones/botonConsultarVac.ejs') %>
+        </div>
+        <br>
     <% } %>
 
     <% if (flag == 'solicitudAceptada') { %> 

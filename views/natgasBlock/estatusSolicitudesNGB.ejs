@@ -1,8 +1,12 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
-<h4 class="center">Solicitudes de NGB</h4>
+<h4 class="center">Estatus de Solicitudes de NGB</h4>
 
 <% if (rol == 'recursosHumanos') { %>
     <%- include('componentes/botones/botonRealizarSol') %>
+<% } %>
+
+<% if (rol == 'admin') { %>
+    <%- include('componentes/botones/botonResponderSol.ejs') %>
 <% } %>
 
 <br>

@@ -1,11 +1,10 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
 <h4 class="center">Empleados Registrados</h4>
 
-<br>
 <%- include('componentes/botones/botonAceptarSolicitudes.ejs') %>
 
 <div class="input-field col s12 m8 l13">
-    <input type="text" id="buscar" name="buscar">
+    <input type="text" id="buscar" name="buscar" placeholder="">
     <label for="buscar">Buscar empleado:</label>
 </div>
 
@@ -33,6 +32,9 @@
             console.log(data);
             let respuesta = ''
             for(let empleado of data){
+                console.log(data);
+                const fechaNac = new Date(empleado.fechaNac);
+                const fechaIngr = new Date(empleado.fechaIngr);
                 respuesta += '<div class="row">' +
                                 '<div class="col s12 m2 l13"></div>' +
                                 '<div class="col s12 m8 l13">' +
@@ -51,7 +53,7 @@
                                             '<div class="row">'+
                                                 '<div class="col s12 m7 l13">' +
                                                     '<h6 style="margin-left: 5%;">'+
-                                                        '<span style="font-weight: 600;">Fecha de Nacimiento:</span> ' + empleado.fechaNac.toString().substr(0,10) +
+                                                        '<span style="font-weight: 600;">Fecha de Nacimiento:</span> ' + fechaNac.getDate() + '/' + fechaNac.getMonth() + '/' + fechaNac.getFullYear() +
                                                     '</h6>'+
                                                 '</div>'+
                                             '</div>'+
@@ -65,7 +67,7 @@
                                                 '</div>'+
                                                 '<div class="col s12 m2 l13"></div>' +
                                                 '<div class="col s12 m3 l13" style="display:inline-flex;">'+
-                                                    '<span style="font-weight: 600;"><a class="btn-large blue">Modificar</a></span>'+
+                                                    '<span style="font-weight: 600;"><a class="btn-large light-blue darken-3">Modificar</a></span>'+
                                                     '<span style="margin-left:2vw;"></span>'+
                                                     '<form action="/empleados/empleados_registrados" method="POST">'+
                                                         '<input name="delete" type="hidden" value="'+ empleado.idEmpleado+'">'+
@@ -80,7 +82,7 @@
                                                 '<div class="col s12 m6 l13">'+
                                                     '<h6 style="margin-left: 1.8vw;">'+
                                                         '<span style="font-weight: 600;">Fecha de Ingreso: </span> '+
-                                                        empleado.fechaIngr.toString().substring(0,10) + ' |' + ' <span style="font-weight: 600;">Area: </span>' + empleado.nombreArea +
+                                                        fechaIngr.getDate() + '/' + fechaIngr.getMonth() + '/' + fechaIngr.getFullYear() + ' |' + ' <span style="font-weight: 600;">Area: </span>' + empleado.nombreArea +
                                                     '</h6>'+
                                                 '</div>'+
                                             '</div>'+
@@ -90,8 +92,8 @@
                                                         'Numero Telefonico: '+
                                                     '</span>'+
                                                     empleado.numTelefonico + ' | ' +
-                                                    '<span style="font-weight: 600;"> Plaza: </span>' + empleado.plaza+' | ' +
-                                                    '<span style="font-weight: 600;"> Rol: </span>' + empleado.descripcionRol +
+                                                    '<span style="font-weight: 600;"> Plaza: </span>' + empleado.nombrePlaza +' | ' +
+                                                    '<span style="font-weight: 600;"> Rol: </span>' + empleado.nombreRolEmpresa +
                                                 '</h6>'+
                                             '</div>'+
                                         '</div>'+

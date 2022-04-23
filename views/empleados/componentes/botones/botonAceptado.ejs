@@ -10,19 +10,23 @@
                     <label for="fechaIng">Fecha de ingreso a la empresa</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <input name="ngb" id="ngb" type="number" placeholder="5" min="0" max="5" required>
+                    <input name="ngb" id="ngb" type="number" placeholder="" min="0" max="5" required>
                     <label for="ngb" >Cantidad de Natgas Blocks del empleado</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <input name="vacLey" id="vacLey" type="number" placeholder="8" min="0" required>
+                    <input name="vacLey" id="vacLey" type="number" placeholder="" min="0" required>
                     <label for="vacLey" >Cantidad de vacaciones ley</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <input name="vacPremio" id="vacPremio" type="number" placeholder="2" min="0" required>
+                    <input name="vacPremio" id="vacPremio" type="number" placeholder="" min="0" required>
                     <label for="vacPremio" >Cantidad de vacaciones premio</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
-                    <input name="plaza" id="plaza" type="text" placeholder="QRO" required>
+                    <select name="plaza" id="plaza" required>
+                        <% for (let plaza of plazas) { %>
+                            <option value="<%= plaza.idPlaza %>"><%= plaza.nombrePlaza %></option>
+                        <% } %>
+                    </select>
                     <label for="plaza">Plaza</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
@@ -35,16 +39,25 @@
                 </div>
                 <div class="input-field col s12 m12 l13">
                     <select name="lider" id="lider" required>
-                    <% for (let lider of lideres) { %>
-                        <option value="<%= lider.idLider %>"><%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %></option>
-                    <% } %> 
+                        <option value="0">No tiene lider</option>
+                    <% for (let area of areas) { %>
+                        <optgroup label="<%= area.nombre %>" >
+                            <% for (let lider of lideres) { %>
+                                <% if (lider.nombreArea == area.nombre) { %> 
+                                    <option value="<%= lider.idLider %>"><%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %></option>
+                                <% } %>
+                            <% } %> 
+                        </optgroup>
+                    <% } %>
                     </select>
                     <label for="lider">Lider del empleado</label>
                 </div>
                 <div class="input-field col s12 m12 l13">
                     <select name="rol" id="rol" required>
                         <% for (let rol of roles) { %>
-                            <option value="<%= rol.idRol %>"><%= rol.descripcionRol%></option>
+                            <% if (rol.descripcionRol != 'admin') { %>
+                                <option value="<%= rol.idRol %>"><%= rol.nombreRolEmpresa%></option>
+                            <% } %>
                         <% } %>
                     </select> 
                     <label for="rol">Rol del empleado en el sistema</label>
