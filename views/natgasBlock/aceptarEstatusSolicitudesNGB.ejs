@@ -6,6 +6,10 @@
     <%- include('componentes/botones/botonRealizarSol.ejs') %>
 <% } %>
 
+<% if (rol == 'admin') { %>
+    <%- include('componentes/botones/botonConsultarNGB.ejs') %>
+<% } %>
+
 <% if (flag == 'ngbAceptada') { %> 
     <%- include('componentes/cartas/cartaRetroAceptarNGB.ejs') %>
 <% } %>

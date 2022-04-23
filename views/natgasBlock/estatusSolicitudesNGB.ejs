@@ -5,6 +5,10 @@
     <%- include('componentes/botones/botonRealizarSol') %>
 <% } %>
 
+<% if (rol == 'admin') { %>
+    <%- include('componentes/botones/botonResponderSol.ejs') %>
+<% } %>
+
 <br>
 
 <%- include('componentes/bloques/bloqueDropDown_MesArea_BotonDescarga.ejs') %>

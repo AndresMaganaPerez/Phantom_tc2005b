@@ -252,7 +252,7 @@ exports.registrarEmpleado = (request, response, next) => {
                                         roles: roles,
                                         flag: flag,
                                         infoEmpleado: infoEmpleado
-                                    }) //END RENDER        
+                                    })  
                                 })
                                 .catch((error) => {
                                     console.log(error);
