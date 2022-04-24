@@ -136,9 +136,18 @@ exports.aceptarNGB = (request, response, next) => {
 
 // Funcion Filtrar solicitudes de NGB por Mes
 exports.filtraSolNGBMes = (request, response, next) => {
-    console.log("Filtrando NGB");
-    const month = request.params.mes;
-    NGB.filtraSolNGBMes(month).then(([rows, fieldData]) => {
+    // Variable correspondiente a mes o area
+    const monar = request.params.mesar;
+
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+    let index_mes = meses.indexOf(monar) + 1;
+
+    // Variable que obtiene el año actual
+    const y = new Date();
+    let year = y.getFullYear();
+    
+    NGB.filtraSolNGBMes(year, index_mes, monar).then(([rows, fieldData]) => {
         response.render('natgasBlock/estatusSolicitudesNGB', {
             sesion: request.session.empleado,
             rol: request.session.rol,
