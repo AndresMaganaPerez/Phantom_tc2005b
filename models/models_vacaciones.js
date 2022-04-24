@@ -63,6 +63,10 @@ module.exports = class solicitudVacaciones {
         return db.execute('CALL Modificar_Estatus_Vacas_Rechazar(?,?,?)', [idSolicitud, nota, vacacionesUsadas]);
     }
 
+    static fetchPaginacionAllVacaciones(inicioLimite, resultadosPorPagina){
+        return db.execute("SELECT idSolicitud, e.idEmpleado AS 'solicita', e.nombre AS 'nomSolicita', e.apellidoPaterno AS 'apellidoPatSolicita', e.apellidoMaterno AS 'apellidoMatSolicita', sv.fechaInicio, sv.fechaFin, sv.fechaReanudacion, sv.fechaSolicitud, sv.suplente, sv.solicitudAceptadaEstatus, d.idLider, f.nombre AS 'nomLider', f.apellidoPaterno AS 'apellidoPatLider', f.apellidoMaterno AS 'apellidoMatLider', Nota FROM solicitudvacaciones sv, empleado e, empleado f, dirige d WHERE sv.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND solicitudAceptadaEstatus IS NOT NULL ORDER BY fechaSolicitud DESC LIMIT ?, ?;", [inicioLimite, resultadosPorPagina]);
+    }
+
     // Funcion Filtrar solicitudes de vacaciones por Mes
     static filtraSolVacacionesMes(mesar) {
         if (mesar == 'Enero') {
