@@ -5,6 +5,8 @@ const { formatWithOptions } = require('util');
 const { on } = require('events');
 const { info } = require('console');
 
+const resultadosPorPagina = 10;
+
 exports.solicitarVacaciones = (request, response, next) => {
     console.log(request.body);
     const date = new Date();
@@ -269,21 +271,37 @@ exports.rechazarSolicitudesEstatus = (request, response, next) => {
 exports.estatusMisVacaciones = (request, response, next) => {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
-            const misVacaciones = rows;
             const currentDate = new Date();
+            const numeroDeResultados = rows.length;
+            const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+            const page = request.query.page ? Number(request.query.page) : 1;
+            if (page > numeroDePaginas) {
+                response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent(numeroDePaginas));
+            } else if (page < 1) {
+                response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent('1'));
+            }
+            const inicioLimite = (page - 1) * resultadosPorPagina;
             Solicitudes.fetchLider(request.session.empleado.idEmpleado)
                 .then(([rows, fieldData]) => {
                     const lider = rows[0];
                     const flag = '';
-                    response.render('vacaciones/estatusMisVacaciones', {
-                        sesion: request.session.empleado,
-                        rol: request.session.rol,
-                        privilegios: request.session.privilegios,
-                        solicitudes: misVacaciones,
-                        lider: lider,
-                        diaActual: currentDate,
-                        flag: flag
-                    });
+                    Solicitudes.fetchPaginacionMisVacaciones(request.session.empleado.idEmpleado, inicioLimite, resultadosPorPagina)
+                    .then(([rows, fieldData]) => {
+                        const iterator = (page - 5) < 1 ? 1 : page - 5;
+                        const paginaFinal = (iterator + 9) <= numeroDePaginas ? (iterator) : page + (numeroDePaginas - page);
+                        response.render('vacaciones/estatusMisVacaciones', {
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas,
+                            lider: lider,
+                            diaActual: currentDate,
+                            flag: flag
+                        });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
                 })
                 .catch((err) => {
                     console.log(err);
@@ -380,10 +398,9 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 exports.estatusVacaciones = (request, response, next) => {
     Solicitudes.fetchAllVacaciones().then(([rows, fieldData]) => {
         const data = rows;
-        const resultadosPorPagina = 10;
         const numeroDeResultados = rows.length;
         const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
-        let page = request.query.page ? Number(request.query.page) : 1;
+        const page = request.query.page ? Number(request.query.page) : 1;
         // console.log(page);
         if (page > numeroDePaginas) {
             response.redirect('vacaciones/solicitudes_estatus_vacaciones/?page='+encodeURIComponent(numeroDePaginas));
@@ -400,8 +417,8 @@ exports.estatusVacaciones = (request, response, next) => {
                     .on('finish', function() {
                         Solicitudes.fetchPaginacionAllVacaciones(inicioLimite, resultadosPorPagina)
                         .then(([rows,fieldData]) => {
-                            let iterator = (page - 5) < 1 ? 1 : page - 5;
-                            let paginaFinal = (iterator + 9) <= numeroDePaginas ? (iterator) : page + (numeroDePaginas -page);
+                            const iterator = (page - 5) < 1 ? 1 : page - 5;
+                            const paginaFinal = (iterator + 9) <= numeroDePaginas ? (iterator) : page + (numeroDePaginas - page);
                             // if (paginaFinal < (page + 4)) {
                             //     iterator -= (page + 4) - numeroDePaginas;
                             // }
