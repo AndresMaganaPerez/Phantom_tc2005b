@@ -5,6 +5,8 @@ const datetime = currentdate.getDate() + "/"
                 + (currentdate.getMonth()+1)  + "/" 
                 + currentdate.getFullYear();
 
+const resultadosPorPagina = 10;
+
 exports.solicitarNatgasBlock = (request, response, next) => {
     console.log(request.body);
     console.log("Solicitar mi Natgas Block");
@@ -90,13 +92,33 @@ exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
 exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
     console.log("Consultar Solicitudes NGB");
     NGB.fetchAll().then(([rows, fieldData]) => {
-        console.log("Mostrando la tabla que necesito")
-        console.log(rows);
-        response.render('natgasBlock/estatusSolicitudesNGB', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            solicitudes: rows,
+        const numeroDeResultados = rows.length;
+        const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+        const page = request.query.page ? Number(request.query.page) : 1;
+        if (numeroDeResultados > 0){
+            if (page > numeroDePaginas) {
+                response.redirect('natgas_blocks/solicitudes_estatus_natgas_block/?page=' + encodeURIComponent(numeroDePaginas));
+            } else if (page < 1) {
+                response.redirect('natgas_blocks/solicitudes_estatus_natgas_block/?page=' + encodeURIComponent('1'));
+            }
+        }    
+        const inicioLimite = (page - 1) * resultadosPorPagina;
+        NGB.fetchPaginacionAll(inicioLimite, resultadosPorPagina)
+        .then(([rows, fieldData]) => {
+            let iterator = (page - 2) < 1 ? 1 : page - 2;
+            const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+            if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                iterator = numeroDePaginas - 4;
+            }
+            response.render('natgasBlock/estatusSolicitudesNGB', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas
+            });
+        })
+        .catch((error) => {
+            console.log(error);
         })
     }).catch((error) => {
         console.log(error);

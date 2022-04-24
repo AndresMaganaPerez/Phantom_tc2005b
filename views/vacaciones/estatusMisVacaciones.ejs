@@ -23,28 +23,29 @@
     <% for (solicitud of solicitudes) { %>
         <%- include('componentes/cartas/cartaEstatusMisSolVac.ejs', {solicitud: solicitud}) %>
     <% } %>
+    <ul class="pagination center">
+        <% if (page > 1) { %>
+            <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=1"><i class="material-icons">first_page</i></a></li>
+            <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%=page - 1%>"><i class="material-icons">chevron_left</i></a></li>
+        <% } else { %>
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+        <% } %>
+        <% for (let i = iterator; i <= paginaFinal; i++) { %>
+            <% if (i == page) { %>
+                <li class="active light-blue darken-4"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%= i%>"><%= i %></a></li>
+                <% continue; %>
+            <% } %>
+            <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%= i%>"><%= i %></a></li>
+        <% } %>
+        <% if (page < numeroDePaginas) { %>
+            <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%=page + 1%>"><i class="material-icons">chevron_right</i></a></li>
+            <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%= numeroDePaginas%>"><i class="material-icons">last_page</i></a></li>
+        <% } else { %>
+            <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        <% } %>
+    </ul>
 <% } else { %>
     <h3 class="center">No tienes solicitudes de vacaciones</h5>
 <% } %>
-
-<ul class="pagination center">
-    <% if (page > 1) { %>
-        <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%=page - 1%>"><i class="material-icons">chevron_left</i></a></li>
-    <% } else { %>
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
-    <% } %>
-    <% for (let i = iterator; i <= paginaFinal; i++) { %>
-        <% if (i == page) { %>
-            <li class="active light-blue darken-4"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%= i%>"><%= i %></a></li>
-            <% continue; %>
-        <% } %>
-        <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%= i%>"><%= i %></a></li>
-    <% } %>
-    <% if (page < numeroDePaginas) { %>
-        <li class="waves-effect"><a href="/vacaciones/estatus_mis_vacaciones/?page=<%=page + 1%>"><i class="material-icons">chevron_right</i></a></li>
-    <% } else { %>
-        <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-    <% } %>
-</ul>
 
 <%- include('../includes/footer.ejs') %>
