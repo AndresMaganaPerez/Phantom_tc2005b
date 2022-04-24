@@ -287,8 +287,11 @@ exports.estatusMisVacaciones = (request, response, next) => {
                     const flag = '';
                     Solicitudes.fetchPaginacionMisVacaciones(request.session.empleado.idEmpleado, inicioLimite, resultadosPorPagina)
                     .then(([rows, fieldData]) => {
-                        const iterator = (page - 5) < 1 ? 1 : page - 5;
-                        const paginaFinal = (iterator + 9) <= numeroDePaginas ? (iterator) : page + (numeroDePaginas - page);
+                        let iterator = (page - 2) < 1 ? 1 : page - 2;
+                        const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                        if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                            iterator = numeroDePaginas - 4;
+                        }
                         response.render('vacaciones/estatusMisVacaciones', {
                             sesion: request.session.empleado,
                             rol: request.session.rol,
@@ -417,11 +420,12 @@ exports.estatusVacaciones = (request, response, next) => {
                     .on('finish', function() {
                         Solicitudes.fetchPaginacionAllVacaciones(inicioLimite, resultadosPorPagina)
                         .then(([rows,fieldData]) => {
-                            const iterator = (page - 5) < 1 ? 1 : page - 5;
-                            const paginaFinal = (iterator + 9) <= numeroDePaginas ? (iterator) : page + (numeroDePaginas - page);
-                            // if (paginaFinal < (page + 4)) {
-                            //     iterator -= (page + 4) - numeroDePaginas;
-                            // }
+                            let iterator = (page - 2) < 1 ? 1 : page - 2;
+                            const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                            if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                                iterator = numeroDePaginas - 4;
+                            }
+                            console.log(paginaFinal);
                             response.render('vacaciones/estatusVacaciones', {
                                 sesion: request.session.empleado,
                                 rol: request.session.rol,
