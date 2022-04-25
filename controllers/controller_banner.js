@@ -27,6 +27,8 @@ exports.vistaAgregarBanner = (request, response, next) => {
     date.setMonth(date.getMonth() + 2);
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+    const nuevaFecha = new Date(dateStr);
+    console.log(nuevaFecha);
     console.log(dateStr);
     const flag = '';
 
@@ -41,21 +43,25 @@ exports.vistaAgregarBanner = (request, response, next) => {
 
 exports.agregarBanner = (request, response, next) => {
     console.log('Creación en proceso');
-    let date= new Date();
-    let today = Date.now();
-    let mes = date.getMonth() + 1;
-    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+    let today = new Date();
     const banner = new Banners(request.file.filename, request.body.expiracion);
-    console.log(banner);
-    if (request.body.expiracion > today) {
+    const aux = new Date(request.body.expiracion);
+
+
+    if (aux > today) {
+        let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
+        date.setMonth(date.getMonth() + 2);
+        let mes = date.getMonth() + 1;
+        let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
         const flag = 'success';
         banner.saveBanners()
             .then(() => {
                 console.log('Se creó nuevo banner.');
-                response.render('agregarBanner', {
+                response.render('banner/agregarBanner', {
                     sesion: request.session.empleado,
                     rol: request.session.rol,
                     privilegios: request.session.privilegios,
+                    date: dateStr,
                     flag: flag
                 });
             })
