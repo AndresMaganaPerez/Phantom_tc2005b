@@ -6,7 +6,41 @@
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
                             <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
-                            <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
+                            <div id="mujeres1" hidden><%= mujeres[0].Valor %></div>
+                            <div id="mujeres2" hidden><%= mujeres[1].Valor %></div>
+                            <div id="mujeres3" hidden><%= mujeres[2].Valor %></div>
+                            <div id="mujeres4" hidden><%= mujeres[3].Valor %></div>
+                            <div id="mujeres5" hidden><%= mujeres[4].Valor %></div>
+                            <div id="mujeres6" hidden><%= mujeres[5].Valor %></div>
+                            <canvas id="myChartmujeres" style="height: 20px; width: 55px;"></canvas>
+                            <script>
+                                let myChartmujeres = document.getElementById('myChartmujeres').getContext('2d');
+                                let mujeres1 = document.getElementById('mujeres1').innerText;
+                                let mujeres2 = document.getElementById('mujeres2').innerText;
+                                let mujeres3 = document.getElementById('mujeres3').innerText;
+                                let mujeres4 = document.getElementById('mujeres4').innerText;
+                                let mujeres5 = document.getElementById('mujeres5').innerText;
+                                let mujeres6 = document.getElementById('mujeres6').innerText;
+                                let mujeres_Chart = new Chart(myChartmujeres, {
+                                    type: 'bar',
+                                    data: {
+                                        labels:['Nov', 'Dic', 'Ene', 'Feb', 'Mar', 'Abr'],
+                                        datasets:[{
+                                            label: 'Valor mujeres',
+                                            data:[
+                                                mujeres1,
+                                                mujeres2,
+                                                mujeres3,
+                                                mujeres4,
+                                                mujeres5,
+                                                mujeres6
+                                            ],
+                                            backgroundColor:'rgb(0,43,73,0.75)',
+                                            fill: true,
+                                        }]
+                                    },
+                                });
+                            </script>  
                             <% if (indicador.Valor < indicadorAnterior.Valor) { %>
                                 <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
                                 <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">

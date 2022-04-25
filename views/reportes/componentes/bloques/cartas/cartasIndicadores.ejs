@@ -6,7 +6,57 @@
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
                             <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
-                            <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
+                            <div id="nps1" hidden><%= npss[0].Valor %></div>
+                            <div id="nps2" hidden><%= npss[1].Valor %></div>
+                            <div id="nps3" hidden><%= npss[2].Valor %></div>
+                            <div id="nps4" hidden><%= npss[3].Valor %></div>
+                            <div id="nps5" hidden><%= npss[4].Valor %></div>
+                            <div id="nps6" hidden><%= npss[5].Valor %></div>
+
+                            <div id="mes1" hidden><%= meses[0] %></div>
+                            <div id="mes2" hidden><%= meses[1] %></div>
+                            <div id="mes3" hidden><%= meses[2] %></div>
+                            <div id="mes4" hidden><%= meses[3] %></div>
+                            <div id="mes5" hidden><%= meses[4] %></div>
+                            <div id="mes6" hidden><%= meses[5] %></div>
+                            <% console.log("-----------------------------------------------------------------") %>
+                            <% console.log(npss) %>
+                            <canvas id="myChart" style="height: 20px; width: 55px;"></canvas>
+                            <script>
+                                let myChart = document.getElementById('myChart').getContext('2d');
+                                let nps1 = document.getElementById('nps1').innerText;
+                                let nps2 = document.getElementById('nps2').innerText;
+                                let nps3 = document.getElementById('nps3').innerText;
+                                let nps4 = document.getElementById('nps4').innerText;
+                                let nps5 = document.getElementById('nps5').innerText;
+                                let nps6 = document.getElementById('nps6').innerText;
+
+                                let mes1 = document.getElementById('mes1').innerText;
+                                let mes2 = document.getElementById('mes2').innerText;
+                                let mes3 = document.getElementById('mes3').innerText;
+                                let mes4 = document.getElementById('mes4').innerText;
+                                let mes5 = document.getElementById('mes5').innerText;
+                                let mes6 = document.getElementById('mes6').innerText;
+                                let NPS_Chart = new Chart(myChart, {
+                                    type: 'bar',
+                                    data: {
+                                        labels:[mes1, mes2, mes3, mes4, mes5, mes6],
+                                        datasets:[{
+                                            label: 'Valor NPS',
+                                            data:[
+                                                nps1,
+                                                nps2,
+                                                nps3,
+                                                nps4,
+                                                nps5,
+                                                nps6
+                                            ],
+                                            backgroundColor:'rgb(0,43,73,0.75)',
+                                            fill: true,
+                                        }]
+                                    },
+                                });
+                            </script>
                             <% if (indicador.Valor < indicadorAnterior.Valor) { %>
                                 <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
                                 <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
@@ -35,7 +85,41 @@
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
                             <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
-                            <img style="padding-left: 55px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcyLJ2lI6ohpsRRlQpEswSIhP9AqWpWoOP_g&usqp=CAU">
+                            <div id="enps1" hidden><%= enpss[0].Valor %></div>
+                            <div id="enps2" hidden><%= enpss[1].Valor %></div>
+                            <div id="enps3" hidden><%= enpss[2].Valor %></div>
+                            <div id="enps4" hidden><%= enpss[3].Valor %></div>
+                            <div id="enps5" hidden><%= enpss[4].Valor %></div>
+                            <div id="enps6" hidden><%= enpss[5].Valor %></div>
+                            <canvas id="myChartENPS" style="height: 20px; width: 55px;"></canvas>
+                            <script>
+                                let myChartENPS = document.getElementById('myChartENPS').getContext('2d');
+                                let enps1 = document.getElementById('enps1').innerText;
+                                let enps2 = document.getElementById('enps2').innerText;
+                                let enps3 = document.getElementById('enps3').innerText;
+                                let enps4 = document.getElementById('enps4').innerText;
+                                let enps5 = document.getElementById('enps5').innerText;
+                                let enps6 = document.getElementById('enps6').innerText;
+                                let ENPS_Chart = new Chart(myChartENPS, {
+                                    type: 'bar',
+                                    data: {
+                                        labels:['Nov', 'Dic', 'Ene', 'Feb', 'Mar', 'Abr'],
+                                        datasets:[{
+                                            label: 'Valor ENPS',
+                                            data:[
+                                                enps1,
+                                                enps2,
+                                                enps3,
+                                                enps4,
+                                                enps5,
+                                                enps6
+                                            ],
+                                            backgroundColor:'rgb(0,43,73,0.75)',
+                                            fill: true,
+                                        }]
+                                    },
+                                });
+                            </script>
                             <% if (indicador.Valor < indicadorAnterior.Valor) { %>
                                 <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
                                 <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
