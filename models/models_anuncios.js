@@ -21,7 +21,11 @@ module.exports = class Anuncios {
         return db.execute('DELETE FROM solicitudvacaciones WHERE idAnuncios=?', [idAnuncio]);
     }
 
-    static fetchAll() {
-        return db.execute ('SELECT * FROM anuncios ORDER BY Fecha DESC');
+    static fetchAllPinned() {
+        return db.execute ('SELECT * FROM anuncios WHERE Pin = 1 ORDER BY Fecha DESC');
+    }
+
+    static fetchAllUnpinned() {
+        return db.execute ('SELECT * FROM anuncios WHERE Pin = 0 ORDER BY Fecha DESC');
     }
 }

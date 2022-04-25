@@ -7,7 +7,15 @@
     <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>
 <% } %>
 
-<% if (anuncios.length> 0) { %>
+<% if (flag == 'fail') { %>
+    <div class="center">
+        <span style="font-weight: 450; color: green;">
+            Anuncio creado exitosamente
+        </span>
+    </div>
+<% } %>
+
+<% if (anunciosUnpinned.length> 0) { %>
     <%- include('componentes/cartas/cartaAnuncio.ejs') %>
 <% } else { %>
     <h3 class="center" style="text-align: center">No hay anuncios publicados</h3>
