@@ -7,6 +7,10 @@ var datetime = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" +
 
 exports.anuncios = (request, response, next) => {
     const flag = '';
+    let date= new Date();
+    let today = Date.now();
+    let mes = date.getMonth() + 1;
+    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
     
     Anuncio.fetchAllPinned().then(([rowsPin, fieldData]) => {
         Anuncio.fetchAllUnpinned().then(([rowsUnpin, fieldData]) => {
@@ -16,6 +20,7 @@ exports.anuncios = (request, response, next) => {
                 privilegios: request.session.privilegios,
                 anunciosPinned: rowsPin,
                 anunciosUnpinned: rowsUnpin,
+                fechaDeHoy: dateStr,
                 flag: flag
             });
         });

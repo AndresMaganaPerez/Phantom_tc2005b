@@ -15,7 +15,7 @@
     </div>
 <% } %>
 
-<% if (anunciosUnpinned.length> 0) { %>
+<% if (anunciosUnpinned.length > 0 || anunciosPinned.length > 0) { %>
     <%- include('componentes/cartas/cartaAnuncio.ejs') %>
 <% } else { %>
     <h3 class="center" style="text-align: center">No hay anuncios publicados</h3>
