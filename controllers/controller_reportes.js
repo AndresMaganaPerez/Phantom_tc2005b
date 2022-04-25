@@ -11,11 +11,49 @@ exports.reportes = (request, response, next) => {
         previousMonth = 12;
     }
     
-    console.log("El mes anterior es: "+mes)
+
+    const resta = mes-6
+
+    console.log(resta)
+    const aux = []
+    if(resta < 1){
+        for(i=0; i < month.slice(resta).length; i++){
+            console.log("Hello")
+            console.log(month.slice(resta)[i])
+            aux.push(month.slice(resta)[i])
+        }
+        
+        for(i=0; i < mes; i++){
+            aux.push(month[i]);
+        }
+        console.log(aux)
+    } else{
+        for(i=resta; i < mes; i++){
+            console.log("Hello")
+            aux.push(month[i])
+        }
+        console.log(aux)
+    }
+    console.log("El mesStar: "+aux[0]);
+    const mesStart = aux[0];
+    console.log("El mesEnd: "+aux[aux.length - 1])
+    const mesEnd = aux[aux.length - 1];
+
+    console.log("El mes anterior es: "+previousMonth)
     let nombreMes = meses[d.getMonth()];
 
     const y = new Date();
     let year = d.getFullYear();
+
+    let previousYear = 0;
+    if(mesStart >= 8 && mesStart <=12){
+        previousYear = year - 1;
+    }else{
+        previousYear = year;
+    }
+    console.log(previousYear)
+    
+
 
     Reportes.fetchAll(mes, year).then(([rows, fieldData]) => {
         console.log(rows);
@@ -24,14 +62,101 @@ exports.reportes = (request, response, next) => {
             console.log("MES ANTERIOR");
             console.log(rowsAnterior);
             // console.log(rowsAnterior[0].Valor)
-            response.render('reportes/consultarReportes',{
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                indicadores: rows,
-                mesAnterior: rowsAnterior,
-                nombreMes: nombreMes
+
+            Reportes.fetchUltimos6NPS(mesStart, mesEnd, previousYear, year).then(([npss, fieldData]) =>{
+                console.log("Imprimiendo ultimos 6 NPS")
+                while(npss.length < 6){
+                    npss.push({
+                        Valor: 0
+                    });
+                }
+                console.log(npss.reverse());
+                const ultimos6npss = npss; 
+
+                Reportes.fetchUltimos6ENPS(mesStart, mesEnd, previousYear, year).then(([enpss, fieldData]) =>{
+                    console.log("Imprimiendo ultimos 6 ENPS")
+                    while(enpss.length < 6){
+                        enpss.push({
+                            Valor: 0
+                        });
+                    }
+                    console.log(enpss.reverse());
+                    const ultimos6enpss = enpss; 
+
+                    Reportes.fetchUltimos6CO2(mesStart, mesEnd, previousYear, year).then(([co2s, fieldData]) =>{
+                        console.log("Imprimiendo ultimos 6 CO2")
+                        while(co2s.length < 6){
+                            co2s.push({
+                                Valor: 0
+                            });
+                        }
+                        console.log(co2s.reverse());
+                        const ultimos6co2s = co2s; 
+
+                        Reportes.fetchUltimos6Hombres(mesStart, mesEnd, previousYear, year).then(([hombres, fieldData]) =>{
+                            console.log("Imprimiendo ultimos 6 Hombres")
+                            while(hombres.length < 6){
+                                hombres.push({
+                                    Valor: 0
+                                });
+                            }
+                            console.log(hombres.reverse());
+                            const ultimos6hombres = hombres; 
+    
+
+                            Reportes.fetchUltimos6Mujeres(mesStart, mesEnd, previousYear, year).then(([mujeres, fieldData]) =>{
+                                console.log("Imprimiendo ultimos 6 Mujeres")
+                                while(mujeres.length < 6){
+                                    mujeres.push({
+                                        Valor: 0
+                                    });
+                                }
+                                console.log(mujeres.reverse());
+                                const ultimos6mujeres = mujeres; 
+        
+                                response.render('reportes/consultarReportes',{
+                                    sesion: request.session.empleado,
+                                    rol: request.session.rol,
+                                    privilegios: request.session.privilegios,
+                                    indicadores: rows,
+                                    mesAnterior: rowsAnterior,
+                                    nombreMes: nombreMes,
+                                    npss: ultimos6npss,
+                                    enpss: ultimos6enpss,
+                                    co2s: ultimos6co2s,
+                                    hombres: ultimos6hombres,
+                                    mujeres: ultimos6mujeres,
+                                    meses: aux
+                                }); 
+                            }).catch((error) => {
+                                console.log(error);
+                                response.send('<h1>Todavia no hay 6 meses</h1>');
+                            });
+
+                        }).catch((error) => {
+                            console.log(error);
+                            response.send('<h1>Todavia no hay 6 meses</h1>');
+                        });
+
+                    }).catch((error) => {
+                        console.log(error);
+                        response.send('<h1>Todavia no hay 6 meses</h1>');
+                    });
+
+
+                }).catch((error) => {
+                    console.log(error);
+                    response.send('<h1>Todavia no hay 6 meses</h1>');
+                });
+
+                
+            }).catch((error) => {
+                console.log(error);
+                response.send('<h1>Todavia no hay 6 meses</h1>');
             });
+
+
+            
         }).catch((error) => {
             console.log(error);
         });
