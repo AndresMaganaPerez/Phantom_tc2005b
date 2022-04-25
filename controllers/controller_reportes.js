@@ -16,6 +16,7 @@ exports.reportes = (request, response, next) => {
 
     console.log(resta)
     const aux = []
+    const auxMeses = []
     if(resta < 1){
         for(i=0; i < month.slice(resta).length; i++){
             console.log("Hello")
@@ -27,6 +28,10 @@ exports.reportes = (request, response, next) => {
             aux.push(month[i]);
         }
         console.log(aux)
+        for(i=0; i<aux.length; i++){
+            auxMeses.push(meses[aux[i]-1])
+        }
+        console.log(auxMeses)
     } else{
         for(i=resta; i < mes; i++){
             console.log("Hello")
@@ -126,7 +131,7 @@ exports.reportes = (request, response, next) => {
                                     co2s: ultimos6co2s,
                                     hombres: ultimos6hombres,
                                     mujeres: ultimos6mujeres,
-                                    meses: aux
+                                    meses: auxMeses
                                 }); 
                             }).catch((error) => {
                                 console.log(error);
