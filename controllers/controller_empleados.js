@@ -344,13 +344,14 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
 exports.usuarios = (request,response,next) =>{
     empleados.fetchEmpleadoYRol()
     .then(([rows,fieldData]) =>{
+        const flag = '';
         response.render('empleados/empleadosExistentes', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,
-            empleados: rows
-        })
-
+            empleados: rows,
+            flag: flag
+        });
     }).catch((error) => {
         console.log(error);
     });
@@ -364,13 +365,30 @@ exports.buscarUsuario = (request, response, next) => {
 }
 
 exports.borrarUsuario = (request, response, next) => {
-    const id = request.body.delete
-    console.log(id)
-    // borrarEmpleado(id)
-    // .then(() => {
-    //     response.redirect('/usuarios')  
-    // })
-    // .catch((err) => {
-    //     console.log(err)
-    // })
-}
+    const id = request.body.delete;
+    const nombre = request.body.nombre + ' ' + request.body.apPat + ' ' + request.body.apMat;
+    console.log(id);
+    const flag = 'eliminarExitoso';
+
+    
+
+    empleados.borrarEmpleado(id)
+    .then(() => {
+        empleados.fetchEmpleadoYRol()
+        .then(([rows,fieldData]) => {
+            response.render('empleados/empleadosExistentes', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                empleados: rows,
+                nombre: nombre,
+                flag: flag
+            });
+        }).catch((error) => {
+            console.log(error);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+};

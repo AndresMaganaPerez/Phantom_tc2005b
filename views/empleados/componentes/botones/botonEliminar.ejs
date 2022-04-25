@@ -1,4 +1,15 @@
-<form action="/empleados/empleados_registrados" method="POST">
-    <input name="delete" type="hidden" value="<%= empleado.idEmpleado %>">
-    <button type="submit" class="btn-large red" style="font-weight: 600;">Eliminar</button>
-</form>
+<a href="#eliminarEmpleado?empleado= <%= empleado.idEmpleado %>" class="btn-large red modal-trigger" style="font-weight: 600;">Eliminar</a>
+
+<div id="eliminarEmpleado?empleado= <%= empleado.idEmpleado %>" class="modal">
+    <div class="modal-content">
+        <h4>¿Estás seguro de que quieres eliminar a este empleado?</h4>
+        <form action="/empleados/empleados_registrados" method="POST">
+            <input name="delete" type="hidden" value="<%= empleado.idEmpleado %>">
+            <input name="nombre" type="hidden" value="<%= empleado.nombre %>">
+            <input name="apPat" type="hidden" value="<%= empleado.apellidoPaterno %>">
+            <input name="apMat" type="hidden" value="<%= empleado.apellidoMaterno %>">
+            <button type="submit" class="btn green">Aceptar</button>
+            <input type="button" class="btn red modal-close" value="Cancelar">
+        </form>
+    </div>
+</div>

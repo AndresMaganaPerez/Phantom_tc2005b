@@ -3,10 +3,16 @@
 
 <%- include('componentes/botones/botonAceptarSolicitudes.ejs') %>
 
+<% if (flag == 'eliminarExitoso') { %>
+    <%- include('componentes/cartas/cartaEliminadoExitoso.ejs') %>
+<% } %>
+
 <div class="input-field col s12 m8 l13">
     <input type="text" id="buscar" name="buscar" placeholder="">
     <label for="buscar">Buscar empleado:</label>
 </div>
+
+
 
 <div class="row" id="busqueda_ajax">
 <% if (empleados.length > 0) { %>
@@ -19,6 +25,7 @@
 </div>
 
 <script>
+
     const busqueda_async = () => {
         const valor_busqueda = document.getElementById('buscar').value
         fetch('/empleados/buscar/' + valor_busqueda, {
@@ -61,7 +68,7 @@
                                                 '<div class="col s12 m6 l13">' +
                                                     '<h6 style="margin-left: 1.85vw;">' +
                                                         '<span style="font-weight: 600;">Vacaciones Totales:</span> ' + empleado.vacacionesTotales +
-                                                        ' | <span style="font-weight: 600;">Natgas Blocks</span> ' +
+                                                        ' | <span style="font-weight: 600;">Natgas Blocks:</span> ' +
                                                         empleado.cantidadNatgasBlocks +
                                                     '</h6>'+
                                                 '</div>'+
@@ -69,15 +76,22 @@
                                                 '<div class="col s12 m3 l13" style="display:inline-flex;">'+
                                                     '<span style="font-weight: 600;"><a class="btn-large light-blue darken-3">Modificar</a></span>'+
                                                     '<span style="margin-left:2vw;"></span>'+
-                                                    '<form action="/empleados/empleados_registrados" method="POST">'+
-                                                        '<input name="delete" type="hidden" value="'+ empleado.idEmpleado+'">'+
-                                                        '<button type="submit" class="btn-large red" style="font-weight: 600">'+
-                                                            'Eliminar'+
-                                                        '</button>'+
-                                                    '</form>'+
-                                                '</div>'+
-                                            '</div>'+
-
+                                                    '<a href="#eliminar" class="btn-large red modal-trigger" style="font-weight: 600;">Eliminar</a>' +
+                                                    '<div id="eliminar" class="modal">' + 
+                                                        '<div class="modal-content">' + 
+                                                        '<h4>¿Estás seguro de que quieres eliminar a este empleado?</h4>' +
+                                                        '<form action="/empleados/empleados_registrados" method="POST">' +
+                                                            '<input name="delete" type="hidden" value="' + empleado.idEmpleado + '">' +
+                                                            '<input name="nombre" type="hidden" value="' + empleado.nombre + '">' +
+                                                            '<input name="apPat" type="hidden" value="' + empleado.apellidoPaterno + '">' +
+                                                            '<input name="apMat" type="hidden" value="' +  empleado.apellidoMaterno + '">' +
+                                                            '<button type="submit" class="btn green">Aceptar</button>' + '     ' +
+                                                            '<input type="button" class="btn red modal-close" value="Cancelar">' +
+                                                        '</form>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '</div>' +
                                             '<div class="row">'+
                                                 '<div class="col s12 m6 l13">'+
                                                     '<h6 style="margin-left: 1.8vw;">'+
@@ -103,12 +117,14 @@
                             '</div>'
             }
             document.getElementById('busqueda_ajax').innerHTML = respuesta;
+            M.AutoInit();
         }).catch(err =>{
             console.log(err);
         });
     };
 
     document.getElementById('buscar').onkeyup = busqueda_async;
+
 </script>
 
 <%- include('../includes/footer.ejs') %>
