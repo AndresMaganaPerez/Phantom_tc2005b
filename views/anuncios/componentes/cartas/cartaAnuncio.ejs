@@ -9,12 +9,12 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="#002b49" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 10px; margin-top: 10px;">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                 <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-                              </svg> 
+                            </svg>
                             <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4><%= anuncio.Titulo %></h4></span>
                         </div>
-                        <div class="col s2 m4 l4"></div>
+                        <div class="col s2 m6 l4"></div>
                         <div class="col s2 m2 l2">
-                            <span style="margin-top: 10px;"><h8 class="flow-text"><%= anuncio.Fecha.toString().substr(4,11) %></h8></span>
+                            <span style="margin-top: 10px;"><h6>Fecha de publicación: <%= anuncio.Fecha.getDate()+'/'+anuncio.Fecha.getMonth()+'/'+anuncio.Fecha.getFullYear() %></h6></span>
                         </div>
                     </div>
                     
@@ -43,7 +43,7 @@
                         </div>
                         <div class="col s2 m4 l4"></div>
                         <div class="col s2 m2 l2">
-                            <span style="margin-top: 10px;"><h8 class="flow-text"><%= anuncio.Fecha.toString().substr(4,11) %></h8></span>
+                            <span style="margin-top: 10px;"><h6>Fecha de publicación: <%= anuncio.Fecha.getDate()+'/'+anuncio.Fecha.getMonth()+'/'+anuncio.Fecha.getFullYear() %></h6></span>
                         </div>
                     </div>
                     
