@@ -20,7 +20,7 @@ exports.anuncios = (request, response, next) => {
                 privilegios: request.session.privilegios,
                 anunciosPinned: rowsPin,
                 anunciosUnpinned: rowsUnpin,
-                fechaDeHoy: dateStr,
+                hoy: dateStr,
                 flag: flag
             });
         });
