@@ -1,16 +1,16 @@
-<div class="row">
+<div class="row" style="margin-top: 40px;">
     <div class="card" style="border-radius: 15px;">
         <div class="card-content" style="padding: 10px;">
             <span class="card-title activator black-text text-darken-4 center ">
-                <h5>Solicitudes de Vacaciones</h5>
+                <h5>Vacaciones</h5>
             </span>
         </div>
         <div class="card-content center" style="padding-top: 1px;">
             <!-- Va a haber un if en el que se verifica si hay solicitudes o no. Dependiendo de eso, va a cambiar el icono de la notificacion -->
-            <% if(rol =='lider'|| rol == 'operador'|| rol =='recursosHumanos') { %>
+            <% if (rol =='lider'|| rol == 'operador'|| rol == 'recursosHumanos') { %>
                 <%- include('../botones/botonCrearSolicitudVac.ejs') %>
             <% } %>
-            <%- include('../botones/botonSolicitudVac.ejs') %>
+            <%- include('../botones/botonSolicitudNGB.ejs') %>
         </div>
     </div>
 </div>
