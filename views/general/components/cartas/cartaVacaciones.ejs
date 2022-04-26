@@ -7,10 +7,10 @@
         </div>
         <div class="card-content center" style="padding-top: 1px;">
             <!-- Va a haber un if en el que se verifica si hay solicitudes o no. Dependiendo de eso, va a cambiar el icono de la notificacion -->
-            <% if (rol =='lider'|| rol == 'operador'|| rol == 'recursosHumanos') { %>
+            <% if (rol =='lider'|| rol == 'operador'|| rol == 'recursosHumanos' || rol == 'despachador' ) { %>
                 <%- include('../botones/botonCrearSolicitudVac.ejs') %>
             <% } %>
-            <%- include('../botones/botonSolicitudNGB.ejs') %>
+            <%- include('../botones/botonSolicitudVac.ejs') %>
         </div>
     </div>
 </div>

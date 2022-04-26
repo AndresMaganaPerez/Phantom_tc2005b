@@ -12,9 +12,10 @@
 <%- include('components/cartas/cartaAnuncios.ejs') %>
 
     <div class="col s12 m4 l13">
+        <% if (rol =='lider'|| rol == 'operador'|| rol == 'recursosHumanos' || rol == 'admin') { %>
         <%- include('components/cartas/cartaNGB.ejs') %>
+        <% } %>
         <%- include('components/cartas/cartaVacaciones.ejs') %>
-        
     </div>
     
 </div>
