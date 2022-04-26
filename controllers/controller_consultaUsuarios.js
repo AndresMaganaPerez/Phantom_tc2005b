@@ -2,6 +2,29 @@ const { borrarEmpleado } = require('../models/models_empleados')
 const empleados = require('../models/models_empleados')
 
 exports.usuarios = (request,response,next) =>{
+    console.log('TEST21')
+    if(request.session.rol == "admin"){
+        empleados.fetchEmpleadoYRolADMIN(request.session.empleado.idEmpleado)
+        .then(([rows,fieldData])=>{
+            if(rows.length >= 1){
+                console.log('hi');
+                response.render('consultaUsuarios/consultaDeEmpleados', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    empleados: rows
+                })
+            } else{
+                response.render('consultaUsuarios/consultaDeEmpleados', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    empleados: "No existen empleados registrados."
+                })
+            }
+        })
+    } else{
+        console.log('test')
     empleados.fetchEmpleadoYRol()
     .then(([rows,fieldData]) =>{
         if(rows.length >= 1){
@@ -20,6 +43,7 @@ exports.usuarios = (request,response,next) =>{
             })
         }
     })
+}
 }
 
 exports.buscarUsuario = (request, response, next) => {

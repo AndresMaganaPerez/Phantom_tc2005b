@@ -342,6 +342,22 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
 };
 
 exports.usuarios = (request,response,next) =>{
+    if(request.session.rol == "admin"){
+        empleados.fetchEmpleadoYRolADMIN(request.session.empleado.idEmpleado)
+    .then(([rows,fieldData]) =>{
+        const flag = '';
+        response.render('empleados/empleadosExistentes', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            empleados: rows,
+            flag: flag
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+    }else{
+
     empleados.fetchEmpleadoYRol()
     .then(([rows,fieldData]) =>{
         const flag = '';
@@ -355,13 +371,21 @@ exports.usuarios = (request,response,next) =>{
     }).catch((error) => {
         console.log(error);
     });
+}
 };
 
 exports.buscarUsuario = (request, response, next) => {
+    if(request.session.rol == "admin"){
+        empleados.fetchEmpleadoADMIN(request.session.empleado.idEmpleado, request.params.criterio)
+    .then(([rows,FieldData]) => {
+        response.status(200).json(rows);
+    }).catch(error =>{console.log(error);})
+    }else{
     empleados.fetchEmpleado(request.params.criterio)
     .then(([rows,FieldData]) => {
         response.status(200).json(rows);
     }).catch(error =>{console.log(error);})
+}
 }
 
 exports.borrarUsuario = (request, response, next) => {

@@ -12,6 +12,7 @@
                             <div id="co24" hidden><%= co2s[3].Valor %></div>
                             <div id="co25" hidden><%= co2s[4].Valor %></div>
                             <div id="co26" hidden><%= co2s[5].Valor %></div>
+
                             <canvas id="myChartCO2S" style="height: 20px; width: 55px;"></canvas>
                             <script>
                                 let myChartCO2S = document.getElementById('myChartCO2S').getContext('2d');
@@ -24,7 +25,7 @@
                                 let CO2_Chart = new Chart(myChartCO2S, {
                                     type: 'bar',
                                     data: {
-                                        labels:['Nov', 'Dic', 'Ene', 'Feb', 'Mar', 'Abr'],
+                                        labels:[mes1, mes2, mes3, mes4, mes5, mes6],
                                         datasets:[{
                                             label: 'Valor CO2',
                                             data:[
@@ -84,10 +85,11 @@
                                 let hombres4 = document.getElementById('hombres4').innerText;
                                 let hombres5 = document.getElementById('hombres5').innerText;
                                 let hombres6 = document.getElementById('hombres6').innerText;
+
                                 let Hombres_Chart = new Chart(myChartHombres, {
                                     type: 'bar',
                                     data: {
-                                        labels:['Nov', 'Dic', 'Ene', 'Feb', 'Mar', 'Abr'],
+                                        labels:[mes1, mes2, mes3, mes4, mes5, mes6],
                                         datasets:[{
                                             label: 'Valor Hombres',
                                             data:[
