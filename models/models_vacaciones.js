@@ -87,6 +87,21 @@ module.exports = class solicitudVacaciones {
         }
     }
 
+    static filtraPaginacionSolVacacionesMes(anio, mes, mesar, inicioLimite, resultadosPorPagina) {
+        if (mesar == 'Enero' || mesar == 'Febrero' || mesar == 'Marzo' || mesar == 'Abril' || mesar == 'Mayo' || mesar == 'Junio' || mesar == 'Julio' || mesar == 'Agosto' || mesar == 'Septiembre' || mesar == 'Octubre' || mesar == 'Noviembre' || mesar == 'Diciembre') {
+            return db.execute("SELECT idSolicitud, e.idEmpleado AS 'solicita', e.nombre AS 'nomSolicita', e.apellidoPaterno AS 'apellidoPatSolicita', e.apellidoMaterno AS 'apellidoMatSolicita', sv.fechaInicio, sv.fechaFin, sv.fechaReanudacion, sv.fechaSolicitud, sv.suplente, sv.solicitudAceptadaEstatus, d.idLider, f.nombre AS 'nomLider', f.apellidoPaterno AS 'apellidoPatLider', f.apellidoMaterno AS 'apellidoMatLider' FROM solicitudvacaciones sv, empleado e, empleado f, dirige d WHERE sv.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND sv.fechaInicio BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' AND solicitudAceptadaEstatus IS NOT NULL LIMIT ?, ?;", [inicioLimite, resultadosPorPagina]);
+        } else {
+            return db.execute("SELECT sv.idSolicitud, sv.idEmpleado AS 'solicita', e.nombre AS 'nomSolicita', e.apellidoPaterno AS 'apellidoPatSolicita', e.apellidoMaterno AS 'apellidoMatSolicita', " +
+                "sv.fechaSolicitud, sv.solicitudAceptadaEstatus, sv.fechaInicio, sv.fechaFin, sv.fechaReanudacion, sv.suplente, " +
+                "d.idLider, l.nombre AS 'nomLider', l.apellidoPaterno AS 'apellidoPatLider', l.apellidoMaterno AS 'apellidoMatLider' " +
+                "FROM empleado e, empleado l, solicitudvacaciones sv, dirige d " +
+                "WHERE e.idEmpleado = sv.idEmpleado AND e.idEmpleado = d.idOperador AND solicitudAceptadaEstatus IS NOT NULL AND l.idEmpleado = d.idLider AND sv.idEmpleado IN " +
+                "(SELECT ae.idEmpleado " +
+                "FROM area_empleado ae, area a " +
+                "WHERE ae.idArea = a.idArea AND ae.idArea = ?) LIMIT ?, ?;", [mesar, inicioLimite, resultadosPorPagina]);
+        }
+    }
+
     // Funcion Obtener Áreas de Natgas
     static fetchAreas(){
         return db.execute('SELECT * FROM area');

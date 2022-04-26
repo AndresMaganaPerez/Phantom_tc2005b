@@ -4,20 +4,33 @@
             <div class="card" style="border-radius: 15px;" data-sol-id="<%= solicitud.idSolicitud %>">
                 <div class="card-content" style="padding: 10px;">
                     <div class="row">
-                        <div class="col s12 m7 l13">
+                        <div class="col s12 m12 l13">
                             <span class='txt'>
-                                <h5 style="margin-left: 5%;">
-                                    <span style="font-weight: 600;">Fecha de solicitud:</span> <%= solicitud.fechaSolicitud.getDate() + '/' + (solicitud.fechaSolicitud.getMonth() + 1) + '/' + solicitud.fechaSolicitud.getFullYear() %>
+                                <h5 style="margin-left: 1.8vw;">
+                                    <span style="font-weight: 600;">
+                                        Empleado: 
+                                    </span>
+                                        <%= solicitud.nombre + ' ' + solicitud.apellidoPaterno + ' ' + solicitud.apellidoMaterno %> 
                                 </h5>
                             </span>
                         </div>
-                        <div class="col s12 m2 l13"></div>
+                        <div class="col s12 m4 l13">
+                            <h6 style="margin-left: 1.8vw;">
+                                <span style="font-weight: 600;">Suplente:</span> <%= solicitud.suplente %>
+                            </h6>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col s12 m7 l13">
-                            <h6 style="margin-left: 5%;">
+                        <div class="col s12 m6 l13">
+                            <h6 style="margin-left: 1.8vw;">
                                 <span style="font-weight: 600;">Fecha Inicio:</span> <%= solicitud.fechaInicio.getDate() + '/' + (solicitud.fechaInicio.getMonth() + 1) + '/' + solicitud.fechaInicio.getFullYear() %> | <span style="font-weight: 600;">Fecha Fin:</span> <%= solicitud.fechaFin.getDate() + '/' + (solicitud.fechaFin.getMonth() + 1) + '/' + solicitud.fechaFin.getFullYear() %>
                             </h6>
+                        </div>
+                        <div class="col s12 m1 l13"></div>
+                        <div class="col s12 m3 l13" style="display: inline-flex;">
+                            <%- include('../bloques/componentesBloque/botones/botonAceptado.ejs', {solicitud: solicitud}) %>
+                            <span style="margin-left: 3.9vw;"></span>
+                            <%- include('../bloques/componentesBloque/botones/botonRechazado.ejs') %>
                         </div>
                     </div>
                     <div class="row">
@@ -28,19 +41,10 @@
                             </h6>
                         </div>
                         <div class="col s12 m1 l13"></div>
-                        <div class="col s12 m3 l13" style="display: inline-flex;">
-                            <%- include('../bloques/componentesBloque/botones/botonAceptado.ejs', {solicitud: solicitud}) %>
-                            <span style="margin-left: 1vw;"></span>
-                            <%- include('../bloques/componentesBloque/botones/botonRechazado.ejs') %>
-                        </div>
                     </div>
                     <div class="row">
                         <h6 style="margin-left: 4%;">
-                            <span style="font-weight: 600;">
-                                Empleado: 
-                            </span>
-                                <%= solicitud.nombre + ' ' + solicitud.apellidoPaterno + ' ' + solicitud.apellidoMaterno%> |
-                            <span style="font-weight: 600;">Suplente:</span> <%= solicitud.suplente %>
+                            <span style="font-weight: 600;">Fecha de solicitud:</span> <%= solicitud.fechaSolicitud.getDate() + '/' + (solicitud.fechaSolicitud.getMonth() + 1) + '/' + solicitud.fechaSolicitud.getFullYear() %>
                         </h6>
                     </div>
                 </div>
