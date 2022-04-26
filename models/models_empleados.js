@@ -48,12 +48,16 @@ module.exports = class Empleados{
     }
 
     static fetchEmpleadoYRol() {
-        return db.execute('SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND estatusEmpleado = 1;')
+        return db.execute('SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND estatusEmpleado = 1 AND NOT area.nombre = "Recursos Humanos";')
+    }
+    
+    static fetchEmpleadoYRolADMIN(idAdmin){
+        return db.execute('SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND estatusEmpleado = 1 AND NOT empleado.idEmpleado =?',[idAdmin])
     }
 
     static findRol(nomina) {
-       return db.execute('SELECT descripcionRol FROM empleado e, roles r, empleado_rol eR WHERE e.idEmpleado=eR.idEmpleado AND r.idRol=eR.idRol AND eR.idEmpleado=?', [nomina]);
-    }
+        return db.execute('SELECT descripcionRol FROM empleado e, roles r, empleado_rol eR WHERE e.idEmpleado=eR.idEmpleado AND r.idRol=eR.idRol AND eR.idEmpleado=?', [nomina]);
+     }
 
     static findPrivilegio(rol) {
         return db.execute('SELECT accion FROM roles_privilegios rp, privilegios p, roles r WHERE p.idPrivilegio = rp.idPrivilegio AND r.idRol = rp.idRol AND descripcionRol=?', [rol]);
@@ -65,8 +69,14 @@ module.exports = class Empleados{
 
     static fetchEmpleado(criterio) {
         return db.execute(
-            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND estatusEmpleado = 1 AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR nombrePlaza LIKE ? OR nombreRolEmpresa LIKE ? OR empleado.idEmpleado LIKE ?);',
+            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND estatusEmpleado = 1 AND NOT area.nombre = "Recursos Humanos" AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR nombrePlaza LIKE ? OR nombreRolEmpresa LIKE ? OR empleado.idEmpleado LIKE ?);',
             ['%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%']);
+    }
+
+    static fetchEmpleadoADMIN(admin,criterio) {
+        return db.execute(
+            'SELECT empleado.idEmpleado, email, empleado.nombre, apellidoPaterno, apellidoMaterno, fechaNac, fechaIngr, numTelefonico, cantidadNatgasBlocks, antiguedad, vacacionesTotales, numVacacionesLey, numVacacionesPremio, roles.idRol, nombreRolEmpresa, area.idArea, area.nombre AS "nombreArea", plaza.idPlaza, nombrePlaza FROM empleado, empleado_rol, roles, area_empleado, area, plaza, plaza_empleado WHERE empleado.idEmpleado = empleado_rol.idEmpleado AND empleado_rol.idRol = roles.idRol AND empleado.idEmpleado = area_empleado.idEmpleado AND area_empleado.idArea = area.idArea AND empleado.idEmpleado = plaza_empleado.idEmpleado AND plaza.idPlaza = plaza_empleado.idPlaza AND estatusEmpleado = 1 AND NOT empleado.idEmpleado = ? AND (empleado.nombre LIKE ? OR empleado.apellidoPaterno LIKE ? OR empleado.apellidoMaterno LIKE ? OR area.nombre LIKE ? OR nombrePlaza LIKE ? OR nombreRolEmpresa LIKE ? OR empleado.idEmpleado LIKE ?);',
+            [admin ,'%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%', '%'+ criterio +'%']);
     }
 
     static saveTel(nomina, telefono) {
