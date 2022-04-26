@@ -16,7 +16,13 @@
 <% } %>
 
 <% if (anunciosUnpinned.length > 0 || anunciosPinned.length > 0) { %>
-    <%- include('componentes/cartas/cartaAnuncio.ejs') %>
+    <% for (anuncio of anunciosPinned) { %>
+        <%- include('componentes/cartas/cartaAnuncioPin.ejs') %>
+    <% } %>
+
+    <% for (anuncio of anunciosUnpinned) { %>
+        <%- include('componentes/cartas/cartaAnuncioUnpin.ejs') %>
+    <% } %>
 <% } else { %>
     <h3 class="center" style="text-align: center">No hay anuncios publicados</h3>
 <% } %>
