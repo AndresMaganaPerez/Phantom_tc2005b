@@ -21,11 +21,19 @@ module.exports = class Anuncios {
         return db.execute('DELETE FROM solicitudvacaciones WHERE idAnuncios=?', [idAnuncio]);
     }
 
-    static fetchAllPinned() {
-        return db.execute ('SELECT * FROM anuncios WHERE Pin = 1 ORDER BY Fecha DESC');
+    static fetchAllPinned(hoy) {
+        return db.execute ('SELECT a.IdAnuncios, Titulo, texto, Fecha, expiracion, Pin, recursoDigital FROM anuncios a, anuncios_recurso_digital ard, recurso_digital rd WHERE a.IdAnuncios = ard.idAnuncios AND rd.idRecursoDigital = ard.idRecursoDigital AND Pin = 1 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC');
     }
 
-    static fetchAllUnpinned() {
-        return db.execute ('SELECT * FROM anuncios WHERE Pin = 0 ORDER BY Fecha DESC');
+    static fetchAllUnpinned(hoy) {
+        return db.execute ('SELECT a.IdAnuncios, Titulo, texto, Fecha, expiracion, Pin, recursoDigital FROM anuncios a, anuncios_recurso_digital ard, recurso_digital rd WHERE a.IdAnuncios = ard.idAnuncios AND rd.idRecursoDigital = ard.idRecursoDigital AND Pin = 0 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC');
+    }
+
+    static fetchLastPin(hoy) {
+        return db.execute('SELECT * FROM anuncios WHERE Pin = 1 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC LIMIT 1');
+    }
+
+    static fetchLastUnpin(hoy) {
+        return db.execute('SELECT * FROM anuncios WHERE Pin = 1 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC LIMIT 1');
     }
 }

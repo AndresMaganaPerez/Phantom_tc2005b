@@ -4,12 +4,15 @@
         <div class="card" style="border-radius: 15px;">
             <div class="card-content" style="padding: 10px;">
                 <div class="row" style="margin-bottom: 10px;">
-                    <div class="col s8 m6 l6">
-                        <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4><a class="modal-trigger" style="color: #43B02A;" href="#anuncios?id=<%= anuncio.IdAnuncios %>"><%= anuncio.Titulo %></a></h4></span>
+                    <div class="col s12 m2 l13">
                     </div>
-                    <div class="col s2 m6 l4"></div>
-                    <div class="col s2 m2 l2">
-                        <span style="margin-top: 10px;"><h6>Fecha de publicación: <%= anuncio.Fecha.getDate()+'/'+anuncio.Fecha.getMonth()+'/'+anuncio.Fecha.getFullYear() %></h6></span>
+                    <div class="col s12 m8 l13"></div>
+                    <div class="col s12 m2 l13">
+                        <span style="margin-top: 10px; margin-left: 10px;"><h6>Fecha de publicación: <%= anuncio.Fecha.getDate()+'/'+anuncio.Fecha.getMonth()+'/'+anuncio.Fecha.getFullYear() %></h6></span>
+                    </div>
+
+                    <div class="col s12 m12 l13">
+                        <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4><a class="modal-trigger" style="color: #000; font-weight: 300px;" href="#anuncios?id=<%= anuncio.IdAnuncios %>"><%= anuncio.Titulo %></a></h4></span>
                     </div>
                 </div>
             </div>
@@ -26,10 +29,14 @@
 
 <!-- Estructura del Modal -->
 <div id="anuncios?id=<%= anuncio.IdAnuncios %>" class="modal" style="border-radius: 15px;">
-    <div class="modal-content" style="border-radius: 15px;">
-      <h4><%= anuncio.Titulo %></h4>
-      <!-- <img src="/<%= anuncio.recursoDigital %>" style="width: fit-content; height: 200px;"> -->
-      <p><%= anuncio.texto %></p>
+    <div class="modal-content, center" style="border-radius: 15px;">
+      <h4 style="padding-top: 15px;"><%= anuncio.Titulo %></h4>
+      <% if (anuncio.recursoDigital != null) { %>
+        <img src="/<%= anuncio.recursoDigital %>" class="responsive-img" style="width: fit-content; height: 300px;">
+      <% } %>
+    </div>
+    <div style="padding-left: 3vw; padding-right: 3vw;">
+        <p><%= anuncio.texto %></p>
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-blue btn-flat" style="border-radius: 10px;">Cerrar</a>
