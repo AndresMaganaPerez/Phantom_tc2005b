@@ -1,5 +1,4 @@
 const { response } = require("express");
-const Anuncios = require("../models/models_anuncios");
 const Anuncio = require('../models/models_anuncios');
 
 var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
@@ -12,8 +11,8 @@ exports.anuncios = (request, response, next) => {
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
     
-    Anuncio.fetchAllPinned().then(([rowsPin, fieldData]) => {
-        Anuncio.fetchAllUnpinned().then(([rowsUnpin, fieldData]) => {
+    Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
+        Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
             response.render('anuncios/anuncios',{
                 sesion: request.session.empleado,
                 rol: request.session.rol,
@@ -47,7 +46,7 @@ exports.postAnuncio = (request, response, next) => {
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
     
-    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ?  request.file.filename : "");
+    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null);
     
     if (request.body.expiracion > dateStr) {
         const flag = 'success';

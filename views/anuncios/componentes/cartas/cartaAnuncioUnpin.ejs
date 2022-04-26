@@ -28,7 +28,9 @@
 <div id="anuncios?id=<%= anuncio.IdAnuncios %>" class="modal" style="border-radius: 15px;">
     <div class="modal-content" style="border-radius: 15px;">
       <h4><%= anuncio.Titulo %></h4>
-      <!-- <img src="/<%= anuncio.recursoDigital %>" style="width: fit-content; height: 200px;"> -->
+      <% if (anuncio.recursoDigital != null) { %>
+        <img src="/<%= anuncio.recursoDigital %>" style="width: fit-content; height: 300px; align-content: center;">
+      <% } %>
       <p><%= anuncio.texto %></p>
     </div>
     <div class="modal-footer">
