@@ -1,11 +1,22 @@
-<% if (rol == 'admin') { %>
-    <%- include('generalRoles/generalAdmin.ejs') %>
-<% } else if (rol == 'recursosHumanos') { %>
-    <%- include('generalRoles/generalLider.ejs') %>
-<% } else if (rol == 'lider') { %>
-    <%- include('generalRoles/generalLider.ejs') %>
-<% } else if (rol == 'operador') { %>
-    <%- include('generalRoles/generalOperador.ejs') %>
-<% } else if (rol == 'despachador') { %>
-    <%- include('generalRoles/generalPromJF.ejs') %>
-<% } %>
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+
+<div class="row" style="margin-top: 40px;">
+    <div class="col s12 m2 l13"></div>
+    <%- include('../includes/banner.ejs') %>
+    <%- include('components/cartas/cartaReportes.ejs') %>
+</div>
+
+
+
+<%- include('components/cartas/cartaAnuncios.ejs') %>
+
+    <div class="col s12 m4 l13">
+        <%- include('components/cartas/cartaNGB.ejs') %>
+        <%- include('components/cartas/cartaVacaciones.ejs') %>
+        
+    </div>
+    
+</div>
+
+<%- include('../includes/footer.ejs') %>
