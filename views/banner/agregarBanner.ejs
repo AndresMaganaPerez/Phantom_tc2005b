@@ -1,40 +1,31 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
-    <h3 style="text-align: center;">Agregar Banner</h3>
-    <% if (flag == 'success') { %>
-        <%- include('componentes/cartas/cartaExitoBanner.ejs') %>
-    <% } %>
-
-    <!-- <div class="row">
-        <div class="col s12 m2 l13"></div>
-        <div class="col s12 m8 l13">
-            <div class="right-align" style="padding-top: 20px;">
-                <button class="btn waves-effect waves-light blue" action="#" style="margin-bottom: 10px;">
-                    <i class="material-icons left">add</i>
-                    <span>Agregar</span>
-                </button>
-            </div>
-        </div>
-    </div> -->
-
-    <div class="row">
-        <div class="col s12 m2 l13"></div>
-        <div class="col s12 m8 l13">
-            <div class="card"  style="border-radius: 15px; padding: 40px 40px;">
-                <div class="card-content center" style="padding: 10px; border: dashed grey;">
-                    <h4>Subir Imagen</h4>
+    <div class="row center">
+        <% if (flag == 'success') { %>
+            <%- include('componentes/cartas/cartaExitoBanner.ejs') %>
+        <% } %>
+        <div class="col s12 m3 l13"></div>
+        <div class="col s12 m6 l13">
+            <div class="card"  style="border-radius: 15px; padding: 40px 40px; margin-top: 100px;">
+                <div class="card-content center" style="padding: 10px; padding-right: 20px;  padding-left: 20px;">
+                    <div style="margin-bottom: 50px">
+                        <h4>Agregar Banner</h4>
+                    </div>
                     <form action="/banners/agregar_banner" method="POST" enctype="multipart/form-data">
-                        <div class="file-field input-field">
+                        <div class="file-field input-field" style="margin-bottom: 20px">
                             <div class="row">
-                                <input type="file" accept="image/png, image/jpg, image/jpeg" name="image" required
-                                <% if (flag == 'fail') { %>
-                                    value = "<%= imagen %>"
-                                <% } %>
-                                >
-                                <img src="https://cdn.picpng.com/icon/upload-files-icon-66763.png" style="width: 100px; height: 100px; margin-top: 10px;">
+                                <div class="btn ">
+                                    <span>Archivo</span>
+                                  <input type="file" name="image" accept="image/png, image/jpg, image/jpeg" style="width: 200px; margin-top: 10px;" required>
+                                </div>
+                                <div class="file-path-wrapper">
+                                  <input class="file-path validate" type="text">
+                                </div>
                             </div>
                         </div>
+
                         <label for="expiracion" style="font-weight: bold; color: black; margin-right: 10px;">Fecha de Expiración</label>
-                        <input id= "expiracion" type="date" class="" name="expiracion" required style="width: 200px; margin-top: 10px;" value="<%= date %>">
+                        <input id= "expiracion" type="date" class="" name="expiracion" required style="width: 20em; margin-top: 10px;" value="<%= date %>">
+
                         <% if (flag == 'fail') { %>
                             <%- include('componentes/cartas/cartaErrorBanner.ejs') %>
                         <% } %>
@@ -50,6 +41,7 @@
             </div>
             
         </div>
+        <div class="col s12 m3 l13"></div>
     </div>
 
 
