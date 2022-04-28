@@ -252,23 +252,30 @@ exports.registrarEmpleado = (request, response, next) => {
                         .then(([lideres, fieldData]) => {
                             empleados.fetchRoles()
                             .then(([roles, fieldData]) => {
-                                empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
-                                .then(() => {
-                                    response.render('empleados/aceptarEmpleados', {
-                                        sesion: request.session.empleado,
-                                        rol: request.session.rol,
-                                        privilegios: request.session.privilegios,
-                                        solicitudes: empleado,
-                                        areas: areas,
-                                        lideres: lideres,
-                                        roles: roles,
-                                        flag: flag,
-                                        infoEmpleado: infoEmpleado
-                                    })  
+                                empleados.fetchPlazas()
+                                .then(([plazas, fieldData]) => {
+                                    empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
+                                    .then(() => {
+                                        response.render('empleados/aceptarEmpleados', {
+                                            sesion: request.session.empleado,
+                                            rol: request.session.rol,
+                                            privilegios: request.session.privilegios,
+                                            solicitudes: empleado,
+                                            areas: areas,
+                                            lideres: lideres,
+                                            roles: roles,
+                                            flag: flag,
+                                            infoEmpleado: infoEmpleado,
+                                            plazas: plazas
+                                        })  
+                                    })
+                                    .catch((error) => {
+                                        console.log(error);
+                                    });
                                 })
                                 .catch((error) => {
                                     console.log(error);
-                                });        
+                                })        
                             })
                             .catch((error) => {
                             console.log(error);
@@ -310,16 +317,22 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
                     .then(([lideres, fieldData]) => {
                         empleados.fetchRoles()
                         .then(([roles, fieldData]) => {
-                            response.render('empleados/aceptarEmpleados', {
-                                sesion: request.session.empleado,
-                                rol: request.session.rol,
-                                privilegios: request.session.privilegios,
-                                solicitudes: empleado,
-                                areas: areas,
-                                lideres: lideres,
-                                roles: roles,
-                                flag: flag,
-                                infoEmpleado: infoEmpleado
+                            empleados.fetchPlazas()
+                            .then(([plazas, fieldData]) => {
+                                response.render('empleados/aceptarEmpleados', {
+                                    sesion: request.session.empleado,
+                                    rol: request.session.rol,
+                                    privilegios: request.session.privilegios,
+                                    solicitudes: empleado,
+                                    areas: areas,
+                                    lideres: lideres,
+                                    roles: roles,
+                                    flag: flag,
+                                    infoEmpleado: infoEmpleado,
+                                    plazas: plazas
+                                })
+                            }).catch((error) => {
+                                console.log(error);
                             })
                         }).catch((error) =>{
                             console.log(error);
