@@ -13,6 +13,9 @@ exports.anuncios = (request, response, next) => {
     
     Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
         Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
+            console.log(rowsPin);
+            console.log(rowsUnpin);
+            console.
             response.render('anuncios/anuncios',{
                 sesion: request.session.empleado,
                 rol: request.session.rol,
