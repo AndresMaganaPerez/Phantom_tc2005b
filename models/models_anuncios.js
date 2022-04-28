@@ -30,10 +30,10 @@ module.exports = class Anuncios {
     }
 
     static fetchLastPin(hoy) {
-        return db.execute('SELECT * FROM anuncios WHERE Pin = 1 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC LIMIT 1');
+        return db.execute('SELECT * FROM anuncios WHERE Pin = 1 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC LIMIT 5');
     }
 
     static fetchLastUnpin(hoy) {
-        return db.execute('SELECT * FROM anuncios WHERE Pin = 1 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC LIMIT 1');
+        return db.execute('SELECT * FROM anuncios WHERE Pin = 0 AND expiracion >= "'+hoy+'" ORDER BY Fecha DESC LIMIT 5');
     }
 }

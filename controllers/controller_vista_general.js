@@ -4,17 +4,18 @@ const Reportes = require('../models/models_reportes');
 
 exports.vistaGeneral = (request, response, next) => {
     let today = Date.now();
-    // let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
-    Banners.fetchAllBanners()
-    .then(([rows, fieldData]) => {
-        Anuncio.fetchLastPin().then(([rowsPin, fieldData]) => {
+    let date= new Date();
+    let mes = date.getMonth() + 1;
+    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+    //let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
+    Banners.fetchAllBanners(dateStr).then(([rows, fieldData]) => {
+        Anuncio.fetchLastPin(dateStr).then(([rowsPin, fieldData]) => {
             Anuncio.fetchLastUnpin().then(([rowsUnPin, fieldData]) => {
                 const banners = rows;
                 console.log(request.body);
                 console.log(request.session.empleado);
                 console.log(request.session.rol);
                 console.log(request.session.privilegios);
-
 
                 const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
                 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];

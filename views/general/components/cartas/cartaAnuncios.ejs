@@ -1,20 +1,42 @@
 <div class="row">
     <div class="col s12 m2 l13"></div>
     <div class="col s12 m4 l13">
-        <div class="card medium" style="padding-left: 10px; padding-right: 10px; border-radius: 15px; ">
+        <div class="card medium" style="padding-left: 10px; padding-right: 10px; border-radius: 15px; overflow: scroll;">
             <div class="card-content" style="padding: 10px;">
                 <span class="card-title activator black-text text-darken-4 center ">
                     <h4>Anuncios</h4>
                     <li class="divider"></li>
                 </span>
             </div>
-            <div class="card" style="border-radius: 15px; height: 180px;">
-                <div class="card-content" >
-                    <h5>TITULO ANUNCIO</h5>
-                    <li class="divider"></li>
-                    <p style="padding-top: 15px;">Contenido de Anuncio</p>
-                </div>
-            </div>
+
+            <% if (anuncioPin.length > 0) { %>
+                <% for (anuncio of anuncioPin) { %>
+                    <!-- Inicio de cartas anuncios Pineados -->
+                    <div class="card" style="border-radius: 15px; height: 180px;">
+                        <div class="card-content" >
+                            <h5><%= anuncio.Titulo %></h5>
+                            <li class="divider"></li>
+                            <p style="padding-top: 15px;"><%= anuncio.texto.toString().substr(0, 125) %>...</p>
+                        </div>
+                    </div>
+                    <!-- Fin de cartas anuncios Pineados -->
+                <% } %>
+            <% } else if (anuncioUnpin.length > 0) { %>
+                <% for (anuncio of anuncioUnpin) { %>
+                    <!-- Inicio de cartas anuncios No Pineados -->
+                    <div class="card" style="border-radius: 15px; height: 180px;">
+                        <div class="card-content" >
+                            <h5><%= anuncio.Titulo %></h5>
+                            <li class="divider"></li>
+                            <p style="padding-top: 15px;"><%= anuncio.texto %></p>
+                        </div>
+                    </div>
+                    <!-- Fin de cartas anuncios No Pineados -->
+                <% } %>
+            <% } else { %>
+                <h6>No hay anuncios publicados</h6>
+            <% } %>
+
             <div class="card-content">
                 <p><a href="/anuncios">Ver Anuncios</a></p>
             </div>
