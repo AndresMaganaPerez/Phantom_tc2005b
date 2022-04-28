@@ -71,52 +71,52 @@ exports.reportes = (request, response, next) => {
             Reportes.fetchUltimos6NPS(mesStart, mesEnd, previousYear, year).then(([npss, fieldData]) =>{
                 console.log("Imprimiendo ultimos 6 NPS")
                 while(npss.length < 6){
-                    npss.push({
+                    npss.unshift({
                         Valor: 0
                     });
                 }
-                console.log(npss.reverse());
+                console.log(npss);
                 const ultimos6npss = npss; 
 
                 Reportes.fetchUltimos6ENPS(mesStart, mesEnd, previousYear, year).then(([enpss, fieldData]) =>{
                     console.log("Imprimiendo ultimos 6 ENPS")
                     while(enpss.length < 6){
-                        enpss.push({
+                        enpss.unshift({
                             Valor: 0
                         });
                     }
-                    console.log(enpss.reverse());
+                    console.log(enpss);
                     const ultimos6enpss = enpss; 
 
                     Reportes.fetchUltimos6CO2(mesStart, mesEnd, previousYear, year).then(([co2s, fieldData]) =>{
                         console.log("Imprimiendo ultimos 6 CO2")
                         while(co2s.length < 6){
-                            co2s.push({
+                            co2s.unshift({
                                 Valor: 0
                             });
                         }
-                        console.log(co2s.reverse());
+                        console.log(co2s);
                         const ultimos6co2s = co2s; 
 
                         Reportes.fetchUltimos6Hombres(mesStart, mesEnd, previousYear, year).then(([hombres, fieldData]) =>{
                             console.log("Imprimiendo ultimos 6 Hombres")
                             while(hombres.length < 6){
-                                hombres.push({
+                                hombres.unshift({
                                     Valor: 0
                                 });
                             }
-                            console.log(hombres.reverse());
+                            console.log(hombres);
                             const ultimos6hombres = hombres; 
     
 
                             Reportes.fetchUltimos6Mujeres(mesStart, mesEnd, previousYear, year).then(([mujeres, fieldData]) =>{
                                 console.log("Imprimiendo ultimos 6 Mujeres")
                                 while(mujeres.length < 6){
-                                    mujeres.push({
+                                    mujeres.unshift({
                                         Valor: 0
                                     });
                                 }
-                                console.log(mujeres.reverse());
+                                console.log(mujeres);
                                 const ultimos6mujeres = mujeres; 
         
                                 response.render('reportes/consultarReportes',{
