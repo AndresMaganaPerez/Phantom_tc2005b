@@ -25,7 +25,7 @@ exports.solicitarNatgasBlock = (request, response, next) => {
             fechaDeHoy: datetime,
             ultimoNGB: condicionUltimoNGB,
             limiteFecha : limiteFechaNGB,
-            flag: flag
+            flag: flag,
         });
         //console.log(rows);
     }).catch((err) =>{console.log(err)});
@@ -35,16 +35,16 @@ exports.solicitarNatgasBlock = (request, response, next) => {
 exports.postDeSolicitud = (request,response,next) => {
     const fechaUso = new Date(request.body.fecha);
     const flag = fechaUso.getUTCDay() == 0 || fechaUso.getUTCDay() == 6 ? 'FUSB' : 'success';
-    NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
-    .then(([rows,fieldData]) =>{
-        const fechaUltimaSolicitud = rows.length > 0 ? new Date(rows[0].fechaSolicitud) : '';
-        const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
-        const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
-        const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != (fechaUltimaSolicitud.getMonth() + 1) ? 'pass' : 'invalid';
-        if (flag == 'success'){
-            const ngb = new NGB(request.session.empleado.idEmpleado,request.body.fecha);
-            ngb.save_NGB()
-            .then(() => {
+    if (flag == 'success'){
+        const ngb = new NGB(request.session.empleado.idEmpleado,request.body.fecha);
+        ngb.save_NGB()
+        .then(() => {
+            NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
+            .then(([rows,fieldData]) =>{
+                const fechaUltimaSolicitud = rows.length > 0 ? new Date(rows[0].fechaSolicitud) : '';
+                const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
+                const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
+                const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != (fechaUltimaSolicitud.getMonth() + 1) ? 'pass' : 'invalid';
                 response.render('natgasBlock/nuevaSolicitudNGB', {
                     sesion: request.session.empleado,
                     rol: request.session.rol,
@@ -55,10 +55,21 @@ exports.postDeSolicitud = (request,response,next) => {
                     limiteFecha : limiteFechaNGB,
                     flag: flag
                 });
-            }).catch((err) => {
-                console.log(err);
+            }).catch((error) => {
+                console.log(error);
             });
-        } else{
+
+        }).catch((err) => {
+            console.log(err);
+        });
+    } else{
+        NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
+        .then(([rows,fieldData]) =>{
+            const fechaUltimaSolicitud = rows.length > 0 ? new Date(rows[0].fechaSolicitud) : '';
+            const ultimoNGB = rows.length < 1 ? " No has solicitado ningún Natgas Block" : new Date(rows[0].fechaSolicitud);
+            const condicionUltimoNGB = ultimoNGB instanceof Date ? ultimoNGB.getDate() + "/" + (ultimoNGB.getMonth() + 1) + "/" + ultimoNGB.getFullYear() : ultimoNGB; 
+            const limiteFechaNGB = fechaUltimaSolicitud == '' ? '' : (currentdate.getMonth() + 1) != (fechaUltimaSolicitud.getMonth() + 1) ? 'pass' : 'invalid';
+            const ngbRegistrado = '';
             response.render('natgasBlock/nuevaSolicitudNGB', {
                 sesion: request.session.empleado,
                 rol: request.session.rol,
@@ -70,8 +81,10 @@ exports.postDeSolicitud = (request,response,next) => {
                 fechaUso: request.body.fecha,
                 flag: flag
             });
-        }
-    }).catch((err) =>{console.log(err)});
+        }).catch((error) => {
+            console.log(error);
+        });
+    }
 };
 
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
