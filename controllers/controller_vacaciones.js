@@ -154,7 +154,7 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
             });
         })
         .catch((err) => {
-            cnsole.log(err);
+            console.log(err);
         });
 };
 

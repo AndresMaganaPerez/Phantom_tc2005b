@@ -4,11 +4,13 @@ const Reportes = require('../models/models_reportes');
 
 exports.vistaGeneral = (request, response, next) => {
     let today = Date.now();
+    const currentDate = new Date();
+    const hoy = currentDate.toISOString().split('T')[0].toString();
     // let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
     Banners.fetchAllBanners()
     .then(([rows, fieldData]) => {
-        Anuncio.fetchLastPin().then(([rowsPin, fieldData]) => {
-            Anuncio.fetchLastUnpin().then(([rowsUnPin, fieldData]) => {
+        Anuncio.fetchLastPin(hoy).then(([rowsPin, fieldData]) => {
+            Anuncio.fetchLastUnpin(hoy).then(([rowsUnPin, fieldData]) => {
                 const banners = rows;
                 console.log(request.body);
                 console.log(request.session.empleado);
