@@ -5,7 +5,7 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 3) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Tonleadas</span></h2>
                             <div id="co21" hidden><%= co2s[0].Valor %></div>
                             <div id="co22" hidden><%= co2s[1].Valor %></div>
                             <div id="co23" hidden><%= co2s[2].Valor %></div>
@@ -27,7 +27,7 @@
                                     data: {
                                         labels:[mes1, mes2, mes3, mes4, mes5, mes6],
                                         datasets:[{
-                                            label: 'Valor CO2',
+                                            label: 'Toneladas de CO2',
                                             data:[
                                                 co21,
                                                 co22,
@@ -69,7 +69,7 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 4) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Hombres</span></h2>
                             <div id="hombres1" hidden><%= hombres[0].Valor %></div>
                             <div id="hombres2" hidden><%= hombres[1].Valor %></div>
                             <div id="hombres3" hidden><%= hombres[2].Valor %></div>
@@ -91,7 +91,7 @@
                                     data: {
                                         labels:[mes1, mes2, mes3, mes4, mes5, mes6],
                                         datasets:[{
-                                            label: 'Valor Hombres',
+                                            label: 'Numero de Hombres',
                                             data:[
                                                 hombres1,
                                                 hombres2,
@@ -136,7 +136,7 @@
         <% if (indicador.TipoIndicadorID == 3) { %>
             <div class="col s12 m4 l13">
                 <div class="card" style="border-radius: 1rem;">
-                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Tonleadas</span></h2>
                     <div class="divider" style="margin-top: 20px;"></div>
                     <div class="card-content">
                         <h4 style="padding-bottom: 10px;">CO2</h4>
@@ -150,7 +150,7 @@
         <% if (indicador.TipoIndicadorID == 4) { %>
             <div class="col s12 m4 l13">
                 <div class="card" style="border-radius: 1rem;">
-                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Hombres</span></h2>
                     <div class="divider" style="margin-top: 20px;"></div>
                     <div class="card-content">
                         <h4 style="padding-bottom: 10px;">Hombres</h4>
