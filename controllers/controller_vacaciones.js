@@ -525,8 +525,8 @@ exports.filtraSolVacaciones = (request, response, next) => {
                     .then(([rows, fieldData]) => {
                         let iterator = (page - 2) < 1 ? 1 : page - 2;
                         const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
-                            if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
-                                iterator = numeroDePaginas - 4;
+                        if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                            iterator = numeroDePaginas - 4;
                         }
                         response.render('vacaciones/estatusVacaciones', {
                             sesion: request.session.empleado,

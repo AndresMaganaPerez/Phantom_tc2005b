@@ -45,9 +45,23 @@ module.exports = class NGB {
     }
 
     // Funcion Filtrar solicitudes de Natgas Block por Mes
-    static filtraSolNGBMes(anio, mes, mesar) {
+    static filtraSolNGBMesAr(anio, mes, mesar) {
         if (mesar == 'Enero' || mesar == 'Febrero' || mesar == 'Marzo' || mesar == 'Abril' || mesar == 'Mayo' || mesar == 'Junio' || mesar == 'Julio' || mesar == 'Agosto' || mesar == 'Septiembre' || mesar == 'Octubre' || mesar == 'Noviembre' || mesar == 'Diciembre') {
-            return db.execute("SELECT idNatgasBlocks, e.idEmpleado AS 'solicita', e.nombre AS 'Quien_Solicita', e.apellidoPaterno AS 'qsApellidoPaterno', e.apellidoMaterno AS 'qsApellidoMaterno', ng.fechaUsoNGB, ng.fechaSolicitud, ng.estatusNGB, d.idLider, f.nombre AS 'nomLider', f.apellidoPaterno AS 'lApellidoPaterno', f.apellidoMaterno AS 'lApellidoMaterno' FROM natgasblocks ng, empleado e, empleado f, dirige d WHERE ng.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND ng.fechaUsoNGB BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' AND estatusNGB IS NOT NULL;");
+            return db.execute("SELECT idNatgasBlocks, e.idEmpleado AS 'solicita', e.nombre AS 'Quien_Solicita', e.apellidoPaterno AS 'qsApellidoPaterno', e.apellidoMaterno AS 'qsApellidoMaterno', ng.fechaUsoNGB, ng.fechaSolicitud, ng.estatusNGB, d.idLider, f.nombre AS 'Lider', f.apellidoPaterno AS 'lApellidoPaterno', f.apellidoMaterno AS 'lApellidoMaterno' FROM natgasblocks ng, empleado e, empleado f, dirige d WHERE ng.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND ng.fechaUsoNGB BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' AND estatusNGB IS NOT NULL;");
+        } else {
+            return db.execute("SELECT ngb.idNatgasBlocks, e.idEmpleado AS 'solicita', e.nombre AS 'Quien_Solicita', e.apellidoPaterno AS 'qsApellidoPaterno', e.apellidoMaterno AS 'qsApellidoMaterno',  f.nombre AS 'Lider', f.apellidoPaterno AS 'lApellidoPaterno', f.apellidoMaterno AS 'lApellidoMaterno', fechaSolicitud, fechaUsoNGB, estatusNGB FROM natgasblocks ngb, empleado e, empleado f, dirige d WHERE ngb.idEmpleado = e.idEmpleado AND e.idEmpleado = d.idOperador AND f.idEmpleado = d.idLider AND estatusNGB IS NOT NULL AND ngb.idEmpleado IN (SELECT ae.idEmpleado FROM area_empleado ae, area a WHERE ae.idArea = a.idArea AND ae.idArea = ?)", [mesar]);
         }
+    }
+
+    static filtraPaginacionSolNGBMesAr(anio, mes, mesar, inicioLimite, resultadosPorPagina) {
+        if (mesar == 'Enero' || mesar == 'Febrero' || mesar == 'Marzo' || mesar == 'Abril' || mesar == 'Mayo' || mesar == 'Junio' || mesar == 'Julio' || mesar == 'Agosto' || mesar == 'Septiembre' || mesar == 'Octubre' || mesar == 'Noviembre' || mesar == 'Diciembre') {
+            return db.execute("SELECT idNatgasBlocks, e.idEmpleado AS 'solicita', e.nombre AS 'Quien_Solicita', e.apellidoPaterno AS 'qsApellidoPaterno', e.apellidoMaterno AS 'qsApellidoMaterno', ng.fechaUsoNGB, ng.fechaSolicitud, ng.estatusNGB, d.idLider, f.nombre AS 'Lider', f.apellidoPaterno AS 'lApellidoPaterno', f.apellidoMaterno AS 'lApellidoMaterno' FROM natgasblocks ng, empleado e, empleado f, dirige d WHERE ng.idEmpleado = e.idEmpleado AND d.idOperador = e.idEmpleado AND d.idLider = f.idEmpleado AND ng.fechaUsoNGB BETWEEN '"+anio+"-"+mes+"-01' AND '"+anio+"-"+mes+"-31' AND estatusNGB IS NOT NULL LIMIT ?, ?;", [inicioLimite, resultadosPorPagina]);
+        } else {
+            return db.execute("SELECT ngb.idNatgasBlocks, e.idEmpleado AS 'solicita', e.nombre AS 'Quien_Solicita', e.apellidoPaterno AS 'qsApellidoPaterno', e.apellidoMaterno AS 'qsApellidoMaterno',  f.nombre AS 'Lider', f.apellidoPaterno AS 'lApellidoPaterno', f.apellidoMaterno AS 'lApellidoMaterno', fechaSolicitud, fechaUsoNGB, estatusNGB FROM natgasblocks ngb, empleado e, empleado f, dirige d WHERE ngb.idEmpleado = e.idEmpleado AND e.idEmpleado = d.idOperador AND f.idEmpleado = d.idLider AND estatusNGB IS NOT NULL AND ngb.idEmpleado IN (SELECT ae.idEmpleado FROM area_empleado ae, area a WHERE ae.idArea = a.idArea AND ae.idArea = ?) LIMIT ?, ?;", [mesar, inicioLimite, resultadosPorPagina]);
+        }
+    }
+
+    static fetchAreas(){
+        return db.execute('SELECT * FROM area');
     }
 }

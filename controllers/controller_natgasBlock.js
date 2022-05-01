@@ -104,40 +104,47 @@ exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
 
 exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
     console.log("Consultar Solicitudes NGB");
-    NGB.fetchAll().then(([rows, fieldData]) => {
-        const numeroDeResultados = rows.length;
-        const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
-        const page = request.query.page ? Number(request.query.page) : 1;
-        if (numeroDeResultados > 0){
-            if (page > numeroDePaginas) {
-                response.redirect('natgas_blocks/solicitudes_estatus_natgas_block/?page=' + encodeURIComponent(numeroDePaginas));
-            } else if (page < 1) {
-                response.redirect('natgas_blocks/solicitudes_estatus_natgas_block/?page=' + encodeURIComponent('1'));
-            }
-        }    
-        const inicioLimite = (page - 1) * resultadosPorPagina;
-        NGB.fetchPaginacionAll(inicioLimite, resultadosPorPagina)
-        .then(([rows, fieldData]) => {
-            let iterator = (page - 2) < 1 ? 1 : page - 2;
-            const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
-            if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
-                iterator = numeroDePaginas - 4;
-            }
-            response.render('natgasBlock/estatusSolicitudesNGB', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas
-            });
-        })
-        .catch((error) => {
+    NGB.fetchAreas()
+    .then(([areas, fieldData]) => {
+        NGB.fetchAll().then(([rows, fieldData]) => {
+            const numeroDeResultados = rows.length;
+            const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+            const page = request.query.page ? Number(request.query.page) : 1;
+            if (numeroDeResultados > 0){
+                if (page > numeroDePaginas) {
+                    response.redirect('natgas_blocks/solicitudes_estatus_natgas_block/?page=' + encodeURIComponent(numeroDePaginas));
+                } else if (page < 1) {
+                    response.redirect('natgas_blocks/solicitudes_estatus_natgas_block/?page=' + encodeURIComponent('1'));
+                }
+            }    
+            const inicioLimite = (page - 1) * resultadosPorPagina;
+            NGB.fetchPaginacionAll(inicioLimite, resultadosPorPagina)
+            .then(([rows, fieldData]) => {
+                const monar = '';
+                let iterator = (page - 2) < 1 ? 1 : page - 2;
+                const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                    iterator = numeroDePaginas - 4;
+                }
+                response.render('natgasBlock/estatusSolicitudesNGB', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas,
+                    areas: areas,
+                    monar: monar
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        }).catch((error) => {
             console.log(error);
-        })
-    }).catch((error) => {
+        });
+    })
+    .catch((error) => {
         console.log(error);
-    });
-
-
+    })
 };
 
 exports.aceptarNGB = (request, response, next) => {
@@ -179,16 +186,46 @@ exports.filtraSolNGBMes = (request, response, next) => {
     let index_mes = meses.indexOf(monar) + 1;
 
     // Variable que obtiene el año actual
-    const y = new Date();
-    let year = y.getFullYear();
+    const currentDate = new Date();
+    let year = currentDate.getFullYear();
     
-    NGB.filtraSolNGBMes(year, index_mes, monar).then(([rows, fieldData]) => {
-        response.render('natgasBlock/estatusSolicitudesNGB', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            solicitudes: rows,
-        });
+    NGB.filtraSolNGBMesAr(year, index_mes, monar).then(([rows, fieldData]) => {
+        const numeroDeResultados = rows.length;
+        const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+        const page = request.query.page ? Number(request.query.page) : 1;
+        if(numeroDeResultados > 0) {
+            if (page > numeroDePaginas) {
+                response.redirect('/natgas_blocks/solicitudes_natgas_block/' + monar + '/?page=' + encodeURIComponent(numeroDePaginas));
+            } else if (page < 1) {
+                response.redirect('/natgas_blocks/solicitudes_natgas_block/' + monar + '/?page=' + encodeURIComponent('1'));
+            }
+        }
+        const inicioLimite = (page - 1) * resultadosPorPagina;
+        NGB.fetchAreas()
+        .then(([areas, fieldData]) => {
+            NGB.filtraPaginacionSolNGBMesAr(year, index_mes, monar, inicioLimite, resultadosPorPagina)
+            .then(([rows, fieldData]) => {
+                let iterator = (page - 2) < 1? 1: page - 2;
+                const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                    iterator = numeroDePaginas - 4;
+                }
+                response.render('natgasBlock/estatusSolicitudesNGB', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas,
+                    monar: monar,
+                    areas: areas
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }).catch((error) => {
         console.log(error);
     });
