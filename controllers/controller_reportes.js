@@ -5,10 +5,10 @@ exports.reportes = (request, response, next) => {
     const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const d = new Date();
-    let mes = month[d.getMonth()];
+    let mes = month[d.getMonth()] -1 ; //-1 porque en abril se va a ver el del mes pasado. Porque no se puede ver Abril en abril, ya que no ha pasado el mes. La logica no da. No pueden tener un indicador de un mes que no ha acabado.
     let previousMonth = mes -1;
     if(month[d.getMonth()] == 01){
-        previousMonth = 12;
+        previousMonth = 11;
     }
     
 
@@ -45,7 +45,7 @@ exports.reportes = (request, response, next) => {
     const mesEnd = aux[aux.length - 1];
 
     console.log("El mes anterior es: "+previousMonth)
-    let nombreMes = meses[d.getMonth()];
+    let nombreMes = meses[d.getMonth()-1]; //-1 por el problema de logica de que no pueden ser del mes presente ya que no ha acabado y no tiene logica que registren indicador de un mes que no ha acabado.
 
     const y = new Date();
     let year = d.getFullYear();
@@ -96,7 +96,7 @@ exports.reportes = (request, response, next) => {
                             });
                         }
                         console.log(co2s);
-                        const ultimos6co2s = co2s; 
+                        const ultimos6co2s = co2s;
 
                         Reportes.fetchUltimos6Hombres(mesStart, mesEnd, previousYear, year).then(([hombres, fieldData]) =>{
                             console.log("Imprimiendo ultimos 6 Hombres")
@@ -193,7 +193,7 @@ exports.nuevo_reporte = (request, response, next) => {
 exports.post_nuevo_reporte = (request, response, next) => {
     const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
     const d = new Date();
-    let mes = month[d.getMonth()];
+    let mes = month[d.getMonth()]-1;
 
     const y = new Date();
     let year = d.getFullYear();
