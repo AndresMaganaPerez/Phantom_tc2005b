@@ -2,6 +2,16 @@ const empleados = require('../models/models_empleados');
 const bcrypt = require('bcryptjs');
 const { parse } = require('fast-csv');
 const { findLider } = require('../models/models_empleados');
+const nodemailer = require('nodemailer');
+const noReplyJSON = require('../no_reply_email.json');
+
+const transporter = nodemailer.createTransport({
+    service: "hotmail",
+    auth: {
+        user: noReplyJSON.email,
+        pass: noReplyJSON.password
+    }
+});
 
 exports.signup = (request, response, next) => {
     response.render('signup_login/signIn', {
@@ -256,18 +266,34 @@ exports.registrarEmpleado = (request, response, next) => {
                                 .then(([plazas, fieldData]) => {
                                     empleados.registrarInfoEmpleado(infoEmpleado.idEmpleado, lider, area, rol)
                                     .then(() => {
-                                        response.render('empleados/aceptarEmpleados', {
-                                            sesion: request.session.empleado,
-                                            rol: request.session.rol,
-                                            privilegios: request.session.privilegios,
-                                            solicitudes: empleado,
-                                            areas: areas,
-                                            lideres: lideres,
-                                            roles: roles,
-                                            flag: flag,
-                                            infoEmpleado: infoEmpleado,
-                                            plazas: plazas
-                                        })  
+                                        let respuestaHTML ='<h1>Estatus de Solicitud de ingreso a la plataforma</h1>';
+                                        respuestaHTML += 'Estimado ' + infoEmpleado.nombre + ' ' + infoEmpleado.apellidoPaterno + ' ' + infoEmpleado.apellidoMaterno + ',<br><br>';
+                                        respuestaHTML += 'Le envíamos este correo para informarle que su solicitud de registro a la Intranet NATGAS ha sido <span style="font-weight: 600;">ACEPTADA</span>.'; 
+                                        const options = {
+                                            from: "no-reply-NATGAS@hotmail.com",
+                                            to: infoEmpleado.email,
+                                            subject: "Estatus de Solicitud en Intranet NATGAS",
+                                            html: respuestaHTML
+                                        }
+                                        transporter.sendMail(options)
+                                        .then((info) => {
+                                            console.log(info);
+                                            response.render('empleados/aceptarEmpleados', {
+                                                sesion: request.session.empleado,
+                                                rol: request.session.rol,
+                                                privilegios: request.session.privilegios,
+                                                solicitudes: empleado,
+                                                areas: areas,
+                                                lideres: lideres,
+                                                roles: roles,
+                                                flag: flag,
+                                                infoEmpleado: infoEmpleado,
+                                                plazas: plazas
+                                            })  
+                                        })
+                                        .catch((error) => {
+                                            console.log(error);
+                                        });
                                     })
                                     .catch((error) => {
                                         console.log(error);
@@ -319,18 +345,34 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
                         .then(([roles, fieldData]) => {
                             empleados.fetchPlazas()
                             .then(([plazas, fieldData]) => {
-                                response.render('empleados/aceptarEmpleados', {
-                                    sesion: request.session.empleado,
-                                    rol: request.session.rol,
-                                    privilegios: request.session.privilegios,
-                                    solicitudes: empleado,
-                                    areas: areas,
-                                    lideres: lideres,
-                                    roles: roles,
-                                    flag: flag,
-                                    infoEmpleado: infoEmpleado,
-                                    plazas: plazas
+                                let respuestaHTML ='<h1>Estatus de Solicitud de ingreso a la plataforma</h1>';
+                                respuestaHTML += 'Estimado ' + infoEmpleado.nombre + ' ' + infoEmpleado.apellidoPaterno + ' ' + infoEmpleado.apellidoMaterno + ',<br><br>';
+                                respuestaHTML += 'Le envíamos este correo para informarle que su solicitud de registro a la Intranet NATGAS ha sido <span style="font-weight: 600;">RECHAZADA</span>.'; 
+                                const options = {
+                                    from: "no-reply-NATGAS@hotmail.com",
+                                    to: infoEmpleado.email,
+                                    subject: "Estatus de Solicitud en Intranet NATGAS",
+                                    html: respuestaHTML
+                                }
+                                transporter.sendMail(options)
+                                .then((info) => {
+                                    console.log(info);
+                                    response.render('empleados/aceptarEmpleados', {
+                                        sesion: request.session.empleado,
+                                        rol: request.session.rol,
+                                        privilegios: request.session.privilegios,
+                                        solicitudes: empleado,
+                                        areas: areas,
+                                        lideres: lideres,
+                                        roles: roles,
+                                        flag: flag,
+                                        infoEmpleado: infoEmpleado,
+                                        plazas: plazas
+                                    })
                                 })
+                                .catch((error) => {
+                                    console.log(error);
+                                });
                             }).catch((error) => {
                                 console.log(error);
                             })
