@@ -12,11 +12,15 @@
             <% if (anuncioPin.length > 0) { %>
                 <% for (anuncio of anuncioPin) { %>
                     <!-- Inicio de cartas anuncios Pineados -->
-                    <div class="card" style="border-radius: 15px; height: 180px;">
+                    <div class="card" style="border-radius: 15px;">
                         <div class="card-content" >
                             <h5><%= anuncio.Titulo %></h5>
                             <li class="divider"></li>
-                            <p style="padding-top: 15px;"><%= anuncio.texto.toString().substr(0, 125) %>...</p>
+                            <div class="center">
+                                <% if (anuncio.recursoDigital != null) { %>
+                                    <img src="/<%= anuncio.recursoDigital %>" class="responsive-img" style="width: fit-content; height: 200px; padding-top: 25px;">
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                     <!-- Fin de cartas anuncios Pineados -->
@@ -24,11 +28,15 @@
             <% } else if (anuncioUnpin.length > 0) { %>
                 <% for (anuncio of anuncioUnpin) { %>
                     <!-- Inicio de cartas anuncios No Pineados -->
-                    <div class="card" style="border-radius: 15px; height: 180px;">
+                    <div class="card" style="border-radius: 15px;">
                         <div class="card-content" >
                             <h5><%= anuncio.Titulo %></h5>
                             <li class="divider"></li>
-                            <p style="padding-top: 15px;"><%= anuncio.texto %></p>
+                            <div class="center">
+                                <% if (anuncio.recursoDigital != null) { %>
+                                    <img src="/<%= anuncio.recursoDigital %>" class="responsive-img" style="width: fit-content; height: 150px;">
+                                <% } %>
+                            </div>
                         </div>
                     </div>
                     <!-- Fin de cartas anuncios No Pineados -->

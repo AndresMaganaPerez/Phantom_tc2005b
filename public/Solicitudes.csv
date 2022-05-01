@@ -1,6 +1,0 @@
-<<<<<<< HEAD
-=======
-idSolicitud,solicita,nomSolicita,apellidoPatSolicita,apellidoMatSolicita,fechaInicio,fechaFin,fechaReanudacion,fechaSolicitud,suplente,solicitudAceptadaEstatus,idLider,nomLider,apellidoPatLider,apellidoMatLider,Nota
-177,91904,Diego,Rodríguez,Palacio,Mon May 16 2022 00:00:00 GMT-0500 (Central Daylight Time),Wed May 18 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu May 19 2022 00:00:00 GMT-0500 (Central Daylight Time),Thu Apr 28 2022 00:00:00 GMT-0500 (Central Daylight Time),Juan Carlos ,1,91900,Alfonso,Hernández,Carrillo,
-167,91904,Diego,Rodríguez,Palacio,Mon Apr 25 2022 00:00:00 GMT-0500 (Central Daylight Time),Mon Apr 25 2022 00:00:00 GMT-0500 (Central Daylight Time),Tue Apr 26 2022 00:00:00 GMT-0500 (Central Daylight Time),Fri Apr 22 2022 00:00:00 GMT-0500 (Central Daylight Time),Ignacio,0,91900,Alfonso,Hernández,Carrillo,Bajo performance... No puedes salir ahorita gracias 
->>>>>>> caceres/fixesBanners

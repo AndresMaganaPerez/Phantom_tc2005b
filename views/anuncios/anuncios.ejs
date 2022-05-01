@@ -2,6 +2,10 @@
 
 <h3 style="text-align: center;">Anuncios</h3>
 
+<% if (flag == 'anuncio_eliminado') { %>
+    <%- include('componentes/cartas/cartaAnuncioEliminado.ejs') %>
+<% } %>
+
 <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
     <br>
     <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>
