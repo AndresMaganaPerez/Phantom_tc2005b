@@ -44,5 +44,12 @@ module.exports = class Reportes {
         return db.execute("SELECT * FROM valor_indicador WHERE TipoIndicadorID=5 AND fecha BETWEEN '"+previousYear+"-"+mesStart+"-01' AND '"+anio+"-"+mesEnd+"-31'")
     }
 
+    static fectchValorEditar(idIndicador){
+        return db.execute("SELECT * FROM valor_indicador WHERE ValorIndicadorID = ?", [idIndicador]);
+    }
+
+    static updateValor(idIndicador, valor){
+        return db.execute("UPDATE valor_indicador SET Valor=? WHERE ValorIndicadorID = ?", [valor, idIndicador]);
+    }
 
 }
