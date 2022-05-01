@@ -253,9 +253,46 @@ exports.post_nuevo_reporte = (request, response, next) => {
 
 exports.modificar_reporte = (request, response, next) => {
     console.log("Modificar Reporte");
-    response.render('reportes/modificarReporte',{
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios
+    const idIndicador = request.params.idIndicador = '' ? '' : request.params.idIndicador;
+    console.log("ID del Indicador a Editar: " + idIndicador)
+    Reportes.fectchValorEditar(idIndicador).then(([rows, fieldData]) => {
+        console.log(rows);
+        console.log("Valor Actual del Indicador elegido: " + rows[0].Valor)
+        response.render('reportes/modificarReporte',{
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            valor: rows[0].Valor,
+            flag: "fail",
+            idIndicador: idIndicador
+        });
+    }).catch((err) => {
+        console.log(err);
     });
+    
+};
+
+exports.post_modificar_reporte = (request, response, next) => {
+    const idIndicador = request.body.idIndicador;
+    const valor = request.body.valor
+    const valorNuevo = request.body.nuevoValor;
+    console.log(idIndicador)
+    console.log(valor)
+    console.log(valorNuevo)
+    flag = "success"
+    Reportes.updateValor(idIndicador, valorNuevo).then(([rows, fieldData]) => {
+        response.render('reportes/modificarReporte',{
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            valorNuevo: valorNuevo,
+            flag: flag,
+            valor: valor,
+            idIndicador: idIndicador
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+
+    
 };
