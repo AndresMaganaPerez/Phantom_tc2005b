@@ -1,3 +1,4 @@
+const { request } = require("express");
 const { response } = require("express");
 const Anuncio = require('../models/models_anuncios');
 
@@ -45,14 +46,14 @@ exports.postAnuncio = (request, response, next) => {
     let today = Date.now();
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+    const elim = 0;
     
-    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null);
-    
+    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null, elim);
+
     if (request.body.expiracion > dateStr) {
         const flag = 'success';
         anuncio.saveAnuncio()
             .then(() => {
-                console.log('Anuncio creado');
                 response.render('anuncios/crearAnuncio', {
                     sesion: request.session.empleado,
                     rol: request.session.rol,
@@ -91,4 +92,38 @@ exports.modificarAnuncio = (request, response, next) => {
         rol: request.session.rol,
         privilegios: request.session.privilegios
     })
+}
+
+exports.eliminarAnuncio = (request, response, next) => {
+    const flag = 'anuncio_eliminado';
+    let date= new Date();
+    let today = Date.now();
+    let mes = date.getMonth() + 1;
+    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+
+    const idA = request.body.id_anuncio;
+    
+    console.log(idA);
+    
+    Anuncio.eliminarAnuncio(idA).then(() => {
+        Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
+            Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
+                response.render('anuncios/anuncios',{
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    anunciosPinned: rowsPin,
+                    anunciosUnpinned: rowsUnpin,
+                    hoy: dateStr,
+                    flag: flag
+                });
+            }).catch((error) => {
+                console.log(error);
+            })
+        }).catch((error) => {
+            console.log(error);
+        })
+    }).catch(err => {
+        console.log(err);
+    });
 }

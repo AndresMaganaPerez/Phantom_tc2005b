@@ -12,33 +12,39 @@
                     </div>
 
                     <div class="col s12 m12 l13">
-                        <span class="card-title activator black-text text-darken-4" style="padding-left: 30px;"><h4><a class="modal-trigger" style="color: #000; font-weight: 300px;" href="#anuncios?id=<%= anuncio.IdAnuncios %>"><%= anuncio.Titulo %></a></h4></span>
+                        <span class="card-title activator black-text text-darken-4" style="padding-left: 30px; color: #000; font-weight: 300px;"><h4><%= anuncio.Titulo %></h4></span>
                     </div>
                 </div>
             </div>
+
+            <div class="center">
+                <% if (anuncio.recursoDigital != null) { %>
+                    <img src="/<%= anuncio.recursoDigital %>" class="responsive-img" style="width: fit-content; height: 350px;">
+                <% } %>
+            </div>
+
             <div class="card-content" style="padding-top:0px; padding-left: 30px;">
-                <p><%= anuncio.texto.toString().substr(0, 350) %>...</p>
+                <p><%= anuncio.texto %></p>
             </div>
             <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
                 <br>
                 <%- include ('../botones/botonModificarAnuncio.ejs') %>
+                <%- include ('../botones/botonEliminarAnuncio.ejs') %>
             <% } %>
         </div>
     </div>
 </div>
 
-<!-- Estructura del Modal -->
-<div id="anuncios?id=<%= anuncio.IdAnuncios %>" class="modal" style="border-radius: 15px;">
-    <div class="modal-content, center" style="border-radius: 15px;">
-      <h4 style="padding-top: 15px;"><%= anuncio.Titulo %></h4>
-      <% if (anuncio.recursoDigital != null) { %>
-        <img src="/<%= anuncio.recursoDigital %>" class="responsive-img" style="width: fit-content; height: 300px;">
-      <% } %>
-    </div>
-    <div style="padding-left: 3vw; padding-right: 3vw;">
-        <p><%= anuncio.texto %></p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-blue btn-flat" style="border-radius: 10px;">Cerrar</a>
-    </div>
+<!-- Modal Structure -->
+<div id="anunciosEliminar?idA=<%= anuncio.IdAnuncios %>" class="modal" style="height: 200px;">
+    <form action="/anuncios" method="POST">
+        <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
+        <div class="modal-content">
+            <h5>¿Está seguro que desea eliminar el anuncio?</h5>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-large waves-effect red" type="submit" name="action">Aceptar</button>
+            <a class="modal-close waves-effect blue btn-large">Cancelar</a>
+        </div>
+    </form>
 </div>
