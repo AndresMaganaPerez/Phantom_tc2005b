@@ -6,6 +6,10 @@
     <%- include('componentes/cartas/cartaAnuncioEliminado.ejs') %>
 <% } %>
 
+<% if (flag == 'anuncio_modificado') { %>
+    <%- include('componentes/cartas/cartaAnuncioModificado.ejs') %>
+<% } %>
+
 <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
     <br>
     <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>

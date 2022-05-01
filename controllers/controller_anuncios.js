@@ -1,5 +1,6 @@
 const { request } = require("express");
 const { response } = require("express");
+const req = require("express/lib/request");
 const Anuncio = require('../models/models_anuncios');
 
 var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
@@ -21,6 +22,7 @@ exports.anuncios = (request, response, next) => {
                 anunciosPinned: rowsPin,
                 anunciosUnpinned: rowsUnpin,
                 hoy: dateStr,
+                fechaDeHoy: dateStr,
                 flag: flag
             });
         });
@@ -87,11 +89,55 @@ exports.postAnuncio = (request, response, next) => {
 };
 
 exports.modificarAnuncio = (request, response, next) => {
-    response.render('anuncios/modificarAnuncio',{
-        sesion: request.session.empleado,
-        rol: request.session.rol,
-        privilegios: request.session.privilegios
-    })
+
+    let date= new Date();
+    let today = Date.now();
+    let mes = date.getMonth() + 1;
+    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+
+    const idA = request.body.id_anuncio;
+    //const idR = request.boyd.id_recurso_digital;
+
+    console.log(idR);
+    
+    if (request.body.expiracion > dateStr) {
+        const flag = 'anuncio_modificado';
+        Anuncio.modificarAnuncio(idA, idR, dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null).then(() => {
+            Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
+                Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
+                    response.render('anuncios/anuncios',{
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        anunciosPinned: rowsPin,
+                        anunciosUnpinned: rowsUnpin,
+                        hoy: dateStr,
+                        flag: flag
+                    });
+                }).catch((error) => {
+                    console.log(error);
+                })
+            }).catch((error) => {
+                console.log(error);
+            })
+        }).catch(err => {
+            console.log(err);
+        });
+    } else {
+        const flag = 'fail';
+        
+        console.log('No ingresó correctamente la fecha');
+        
+        console.log(dateStr);
+        response.render('anuncios/crearAnuncio', {
+            sesion: request.session.empleado,
+            rol: request.session.rol,
+            privilegios: request.session.privilegios,
+            expiracion: request.body.expiracion,
+            fechaDeHoy: datetime,
+            flag: flag
+        });
+    }
 }
 
 exports.eliminarAnuncio = (request, response, next) => {
