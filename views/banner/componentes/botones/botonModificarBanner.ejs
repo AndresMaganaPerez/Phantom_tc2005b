@@ -1,0 +1,36 @@
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger light-blue darken-3" href="#modificarBanner?idBanner=<%= banner.idBanner %>">Modificar</a>
+<%= console.log(banner.idBanner + " hola") %>
+<%= console.log(banner.recursoDigital + " hola") %>
+<%= console.log(banner.expiracion + " hola") %>
+
+<!-- Modal Structure -->
+<div id="modificarBanner?idBanner=<%= banner.idBanner %>" class="modal">
+    <div class="modal-content">
+      <h4>Modificar Banner</h4>
+       <form action="/banners/modificar_banner" method="POST" enctype="multipart/form-data">
+          <div class="file-field input-field" style="margin-bottom: 20px">
+              <div class="row">
+                  <div class="btn ">
+                      <span>Archivo</span>
+                    <input type="file" name="image" accept="image/png, image/jpg, image/jpeg" style="width: 200px; margin-top: 10px;" value="Hola" required>
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text">
+                  </div>
+              </div>
+          </div>
+
+          <label for="expiracion" style="font-weight: bold; color: black; margin-right: 10px;">Fecha de Expiración</label>
+          <input id= "expiracion" type="date" class="" name="expiracion" required style="width: 20em; margin-top: 10px;" value="<%= banner.expiracion %>">
+
+          <% if (flag == 'fail') { %>
+              <%- include('componentes/cartas/cartaErrorBanner.ejs') %>
+          <% } %>
+          <div class="center" style="padding-top: 20px;">
+              <input type="text" value="<%= banner.idBanner %>" name="idBanner" hidden>
+              <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Guardar</button>
+          </div>
+      </form>
+    </div>
+</div>

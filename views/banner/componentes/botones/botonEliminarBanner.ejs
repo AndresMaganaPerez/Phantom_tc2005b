@@ -1,3 +1,15 @@
-<button class="btn waves-effect waves-light red" action="#" style="margin-bottom: 50px;">
-    <span>Eliminar</span>
-</button>
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger red" href="#eliminarBanner?idBanner=<%= banner.idBanner %>">Eliminar</a>
+
+<!-- Modal Structure -->
+<div id="eliminarBanner?idBanner=<%= banner.idBanner %>" class="modal">
+    <div class="modal-content">
+      <h4>¿Estás seguro de que quieres eliminar el banner?</h4>
+          <form action="/banners/eliminar_banner" method="POST">
+              <input type="text" value="<%= banner.idBanner %>" name="idBanner" hidden>
+              <input type="submit" class="btn waves-effect waves-light green" style="color: white" value="Aceptar">
+              <a class="modal-close btn red">Cancelar</a>
+          </form>
+    </div>
+</div>
+

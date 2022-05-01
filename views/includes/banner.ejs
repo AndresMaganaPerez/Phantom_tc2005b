@@ -10,7 +10,7 @@
                         <% if (banners.length > 0) { %>
                                 <% for (banner of banners) { %>
                                     <% if (today <= banner.expiracion) { %>
-                                        <a class="carousel-item" href="#"><img class="imgBanner" src="/<%= banner.recursoDigital %>" ></a>
+                                        <a class="carousel-item" href="#"><img class="responsive-img" src="/<%= banner.recursoDigital %>" ></a>
                                     <% } %>
                                 <% } %>
                             <% } else { %>

@@ -2,11 +2,11 @@
 const Banners = require('../models/models_banners');
 const fs = require('fs');
 const { formatWithOptions } = require('util');
-const { on } = require('events');
 
 exports.banners = (request, response, next) => {
     // let today = new Date.now();
     // let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
+    const flag = "";
     Banners.fetchAllBanners()
         .then(([rows, fieldData]) => {
             const banners = rows;
@@ -16,6 +16,7 @@ exports.banners = (request, response, next) => {
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
                 banners: banners,
+                flag: flag
                 // today: dateStr
             });
         })
@@ -67,7 +68,6 @@ exports.agregarBanner = (request, response, next) => {
             })
             .catch(err => {
                 console.log(err);
-
             })
     } else {
         const flag = 'fail';
@@ -87,4 +87,35 @@ exports.agregarBanner = (request, response, next) => {
             flag: flag
         });
     }
+};
+
+exports.eliminarBanner = (request, response, next) => {
+    const idBanner = request.body.idBanner;
+    Banners.deleteBanner(idBanner)
+        .then(([rows, fieldData]) => {
+            const banners = rows;
+            console.log('Se modificó atributo visibilidad.')
+            response.redirect('/banners/consultar_banners/');
+        })
+        .catch(err => {
+            console.log(err);
+        })
+};
+
+exports.modificarBanner = (request, response, next) => {
+    const flag = '';
+    Banners.modificarBanner(request.file.filename, request.body.expiracion, idBanner)
+        .then(() => {
+            console.log('Se modificó nuevo banner.');
+            response.render('banner/consultarBanners', {
+                sesion: request.session.empleado,
+                rol: request.session.rol,
+                privilegios: request.session.privilegios,
+                date: dateStr,
+                flag: flag
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        })
 };
