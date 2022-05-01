@@ -10,9 +10,9 @@ const isAuth = require('../controllers/is-auth');
 
 router.get('/', isAuth, controllerAnuncios.anuncios);
 
-//router.post('/', isAuth, controllerAnuncios.modificarAnuncio);
+router.post('/eliminar', isAuth, controllerAnuncios.eliminarAnuncio);
 
-router.post('/', isAuth, controllerAnuncios.eliminarAnuncio);
+router.post('/modificar', isAuth, controllerAnuncios.modificarAnuncio);
 
 router.get('/nuevo', isAuth, controllerAnuncios.nuevoAnuncio);
 

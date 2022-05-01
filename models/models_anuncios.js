@@ -26,6 +26,10 @@ module.exports = class Anuncios {
         return db.execute('UPDATE anuncios SET eliminado = 1 WHERE idAnuncios=?', [idAnuncio]);
     }
 
+    static modAnuncio(idAnuncio) {
+        return db.execute('SELECT a.IdAnuncios, Titulo, texto, Fecha, expiracion, Pin, eliminado, rd.idRecursoDigital as idRec, recursoDigital FROM anuncios a, anuncios_recurso_digital ard, recurso_digital rd WHERE a.IdAnuncios=?', [idAnuncio]);
+    }
+
     static fetchAllPinned(hoy) {
         return db.execute ('SELECT a.IdAnuncios, Titulo, texto, Fecha, expiracion, Pin, eliminado, rd.idRecursoDigital as idRec, recursoDigital FROM anuncios a, anuncios_recurso_digital ard, recurso_digital rd WHERE a.IdAnuncios = ard.idAnuncios AND rd.idRecursoDigital = ard.idRecursoDigital AND Pin = 1 AND expiracion >= "'+hoy+'" AND eliminado = 0 ORDER BY Fecha DESC');
     }

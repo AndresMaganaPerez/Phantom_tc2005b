@@ -15,6 +15,7 @@ exports.anuncios = (request, response, next) => {
     
     Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
         Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
+            console.log(rowsPin);
             response.render('anuncios/anuncios',{
                 sesion: request.session.empleado,
                 rol: request.session.rol,
@@ -54,6 +55,9 @@ exports.postAnuncio = (request, response, next) => {
 
     if (request.body.expiracion > dateStr) {
         const flag = 'success';
+        
+        console.log(anuncio);
+
         anuncio.saveAnuncio()
             .then(() => {
                 response.render('anuncios/crearAnuncio', {
@@ -89,20 +93,23 @@ exports.postAnuncio = (request, response, next) => {
 };
 
 exports.modificarAnuncio = (request, response, next) => {
-
     let date= new Date();
     let today = Date.now();
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
 
     const idA = request.body.id_anuncio;
-    //const idR = request.boyd.id_recurso_digital;
-
-    console.log(idR);
+    const idR = request.body.id_recurso_digital;
     
     if (request.body.expiracion > dateStr) {
         const flag = 'anuncio_modificado';
-        Anuncio.modificarAnuncio(idA, idR, dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null).then(() => {
+        
+        let pin_status = 0;
+        if (request.body.pin == 'on') {
+            pin_status = 1;
+        }
+
+        Anuncio.modificarAnuncio(idA, idR, dateStr, request.body.titulo, pin_status, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null).then(() => {
             Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
                 Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
                     response.render('anuncios/anuncios',{
@@ -112,6 +119,7 @@ exports.modificarAnuncio = (request, response, next) => {
                         anunciosPinned: rowsPin,
                         anunciosUnpinned: rowsUnpin,
                         hoy: dateStr,
+                        fechaDeHoy: dateStr,
                         flag: flag
                     });
                 }).catch((error) => {
@@ -129,7 +137,7 @@ exports.modificarAnuncio = (request, response, next) => {
         console.log('No ingresó correctamente la fecha');
         
         console.log(dateStr);
-        response.render('anuncios/crearAnuncio', {
+        response.render('anuncios/anuncios', {
             sesion: request.session.empleado,
             rol: request.session.rol,
             privilegios: request.session.privilegios,

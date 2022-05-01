@@ -40,10 +40,13 @@
 </div>
 
 <!-- Modal Structure -->
-<div id="anunciosModificar?idA=<%= anuncio.IdAnuncios %>" class="modal" style="height: 500px;">
-    <form action="/anuncios" method="POST">
+<div id="anunciosModificar?idA=<%= anuncio.IdAnuncios %>&idRec=<%= anuncio.idRec %>" class="modal" style="height: 500px;">
+    <form action="/anuncios/modificar" method="POST" enctype="multipart/form-data">
+        
         <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
-        <!-- <input type="hidden" name="id_recurso_digital" value="<%= anuncio.idRec %>"> -->
+        
+        <input type="hidden" name="id_recurso_digital" value="<%= anuncio.idRec %>">
+        
         <div class="modal-content">
             <h5 style="text-align: center;">Modificar Anuncio</h5>
             <p class="center">Fecha Actual: <%= fechaDeHoy %></p>
@@ -62,12 +65,12 @@
             </div>
             <div class="input-field" style="padding: 0px 30px">
                 <h5>Contenido:</h5>
-                <textarea placeholder="Escriba aquí..." id="textareaTexto" class="materialize-textarea" name="texto" value="<%= anuncio.texto %>" required></textarea>
+                <textarea placeholder="Escriba aquí..." id="textareaTexto" type="text" class="materialize-textarea validate" name="texto" value="<%= anuncio.texto.toString() %>" required></textarea>
             </div>
             
             <div style="padding: 0px 30px;">
                 <h5>Fecha de expiración:</h5>
-                <input type="date" placeholder="AAAA-MM-DD" id="expiracion" name="expiracion" value="<%= anuncio.expiracion %>" required>
+                <input type="date" placeholder="AAAA-MM-DD" id="expiracion" name="expiracion" value="<%= anuncio.expiracion.toString().substr(0, 10) %>" required>
             </div>
 
             <% if (flag == 'fail') { %>
@@ -113,7 +116,7 @@
 
 <!-- Modal Structure -->
 <div id="anunciosEliminar?idA=<%= anuncio.IdAnuncios %>" class="modal" style="height: 200px;">
-    <form action="/anuncios" method="POST">
+    <form action="/anuncios/eliminar" method="POST">
         <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
         <div class="modal-content">
             <h5>¿Está seguro que desea eliminar el anuncio?</h5>
