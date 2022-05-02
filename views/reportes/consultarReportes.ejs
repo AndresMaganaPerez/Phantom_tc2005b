@@ -27,6 +27,8 @@
         <div class="col s12 m2 l13"></div>
         <h6>Mostrando Indicadores del Mes de <%= nombreMes %></h6>
     </div>
+<% console.log('------------------------------------' + mesAnterior.length) %>
+
     <% if(indicadores.length > 0) { %>
         <div class="row">
             <div class="col s12 m2 l13"></div>
@@ -40,9 +42,9 @@
             <div class="col s12 m2 l13"></div>
             <%- include('componentes/bloques/cartas/cartasIndicadores3.ejs') %>
         </div>
-    <% } else{ %>
+    <% } else { %>
         <h4 class="center">No Hay ningun tipo de Indicador para este Mes</h4>
-        <% } %>
+    <% } %>
     
     
 <%- include('../includes/footer.ejs') %>

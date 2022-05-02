@@ -1,89 +1,105 @@
-<% if (mesAnterior.length > 0) { %>
+<% if (mesAnterior.length == 5) { %>
     <% for (let indicador of indicadores) { %>
-        <% for (let indicadorAnterior of mesAnterior) { %>
-            <% if (indicador.TipoIndicadorID == 5) { %>
-                <% if (indicadorAnterior.TipoIndicadorID == 5) { %>
-                    <div class="col s12 m4 l13">
-                        <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Mujeres</span></h2>
-                            <div id="mujeres1" hidden><%= mujeres[0].Valor %></div>
-                            <div id="mujeres2" hidden><%= mujeres[1].Valor %></div>
-                            <div id="mujeres3" hidden><%= mujeres[2].Valor %></div>
-                            <div id="mujeres4" hidden><%= mujeres[3].Valor %></div>
-                            <div id="mujeres5" hidden><%= mujeres[4].Valor %></div>
-                            <div id="mujeres6" hidden><%= mujeres[5].Valor %></div>
-                            <canvas id="myChartmujeres" style="height: 20px; width: 55px;"></canvas>
-                            <script>
-                                let myChartmujeres = document.getElementById('myChartmujeres').getContext('2d');
-                                let mujeres1 = document.getElementById('mujeres1').innerText;
-                                let mujeres2 = document.getElementById('mujeres2').innerText;
-                                let mujeres3 = document.getElementById('mujeres3').innerText;
-                                let mujeres4 = document.getElementById('mujeres4').innerText;
-                                let mujeres5 = document.getElementById('mujeres5').innerText;
-                                let mujeres6 = document.getElementById('mujeres6').innerText;
-                                let mujeres_Chart = new Chart(myChartmujeres, {
-                                    type: 'bar',
-                                    data: {
-                                        labels:[mes1, mes2, mes3, mes4, mes5, mes6],
-                                        datasets:[{
-                                            label: 'Numero de Mujeres',
-                                            data:[
-                                                mujeres1,
-                                                mujeres2,
-                                                mujeres3,
-                                                mujeres4,
-                                                mujeres5,
-                                                mujeres6
-                                            ],
-                                            backgroundColor:'rgb(0,43,73,0.75)',
-                                            fill: true,
-                                        }]
-                                    },
-                                });
-                            </script>  
-                            <% if (indicador.Valor < indicadorAnterior.Valor) { %>
-                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                                <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
-                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                                </h6>
-                            <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
-                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                                <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
-                                    <span>+</span>
-                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                                </h6>
-                            <% } %>
-                            <div class="divider" style="margin-top: 20px;"></div>
-                            <div class="card-content">
-                                <h4 style="padding-bottom: 10px;">Mujeres</h4>
-                                <% if(rol == "admin" || rol == "recursosHumanos") { %>
-                                    <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
+        <% if (indicador.TipoIndicadorID == 5) { %>
+    <div class="col s12 m4 l13">
+        <div class="card" style="border-radius: 1rem;">
+            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= hombres[5].Valor %> <span style="font-size: large;">Hombres</span> <%= mujeres[5].Valor %> <span style="font-size: large;">Mujeres</span></h2>
+            <canvas id="myChartmujeres" style="height: 20px; width: 55px;"></canvas>
+            <script>
+                let myChartmujeres = document.getElementById('myChartmujeres').getContext('2d');
+                let mujeres_Chart = new Chart(myChartmujeres, {
+                        type: 'doughnut',
+                        data: {
+                            labels:['Hombres', 'Mujeres'],
+                            datasets:[{
+                                label: ['Número de Hombres','Numero de Mujeres'],
+                                data:[
+                                    hombres6,
+                                    mujeres6
+                                ],
+                                backgroundColor:['rgb(0,43,73,0.75)', 'rgb(241,122,171,0.75)'],
+                                fill: true,
+                            }]
+                        }
+                    });
+            </script>
+            <% if (hombres[5].Valor < hombres[4].Valor) { %>
+                <% const porcentajeH = ((hombres[5].Valor - hombres[4].Valor)/hombres[4].Valor)*100 %>
+                    <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                        <%= porcentajeH.toFixed(2) %>% de Hombres desde el Mes Anterior
+                    </h6>
+                <% } else if (hombres[5].Valor > hombres[4].Valor) { %>
+                    <% const porcentajeH = ((hombres[5].Valor - hombres[4].Valor)/hombres[4].Valor)*100 %>
+                    <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                        <span>+</span>
+                        <%= porcentajeH.toFixed(2) %>% de Hombres desde el Mes Anterior
+                    </h6>
+                <% } %>  
+
+                <% if (mujeres[5].Valor < mujeres[4].Valor) { %>
+                    <% const porcentajeM = ((mujeres[5].Valor - mujeres[4].Valor)/mujeres[4].Valor)*100 %>
+                    <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                        <%= porcentajeM.toFixed(2) %>% de Mujeres desde el Mes Anterior
+                    </h6>
+                <% } else if (mujeres[5].Valor > mujeres[4].Valor) { %>
+                    <% const porcentajeM = ((mujeres[5].Valor - mujeres[4].Valor)/mujeres[4].Valor)*100 %>
+                    <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                        <span>+</span>
+                        <%= porcentajeM.toFixed(2) %>% de Mujeres desde el Mes Anterior
+                    </h6>
                 <% } %>
-            <% } %>
+                <div class="divider" style="margin-top: 20px;"></div>
+                <div class="card-content">
+                    <h4 style="padding-bottom: 10px;">Hombres y Mujeres</h4>
+                    <% if(rol == "admin" || rol == "recursosHumanos") { %>
+                        <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                    <% } %>
+                </div>
+            </div>
+        </div>
         <% } %>
     <% } %>
     <!--QUE PASA SI NO HAY VALORES DE MES ANTERIOR-->
-<% } else if (mesAnterior.length < 1) { %>
+<% } else if (mesAnterior.length < 5) { %>
     <% for (let indicador of indicadores) { %>
         <% if (indicador.TipoIndicadorID == 5) { %>
-            <div class="col s12 m4 l13">
-                <div class="card" style="border-radius: 1rem;">
-                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Mujeres</span></h2>
-                    <div class="divider" style="margin-top: 20px;"></div>
-                    <div class="card-content">
-                        <h4 style="padding-bottom: 10px;">Mujeres</h4>
-                        <% if(rol == "admin" || rol == "recursosHumanos") { %>
-                            <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
-                        <% } %>
-                    </div>
-                </div>
+    <div class="col s12 m4 l13">
+        <div class="card" style="border-radius: 1rem;">
+            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= hombres[5].Valor %> <span style="font-size: large;">Hombres</span> <%= mujeres[5].Valor %> <span style="font-size: large;">Mujeres</span></h2>
+            <div id="hombres6" hidden><%= hombres[5].Valor %></div>
+            <div id="mujeres6" hidden><%= mujeres[5].Valor %></div>
+            <canvas id="myChartmujeres2" style="height: 20px; width: 55px;"></canvas>
+            <script>
+                const hombres6 = document.getElementById('hombres6').innerText;
+                const mujeres6 = document.getElementById('mujeres6').innerText;
+                let myChartmujeres2 = document.getElementById('myChartmujeres2').getContext('2d');
+                let mujeres_Chart2 = new Chart(myChartmujeres2, {
+                    type: 'doughnut',
+                    data: {
+                        labels:['Hombres', 'Mujeres'],
+                        datasets:[{
+                            label: ['Número de Hombres','Numero de Mujeres'],
+                            data:[
+                                hombres6,
+                                mujeres6
+                            ],
+                            backgroundColor:['rgb(0,43,73,0.75)', 'rgb(241,122,171,0.75)'],
+                            fill: true,
+                        }]
+                    }
+                });
+            </script>
+            <div class="divider" style="margin-top: 20px;"></div>
+            <div class="card-content">
+                <h4 style="padding-bottom: 10px;">Hombres y Mujeres</h4>
+                <% if(rol == "admin" || rol == "recursosHumanos") { %>
+                    <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                <% } %>
             </div>
+        </div>
+    </div>
         <% } %>
-    <% } %>
+    <% } %>    
 <% } %>
 
 

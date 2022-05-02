@@ -19,8 +19,6 @@
                             <div id="mes4" hidden><%= meses[3] %></div>
                             <div id="mes5" hidden><%= meses[4] %></div>
                             <div id="mes6" hidden><%= meses[5] %></div>
-                            <% console.log("-----------------------------------------------------------------") %>
-                            <% console.log(npss) %>
                             <canvas id="myChart" style="height: 20px; width: 55px;"></canvas>
                             <script>
                                 let myChart = document.getElementById('myChart').getContext('2d');
@@ -75,7 +73,7 @@
                                 <% if(rol == "admin" || rol == "recursosHumanos") { %>
                                     <a id="<% indicador.ValorIndicadorID %>" href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
                                 <% } %>
-                                </div>
+                             </div>
                         </div>
                     </div>
                 <% } %>
