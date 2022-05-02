@@ -83,5 +83,5 @@ app.use((request, response, next) => {
     response.statusCode = 404;
     response.send('<h1>La ruta que buscas no existe</h1>');
 });
-
-app.listen(5000);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT);

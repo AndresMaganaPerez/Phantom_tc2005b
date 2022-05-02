@@ -47,7 +47,7 @@ module.exports = class solicitudVacaciones {
                                'FROM solicitudvacaciones, empleado ' +
                                'WHERE solicitudvacaciones.idEmpleado = empleado.idEmpleado AND solicitudAceptadaEstatus IS NULL AND solicitudvacaciones.idEmpleado ' +
                                'IN (SELECT idOperador ' +
-                                    'FROM DIRIGE D ' +
+                                    'FROM dirige D ' +
                                     'WHERE idLider = ?)', [nomina]);
     }
 

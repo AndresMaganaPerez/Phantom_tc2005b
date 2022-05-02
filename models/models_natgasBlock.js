@@ -19,7 +19,7 @@ module.exports = class NGB {
         return db.execute('SELECT fechaSolicitud FROM natgasblocks WHERE idEmpleado =? ORDER BY fechaSolicitud DESC LIMIT 1', [_nomina])
     }
     static getNGBDeMisEmpleados(_nomina) {
-        return db.execute('SELECT idNatgasBlocks, natgasblocks.idEmpleado, fechaSolicitud,fechaUsoNGB,nombre,apellidoPaterno,apellidoMaterno FROM natgasblocks, empleado WHERE natgasblocks.idEmpleado = empleado.idEmpleado AND natgasblocks.idEmpleado IN (SELECT idOperador FROM DIRIGE D WHERE idLider =?)', [_nomina])
+        return db.execute('SELECT idNatgasBlocks, natgasblocks.idEmpleado, fechaSolicitud,fechaUsoNGB,nombre,apellidoPaterno,apellidoMaterno FROM natgasblocks, empleado WHERE natgasblocks.idEmpleado = empleado.idEmpleado AND natgasblocks.idEmpleado IN (SELECT idOperador FROM dirige D WHERE idLider =?)', [_nomina])
     }
     /*static getNombreDeEmpleado(_nomina){
         return db.execute('SELECT nombre, apellidoPaterno, apellidoMaterno FROM empleado WHERE idEmpleado=?',[_nomina])
@@ -33,7 +33,7 @@ module.exports = class NGB {
     }
 
     static fetchNGBPorAceptar(_nomina) {
-        return db.execute('SELECT * FROM solicitudesngb as sngb WHERE Lider IN (SELECT e.nombre FROM DIRIGE d, empleado e WHERE d.idLider = e.idEmpleado AND d.idLider =?) AND sngb.estatusNGB IS NULL;', [_nomina])
+        return db.execute('SELECT * FROM solicitudesngb as sngb WHERE Lider IN (SELECT e.nombre FROM dirige d, empleado e WHERE d.idLider = e.idEmpleado AND d.idLider =?) AND sngb.estatusNGB IS NULL;', [_nomina])
     }
 
     static aceptarNGB(idqs, idngb) {
