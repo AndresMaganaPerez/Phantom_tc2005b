@@ -18,4 +18,6 @@ router.get('/modificar/:idIndicador', isAuth, controllerReportes.modificar_repor
 
 router.post('/modificar', isAuth, controllerReportes.post_modificar_reporte);
 
+router.get('/:nombre', isAuth, controllerReportes.filtrarIndicadorNombre);
+
 module.exports = router;

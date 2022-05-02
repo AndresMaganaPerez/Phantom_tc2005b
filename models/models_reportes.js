@@ -52,4 +52,8 @@ module.exports = class Reportes {
         return db.execute("UPDATE valor_indicador SET Valor=? WHERE ValorIndicadorID = ?", [valor, idIndicador]);
     }
 
+    static filtrarNombre(idIndicador, mes, year){
+        return db.execute("SELECT * FROM valor_indicador WHERE TipoIndicadorID = ? AND fecha BETWEEN '"+year+"-"+mes+"-01' AND '"+year+"-"+mes+"-31'", [idIndicador]);
+    }
+
 }
