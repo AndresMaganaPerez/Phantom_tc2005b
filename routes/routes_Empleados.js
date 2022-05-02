@@ -19,6 +19,8 @@ router.get('/empleados_registrados',isAuth,controller_empleado.usuarios);
 
 router.post('/empleados_registrados',isAuth, controller_empleado.borrarUsuario);
 
+router.post('/empleados_registradosM',isAuth, controller_empleado.modificarEmpleado)
+
 router.get('/buscar/:criterio',isAuth,controller_empleado.buscarUsuario);
 
 module.exports = router;
