@@ -5,15 +5,22 @@
             <div class="card " style="border-radius: 15px;">
                 <div class="card-content" style="padding: 10px;">
                     <div class="row">
-                        <div class="col s12 m7 l13">
+                        <div class="col s12 m12 l13">
                             <span class='txt'>
-                                <h5 style="margin-left: 1.8vw;"><span style="font-weight: 600;">Fecha de solicitud: </span> <%=
-                                    solicitud.fechaSolicitud.getDate() + '/' + (solicitud.fechaSolicitud.getMonth() + 1) + '/' + solicitud.fechaSolicitud.getFullYear()%>
+                                <h5 style="margin-left: 1.8vw;">
+                                    <span style="font-weight: 600;">
+                                        Empleado:   
+                                    </span>
+                                        <%= solicitud.nomSolicita + ' ' + solicitud.apellidoPatSolicita + ' ' + solicitud.apellidoMatSolicita %> 
                                 </h5>
                             </span>
                         </div>
-                        <div class="col s12 m2 l13"></div>
-                        <div class="col s12 m2 l13"></div>
+                        <div class="col s12 m4 l13">
+                            <h6 style="margin-left: 1.8vw;"> 
+                                <span style="font-weight: 600;">Suplente:</span> <%= solicitud.suplente %>
+                            </h6>
+                        </div>
+                        <div class="col s12 m4 l13"></div>
                     </div>
                     <div class="row">
                         <div class="col s12 m7 l13">
@@ -25,12 +32,21 @@
                                 <%= solicitud.fechaFin.getDate() + '/' + (solicitud.fechaFin.getMonth() + 1) + '/' + solicitud.fechaFin.getFullYear() %>
                             </h6>
                         </div>
-                        <div class="col s12 m2 l13"></div>
-                        <% if (solicitud.solicitudAceptadaEstatus == 1) { %>
-                            <%- include('../bloques/componentesBloque/cartas/cartaAceptado.ejs') %>
-                        <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
-                            <%- include ('../bloques/componentesBloque/cartas/cartaRechazado', {nota: solicitud.Nota}) %>
-                        <% } %>
+                        <div class="col s12 m4 l13" style="display: inline-flex;">
+                            <% if (solicitud.solicitudAceptadaEstatus == 1) { %>
+                                <%- include('../bloques/componentesBloque/cartas/cartaAceptado.ejs') %>
+                            <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
+                                <%- include ('../bloques/componentesBloque/cartas/cartaRechazado', {nota: solicitud.Nota}) %>
+                            <% } %>
+                            <div style="margin-left: 5.6vw;"></div>
+                            <div class="col s12 m5 l13" style="margin-left: 1vw;">
+                                <% if (solicitud.solicitudAceptadaEstatus == 1 ) { %>
+                                    Por <%= solicitud.nomLider + ' ' + solicitud.apellidoPatLider + ' ' + solicitud.apellidoMatLider %>
+                                <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
+                                    Por <%= solicitud.nomLider + ' ' + solicitud.apellidoPatLider + ' ' + solicitud.apellidoMatLider %>
+                                <% } %>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col s12 m6 l13">
@@ -40,21 +56,11 @@
                             </h6>
                         </div>
                         <div class="col s12 m2 l13"></div>
-                        <div class="col s12 m3 l13 center" style="margin-left: 1.4vw;">
-                            <% if (solicitud.solicitudAceptadaEstatus == 1 ) { %>
-                                Aceptada por <%= solicitud.nomLider + ' ' + solicitud.apellidoPatLider + ' ' + solicitud.apellidoMatLider %>
-                            <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
-                                Rechazada por <%= solicitud.nomLider + ' ' + solicitud.apellidoPatLider + ' ' + solicitud.apellidoMatLider %>
-                            <% } %>
-                        </div>
                     </div>
                     <div class="row">
-                        <h6 style="margin-left: 2.4vw;">
-                            <span style="font-weight: 600;">
-                                    Nombre Empleado:   
-                            </span>
-                                    <%= solicitud.nomSolicita + ' ' + solicitud.apellidoPatSolicita + ' ' + solicitud.apellidoMatSolicita %> | 
-                            <span style="font-weight: 600;">Suplente:</span> <%= solicitud.suplente %>
+                        <h6 style="margin-left: 2.5vw;">
+                            <span style="font-weight: 600;">Fecha de solicitud: </span> <%=
+                            solicitud.fechaSolicitud.getDate() + '/' + (solicitud.fechaSolicitud.getMonth() + 1) + '/' + solicitud.fechaSolicitud.getFullYear()%>
                         </h6>
                     </div>
                 </div>

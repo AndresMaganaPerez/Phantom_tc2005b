@@ -2,6 +2,10 @@
 
 <h3 style="text-align: center;">Anuncios</h3>
 
+<% if (flag == 'anuncio_eliminado') { %>
+    <%- include('componentes/cartas/cartaAnuncioEliminado.ejs') %>
+<% } %>
+
 <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
     <br>
     <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>
@@ -15,7 +19,7 @@
     </div>
 <% } %>
 
-<% if (anunciosUnpinned.length > 0 || anunciosPinned.length > 0) { %>
+<% if (anunciosPinned.length > 0 || anunciosUnpinned.length > 0) { %>
     <% for (anuncio of anunciosPinned) { %>
         <%- include('componentes/cartas/cartaAnuncioPin.ejs') %>
     <% } %>

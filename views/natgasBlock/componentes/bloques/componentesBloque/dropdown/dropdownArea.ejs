@@ -1,6 +1,9 @@
-<a class='dropdown-trigger btn-large grey darken-1' href='#' data-target='dropdown3'><span>Area </span><i class="material-icons right">arrow_drop_down</i></a>
-<ul id='dropdown3' class='dropdown-content'>
-    <li><a href="#!">TYC</a></li>
-    <li><a href="#!">NATDEV</a></li>
-    <li><a href="#!">Mant</a></li>
+<a class='dropdown-trigger btn-large grey darken-1' href='#' data-target='dropdown4'><span>Area </span><i class="material-icons right">arrow_drop_down</i></a>
+<ul id='dropdown4' class='dropdown-content'>
+    <li><a href="/natgas_blocks/solicitudes_estatus_natgas_block/">Ninguno</a></li>
+    <% if (areas.length > 0) { %>
+        <% for (let area of areas) { %>
+            <li><a href="/natgas_blocks/solicitudes_estatus_natgas_block/<%= area.idArea%>"><%= area.nombre %></a></li>
+        <% } %>
+    <% } %>
 </ul>

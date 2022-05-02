@@ -1,0 +1,22 @@
+
+    <a class='dropdown-trigger btn-large light-blue darken-3' href='#' data-target='dropdown2'>Indicador<i class="material-icons right">arrow_drop_down</i></a>
+        <ul id='dropdown2' class='dropdown-content'>
+            <!-- <li><a href="#!">Jan</a></li>
+            <li><a href="#!">Feb</a></li>
+            <li><a href="#!">Mar</a></li>
+            <li><a href="#!">Apr</a></li>
+            <li><a href="#!">May</a></li>
+            <li><a href="#!">Jun</a></li>
+            <li><a href="#!">Jul</a></li>
+            <li><a href="#!">Aug</a></li>
+            <li><a href="#!">Sep</a></li>
+            <li><a href="#!">Oct</a></li>
+            <li><a href="#!">Nov</a></li>
+            <li><a href="#!">Dec</a></li> -->
+            <li><a href="/reportes">Todos</a></li>
+            <% if(tipos.length > 0) { %>
+                <% for(tipo of tipos) { %>
+                    <li><a href="/reportes/<%= tipo.Nombre %> "><%= tipo.Nombre %> </a></li>  
+                <% } %> 
+            <% } %> 
+        </ul>

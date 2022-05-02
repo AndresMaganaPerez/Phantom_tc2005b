@@ -1,4 +1,4 @@
-<body>
+
         <div class="col s12 m4 l13">
             <div class="card medium" style="border-radius: 15px;">
                 <div class="card-content" style="padding: 10px;">
@@ -6,17 +6,17 @@
                         <h4>Noticias</h4>
                         <li class="divider"></li>
                     </span>
-                    <div class="carousel carousel-slider">
                         <% if (banners.length > 0) { %>
+                            <div class="carousel carousel-slider">
                                 <% for (banner of banners) { %>
                                     <% if (today <= banner.expiracion) { %>
                                         <a class="carousel-item" href="#"><img class="imgBanner" src="/<%= banner.recursoDigital %>" ></a>
                                     <% } %>
                                 <% } %>
+                            </div>    
                             <% } else { %>
                                 <h3 class="center">No hay banners existentes</h2>
                             <% } %>
-                       </div>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
     
     
     <script type="text/javascript" src="js/materialize.min.js"></script>
-  </body>
+
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

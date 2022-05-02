@@ -15,7 +15,7 @@
         <h3 style="margin-bottom:25px">Indicadores</h3>
     </div>
     <div class="row center">
-        <%- include('componentes/bloques/dropdowns/dropdownMes.ejs') %>
+        <%- include('componentes/bloques/dropdowns/dropdownNombre.ejs') %>
     </div>
     <div class="row center">
         <!-- SOLO RECURSOS HUMANOS Y EL ADMIN PUEDEN AGREGAR UN INDICADOR  (mhernandez es rh y 91900 es admin)-->
@@ -27,7 +27,7 @@
         <div class="col s12 m2 l13"></div>
         <h6>Mostrando Indicadores del Mes de <%= nombreMes %></h6>
     </div>
-    <% if(indicadores.length > 0) { %>
+    <% if(indicadores.length > 0 && nombreIndicador == "fail") { %>
         <div class="row">
             <div class="col s12 m2 l13"></div>
             <%- include('componentes/bloques/cartas/cartasIndicadores.ejs') %>
@@ -40,9 +40,34 @@
             <div class="col s12 m2 l13"></div>
             <%- include('componentes/bloques/cartas/cartasIndicadores3.ejs') %>
         </div>
+    <% } else if(indicadores.length > 0 && nombreIndicador == "NPS"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaNPS.ejs') %>
+        </div>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "ENPS"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaENPS.ejs') %>
+        </div>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Reducción de CO2"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaCO2.ejs') %>
+        </div>  
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Hombres"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaHombres.ejs') %>
+        </div>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Mujeres"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaMujeres.ejs') %>
+        </div>
     <% } else{ %>
         <h4 class="center">No Hay ningun tipo de Indicador para este Mes</h4>
-        <% } %>
+    <% } %>
     
     
 <%- include('../includes/footer.ejs') %>

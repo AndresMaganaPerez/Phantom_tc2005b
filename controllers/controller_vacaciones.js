@@ -60,21 +60,41 @@ exports.cancelarSolicitud = (request, response, next) =>{
             .then(() => {
                 Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
                 .then(([vacaciones, fieldData]) => {
-                    const misVacaciones = vacaciones;
                     const currentDate = new Date();
+                    const numeroDeResultados = vacaciones.length;
+                    const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+                    const page = request.query.page ? Number(request.query.page) : 1;
+                    if (numeroDeResultados > 0){
+                        if (page > numeroDePaginas) {
+                            response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent(numeroDePaginas));
+                        } else if (page < 1) {
+                            response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent('1'));
+                        }
+                    }
+                    const inicioLimite = (page - 1) * resultadosPorPagina;
                     Solicitudes.fetchLider(request.session.empleado.idEmpleado)
                     .then(([miLider, fieldData]) => {
                         const lider = miLider[0];
-                        response.render('vacaciones/estatusMisVacaciones', {
-                            sesion: request.session.empleado,
-                            rol: request.session.rol,
-                            privilegios: request.session.privilegios,
-                            solicitudes: misVacaciones,
-                            lider: lider,
-                            diaActual: currentDate,
-                            flag: flag,
-                            infoSolicitud: infoSolicitud
-                        });
+                        Solicitudes.fetchPaginacionMisVacaciones(request.session.empleado.idEmpleado, inicioLimite, resultadosPorPagina).then(([vacaciones, fieldData]) => {
+                            let iterator = (page - 2) < 1 ? 1 : page - 2;
+                            const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                            if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                                iterator = numeroDePaginas - 4;
+                            }
+                            response.render('vacaciones/estatusMisVacaciones', {
+                                sesion: request.session.empleado,
+                                rol: request.session.rol,
+                                privilegios: request.session.privilegios,
+                                solicitudes: vacaciones, page, iterator, paginaFinal, numeroDePaginas,
+                                lider: lider,
+                                diaActual: currentDate,
+                                flag: flag,
+                                infoSolicitud: infoSolicitud
+                            });
+                        }).catch((error) => {
+                            console.log(error);
+                        })
+                        
                     })
                     .catch((err) => {
                         console.log(err);
@@ -99,21 +119,41 @@ exports.cancelarSolicitud = (request, response, next) =>{
             .then(() => {
                 Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
                 .then(([rows, fieldData]) => {
-                    const misVacaciones = rows;
                     const currentDate = new Date();
+                    const numeroDeResultados = rows.length;
+                    const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+                    const page = request.query.page ? Number(request.query.page) : 1;
+                    if (numeroDeResultados > 0){
+                        if (page > numeroDePaginas) {
+                            response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent(numeroDePaginas));
+                        } else if (page < 1) {
+                            response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent('1'));
+                        }
+                    }
+                    const inicioLimite = (page - 1) * resultadosPorPagina;
                     Solicitudes.fetchLider(request.session.empleado.idEmpleado)
                     .then(([rows, fieldData]) => {
                         const lider = rows[0];
-                        response.render('vacaciones/estatusMisVacaciones', {
-                            sesion: request.session.empleado,
-                            rol: request.session.rol,
-                            privilegios: request.session.privilegios,
-                            solicitudes: misVacaciones,
-                            lider: lider,
-                            diaActual: currentDate,
-                            flag: flag,
-                            infoSolicitud: infoSolicitud
-                        });
+                        Solicitudes.fetchPaginacionMisVacaciones(request.session.empleado.idEmpleado, inicioLimite, resultadosPorPagina).then(([vacaciones, fieldData]) => {
+                            let iterator = (page - 2) < 1 ? 1 : page - 2;
+                            const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                            if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                                iterator = numeroDePaginas - 4;
+                            }
+                            response.render('vacaciones/estatusMisVacaciones', {
+                                sesion: request.session.empleado,
+                                rol: request.session.rol,
+                                privilegios: request.session.privilegios,
+                                solicitudes: vacaciones, page, iterator, paginaFinal, numeroDePaginas,
+                                lider: lider,
+                                diaActual: currentDate,
+                                flag: flag,
+                                infoSolicitud: infoSolicitud
+                            });
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        })
                     })
                     .catch((err) => {
                         console.log(err);
@@ -298,7 +338,7 @@ exports.estatusMisVacaciones = (request, response, next) => {
                             sesion: request.session.empleado,
                             rol: request.session.rol,
                             privilegios: request.session.privilegios,
-                            solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas, numeroDePaginas,
+                            solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas,
                             lider: lider,
                             diaActual: currentDate,
                             flag: flag
@@ -403,6 +443,7 @@ exports.postSolicitarVacaciones = (request, response, next) => {
 exports.estatusVacaciones = (request, response, next) => {
     Solicitudes.fetchAllVacaciones().then(([rows, fieldData]) => {
         const data = rows;
+        const monar = '';
         const numeroDeResultados = rows.length;
         const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
         const page = request.query.page ? Number(request.query.page) : 1;
@@ -435,6 +476,7 @@ exports.estatusVacaciones = (request, response, next) => {
                                 privilegios: request.session.privilegios,
                                 solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas,
                                 areas: areas,
+                                monar: monar
                             });
                         })
                         .catch((error) => {
@@ -454,7 +496,7 @@ exports.estatusVacaciones = (request, response, next) => {
 // Funcion Filtrar solicitudes de vacaciones por Mes y Área
 exports.filtraSolVacaciones = (request, response, next) => {
     // Variable correspondiente a mes o area
-    const monar = request.params.mesar;
+    const monar = request.params.mesar = '' ? '' : request.params.mesar;
 
     const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
@@ -466,15 +508,38 @@ exports.filtraSolVacaciones = (request, response, next) => {
 
     Solicitudes.filtraSolVacacionesMes(year, index_mes, monar)
         .then(([rows, fieldData]) => {
+            const numeroDeResultados = rows.length;
+            const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
+            const page = request.query.page ? Number(request.query.page) : 1;
+            if (numeroDeResultados > 0) {
+                if (page > numeroDePaginas) {
+                    response.redirect('vacaciones/solicitudes_estatus_vacaciones/' + monar + '/?page='+ encodeURIComponent(numeroDePaginas));
+                } else if (page < 1) {
+                    response.redirect('vacaciones/solicitudes_estatus_vacaciones/' + monar + '/?page='+ encodeURIComponent('1'));
+                }
+            }
+            const inicioLimite = (page - 1) * resultadosPorPagina;
             Solicitudes.fetchAreas()
                 .then(([areas, fieldData]) => {
-                    response.render('vacaciones/estatusVacaciones', {
-                        sesion: request.session.empleado,
-                        rol: request.session.rol,
-                        privilegios: request.session.privilegios,
-                        solicitudes: rows,
-                        areas: areas
-                });
+                    Solicitudes.filtraPaginacionSolVacacionesMes(year, index_mes, monar, inicioLimite, resultadosPorPagina)
+                    .then(([rows, fieldData]) => {
+                        let iterator = (page - 2) < 1 ? 1 : page - 2;
+                        const paginaFinal = (iterator + 4) <= numeroDePaginas ? (iterator + 4) : numeroDePaginas;
+                        if ((page + 2) > numeroDePaginas && (page - 2) > 1) {
+                            iterator = numeroDePaginas - 4;
+                        }
+                        response.render('vacaciones/estatusVacaciones', {
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            solicitudes: rows, page, iterator, paginaFinal, numeroDePaginas,
+                            monar: monar,
+                            areas: areas
+                    });
+                        })
+                    .catch((error) => {
+                        console.log(error);
+                    })
         });
     }).catch((error) => {
         console.log(error);

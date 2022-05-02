@@ -5,7 +5,7 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 5) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Mujeres</span></h2>
                             <div id="mujeres1" hidden><%= mujeres[0].Valor %></div>
                             <div id="mujeres2" hidden><%= mujeres[1].Valor %></div>
                             <div id="mujeres3" hidden><%= mujeres[2].Valor %></div>
@@ -26,7 +26,7 @@
                                     data: {
                                         labels:[mes1, mes2, mes3, mes4, mes5, mes6],
                                         datasets:[{
-                                            label: 'Valor mujeres',
+                                            label: 'Numero de Mujeres',
                                             data:[
                                                 mujeres1,
                                                 mujeres2,
@@ -57,7 +57,7 @@
                             <div class="card-content">
                                 <h4 style="padding-bottom: 10px;">Mujeres</h4>
                                 <% if(rol == "admin" || rol == "recursosHumanos") { %>
-                                    <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                                    <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
                                 <% } %>
                             </div>
                         </div>
@@ -72,12 +72,12 @@
         <% if (indicador.TipoIndicadorID == 5) { %>
             <div class="col s12 m4 l13">
                 <div class="card" style="border-radius: 1rem;">
-                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                    <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Mujeres</span></h2>
                     <div class="divider" style="margin-top: 20px;"></div>
                     <div class="card-content">
                         <h4 style="padding-bottom: 10px;">Mujeres</h4>
                         <% if(rol == "admin" || rol == "recursosHumanos") { %>
-                            <a href="/reportes/modificar" style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                            <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
                         <% } %>
                     </div>
                 </div>
