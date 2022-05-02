@@ -1,17 +1,17 @@
 <% if (mesAnterior.length > 0) { %>
     <% for (let indicador of indicadores) { %>
         <% for (let indicadorAnterior of mesAnterior) { %>
-            <% if (indicador.TipoIndicadorID == 2) { %>
-                <% if (indicadorAnterior.TipoIndicadorID == 2) { %>
+            <% if (indicador.TipoIndicadorID == 5) { %>
+                <% if (indicadorAnterior.TipoIndicadorID == 5) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
-                            <div id="enps1" hidden><%= enpss[0].Valor %></div>
-                            <div id="enps2" hidden><%= enpss[1].Valor %></div>
-                            <div id="enps3" hidden><%= enpss[2].Valor %></div>
-                            <div id="enps4" hidden><%= enpss[3].Valor %></div>
-                            <div id="enps5" hidden><%= enpss[4].Valor %></div>
-                            <div id="enps6" hidden><%= enpss[5].Valor %></div>
+                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Mujeres</span></h2>
+                            <div id="mujeres1" hidden><%= mujeres[0].Valor %></div>
+                            <div id="mujeres2" hidden><%= mujeres[1].Valor %></div>
+                            <div id="mujeres3" hidden><%= mujeres[2].Valor %></div>
+                            <div id="mujeres4" hidden><%= mujeres[3].Valor %></div>
+                            <div id="mujeres5" hidden><%= mujeres[4].Valor %></div>
+                            <div id="mujeres6" hidden><%= mujeres[5].Valor %></div>
 
                             <div id="mes1" hidden><%= meses[0] %></div>
                             <div id="mes2" hidden><%= meses[1] %></div>
@@ -19,15 +19,15 @@
                             <div id="mes4" hidden><%= meses[3] %></div>
                             <div id="mes5" hidden><%= meses[4] %></div>
                             <div id="mes6" hidden><%= meses[5] %></div>
-                            <canvas id="myChartENPS" style="height: 20px; width: 55px;"></canvas>
+                            <canvas id="myChartmujeres" style="height: 20px; width: 55px;"></canvas>
                             <script>
-                                let myChartENPS = document.getElementById('myChartENPS').getContext('2d');
-                                let enps1 = document.getElementById('enps1').innerText;
-                                let enps2 = document.getElementById('enps2').innerText;
-                                let enps3 = document.getElementById('enps3').innerText;
-                                let enps4 = document.getElementById('enps4').innerText;
-                                let enps5 = document.getElementById('enps5').innerText;
-                                let enps6 = document.getElementById('enps6').innerText;
+                                let myChartmujeres = document.getElementById('myChartmujeres').getContext('2d');
+                                let mujeres1 = document.getElementById('mujeres1').innerText;
+                                let mujeres2 = document.getElementById('mujeres2').innerText;
+                                let mujeres3 = document.getElementById('mujeres3').innerText;
+                                let mujeres4 = document.getElementById('mujeres4').innerText;
+                                let mujeres5 = document.getElementById('mujeres5').innerText;
+                                let mujeres6 = document.getElementById('mujeres6').innerText;
 
                                 let mes1 = document.getElementById('mes1').innerText;
                                 let mes2 = document.getElementById('mes2').innerText;
@@ -35,26 +35,26 @@
                                 let mes4 = document.getElementById('mes4').innerText;
                                 let mes5 = document.getElementById('mes5').innerText;
                                 let mes6 = document.getElementById('mes6').innerText;
-                                let ENPS_Chart = new Chart(myChartENPS, {
+                                let mujeres_Chart = new Chart(myChartmujeres, {
                                     type: 'bar',
                                     data: {
                                         labels:[mes1, mes2, mes3, mes4, mes5, mes6],
                                         datasets:[{
-                                            label: 'Valor ENPS',
+                                            label: 'Numero de Mujeres',
                                             data:[
-                                                enps1,
-                                                enps2,
-                                                enps3,
-                                                enps4,
-                                                enps5,
-                                                enps6
+                                                mujeres1,
+                                                mujeres2,
+                                                mujeres3,
+                                                mujeres4,
+                                                mujeres5,
+                                                mujeres6
                                             ],
                                             backgroundColor:'rgb(0,43,73,0.75)',
                                             fill: true,
                                         }]
                                     },
                                 });
-                            </script>
+                            </script>  
                             <% if (indicador.Valor < indicadorAnterior.Valor) { %>
                                 <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
                                 <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
@@ -69,7 +69,7 @@
                             <% } %>
                             <div class="divider" style="margin-top: 20px;"></div>
                             <div class="card-content">
-                                <h4 style="padding-bottom: 10px;">ENPS</h4>
+                                <h4 style="padding-bottom: 10px;">Mujeres</h4>
                                 <% if(rol == "admin" || rol == "recursosHumanos") { %>
                                     <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
                                 <% } %>

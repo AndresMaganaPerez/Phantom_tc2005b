@@ -20,10 +20,10 @@ exports.vistaGeneral = (request, response, next) => {
                 const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
                 const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
                 const d = new Date();
-                let mes = month[d.getMonth()];
+                let mes = month[d.getMonth()] -1; //-1 por logica de mes en vida real
                 let previousMonth = mes -1;
                 if(month[d.getMonth()] == 01){
-                    previousMonth = 12;
+                    previousMonth = 11;
                 }
                 
 
