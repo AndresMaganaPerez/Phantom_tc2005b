@@ -56,7 +56,7 @@ module.exports = class solicitudVacaciones {
     }
 
     static fetchPaginacionMisVacaciones(nomina, inicioLimite, resultadosPorPagina) {
-        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaSolicitud DESC LIMIT ?, ?', [nomina, inicioLimite, resultadosPorPagina]);
+        return db.execute ('SELECT * FROM solicitudvacaciones WHERE idEmpleado=? ORDER BY fechaSolicitud DESC LIMIT ?, ?', [nomina, ''+inicioLimite, ''+resultadosPorPagina]);
     }
 
     static fetchSolicitud(solicitudId){

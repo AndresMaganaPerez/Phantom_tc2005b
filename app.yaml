@@ -1,0 +1,8 @@
+runtime: nodejs16
+
+
+env_variables:
+   DB_USER: phantomNG
+   DB_PASS: phantom_123
+   DB_NAME: db_natgas_phantom
+   INSTANCE_CONNECTION_NAME : phantom-itesm:us-west2:db-natgas-phantom

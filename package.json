@@ -21,7 +21,7 @@
   "description": "PHantom webapp",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon Natgas_webapp.js",
+    "start": "node Natgas_webapp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
