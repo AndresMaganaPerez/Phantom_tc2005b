@@ -15,7 +15,6 @@ exports.anuncios = (request, response, next) => {
     
     Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
         Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
-            console.log(rowsPin);
             response.render('anuncios/anuncios',{
                 sesion: request.session.empleado,
                 rol: request.session.rol,
@@ -55,8 +54,6 @@ exports.postAnuncio = (request, response, next) => {
 
     if (request.body.expiracion > dateStr) {
         const flag = 'success';
-        
-        console.log(anuncio);
 
         anuncio.saveAnuncio()
             .then(() => {
@@ -72,8 +69,6 @@ exports.postAnuncio = (request, response, next) => {
             })
     } else {
         const flag = 'fail';
-        
-        console.log('No ingresó correctamente la fecha');
         
         let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
         date.setMonth(date.getMonth() + 2);

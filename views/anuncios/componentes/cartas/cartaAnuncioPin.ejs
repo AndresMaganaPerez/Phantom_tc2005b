@@ -65,12 +65,12 @@
             </div>
             <div class="input-field" style="padding: 0px 30px">
                 <h5>Contenido:</h5>
-                <textarea placeholder="Escriba aquí..." id="textareaTexto" type="text" class="materialize-textarea validate" name="texto" value="<%= anuncio.texto.toString() %>" required></textarea>
+                <textarea placeholder="Escriba aquí..." id="textareaTexto" type="text" class="materialize-textarea validate active" name="texto" required><%= anuncio.texto %></textarea>
             </div>
             
             <div style="padding: 0px 30px;">
                 <h5>Fecha de expiración:</h5>
-                <input type="date" placeholder="AAAA-MM-DD" id="expiracion" name="expiracion" value="<%= anuncio.expiracion.toString().substr(0, 10) %>" required>
+                <input type="date" placeholder="AAAA-MM-DD" id="expiracion" name="expiracion" value="<%= anuncio.expiracion.getFullYear() + '-' + ('0' + (anuncio.expiracion.getMonth() + 1)).slice(-2) + '-' + ('0' + anuncio.expiracion.getDate()).slice(-2) %>" required>
             </div>
 
             <% if (flag == 'fail') { %>
@@ -89,10 +89,10 @@
             <div class="file-field input-field"style="padding: 0px 30px">
                 <div class="btn blue">
                   <span>Subir imagen</span>
-                  <input type="file" accept="image/png, image/jpg, image/jpeg" name="image">
+                  <input type="file" accept="image/png, image/jpg, image/jpeg" name="image" value="<%= anuncio.recursoDigital %>">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text">
+                  <input class="file-path validate" type="text" value="<%= anuncio.recursoDigital %>">
                 </div>
             </div>
             
