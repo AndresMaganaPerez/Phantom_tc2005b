@@ -36,10 +36,7 @@
             <div class="col s12 m2 l13"></div>
             <%- include('componentes/bloques/cartas/cartasIndicadores2.ejs') %>
         </div>
-        <div class="row">
-            <div class="col s12 m2 l13"></div>
-            <%- include('componentes/bloques/cartas/cartasIndicadores3.ejs') %>
-        </div>
+        
     <% } else if(indicadores.length > 0 && nombreIndicador == "NPS"){ %>
         <div class="row">
             <div class="col s12 m2 l13"></div>
@@ -55,10 +52,10 @@
             <div class="col s12 m2 l13"></div>
             <%- include('componentes/bloques/cartas/cartaCO2.ejs') %>
         </div>  
-    <%} else if(indicadores.length > 0 && nombreIndicador == "Hombres"){ %>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Hombres y Mujeres"){ %>
         <div class="row">
             <div class="col s12 m2 l13"></div>
-            <%- include('componentes/bloques/cartas/cartaHombres.ejs') %>
+            <%- include('componentes/bloques/cartas/cartaHombresMujeres.ejs') %>
         </div>
     <%} else if(indicadores.length > 0 && nombreIndicador == "Mujeres"){ %>
         <div class="row">

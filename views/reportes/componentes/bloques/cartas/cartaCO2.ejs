@@ -5,7 +5,11 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 3) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Tonleadas</span></h2>
+                            <% if(co2s[5].Valor == 0){ %> 
+                                <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
+                            <% } else{ %>
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %> <span style="font-size: large;">Tonedeladas</span></h2>
+                            <% } %>
                             <div id="co21" hidden><%= co2s[0].Valor %></div>
                             <div id="co22" hidden><%= co2s[1].Valor %></div>
                             <div id="co23" hidden><%= co2s[2].Valor %></div>

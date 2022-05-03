@@ -5,7 +5,11 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 1) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <% if(npss[5].Valor == 0){ %> 
+                                <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
+                            <% } else{ %> 
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= npss[5].Valor %></h2>
+                            <% } %> 
                             <div id="nps1" hidden><%= npss[0].Valor %></div>
                             <div id="nps2" hidden><%= npss[1].Valor %></div>
                             <div id="nps3" hidden><%= npss[2].Valor %></div>
@@ -84,13 +88,24 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 2) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <% if(enpss[5].Valor == 0){ %> 
+                                <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
+                            <% } else{ %> 
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= enpss[5].Valor %></h2>
+                            <% } %> 
                             <div id="enps1" hidden><%= enpss[0].Valor %></div>
                             <div id="enps2" hidden><%= enpss[1].Valor %></div>
                             <div id="enps3" hidden><%= enpss[2].Valor %></div>
                             <div id="enps4" hidden><%= enpss[3].Valor %></div>
                             <div id="enps5" hidden><%= enpss[4].Valor %></div>
                             <div id="enps6" hidden><%= enpss[5].Valor %></div>
+
+                            <div id="mes01" hidden><%= meses[0] %></div>
+                            <div id="mes02" hidden><%= meses[1] %></div>
+                            <div id="mes03" hidden><%= meses[2] %></div>
+                            <div id="mes04" hidden><%= meses[3] %></div>
+                            <div id="mes05" hidden><%= meses[4] %></div>
+                            <div id="mes06" hidden><%= meses[5] %></div>
                             <canvas id="myChartENPS" style="height: 20px; width: 55px;"></canvas>
                             <script>
                                 let myChartENPS = document.getElementById('myChartENPS').getContext('2d');
@@ -100,10 +115,17 @@
                                 let enps4 = document.getElementById('enps4').innerText;
                                 let enps5 = document.getElementById('enps5').innerText;
                                 let enps6 = document.getElementById('enps6').innerText;
+
+                                let mes01 = document.getElementById('mes01').innerText;
+                                let mes02 = document.getElementById('mes02').innerText;
+                                let mes03 = document.getElementById('mes03').innerText;
+                                let mes04 = document.getElementById('mes04').innerText;
+                                let mes05 = document.getElementById('mes05').innerText;
+                                let mes06 = document.getElementById('mes06').innerText;
                                 let ENPS_Chart = new Chart(myChartENPS, {
                                     type: 'bar',
                                     data: {
-                                        labels:[mes1, mes2, mes3, mes4, mes5, mes6],
+                                        labels:[mes01, mes02, mes03, mes04, mes05, mes06],
                                         datasets:[{
                                             label: 'Valor ENPS',
                                             data:[
