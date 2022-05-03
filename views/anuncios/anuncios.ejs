@@ -10,6 +10,10 @@
     <%- include('componentes/cartas/cartaAnuncioModificado.ejs') %>
 <% } %>
 
+<% if (flag == 'fail_mod') { %>
+    <%- include('componentes/cartas/cartaAnuncioNoMod.ejs') %>
+<% } %>
+
 <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
     <br>
     <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>

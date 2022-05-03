@@ -87,12 +87,18 @@
             <% } %>
 
             <div class="file-field input-field"style="padding: 0px 30px">
+                <div class="center">
+                    <h6>Imagen actual</h6>
+                    <% if (anuncio.recursoDigital != null) { %>
+                    <img class="responsive-img" src="/<%= anuncio.recursoDigital %>" style="width: fit-content; height: 200px;">
+                    <% } %>
+                </div>
                 <div class="btn blue">
                   <span>Subir imagen</span>
                   <input type="file" accept="image/png, image/jpg, image/jpeg" name="image" value="<%= anuncio.recursoDigital %>">
                 </div>
                 <div class="file-path-wrapper">
-                  <input class="file-path validate" type="text" value="<%= anuncio.recursoDigital %>">
+                  <input class="file-path validate" type="text">
                 </div>
             </div>
             
