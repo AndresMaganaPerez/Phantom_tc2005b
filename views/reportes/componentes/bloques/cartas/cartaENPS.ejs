@@ -5,7 +5,11 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 2) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <% if(enpss[5].Valor == 0){ %> 
+                                <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
+                            <% } else{ %> 
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= enpss[5].Valor %></h2>
+                            <% } %> 
                             <div id="enps1" hidden><%= enpss[0].Valor %></div>
                             <div id="enps2" hidden><%= enpss[1].Valor %></div>
                             <div id="enps3" hidden><%= enpss[2].Valor %></div>

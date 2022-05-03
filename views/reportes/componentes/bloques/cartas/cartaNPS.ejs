@@ -5,7 +5,11 @@
                 <% if (indicadorAnterior.TipoIndicadorID == 1) { %>
                     <div class="col s12 m4 l13">
                         <div class="card" style="border-radius: 1rem;">
-                            <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= indicador.Valor %></h2>
+                            <% if(npss[5].Valor == 0){ %> 
+                                <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
+                            <% } else{ %> 
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= npss[5].Valor %></h2>
+                            <% } %> 
                             <div id="nps1" hidden><%= npss[0].Valor %></div>
                             <div id="nps2" hidden><%= npss[1].Valor %></div>
                             <div id="nps3" hidden><%= npss[2].Valor %></div>
@@ -19,8 +23,6 @@
                             <div id="mes4" hidden><%= meses[3] %></div>
                             <div id="mes5" hidden><%= meses[4] %></div>
                             <div id="mes6" hidden><%= meses[5] %></div>
-                            <% console.log("-----------------------------------------------------------------") %>
-                            <% console.log(npss) %>
                             <canvas id="myChart" style="height: 20px; width: 55px;"></canvas>
                             <script>
                                 let myChart = document.getElementById('myChart').getContext('2d');
