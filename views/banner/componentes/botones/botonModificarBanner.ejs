@@ -1,34 +1,41 @@
 <!-- Modal Trigger -->
-<a class="waves-effect waves-light btn modal-trigger light-blue darken-3" href="#modificarBanner?idBanner=<%= banner.idBanner %>">Modificar</a>
-<%= console.log(banner.idBanner + " hola") %>
-<%= console.log(banner.recursoDigital + " hola") %>
-<%= console.log(banner.expiracion + " hola") %>
+<a class="waves-effect waves-light btn modal-trigger light-blue darken-3" href="#modificarBanner?idBanner=<%= banner.idBanner %>&expiracion=<%= banner.expiracion %>">Modificar</a>
 
 <!-- Modal Structure -->
-<div id="modificarBanner?idBanner=<%= banner.idBanner %>" class="modal">
+<div id="modificarBanner?idBanner=<%= banner.idBanner %>&expiracion=<%= banner.expiracion %>" class="modal">
     <div class="modal-content">
-      <h4>Modificar Banner</h4>
+      <div class="center">
+        <h4>Modificar Banner</h4>
+      </div>
+      <div class="center">
+           <h6>Banner Actual</h6>
+           <img class="responsive-img" src="/<%= banner.recursoDigital %>" style="width: fit-content; height: 200px;">
+      </div>
        <form action="/banners/modificar_banner" method="POST" enctype="multipart/form-data">
           <div class="file-field input-field" style="margin-bottom: 20px">
               <div class="row">
                   <div class="btn ">
                       <span>Archivo</span>
-                    <input type="file" name="image" accept="image/png, image/jpg, image/jpeg" style="width: 200px; margin-top: 10px;" value="Hola" required>
+                    <input type="file" name="image" accept="image/png, image/jpg, image/jpeg" style="width: 200px; margin-top: 10px;">
+                  </div>
+                  <div>
+                    <h6>Fecha expiracion</h6>
+                    <%= banner.expiracion %>
+                    <br>
+                    <br>
                   </div>
                   <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text">
+                    <input class="file-path validate" type="text" placeholder="Opcional ">
                   </div>
               </div>
           </div>
 
           <label for="expiracion" style="font-weight: bold; color: black; margin-right: 10px;">Fecha de Expiración</label>
-          <input id= "expiracion" type="date" class="" name="expiracion" required style="width: 20em; margin-top: 10px;" value="<%= banner.expiracion %>">
+          <input id= "expiracion" type="date" class="" name="expiracion" required style="width: 40em; margin-top: 10px;" value="<%= banner.expiracion.getFullYear() + '-' + ('0' + (banner.expiracion.getMonth() + 1)).slice(-2) + '-' + ('0' + banner.expiracion.getDate()).slice(-2) %>">
 
-          <% if (flag == 'fail') { %>
-              <%- include('componentes/cartas/cartaErrorBanner.ejs') %>
-          <% } %>
           <div class="center" style="padding-top: 20px;">
               <input type="text" value="<%= banner.idBanner %>" name="idBanner" hidden>
+              <input type="text" value="<%= banner.idRecursoDigital %>" name="idRecursoDigital" hidden>
               <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;">Guardar</button>
           </div>
       </form>

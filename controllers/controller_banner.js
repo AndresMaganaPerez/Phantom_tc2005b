@@ -103,19 +103,44 @@ exports.eliminarBanner = (request, response, next) => {
 };
 
 exports.modificarBanner = (request, response, next) => {
-    const flag = '';
-    Banners.modificarBanner(request.file.filename, request.body.expiracion, idBanner)
-        .then(() => {
-            console.log('Se modificó nuevo banner.');
-            response.render('banner/consultarBanners', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                date: dateStr,
-                flag: flag
-            });
-        })
-        .catch(err => {
+    const today = new Date();
+    const aux = new Date(request.body.expiracion);
+
+    if (aux > today) {
+        const flag = 'success';
+        const file = request.file ? request.file.filename : '';
+        Banners.modificarBanner(file, request.body.expiracion, request.body.idBanner, request.body.idRecursoDigital)
+            console.log('');
+            console.log(request.body.expiracion);
+            Banners.fetchAllBanners()
+                .then(([rows, fieldData]) => {
+                    const banners = rows;
+                    console.log('Se modificó nuevo banner.');
+                    response.render('banner/consultarBanners', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        banners: banners,
+                        flag: flag
+                    });
+                }) .catch(err => {
+                console.log(err);
+                })
+    } else {
+        const flag = 'fail';
+        Banners.fetchAllBanners()
+            .then(([rows, fieldData]) => {
+                const banners = rows;
+                console.log('Se modificó nuevo banner.');
+                response.render('banner/consultarBanners', {
+                    sesion: request.session.empleado,
+                    rol: request.session.rol,
+                    privilegios: request.session.privilegios,
+                    banners: banners,
+                    flag: flag
+                });
+            }).catch(err => {
             console.log(err);
-        })
+            })
+    }
 };
