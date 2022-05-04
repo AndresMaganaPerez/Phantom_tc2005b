@@ -318,14 +318,29 @@ exports.post_nuevo_reporte = (request, response, next) => {
             flag = 1;
             //El siguiente metodo es para que el dropdown del render de este post funcione
             Reportes.fecthTipos().then(([rows, fieldData]) => {
-                filas = rows
+                const filas = rows
+                Reportes.saveIndicador(id, request.body.valorIndicador, fecha, flag)
+                .then(() => {
+                    console.log("Indicador Fue Posteado!")
+                    response.render('reportes/crearReporte',{
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        indicadores: filas,
+                        flag: flag  //FLAG EN LA VISTA PARA MENSAJE DE PUBLICADO
+                    });
+                }).catch((error) => {
+                    console.log(error);
+                });
             }).catch((error) => {
                 console.log(error);
             });
-        
-            Reportes.saveIndicador(id, request.body.valorIndicador, fecha, flag)
-            .then(() => {
-                console.log("Indicador Fue Posteado!")
+        } else if (rows = 1){
+            flag = "ERROR";
+            //El siguiente metodo es para que el dropdown del render de este post funcione
+            Reportes.fecthTipos().then(([rows, fieldData]) => {
+                const filas = rows
+                console.log("Ya hay un indicador de este tipo para este mes!");
                 response.render('reportes/crearReporte',{
                     sesion: request.session.empleado,
                     rol: request.session.rol,
@@ -335,23 +350,7 @@ exports.post_nuevo_reporte = (request, response, next) => {
                 });
             }).catch((error) => {
                 console.log(error);
-            });
-        } else if (rows = 1){
-            flag = "ERROR";
-            //El siguiente metodo es para que el dropdown del render de este post funcione
-            Reportes.fecthTipos().then(([rows, fieldData]) => {
-                filas = rows
-            }).catch((error) => {
-                console.log(error);
-            });
-            console.log("Ya hay un indicador de este tipo para este mes!");
-            response.render('reportes/crearReporte',{
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                indicadores: filas,
-                flag: flag  //FLAG EN LA VISTA PARA MENSAJE DE PUBLICADO
-            });
+            }); 
         }
     }).catch((error) => {
         console.log(error);

@@ -1,16 +1,15 @@
-
     <a class='dropdown-trigger btn-large light-blue darken-3' href='#' data-target='dropdown2'>Indicador<i class="material-icons right">arrow_drop_down</i></a>
-        <ul id='dropdown2' class='dropdown-content'>
-            <li><a href="/reportes">Todos</a></li>
-            <% if(tipos.length > 0) { %>
-                <% for(tipo of tipos) { %>
-                    <% if (tipo.Nombre != 'Mujeres') { %>
-                        <% if (tipo.Nombre == 'Hombres') { %>
-                            <li><a href="/reportes/<%= tipo.Nombre %> ">Hombres y Mujeres </a></li>
-                        <% } else { %>
-                            <li><a href="/reportes/<%= tipo.Nombre %> "><%= tipo.Nombre %></a></li>
-                        <% } %>     
-                    <% } %>  
-                <% } %> 
+    <ul id='dropdown2' class='dropdown-content'>
+        <li><a href="/reportes">Todos</a></li>
+        <% if(tipos.length > 0) { %>
+            <% for(tipo of tipos) { %>
+                <% if (tipo.Nombre != 'Mujeres') { %>
+                    <% if (tipo.Nombre == 'Hombres') { %>
+                        <li><a href="/reportes/<%= tipo.Nombre %> ">Hombres y Mujeres </a></li>
+                    <% } else { %>
+                        <li><a href="/reportes/<%= tipo.Nombre %> "><%= tipo.Nombre %></a></li>
+                    <% } %>     
+                <% } %>  
             <% } %> 
-        </ul>
+        <% } %> 
+    </ul>
