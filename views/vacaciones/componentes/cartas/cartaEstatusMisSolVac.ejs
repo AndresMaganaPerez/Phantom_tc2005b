@@ -18,8 +18,8 @@
                             </h6>
                         </div>
                         <% if ((solicitud.solicitudAceptadaEstatus == 1 || solicitud.solicitudAceptadaEstatus == null) && solicitud.fechaInicio > diaActual) { %>
-                            <div class="col s12 m4 l13"></div>
-                            <div class="col s12 m2 l13" style="margin-left: 1.4vw;">
+                            <div class="col s12 m3 l13"></div>
+                            <div class="col s12 m3 l13" style="margin-left: 2vw;">
                                 <%- include('../botones/botonCancelar.ejs') %>
                             </div>
                         <% } %>
