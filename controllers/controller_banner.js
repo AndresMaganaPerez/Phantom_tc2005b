@@ -2,11 +2,12 @@
 const Banners = require('../models/models_banners');
 const fs = require('fs');
 const { formatWithOptions } = require('util');
-const { on } = require('events');
 
 exports.banners = (request, response, next) => {
-    // let today = new Date.now();
-    // let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
+
+    const flag = request.session.flag;
+    delete request.session.flag;
+
     Banners.fetchAllBanners()
         .then(([rows, fieldData]) => {
             const banners = rows;
@@ -16,7 +17,7 @@ exports.banners = (request, response, next) => {
                 rol: request.session.rol,
                 privilegios: request.session.privilegios,
                 banners: banners,
-                // today: dateStr
+                flag: flag
             });
         })
 };
@@ -67,7 +68,6 @@ exports.agregarBanner = (request, response, next) => {
             })
             .catch(err => {
                 console.log(err);
-
             })
     } else {
         const flag = 'fail';
@@ -86,5 +86,41 @@ exports.agregarBanner = (request, response, next) => {
             date: dateStr,
             flag: flag
         });
+    }
+};
+
+exports.eliminarBanner = (request, response, next) => {
+    const idBanner = request.body.idBanner;
+    Banners.deleteBanner(idBanner)
+        .then(([rows, fieldData]) => {
+            const banners = rows;
+            console.log('Se modificó atributo visibilidad.')
+            response.redirect('/banners/consultar_banners/');
+        })
+        .catch(err => {
+            console.log(err);
+        })
+};
+
+exports.modificarBanner = (request, response, next) => {
+    const today = new Date();
+    const aux = new Date(request.body.expiracion);
+
+    if (aux > today) {
+
+        const file = request.file ? request.file.filename : '';
+
+        Banners.modificarBanner(file, request.body.expiracion, request.body.idBanner, request.body.idRecursoDigital)
+            .then(([rows, fieldData]) => {
+                const banners = rows;
+                console.log('Se modificó nuevo banner.');
+                request.session.flag = "success";
+                response.redirect('/banners/consultar_banners/');
+            }) .catch(err => {
+            console.log(err);
+            })
+    } else {
+        request.session.flag = "fail";
+        response.redirect('/banners/consultar_banners/');
     }
 };

@@ -450,9 +450,9 @@ exports.estatusVacaciones = (request, response, next) => {
         // console.log(page);
         if (numeroDeResultados > 0) {
             if (page > numeroDePaginas) {
-                response.redirect('vacaciones/solicitudes_estatus_vacaciones/?page='+encodeURIComponent(numeroDePaginas));
+                response.redirect('vacaciones/solicitudes_estatus_vacaciones/:mesar/?page='+encodeURIComponent(numeroDePaginas));
             } else if (page < 1) {
-                response.redirect('vacaciones/solicitudes_estatus_vacaciones/?page='+encodeURIComponent('1'));
+                response.redirect('vacaciones/solicitudes_estatus_vacaciones/:mesar/?page='+encodeURIComponent('1'));
             }
         }
         const inicioLimite = (page - 1) * resultadosPorPagina;
@@ -508,14 +508,15 @@ exports.filtraSolVacaciones = (request, response, next) => {
 
     Solicitudes.filtraSolVacacionesMes(year, index_mes, monar)
         .then(([rows, fieldData]) => {
+            // Compaginación
             const numeroDeResultados = rows.length;
             const numeroDePaginas = Math.ceil(numeroDeResultados / resultadosPorPagina);
             const page = request.query.page ? Number(request.query.page) : 1;
-            if (numeroDeResultados > 0) {
+            if (numeroDeResultados > 0){
                 if (page > numeroDePaginas) {
-                    response.redirect('vacaciones/solicitudes_estatus_vacaciones/' + monar + '/?page='+ encodeURIComponent(numeroDePaginas));
+                    response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent(numeroDePaginas));
                 } else if (page < 1) {
-                    response.redirect('vacaciones/solicitudes_estatus_vacaciones/' + monar + '/?page='+ encodeURIComponent('1'));
+                    response.redirect('vacaciones/estatus_mis_vacaciones/?page=' + encodeURIComponent('1'));
                 }
             }
             const inicioLimite = (page - 1) * resultadosPorPagina;

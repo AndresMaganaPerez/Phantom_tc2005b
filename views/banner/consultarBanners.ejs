@@ -1,5 +1,11 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
     <h3 style="text-align: center;">Banners</h3>
+    <% if (flag == 'success') { %>
+        <%- include('componentes/cartas/cartaExitoModBanner.ejs') %>
+    <% } %>
+    <% if (flag == 'fail') { %>
+        <%- include('componentes/cartas/cartaErrorModBanner.ejs') %>
+    <% } %>
 
     <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
         <div class="row">
