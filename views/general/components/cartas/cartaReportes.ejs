@@ -8,31 +8,16 @@
         </div>
         <div class="card-image waves-effect waves-block waves-light">
 
-
             <% if (mesAnterior.length > 0) { %>
                 <% for (let indicador of indicadores) { %>
                     <% for (let indicadorAnterior of mesAnterior) { %>
                         <% if (indicador.TipoIndicadorID == 1) { %>
                             <% if (indicadorAnterior.TipoIndicadorID == 1) { %>
-                                
-                                <div class="row" style="display: flex; flex-direction: row; margin-top: -10px;">
-                                    <h5 style="text-align: left; padding-left: 50px;">NPS: <%= indicador.Valor %></h5>
-
-                                    <% if (indicador.Valor < indicadorAnterior.Valor) { %>
-                                        <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                                        <h6 style="text-align: right; color: red; padding-top: 10px; padding-left: 30px;">
-                                            <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                                        </h6>
-                                    <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
-                                        <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
-                                        <h6 style="text-align: right; color: green; padding-top: 10px; padding-left: 30px;">
-                                            <span>+</span>
-                                            <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
-                                        </h6>
-                                    <% } %>
-
-                                </div>
-                                
+                                <% if(npss[5].Valor == 0){ %> 
+                                    <h6 style="text-align: left; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h6>
+                                <% } else{ %> 
+                                    <h5 style="text-align: left; padding-left: 50px;"><%= npss[5].Valor %><span style="font-size: large;"> NPS</span></h5>
+                                <% } %> 
                                 <div id="nps1" hidden><%= npss[0].Valor %></div>
                                 <div id="nps2" hidden><%= npss[1].Valor %></div>
                                 <div id="nps3" hidden><%= npss[2].Valor %></div>
@@ -83,7 +68,7 @@
                                             }]
                                         },
                                     });
-                                </script>
+                                </script>    
                             <% } %>
                         <% } %>
                     <% } %>
