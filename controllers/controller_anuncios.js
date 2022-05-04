@@ -1,6 +1,15 @@
 const { request } = require("express");
 const { response } = require("express");
 const Anuncio = require('../models/models_anuncios');
+const {Storage} = require('@google-cloud/storage');
+
+const storage = new Storage({
+    projectId: process.env.GCLOUD_PROJECT, 
+    credentials: {client_email: process.env.GCLOUD_CLIENT_EMAIL, 
+    private_key: process.env.GCLOUD_PRIVATE_KEY}
+});
+
+const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET)
 
 var currentdate = new Date(); //ESTO TE DA LA FECHA ACTUAL
 var datetime = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear();
@@ -47,12 +56,35 @@ exports.postAnuncio = (request, response, next) => {
     let mes = date.getMonth() + 1;
     let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
     const elim = 0;
-    
-    const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null, elim);
-
     if (request.body.expiracion > dateStr) {
         const flag = 'success';
-        anuncio.saveAnuncio()
+        if (request.file != null) {
+            const newFileName = new Date().getTime() + '-' + request.file.originalname;
+            const blob = bucket.file(newFileName);
+            const blobStream = blob.createWriteStream();
+
+            blobStream.on("error", err => console.log(err));
+            
+            blobStream.on("finish", () =>{
+                const publicUrl = `https://storage.googleapis.com/${process.env.GCLOUD_STORAGE_BUCKET}/${blob.name}`;
+                const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, publicUrl, elim);
+                anuncio.saveAnuncio()
+                .then(() => {
+                    response.render('anuncios/crearAnuncio', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        fechaDeHoy: datetime,
+                        flag: flag
+                    });
+                }).catch(err => {
+                    console.log(err);
+                })
+            });
+            blobStream.end(request.file.buffer);
+        } else {
+            const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, request.file ? request.file.filename : null, elim);
+            anuncio.saveAnuncio()
             .then(() => {
                 response.render('anuncios/crearAnuncio', {
                     sesion: request.session.empleado,
@@ -64,6 +96,7 @@ exports.postAnuncio = (request, response, next) => {
             }).catch(err => {
                 console.log(err);
             })
+        }
     } else {
         const flag = 'fail';
         
