@@ -4,9 +4,10 @@ const fs = require('fs');
 const { formatWithOptions } = require('util');
 
 exports.banners = (request, response, next) => {
-    // let today = new Date.now();
-    // let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
-    const flag = "";
+
+    const flag = request.session.flag;
+    delete request.session.flag;
+
     Banners.fetchAllBanners()
         .then(([rows, fieldData]) => {
             const banners = rows;
@@ -17,7 +18,6 @@ exports.banners = (request, response, next) => {
                 privilegios: request.session.privilegios,
                 banners: banners,
                 flag: flag
-                // today: dateStr
             });
         })
 };
@@ -107,40 +107,20 @@ exports.modificarBanner = (request, response, next) => {
     const aux = new Date(request.body.expiracion);
 
     if (aux > today) {
-        const flag = 'success';
+
         const file = request.file ? request.file.filename : '';
+
         Banners.modificarBanner(file, request.body.expiracion, request.body.idBanner, request.body.idRecursoDigital)
-            console.log('');
-            console.log(request.body.expiracion);
-            Banners.fetchAllBanners()
-                .then(([rows, fieldData]) => {
-                    const banners = rows;
-                    console.log('Se modificó nuevo banner.');
-                    response.render('banner/consultarBanners', {
-                        sesion: request.session.empleado,
-                        rol: request.session.rol,
-                        privilegios: request.session.privilegios,
-                        banners: banners,
-                        flag: flag
-                    });
-                }) .catch(err => {
-                console.log(err);
-                })
-    } else {
-        const flag = 'fail';
-        Banners.fetchAllBanners()
             .then(([rows, fieldData]) => {
                 const banners = rows;
                 console.log('Se modificó nuevo banner.');
-                response.render('banner/consultarBanners', {
-                    sesion: request.session.empleado,
-                    rol: request.session.rol,
-                    privilegios: request.session.privilegios,
-                    banners: banners,
-                    flag: flag
-                });
-            }).catch(err => {
+                request.session.flag = "success";
+                response.redirect('/banners/consultar_banners/');
+            }) .catch(err => {
             console.log(err);
             })
+    } else {
+        request.session.flag = "fail";
+        response.redirect('/banners/consultar_banners/');
     }
 };
