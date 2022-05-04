@@ -34,7 +34,7 @@
                                 <%= solicitud.fechaFin.getDate() + '/' + (solicitud.fechaFin.getMonth() + 1) + '/' + solicitud.fechaFin.getFullYear()%>
                             </h6>
                         </div>
-                        <div class="col s12 m4 l13" style="display: inline-flex;">
+                        <div class="col s12 m2 l13">
                             <% if (solicitud.solicitudAceptadaEstatus == null) { %>
                                 <%- include('../bloques/componentesBloque/cartas/cartaSinStatus.ejs') %>
                             <% } else if (solicitud.solicitudAceptadaEstatus == 1) { %>
@@ -42,15 +42,15 @@
                             <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
                                 <%- include ('../bloques/componentesBloque/cartas/cartaRechazado', {nota: solicitud.Nota}) %>
                             <% } %>
-                            <div style="margin-left: 3vw;"></div>
-                            <div class="col s12 m5 l13">
-                                <% if (solicitud.solicitudAceptadaEstatus == 1 ) { %>
-                                    Por <%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %>
-                                <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
-                                    Por <%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %>
-                                <% } %>
-                            </div> 
                         </div>
+                        <div class="col s12 m2 l13">
+                            <% if (solicitud.solicitudAceptadaEstatus == 1 ) { %>
+                                Por <%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %>
+                            <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
+                                Por <%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %>
+                            <% } %>
+                        </div> 
+                        
                     </div>
                     <div class="row">
                         <div class="col s12 m6 l13">
