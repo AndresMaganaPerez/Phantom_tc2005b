@@ -19,7 +19,7 @@
     </div>
     <div class="row center">
         <!-- SOLO RECURSOS HUMANOS Y EL ADMIN PUEDEN AGREGAR UN INDICADOR  (mhernandez es rh y 91900 es admin)-->
-        <% if (rol == 'recursosHumanos' || sesion.idEmpleado == 'admin') { %>
+        <% if (rol == 'recursosHumanos' || rol == 'admin') { %>
             <%- include('componentes/botones/agregarIndicador.ejs') %>
         <% } %>
     </div>
