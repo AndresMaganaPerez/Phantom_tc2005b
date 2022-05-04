@@ -53,13 +53,12 @@ app.use(session({
 
 
 //Proteccion csrf
-/*
 app.use(csrfProtection); 
 app.use((request, response, next) => {
     response.locals.csrfToken = request.csrfToken();
     next();
 }); 
-*/
+
 
 //app.use de las rutas
 app.use(cookieParser());

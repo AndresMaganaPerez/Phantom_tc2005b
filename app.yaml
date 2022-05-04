@@ -1,17 +1,9 @@
 runtime: nodejs16
 
 handlers:
-  - url: /favicon\.ico
-    static_files: favicon.ico
-    upload: favicon\.ico
-
-  - url: /static
-    static_dir: public
-
-  - url: /.*
-    secure: always
-    redirect_http_response_code: 301
-    script: auto
+  - url: /favicon.ico
+    static_files: public/favicon.ico
+    upload: public/favicon.ico
 
 env_variables:
    DB_USER: phantomNG

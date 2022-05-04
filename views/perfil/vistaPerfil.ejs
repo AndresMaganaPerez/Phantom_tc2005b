@@ -1,6 +1,7 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
     <br><br>
     <form action="/perfil/guardarNumeroTelefono" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
         <div class="row center">
             <div>
                 <%- include('componentes/bloques/bloqueIconoNombre.ejs') %>

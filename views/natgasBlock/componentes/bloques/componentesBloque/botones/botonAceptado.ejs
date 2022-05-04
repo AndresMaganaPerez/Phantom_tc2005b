@@ -1,4 +1,5 @@
 <form action="/natgas_blocks/click_aceptar_ngb" method="POST">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
     <input type="text" value="<%= ngb.idNatgasBlocks %>" name="idngb" hidden>
     <input type="text" value="<%= ngb.idqs %>" name="idqs" hidden>
     <input style="font-weight: 600;" type="submit" class="btn-large waves-light green" style="color: white;" value="Aceptar" name="aceptado">

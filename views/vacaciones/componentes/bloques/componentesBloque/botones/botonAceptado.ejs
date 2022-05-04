@@ -6,6 +6,7 @@
     <div class="modal-content">
         <h4>¿Estas seguro de que quieres aceptar la solicitud de vacación?</h4>
         <form action="/vacaciones/solicitudes_vacaciones/aceptar" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
             <input type="text" value="<%= solicitud.idEmpleado %>" name="idEmpleado" hidden>
             <input type="text" value="<%= solicitud.fechaInicio %>" name="fechaInicio" hidden>
             <input type="text" value="<%= solicitud.fechaFin %>" name="fechaFin" hidden>

@@ -7,6 +7,7 @@
     <div class="col s12 m4 l13">
         <div class="card " style="border-radius: 15px;">
             <form action="/reportes/modificar" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
                 <div style="padding: 20px 30px;">
                     <% if(flag=="success") { %>
                         <%- include('componentes/cartas/cartaRegistroExitoso.ejs') %>

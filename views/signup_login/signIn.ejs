@@ -18,6 +18,7 @@
     <% } %> id="container">
         <div class="form-container sign-up-container">
             <form class="form-registrar" action="/" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
                 <h1>Crear Cuenta</h1>
                 <span style="margin-bottom: 10px; margin-top: 10px;">El Administrador Aceptara tu Solicitud de Registro</span>
                 <div style="display:inline-flex;">

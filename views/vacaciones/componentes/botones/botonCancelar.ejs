@@ -6,6 +6,7 @@
     <div class="modal-content">
         <h4>¿Estás seguro de que quieres cancelar la solicitud de vacación?</h4>
         <form action="/vacaciones/estatus_mis_vacaciones/" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
             <input type="text" value="<%= solicitud.idSolicitud %>" name="idSol" hidden>
             <input type="text" value="<%= solicitud.solicitudAceptadaEstatus %>" name="estatus" hidden>
             <input type="text" value="<%= solicitud.fechaInicio %>" name="fechaIn" hidden>

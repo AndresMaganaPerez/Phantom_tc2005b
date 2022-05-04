@@ -26,6 +26,7 @@
                 <h6 class='center' style='font-weight: 450; color: red; margin-top: 20px;'>No cuentas con Natgas Blocks Restantes.</h6> 
             <% } %>
             <form action="/natgas_blocks/solicitar_mi_natgas_block" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
                 <div style="padding: 0px 30px;">
                     
                     <h5>Fecha de uso del Natgas Block</h5>

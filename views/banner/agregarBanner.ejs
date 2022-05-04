@@ -11,6 +11,7 @@
                         <h4>Agregar Banner</h4>
                     </div>
                     <form action="/banners/agregar_banner" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                         <div class="file-field input-field" style="margin-bottom: 20px">
                             <div class="row">
                                 <div class="btn ">
