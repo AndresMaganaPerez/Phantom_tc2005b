@@ -3,13 +3,14 @@ const app = express();
 const path = require('path');
 const session = require('express-session');
 
-//const csrf = require('csurf');
-//const csrfProtection = csrf();
+const csrf = require('csurf');
+const csrfProtection = csrf();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 const multer = require('multer');
 
 const fileStorage = multer.diskStorage({
@@ -47,8 +48,8 @@ const { response } = require('express');
 
 app.use(session({
     secret: 'asñldfjlñaksdjfoñksdajrioweuroiudasofhjasñofhjoeiwahfjadshfuñoewhafoñheadwfhñdsaohfoaewjhrñoaksdjfouegbñgjibnñvijnachasdñil', 
-    resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
-    saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+    resave: false, 
+    saveUninitialized: false, 
 }));
 
 
@@ -61,7 +62,7 @@ app.use((request, response, next) => {
 
 
 //app.use de las rutas
-app.use(cookieParser());
+
 app.use('/general', rutasVistaGeneral);
 app.use('/perfil', rutasPerfil);
 app.use('/vacaciones', rutasVacaciones);

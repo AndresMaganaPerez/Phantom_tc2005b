@@ -75,6 +75,7 @@
         </div>
         <div class="form-container sign-in-container">
             <form action="/login" method="POST" style="top: 0;">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
                 <img src="/Images/LogoNatgas_100x100px.png" width="100px" height="100px">
                 <br>
                 <h1>Iniciar Sesión</h1>
