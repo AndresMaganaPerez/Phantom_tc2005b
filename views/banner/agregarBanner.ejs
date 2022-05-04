@@ -1,14 +1,14 @@
 <%- include('../includes/sideBarGeneral.ejs') %>
     <div class="row center">
-        <% if (flag == 'success') { %>
-            <%- include('componentes/cartas/cartaExitoBanner.ejs') %>
-        <% } %>
         <div class="col s12 m3 l13"></div>
         <div class="col s12 m6 l13">
             <div class="card"  style="border-radius: 15px; padding: 40px 40px; margin-top: 100px;">
                 <div class="card-content center" style="padding: 10px; padding-right: 20px;  padding-left: 20px;">
                     <div style="margin-bottom: 50px">
                         <h4>Agregar Banner</h4>
+                        <% if (flag == 'success') { %>
+                            <%- include('componentes/cartas/cartaExitoBanner.ejs') %>
+                        <% } %>
                     </div>
                     <form action="/banners/agregar_banner" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>" >

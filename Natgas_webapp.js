@@ -13,19 +13,23 @@ const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 const multer = require('multer');
 
-const fileStorage = multer.diskStorage({
-    destination: (request, file, callback) => {
-        callback(null, 'uploads');
-    },
-    filename: (request, file, callback) => {
-        callback(null, new Date().getTime() + '-' + file.originalname);
-    },
-});
+const fileStorage = multer.memoryStorage(
+    // {
+    // destination: (request, file, callback) => {
+    //     callback(null, `https://console.cloud.google.com/storage/browser/${process.env.GCLOUD_STORAGE_BUCKET}/`);
+    // },
+    // filename: (request, file, callback) => {
+    //     callback(null, new Date().getTime() + '-' + file.originalname);
+    // }
+    // }
+);
 
 app.use(multer({ storage: fileStorage }).single('image')); 
 
+
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

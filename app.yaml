@@ -1,13 +1,11 @@
 runtime: nodejs16
 
-handlers:
-  - url: /favicon.ico
-    static_files: public/favicon.ico
-    upload: public/favicon.ico
-
 env_variables:
    DB_USER: phantomNG
    DB_PASS: phantom_123
    DB_NAME: db_natgas_phantom
    INSTANCE_CONNECTION_NAME : phantom-itesm:us-west2:db-natgas-phantom
    GCLOUD_STORAGE_BUCKET: phantom-itesm.appspot.com
+   GCLOUD_PROJECT: phantom-itesm
+   GCLOUD_CLIENT_EMAIL: phantom-itesm@appspot.gserviceaccount.com
+   GCLOUD_PRIVATE_KEY: "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0QcF18wVsdMzl\nAuLlE/URFAZ432AGQZSQZa5I4q03HjUWjvJXPj4q73JFRDjPlGEsPYf02tBV18FG\nTIpvSJO0rKTlGKvTduKke7gbqPK64ISZ9rry13N2tM3Aktll/j2Z9dM0OQis0U1B\nFSG//QFhVsfFJ512ftAgjCJasl5OvwLVbH1YptQj9h50ObVXMUXAvbnuhjcdjl0A\nM+NdywZ669Dss5JkPCYyiDSIlGwj9c3q/oTRoDN09BmdzvM6c2jaB2Y8P1NWVh/C\nkZcNnMcYwhEOXPp+b0gwk0KNvVTkKCycoOtQz5Ea9b/Xd8i/3+PVvZyEo1ohVK1r\nqrjBg/VdAgMBAAECggEAJQqHIgECug8FZMETVY4kk7IZA2EplxeGWybd6eHUxOkK\n8TwGLine9g023ud+Qh/EWSY6yDTnz2AS+ipz3xrbqWq5xs8rTfzV5YV754kv+fl1\nnjren1TpR/ku97XlgSk9yOPEVyyqLPMkrC1WvmBUFofR7OBvYeB8zddmHtuc+BK9\nNy6DOVWJj+DOskC2DHIioVlq4r7V+uHRBGsgBtW4mWjKgTbMb8pMCP7uAB6uEp1J\n5agAa8vmQJr09iOIFnLEPlrd89bbmdsAN6iPJGd+woohS5FRa0BRyg1CPxGENMOk\naNiTifIGfJRv8lk4WGHqzPTpeZZOIiawOgoXoy5wwQKBgQDqc/Fc155J5zrtoWl9\nIhjpFRSaKpSoOZ2ZyFl6ywx9WhJ0LD1uys/mYfSWgDW3zMrYzfIXCasFCyc60nBw\nD9N+Yn2KJrFM4sFiWjHYjQfl53ze7mQPoKUVh3PbeivXgHLr1JgRhIE51dZ8ewfF\n0TyXW7HNS0aoyCPMeNwXwfv2QQKBgQDE0rkkINBewW0zJqUohGXFMAA8++gnZWVr\nHvLU2YUWM6MKbtI8NHJqkfJ3yk1HauqGpxvQsaPGJMY65+R3DHDnHUHu2gu0cTjR\n8alsIIuLB0WWsEvuKvn2UZqdIwSIQxiYj48SQS6e7DfWLBla2hpkUj8gMrB3YYx+\nym9wBVUQHQKBgQC4mRuUf0zpYX/bdHjLhtpYQznafOZZYiv91mrlrRQjapUXFXI1\nVsjE26GqEj65fizE8brIettF+FcmEGVpRny+iSvRZ8+3+t5K4ztWBw0N7us52De+\nujzhK6qER7hXUJKrrtMhD9RzxjPABVrEXY+4mQDw5HE5GYReTVb1+c26QQKBgQCT\nZ6XU0uZ7MK3R0y16DL4TUgG7qoWRi7TK5yDCHC46FG4U0C6PfE/8VFWdNVtvEzmV\nou2H/KJFMSFs2GMYba7Yx+arNY3yk6EUSsKyAiW/97A8TMhxFKqjuTXsXV91lZqE\nF2/1IfACgbLHqbtLeXCulZJFUPEsV1hbVMzkvnmYWQKBgBjOti/zUSHWl9zBrP4k\nd3f5/os+loRNqzlMTnV7c1qMYoVnzxVk3f6vs8XSdn04F6GW57IIwfBdTyFkJ+eW\ni+fz/BCauV+m8veT7FY7h0DViXYIH8b5W3CJ1FncK41lkyVdL7o0J0azOtyIVflW\nNGhEz2tbxyd4V7tqG45E6nKu\n-----END PRIVATE KEY-----\n"

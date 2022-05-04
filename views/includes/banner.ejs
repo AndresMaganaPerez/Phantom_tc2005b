@@ -10,7 +10,7 @@
                             <div class="carousel carousel-slider">
                                 <% for (banner of banners) { %>
                                     <% if (today <= banner.expiracion) { %>
-                                        <a class="carousel-item" href="#"><img class="imgBanner" src="/<%= banner.recursoDigital %>" ></a>
+                                        <a class="carousel-item" href="#"><img class="imgBanner" src="<%= banner.recursoDigital %>" ></a>
                                     <% } %>
                                 <% } %>
                             </div>    
