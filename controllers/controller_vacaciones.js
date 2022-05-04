@@ -5,6 +5,16 @@ const { formatWithOptions } = require('util');
 const { on } = require('events');
 const { info } = require('console');
 
+const {Storage} = require('@google-cloud/storage');
+
+const storage = new Storage({
+    projectId: process.env.GCLOUD_PROJECT, 
+    credentials: {client_email: process.env.GCLOUD_CLIENT_EMAIL, 
+    private_key: process.env.GCLOUD_PRIVATE_KEY}
+});
+
+const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET)
+
 const resultadosPorPagina = 10;
 
 exports.solicitarVacaciones = (request, response, next) => {
@@ -174,8 +184,12 @@ exports.cancelarSolicitud = (request, response, next) =>{
 }
 
 exports.descarga = (request, response, next) => {
-    const file = `${__dirname}/../public/Solicitudes.csv`;
-  response.download(file);
+    const file = bucket.file('Solicitudes.csv');
+    file.download(function(err, contents){})
+    file.download({
+        destination: '/Descargas'
+      }, function(err) {});
+
 }
 
 // Controlador para desplegar las solicitudes enviadas al lider en sesión.
@@ -459,10 +473,11 @@ exports.estatusVacaciones = (request, response, next) => {
         Solicitudes.fetchAreas()
             .then(([areas, fieldData]) => {
                 const data = rows;
-                var ws = fs.createWriteStream('public/Solicitudes.csv');
-                fastcsv
-                    .write(data, {headers:true})
-                    .on('finish', function() {
+                const blob = bucket.file('Solicitudes.csv');
+                let blobStream = blob.createWriteStream();
+                fastcsv.write(data, {headers:true}).on("finish", () => {
+                    blobStream.on("error", err => console.log(err));
+                    blobStream.on("finish", () => {
                         Solicitudes.fetchPaginacionAllVacaciones(inicioLimite, resultadosPorPagina)
                         .then(([rows,fieldData]) => {
                             let iterator = (page - 2) < 1 ? 1 : page - 2;
@@ -482,8 +497,9 @@ exports.estatusVacaciones = (request, response, next) => {
                         .catch((error) => {
                             console.log(error);
                         })
-                        
-                    }).pipe(ws);
+                    });
+                    blobStream.end();
+                }).pipe(blobStream);
             })
             .catch((error) => {
                 console.log(error);
