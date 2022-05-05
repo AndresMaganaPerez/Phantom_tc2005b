@@ -42,6 +42,7 @@
 <!-- Modal Structure -->
 <div id="anunciosModificar?idA=<%= anuncio.IdAnuncios %>&idRec=<%= anuncio.idRec %>" class="modal" style="height: 500px;">
     <form action="/anuncios/modificar" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
         
         <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
         
@@ -90,12 +91,12 @@
                 <div class="center">
                     <h6>Imagen actual</h6>
                     <% if (anuncio.recursoDigital != null) { %>
-                    <img class="responsive-img" src="/<%= anuncio.recursoDigital %>" style="width: fit-content; height: 200px;">
+                    <img class="responsive-img" src="<%= anuncio.recursoDigital %>" style="width: fit-content; height: 200px;">
                     <% } %>
                 </div>
                 <div class="btn blue">
                   <span>Subir imagen</span>
-                  <input type="file" accept="image/png, image/jpg, image/jpeg" name="image" value="<%= anuncio.recursoDigital %>">
+                  <input type="file" accept="image/png, image/jpg, image/jpeg" name="image">
                 </div>
                 <div class="file-path-wrapper">
                   <input class="file-path validate" type="text">
@@ -115,7 +116,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="modal-close waves-effect blue btn-large">Cancelar</a>
+            <a class="modal-close waves-effect red btn">Cancelar</a>
         </div>
     </form>
 </div>
@@ -123,13 +124,14 @@
 <!-- Modal Structure -->
 <div id="anunciosEliminar?idA=<%= anuncio.IdAnuncios %>" class="modal" style="height: 200px;">
     <form action="/anuncios/eliminar" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
         <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
         <div class="modal-content">
             <h5>¿Está seguro que desea eliminar el anuncio?</h5>
         </div>
         <div class="modal-footer">
-            <button class="btn-large waves-effect red" type="submit" name="action">Aceptar</button>
-            <a class="modal-close waves-effect blue btn-large">Cancelar</a>
+            <button class="btn waves-effect green" type="submit" name="action">Aceptar</button>
+            <a class="modal-close waves-effect red btn">Cancelar</a>
         </div>
     </form>
 </div>

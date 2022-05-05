@@ -131,10 +131,29 @@ exports.modificarBanner = (request, response, next) => {
     const aux = new Date(request.body.expiracion);
 
     if (aux > today) {
+        if (request.file != '') {
+            const file = new Date().getTime() + '-' + request.file.originalname;
+            const blob = bucket.file(file);
+            const blobStream = blob.createWriteStream();
 
-        const file = request.file ? request.file.filename : '';
+            blobStream.on("error", err => console.log(err));
+            blobStream.on("finish", () => {
+                const publicUrl = `https://storage.googleapis.com/${process.env.GCLOUD_STORAGE_BUCKET}/${blob.name}`;
+                Banners.modificarBanner(publicUrl, request.body.expiracion, request.body.idBanner, request.body.idRecursoDigital)
+                .then(([rows, fieldData]) => {
+                    const banners = rows;
+                    console.log('Se modificó nuevo banner.');
+                    request.session.flag = "success";
+                    response.redirect('/banners/consultar_banners/');
+                }) .catch(err => {
+                console.log(err);
+                })
 
-        Banners.modificarBanner(file, request.body.expiracion, request.body.idBanner, request.body.idRecursoDigital)
+            })
+            blobStream.end(request.file.buffer);
+        } else {
+            const file = '';
+            Banners.modificarBanner(file, request.body.expiracion, request.body.idBanner, request.body.idRecursoDigital)
             .then(([rows, fieldData]) => {
                 const banners = rows;
                 console.log('Se modificó nuevo banner.');
@@ -143,6 +162,7 @@ exports.modificarBanner = (request, response, next) => {
             }) .catch(err => {
             console.log(err);
             })
+        }
     } else {
         request.session.flag = "fail";
         response.redirect('/banners/consultar_banners/');

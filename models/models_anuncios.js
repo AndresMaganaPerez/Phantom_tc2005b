@@ -27,7 +27,7 @@ module.exports = class Anuncios {
     }
 
     static modAnuncio(idAnuncio) {
-        return db.execute('SELECT a.IdAnuncios, Titulo, texto, Fecha, expiracion, Pin, eliminado, rd.idRecursoDigital as idRec, recursoDigital FROM anuncios a, anuncios_recurso_digital ard, recurso_digital rd WHERE a.IdAnuncios=?', [idAnuncio]);
+        return db.execute('SELECT a.IdAnuncios, Titulo, texto, Fecha, expiracion, Pin, eliminado, rd.idRecursoDigital as idRec, recursoDigital FROM anuncios a, anuncios_recurso_digital ard, recurso_digital rd WHERE a.IdAnuncios = ard.idAnuncios AND rd. idRecursoDigital = ard.idRecursoDigital AND a.IdAnuncios=?', [idAnuncio]);
     }
 
     static fetchAllPinned(hoy) {

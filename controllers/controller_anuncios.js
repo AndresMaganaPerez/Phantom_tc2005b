@@ -67,7 +67,7 @@ exports.postAnuncio = (request, response, next) => {
 
             blobStream.on("error", err => console.log(err));
             
-            blobStream.on("finish", () =>{
+            blobStream.on("finish", () => {
                 const publicUrl = `https://storage.googleapis.com/${process.env.GCLOUD_STORAGE_BUCKET}/${blob.name}`;
                 const anuncio = new Anuncio(dateStr, request.body.titulo, request.body.pin, request.body.expiracion, request.body.texto, publicUrl, elim);
                 anuncio.saveAnuncio()
@@ -137,29 +137,63 @@ exports.modificarAnuncio = (request, response, next) => {
         if (request.body.pin == 'on') {
             pin_status = 1;
         }
-
-        Anuncio.modificarAnuncio(idA, idR, dateStr, request.body.titulo, pin_status, request.body.expiracion, request.body.texto, request.file ? request.filename: null).then(() => {
-            Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
-                Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
-                    response.render('anuncios/anuncios',{
-                        sesion: request.session.empleado,
-                        rol: request.session.rol,
-                        privilegios: request.session.privilegios,
-                        anunciosPinned: rowsPin,
-                        anunciosUnpinned: rowsUnpin,
-                        hoy: dateStr,
-                        fechaDeHoy: dateStr,
-                        flag: flag
-                    });
+        if (request.file != undefined) {
+            const newFileName = new Date().getTime() + '-' + request.file.originalname;
+            const blob = bucket.file(newFileName);
+            const blobStream = blob.createWriteStream();
+    
+            blobStream.on("error", err => console.log(err));
+    
+            blobStream.on("finish", () => {
+                const publicUrl = `https://storage.googleapis.com/${process.env.GCLOUD_STORAGE_BUCKET}/${blob.name}`;
+                Anuncio.modificarAnuncio(idA, idR, dateStr, request.body.titulo, pin_status, request.body.expiracion, request.body.texto, publicUrl).then(() => {
+                    Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
+                        Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
+                            response.render('anuncios/anuncios',{
+                                sesion: request.session.empleado,
+                                rol: request.session.rol,
+                                privilegios: request.session.privilegios,
+                                anunciosPinned: rowsPin,
+                                anunciosUnpinned: rowsUnpin,
+                                hoy: dateStr,
+                                fechaDeHoy: dateStr,
+                                flag: flag
+                            });
+                        }).catch((error) => {
+                            console.log(error);
+                        })
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+                }).catch(err => {
+                    console.log(err);
+                });
+            });
+            blobStream.end(request.file.buffer);
+        } else {
+            Anuncio.modificarAnuncio(idA, idR, dateStr, request.body.titulo, pin_status, request.body.expiracion, request.body.texto, '').then(() => {
+                Anuncio.fetchAllPinned(dateStr).then(([rowsPin, fieldData]) => {
+                    Anuncio.fetchAllUnpinned(dateStr).then(([rowsUnpin, fieldData]) => {
+                        response.render('anuncios/anuncios',{
+                            sesion: request.session.empleado,
+                            rol: request.session.rol,
+                            privilegios: request.session.privilegios,
+                            anunciosPinned: rowsPin,
+                            anunciosUnpinned: rowsUnpin,
+                            hoy: dateStr,
+                            fechaDeHoy: dateStr,
+                            flag: flag
+                        });
+                    }).catch((error) => {
+                        console.log(error);
+                    })
                 }).catch((error) => {
                     console.log(error);
                 })
-            }).catch((error) => {
-                console.log(error);
-            })
-        }).catch(err => {
-            console.log(err);
-        });
+            }).catch(err => {
+                console.log(err);
+            });
+        }
     } else {
         const flag = 'fail_mod';
         
@@ -210,6 +244,7 @@ exports.eliminarAnuncio = (request, response, next) => {
                     anunciosPinned: rowsPin,
                     anunciosUnpinned: rowsUnpin,
                     hoy: dateStr,
+                    fechaDeHoy: dateStr,
                     flag: flag
                 });
             }).catch((error) => {

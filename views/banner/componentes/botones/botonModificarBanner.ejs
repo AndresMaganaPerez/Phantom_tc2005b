@@ -9,9 +9,10 @@
       </div>
       <div class="center">
            <h6>Banner Actual</h6>
-           <img class="responsive-img" src="/<%= banner.recursoDigital %>" style="width: fit-content; height: 200px;">
+           <img class="responsive-img" src="<%= banner.recursoDigital %>" style="width: fit-content; height: 200px;">
       </div>
        <form action="/banners/modificar_banner" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
           <div class="file-field input-field" style="margin-bottom: 20px">
               <div class="row">
                   <div class="btn ">

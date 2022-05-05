@@ -149,16 +149,30 @@
                                         }]
                                     },
                                 });
-                            </script>                            <% if (indicador.Valor < indicadorAnterior.Valor) { %>
-                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                            </script>                            
+                            <% if (hombres[5].Valor < hombres[4].Valor) { %>
+                                <% const porcentajeh = ((hombres[5].Valor - hombres[4].Valor)/hombres[4].Valor)*100 %>
                                 <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
-                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                    <%= porcentajeh.toFixed(2) %>% de Hombres desde el Mes Anterior
                                 </h6>
-                            <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
-                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                            <% } else if (hombres[5].Valor > hombres[4].Valor) { %>
+                                <% const porcentajeh = ((hombres[5].Valor - hombres[4].Valor)/hombres[4].Valor)*100 %>
                                 <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
                                     <span>+</span>
-                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                    <%= porcentajeh.toFixed(2) %>% de Hombres desde el Mes Anterior
+                                </h6>
+                            <% } %>
+
+                            <% if (mujeres[5].Valor < mujeres[4].Valor) { %>
+                                <% const porcentajem = ((mujeres[5].Valor - mujeres[4].Valor)/mujeres[4].Valor)*100 %>
+                                <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                                    <%= porcentajem.toFixed(2) %>% de Mujeres desde el Mes Anterior
+                                </h6>
+                            <% } else if (mujeres[5].Valor > mujeres[4].Valor) { %>
+                                <% const porcentajem = ((mujeres[5].Valor - mujeres[4].Valor)/mujeres[4].Valor)*100 %>
+                                <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                                    <span>+</span>
+                                    <%= porcentajem.toFixed(2) %>% de Mujeres desde el Mes Anterior
                                 </h6>
                             <% } %>
                             <div class="divider" style="margin-top: 20px;"></div>

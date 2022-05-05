@@ -15,4 +15,5 @@
 
 # Node.js dependencies:
 node_modules/
+uploads/
 .env
