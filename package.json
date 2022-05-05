@@ -1,10 +1,12 @@
 {
   "dependencies": {
+    "@google-cloud/storage": "^5.19.4",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "chart.js": "^3.7.1",
     "cookie-parser": "^1.4.6",
+    "csurf": "^1.11.0",
     "ejs": "^3.0.2",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
@@ -21,7 +23,7 @@
   "description": "PHantom webapp",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon Natgas_webapp.js",
+    "start": "node Natgas_webapp.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

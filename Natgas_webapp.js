@@ -3,28 +3,33 @@ const app = express();
 const path = require('path');
 const session = require('express-session');
 
-//const csrf = require('csurf');
-//const csrfProtection = csrf();
+const csrf = require('csurf');
+const csrfProtection = csrf();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 const multer = require('multer');
 
-const fileStorage = multer.diskStorage({
-    destination: (request, file, callback) => {
-        callback(null, 'uploads');
-    },
-    filename: (request, file, callback) => {
-        callback(null, new Date().getTime() + '-' + file.originalname);
-    },
-});
+const fileStorage = multer.memoryStorage(
+    // {
+    // destination: (request, file, callback) => {
+    //     callback(null, `https://console.cloud.google.com/storage/browser/${process.env.GCLOUD_STORAGE_BUCKET}/`);
+    // },
+    // filename: (request, file, callback) => {
+    //     callback(null, new Date().getTime() + '-' + file.originalname);
+    // }
+    // }
+);
 
 app.use(multer({ storage: fileStorage }).single('image')); 
 
+
+
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'uploads')));
+app.use('/uploads',express.static(path.join(__dirname, 'uploads')));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -47,22 +52,21 @@ const { response } = require('express');
 
 app.use(session({
     secret: 'asñldfjlñaksdjfoñksdajrioweuroiudasofhjasñofhjoeiwahfjadshfuñoewhafoñheadwfhñdsaohfoaewjhrñoaksdjfouegbñgjibnñvijnachasdñil', 
-    resave: false, //La sesión no se guardará en cada petición, sino sólo se guardará si algo cambió 
-    saveUninitialized: false, //Asegura que no se guarde una sesión para una petición que no lo necesita
+    resave: false, 
+    saveUninitialized: false, 
 }));
 
 
 //Proteccion csrf
-/*
 app.use(csrfProtection); 
 app.use((request, response, next) => {
     response.locals.csrfToken = request.csrfToken();
     next();
 }); 
-*/
+
 
 //app.use de las rutas
-app.use(cookieParser());
+
 app.use('/general', rutasVistaGeneral);
 app.use('/perfil', rutasPerfil);
 app.use('/vacaciones', rutasVacaciones);

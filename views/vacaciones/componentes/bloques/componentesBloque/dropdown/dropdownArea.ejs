@@ -1,6 +1,6 @@
 <a class='dropdown-trigger btn-large grey darken-1' href='#' data-target='dropdown3'><span>Area</span><i class="material-icons right">arrow_drop_down</i></a>
 <ul id='dropdown3' class='dropdown-content'>
-    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/">Ninguno</a></li>
+    <li><a href="/vacaciones/solicitudes_estatus_vacaciones/">Todos</a></li>
         <% if (areas.length > 0) { %>
             <% for (area of areas) { %>
                 <li><a href="/vacaciones/solicitudes_estatus_vacaciones/<%= area.idArea %>"><%= area.nombre %></a></li>

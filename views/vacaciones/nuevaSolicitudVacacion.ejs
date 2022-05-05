@@ -22,6 +22,7 @@
             <% } %>
 
             <form action="/vacaciones/solicitar_mis_vacaciones" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
                 <div style="padding: 0px 30px;">
                     <h5>Fecha inicio</h5>
                     <input type="date" id="FI" name="fechaInicio"

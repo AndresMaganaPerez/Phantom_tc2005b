@@ -18,8 +18,8 @@
                             </h6>
                         </div>
                         <% if ((solicitud.solicitudAceptadaEstatus == 1 || solicitud.solicitudAceptadaEstatus == null) && solicitud.fechaInicio > diaActual) { %>
-                            <div class="col s12 m3 l13"></div>
-                            <div class="col s12 m3 l13" style="margin-left: 2vw;">
+                            <div class="col s12 m3 l13" style="margin-left: 2vw;"></div>
+                            <div class="col s12 m1 l13">
                                 <%- include('../botones/botonCancelar.ejs') %>
                             </div>
                         <% } %>
@@ -42,7 +42,11 @@
                             <% } else if (solicitud.solicitudAceptadaEstatus == 0) { %>
                                 <%- include ('../bloques/componentesBloque/cartas/cartaRechazado', {nota: solicitud.Nota}) %>
                             <% } %>
+<<<<<<< HEAD
                         </div>
+=======
+                        </div>        
+>>>>>>> miguel/despliegueServidor
                         <div class="col s12 m2 l13">
                             <% if (solicitud.solicitudAceptadaEstatus == 1 ) { %>
                                 Por <%= lider.nombre + ' ' + lider.apellidoPaterno + ' ' + lider.apellidoMaterno %>

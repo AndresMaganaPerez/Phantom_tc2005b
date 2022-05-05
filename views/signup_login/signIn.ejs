@@ -18,6 +18,7 @@
     <% } %> id="container">
         <div class="form-container sign-up-container">
             <form class="form-registrar" action="/" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
                 <h1>Crear Cuenta</h1>
                 <span style="margin-bottom: 10px; margin-top: 10px;">El Administrador Aceptara tu Solicitud de Registro</span>
                 <div style="display:inline-flex;">
@@ -74,7 +75,8 @@
         </div>
         <div class="form-container sign-in-container">
             <form action="/login" method="POST" style="top: 0;">
-                <img src="/Images/LogoNatgas_100x100px.PNG" width="100px" height="100px">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
+                <img src="/Images/LogoNatgas_100x100px.png" width="100px" height="100px">
                 <br>
                 <h1>Iniciar Sesión</h1>
                 <br>

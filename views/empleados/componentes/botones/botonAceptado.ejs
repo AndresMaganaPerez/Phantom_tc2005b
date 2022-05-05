@@ -3,6 +3,7 @@
 <div id="modal1?nom=<%= solicitud.nombre %>&apPat= <%= solicitud.apellidoPaterno %>&apMat=<%= solicitud.apellidoMaterno %>&nomina=<%=solicitud.idEmpleado%>" class="modal">
     <div class="modal-content">
         <form action="/empleados/registrar_empleados" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
         <h4>Registro de empleado: <%= solicitud.nombre + ' ' + solicitud.apellidoPaterno + ' ' + solicitud.apellidoMaterno%></h4>
             <div class="row">
                 <div class="input-field col s12 m12 l13">

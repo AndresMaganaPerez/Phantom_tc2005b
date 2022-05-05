@@ -8,6 +8,7 @@
   <div class="modal-content">
     <h4>Motivo de Rechazo</h4>
     <form action="/vacaciones/solicitudes_vacaciones/rechazar" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
         <textarea placeholder="Escribe aquí..." name="nota" style="height: 200px;" required></textarea>
         <input type="text" value="<%= solicitud.idSolicitud %>" name="idSolicitud" hidden>
         <input type="text" value="<%= solicitud.fechaInicio %>" name="fechaIn" hidden>

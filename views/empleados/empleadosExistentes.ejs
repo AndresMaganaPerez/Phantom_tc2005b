@@ -9,6 +9,7 @@
 
 <div class="input-field col s12 m8 l13">
     <input type="text" id="buscar" name="buscar" placeholder="">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
     <label for="buscar">Buscar empleado:</label>
 </div>
 
@@ -28,6 +29,7 @@
 
     const busqueda_async = () => {
         const valor_busqueda = document.getElementById('buscar').value
+        const csrf = document.getElementById('_csrf').value
         fetch('/empleados/buscar/' + valor_busqueda, {
             method: 'GET',
             headers: {
@@ -81,6 +83,7 @@
                                                         '<div class="modal-content">' + 
                                                         '<h4>¿Estás seguro de que quieres eliminar a este empleado?</h4>' +
                                                         '<form action="/empleados/empleados_registrados" method="POST">' +
+                                                            '<input type="hidden" name="_csrf" value="' + csrf + '">' +
                                                             '<input name="delete" type="hidden" value="' + empleado.idEmpleado + '">' +
                                                             '<input name="nombre" type="hidden" value="' + empleado.nombre + '">' +
                                                             '<input name="apPat" type="hidden" value="' + empleado.apellidoPaterno + '">' +

@@ -9,6 +9,7 @@
             <p class="center" style="padding-top: 30px;">Fecha Actual: dd/mm/aa</p>
     
             <form action="/vacaciones/solicitudes_mis_vacaciones" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
                 <div style="padding: 0px 120px">
                     <label>
                       <input type="checkbox" class="filled-in" nombre="pinned?">

@@ -10,7 +10,8 @@ exports.vistaGeneral = (request, response, next) => {
     //let dateStr = today.getFullYear() + '-' + ("0" + today.getMonth()).slice(-2) + '-' + ("0" + today.getDate()).slice(-2);
     Banners.fetchAllBanners(dateStr).then(([rows, fieldData]) => {
         Anuncio.fetchLastPin(dateStr).then(([rowsPin, fieldData]) => {
-            Anuncio.fetchLastUnpin().then(([rowsUnPin, fieldData]) => {
+
+            Anuncio.fetchLastUnpin(dateStr).then(([rowsUnPin, fieldData]) => {
                 const banners = rows;
                 console.log(request.body);
                 console.log(request.session.empleado);

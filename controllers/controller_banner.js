@@ -2,6 +2,16 @@
 const Banners = require('../models/models_banners');
 const fs = require('fs');
 const { formatWithOptions } = require('util');
+const { on } = require('events');
+const {Storage} = require('@google-cloud/storage');
+
+const storage = new Storage({
+    projectId: process.env.GCLOUD_PROJECT, 
+    credentials: {client_email: process.env.GCLOUD_CLIENT_EMAIL, 
+    private_key: process.env.GCLOUD_PRIVATE_KEY}
+});
+
+const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET)
 
 exports.banners = (request, response, next) => {
 
@@ -44,31 +54,45 @@ exports.vistaAgregarBanner = (request, response, next) => {
 
 exports.agregarBanner = (request, response, next) => {
     console.log('Creación en proceso');
-    let today = new Date();
-    const banner = new Banners(request.file.filename, request.body.expiracion);
-    const aux = new Date(request.body.expiracion);
 
+    const today = new Date();
+    const aux = new Date(request.body.expiracion);
+    
 
     if (aux > today) {
-        let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
-        date.setMonth(date.getMonth() + 2);
-        let mes = date.getMonth() + 1;
-        let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
-        const flag = 'success';
-        banner.saveBanners()
-            .then(() => {
-                console.log('Se creó nuevo banner.');
-                response.render('banner/agregarBanner', {
-                    sesion: request.session.empleado,
-                    rol: request.session.rol,
-                    privilegios: request.session.privilegios,
-                    date: dateStr,
-                    flag: flag
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        const newFileName = new Date().getTime() + '-' + request.file.originalname;
+        const blob = bucket.file(newFileName);
+        const blobStream = blob.createWriteStream();
+
+        blobStream.on("error", err => console.log(err));
+
+        blobStream.on("finish", () => {
+            const publicUrl = `https://storage.googleapis.com/${process.env.GCLOUD_STORAGE_BUCKET}/${blob.name}`;
+            const banner = new Banners(publicUrl, request.body.expiracion);
+            let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
+            date.setMonth(date.getMonth() + 2);
+            let mes = date.getMonth() + 1;
+            let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+            const flag = 'success';
+            banner.saveBanners()
+                .then(() => {
+                    console.log('Se creó nuevo banner.');
+                    response.render('banner/agregarBanner', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        date: dateStr,
+                        flag: flag
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+    
+                })
+
+        }) 
+        
+        blobStream.end(request.file.buffer);
     } else {
         const flag = 'fail';
         console.log('No ingresó correctamente la fecha');
