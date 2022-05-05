@@ -33,12 +33,21 @@ exports.anuncios = (request, response, next) => {
 
 exports.nuevoAnuncio = (request, response, next) => {
     const flag = '';
+
+    let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
+    date.setMonth(date.getMonth() + 2);
+    let mes = date.getMonth() + 1;
+    let dateStr = date.getFullYear() + '-' + ("0" + mes).slice(-2) + '-' + ("0" + date.getDate()).slice(-2);
+    const nuevaFecha = new Date(dateStr);
+    
+    console.log(dateStr);
     
     response.render('anuncios/crearAnuncio',{
         sesion: request.session.empleado,
         rol: request.session.rol,
         privilegios: request.session.privilegios,
         fechaDeHoy: datetime,
+        fechaDefault: dateStr,
         flag: flag
     });
 };
