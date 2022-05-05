@@ -355,9 +355,11 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
 };
 
 exports.usuarios = (request,response,next) =>{
+    const flag = request.session.flag;
+    delete request.session.flag;
     if(request.session.rol == "admin"){
         empleados.fetchEmpleadoYRolADMIN(request.session.empleado.idEmpleado)
-    .then(([empleado,fieldData]) =>{
+    .then(([empleado,fieldData]) =>{  
         empleados.fetchAreas()
         .then(([areas, fieldData]) => {
             empleados.fetchLideres()
@@ -366,7 +368,7 @@ exports.usuarios = (request,response,next) =>{
                 .then(([roles, fieldData]) => {
                     empleados.fetchPlazas()
                     .then(([plazas, fieldData]) => {
-                        const flag = '';
+
                     response.render('empleados/empleadosExistentes', {
                         sesion: request.session.empleado,
                         rol: request.session.rol,
@@ -394,27 +396,47 @@ exports.usuarios = (request,response,next) =>{
         .catch((error) => {
             console.log(error);
         });
-        
-        
-        
-    }).catch((error) => {
-        console.log(error);
-    });
+})
     }else{
+        empleados.fetchEmpleadoYRol(request.session.empleado.idEmpleado)
+    .then(([empleado,fieldData]) =>{  
+        empleados.fetchAreas()
+        .then(([areas, fieldData]) => {
+            empleados.fetchLideres()
+            .then(([lideres, fieldData]) => {
+                empleados.fetchRoles()
+                .then(([roles, fieldData]) => {
+                    empleados.fetchPlazas()
+                    .then(([plazas, fieldData]) => {
 
-    empleados.fetchEmpleadoYRol()
-    .then(([rows,fieldData]) =>{
-        const flag = '';
-        response.render('empleados/empleadosExistentes', {
-            sesion: request.session.empleado,
-            rol: request.session.rol,
-            privilegios: request.session.privilegios,
-            empleados: rows,
-            flag: flag
+                    response.render('empleados/empleadosExistentes', {
+                        sesion: request.session.empleado,
+                        rol: request.session.rol,
+                        privilegios: request.session.privilegios,
+                        empleados: empleado,
+                        areas: areas,
+                        lideres: lideres,
+                        roles: roles,
+                        flag: flag,
+                        plazas: plazas
         });
-    }).catch((error) => {
-        console.log(error);
-    });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+})
 }
 };
 
@@ -470,67 +492,7 @@ exports.modificarEmpleado = (request,response,next) =>{
 
     empleados.modificarEmpleado(idEmpleado,request.body.area,request.body.lider,request.body.plaza,request.body.rol,request.body.fechaIng,request.body.ngb,request.body.vacLey,request.body.vacPremio)
     .then(() =>{
-        if(request.session.rol == "admin"){
-            empleados.fetchEmpleadoYRolADMIN(request.session.empleado.idEmpleado)
-        .then(([empleado,fieldData]) =>{
-            empleados.fetchAreas()
-            .then(([areas, fieldData]) => {
-                empleados.fetchLideres()
-                .then(([lideres, fieldData]) => {
-                    empleados.fetchRoles()
-                    .then(([roles, fieldData]) => {
-                        empleados.fetchPlazas()
-                        .then(([plazas, fieldData]) => {
-                            const flag = '';
-                        response.render('empleados/empleadosExistentes', {
-                            sesion: request.session.empleado,
-                            rol: request.session.rol,
-                            privilegios: request.session.privilegios,
-                            empleados: empleado,
-                            areas: areas,
-                            lideres: lideres,
-                            roles: roles,
-                            flag: flag,
-                            plazas: plazas
-            });
-                        })
-                        .catch((error) => {
-                            console.log(error);
-                        })
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    })
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-            
-            
-            
-        }).catch((error) => {
-            console.log(error);
-        });
-        }else{
-    
-        empleados.fetchEmpleadoYRol()
-        .then(([rows,fieldData]) =>{
-            const flag = '';
-            response.render('empleados/empleadosExistentes', {
-                sesion: request.session.empleado,
-                rol: request.session.rol,
-                privilegios: request.session.privilegios,
-                empleados: rows,
-                flag: flag
-            });
-        }).catch((error) => {
-            console.log(error);
-        });
-    }r
+        request.session.flag = 'sucess';
+       response.redirect('/empleados/empleados_registrados');
     })
-
-}
+};

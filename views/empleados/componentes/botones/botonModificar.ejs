@@ -2,12 +2,12 @@
 
 <div id="modificarEmpleado?empleado= <%= empleado.idEmpleado %>" class="modal">
     <div class="modal-content">
-        <form action="/empleados/empleados_registradosM" method="POST">
+        <form action="/empleados/empleados_registradosM " method="POST">
 
             <h4>Modificacion de empleado: <%= empleado.nombre + ' ' + empleado.apellidoPaterno + ' ' + empleado.apellidoMaterno%></h4>
                 <div class="row">
                     <div class="input-field col s12 m12 l13">
-                        <input name="fechaIng" id="fechaIng" type="date" value="<%empleado.fechaIngr%>"  required>
+                        <input name="fechaIng" id="fechaIng" type="date" value="<%= empleado.fechaIngr.getFullYear() + '-' + ('0' + (empleado.fechaIngr.getMonth() + 1)).slice(-2) + '-' + ('0' + empleado.fechaIngr.getDate()).slice(-2) %>"  required>
                         <label for="fechaIng">Fecha de ingreso a la empresa</label>
                     </div>
                     <div class="input-field col s12 m12 l13">
@@ -42,7 +42,7 @@
                     </div>
                     <div class="input-field col s12 m12 l13">
                         <select name="lider" id="lider" required>
-                            <option value="<%=empleado.idLider%>"><%= empleado.NombreLider + ' ' + empleado.ApellidoPLider + ' ' + empleado.ApellidoMLider %></option>
+                            <option value="0">No cambiara Lider.</option>
                         <% for (let area of areas) { %>
                             <optgroup label="<%= area.nombre %>" >
                                 <% for (let lider of lideres) { %>

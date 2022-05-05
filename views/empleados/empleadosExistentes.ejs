@@ -7,6 +7,10 @@
     <%- include('componentes/cartas/cartaEliminadoExitoso.ejs') %>
 <% } %>
 
+<% if (flag == 'sucess') { %>
+    <%- include('componentes/cartas/cartaModificarExitoso.ejs') %>
+<% } %>
+
 <div class="input-field col s12 m8 l13">
     <input type="text" id="buscar" name="buscar" placeholder="">
     <label for="buscar">Buscar empleado:</label>
