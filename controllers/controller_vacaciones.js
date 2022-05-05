@@ -184,12 +184,8 @@ exports.cancelarSolicitud = (request, response, next) =>{
 }
 
 exports.descarga = (request, response, next) => {
-    const file = bucket.file('Solicitudes.csv');
-    file.download(function(err, contents){})
-    file.download({
-        destination: '/Descargas'
-      }, function(err) {});
-
+    const blob = bucket.file('Solicitudes.csv');
+    response.redirect(`https://storage.googleapis.com/${process.env.GCLOUD_STORAGE_BUCKET}/${blob.name}`)
 }
 
 // Controlador para desplegar las solicitudes enviadas al lider en sesión.
