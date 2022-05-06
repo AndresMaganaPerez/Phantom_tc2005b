@@ -87,5 +87,10 @@ app.use((request, response, next) => {
     response.statusCode = 404;
     response.send('<h1>La ruta que buscas no existe</h1>');
 });
+
+app.get('/Unauthorized', (request, reponse, next) => {
+    response.statusCode = 403;
+    response.send('<h1>No tienes acceso para entrar a la ruta ingresada</h1>');
+})
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
