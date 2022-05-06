@@ -8,7 +8,7 @@
                             <% if(enpss[5].Valor == 0){ %> 
                                 <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
                             <% } else{ %> 
-                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;">ENPS Actual: <%= enpss[5].Valor %></h2>
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= enpss[5].Valor %> <span style="font-size: large;">ENPS Actual</span></h2>
                             <% } %> 
                             <div id="enps1" hidden><%= enpss[0].Valor %></div>
                             <div id="enps2" hidden><%= enpss[1].Valor %></div>

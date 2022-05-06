@@ -4,6 +4,7 @@
     <div class="modal-content">
         <h4>¿Estás seguro de que quieres aceptar la solicitud de Natgas Block?</h4>
         <form action="/natgas_blocks/click_aceptar_ngb" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
             <input type="text" value="<%= ngb.idNatgasBlocks %>" name="idngb" hidden>
             <input type="text" value="<%= ngb.idqs %>" name="idqs" hidden>
             <input style="font-weight: 600;" type="submit" class="btn waves-light green" style="color: white;" value="Aceptar" name="aceptado">

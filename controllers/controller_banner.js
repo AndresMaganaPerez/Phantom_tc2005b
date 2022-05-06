@@ -65,7 +65,7 @@ exports.vistaAgregarBanner = (request, response, next) => {
 };
 
 exports.agregarBanner = (request, response, next) => {
-    if (request.session.privilegios.incldues('registrarBanner')){
+    if (request.session.privilegios.includes('registrarBanner')){
     console.log('Creación en proceso');
 
     const today = new Date();
