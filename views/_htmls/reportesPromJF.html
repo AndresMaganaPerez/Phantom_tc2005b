@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotor</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div>
+                    <img src="https://pbs.twimg.com/media/DSA7yP3VAAAsiUM.png" style="width: 201px; height: 85px; margin-bottom: 20px;">
+                </div>
+                <div style="display: inline-flex;">
+                    <a href="#user"><i class="material-icons medium">account_circle</i></a>
+                    <h5 style="padding-left: 20px;">Miguel</h5>
+                </div>
+                <br>
+                <ul>
+                    <li><a href="#">General</a></li>
+                    <li><a href="#">Indicadores</a></li>
+                    <li><a href="#">Anuncios</a></li>
+                    <li><a href="#">Mis Vacaciones</a></li>
+                </ul>
+            </div>
+            <br>
+        </li>
+        <div style="position: absolute; bottom: 10%;">
+            <a href="#" style="padding-left: 50px; display: inline-flex;">
+                <i class="material-icons small">exit_to_app</i>
+                <h6 style="padding-left: 5px;">Cerrar Sesión</h6>
+            </a>
+        </div>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons small" style="padding: 20px;">menu</i></a>
+
+
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+
+    </script>
+
+    <!-- Reportes -->
+    <h3 style="text-align: center; margin-bottom:25px">Reportes</h3>
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m4 l13">
+            <div class="card medium">
+                <div class="card-image">
+                    <img src="https://www.amcharts.com/wp-content/uploads/2013/11/demo_129_none.png">
+                    <span class="card-title">NPS por mes</span>
+                </div>
+                <div class="card-content">
+                    <h4>NPS por mes</h4>
+                    <p>Indicador Net Promoter Score del mes actual.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 l13">
+            <div class="card medium">
+                <div class="card-image">
+                    <img src="https://static.anychart.com/images/gallery/v8/pie-and-donut-charts-donut-chart-with-outside-labels.png">
+                    <span class="card-title">ENPS</span>
+                </div>
+                <div class="card-content">
+                    <h4>ENPS por mes</h4>
+                    <p>Indicador Employee Net Promoter Score del mes actual.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <div class="col s12 m4 l13">
+            <div class="card medium">
+                <div class="card-image">
+                    <img src="https://www.pk-anexcelexpert.com/wp-content/uploads/Blogs/ChartAndVisualization/Old_Chart_Post/Male-Female-Chart.jpg">
+                    <span class="card-title">Hombres y Mujeres</span>
+                </div>
+                <div class="card-content">
+                    <h4>Hombres y Mujeres</h4>
+                    <p>Cantidad de hombres y mujeres dentro de la empresa.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4 l13">
+            <div class="card mediums">
+                <div class="card-image">
+                    <img src="https://ec.europa.eu/eurostat/statistics-explained/images/b/b4/Greenhouse_gas_emissions_trend%2C_EU-28%2C_1990_-_2017_%28Index_1990%3D100%29.png">
+                    <span class="card-title">Reducción de CO2</span>
+                </div>
+                <div class="card-content">
+                    <h4>Reducción de CO2</h4>
+                    <p>Indicador de la reducción de CO2 lograda por la venta de gas natural por parte de la empresa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+    <h3 style="text-align: center;">Banners</h3>
+    <% if (flag == 'success') { %>
+        <%- include('componentes/cartas/cartaExitoModBanner.ejs') %>
+    <% } %>
+    <% if (flag == 'fail') { %>
+        <%- include('componentes/cartas/cartaErrorModBanner.ejs') %>
+    <% } %>
+
+    <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <div class="col s12 m8 l13">
+                <div class="right-align" style="padding-top: 20px;">
+                    <%- include('componentes/botones/botonAgregarBanner.ejs') %>
+                </div>
+            </div>
+        </div>
+    <% } %>
+
+    <% if (banners.length > 0) { %>
+        <% for (banner of banners) { %>
+           <%- include('componentes/cartas/cartaBanner.ejs', {banner: banner}) %>
+        <% } %>
+    <% } else { %>
+        <h3 class="center">No hay banners existentes</h2>
+    <% } %>
+
+<%- include('../includes/footer.ejs') %>

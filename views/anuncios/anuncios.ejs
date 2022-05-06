@@ -1,0 +1,42 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+<h3 style="text-align: center;">Anuncios</h3>
+
+<% if (flag == 'anuncio_eliminado') { %>
+    <%- include('componentes/cartas/cartaAnuncioEliminado.ejs') %>
+<% } %>
+
+<% if (flag == 'success_mod') { %>
+    <%- include('componentes/cartas/cartaAnuncioModificado.ejs') %>
+<% } %>
+
+<% if (flag == 'fail_mod') { %>
+    <%- include('componentes/cartas/cartaAnuncioNoMod.ejs') %>
+<% } %>
+
+<% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+    <br>
+    <%- include ('componentes/botones/botonCrearAnuncio.ejs') %>
+<% } %>
+
+<% if (flag == 'fail') { %>
+    <div class="center">
+        <span style="font-weight: 450; color: green;">
+            Anuncio creado exitosamente
+        </span>
+    </div>
+<% } %>
+
+<% if (anunciosPinned.length > 0 || anunciosUnpinned.length > 0) { %>
+    <% for (anuncio of anunciosPinned) { %>
+        <%- include('componentes/cartas/cartaAnuncioPin.ejs') %>
+    <% } %>
+
+    <% for (anuncio of anunciosUnpinned) { %>
+        <%- include('componentes/cartas/cartaAnuncioUnpin.ejs') %>
+    <% } %>
+<% } else { %>
+    <h3 class="center" style="text-align: center">No hay anuncios publicados</h3>
+<% } %>
+
+<%- include('../includes/footer.ejs') %>

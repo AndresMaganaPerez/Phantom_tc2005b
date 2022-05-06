@@ -1,0 +1,60 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+<div class="row">
+    <div class="col s12 m4 l13"></div>
+    <div class="col s12 m4 l13">
+        <div class="card" style="border-radius: 15px;">
+            <h3 class="center" style="padding-bottom: 0px; padding-top: 20px;">MI SOLICITUD DE NATGAS BLOCK</h3>
+            <p class="center"><span style="font-weight: 600;">Fecha de la solicitud: <%= fechaDeHoy %></p>
+            <h5 class="center"><span style="font-weight: 600;">Natgas Block disponibles:</h5>
+            <h6 class="center">
+            <%=restantes %>
+            <% if (restantes == 1) { %>
+                día
+            <% } else { %>
+                días
+            <% } %></h6>
+            </h6>
+            <h6 class="center"><span style="font-weight: 600;">Último Natgas Block solicitado:</span></h6>
+            <h6 class="center"><%=ultimoNGB%></h6>
+            <% if (flag == 'success') { %>
+                <%- include('componentes/cartas/cartaSolNGBExitosa.ejs') %>    
+            <% } %>
+            <% if (limiteFecha == 'invalid') { %>
+                <h6 class="center" style='font-weight: 450; color: red; margin-top: 20px;'>No ha cambiado de mes desde tu ultima solicitud de natgas block</h6>
+            <% } %>
+            <% if (restantes == 0) { %> 
+                <h6 class='center' style='font-weight: 450; color: red; margin-top: 20px;'>No cuentas con Natgas Blocks Restantes.</h6> 
+            <% } %>
+            <form action="/natgas_blocks/solicitar_mi_natgas_block" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
+                <div style="padding: 0px 30px;">
+                    
+                    <h5>Fecha de uso del Natgas Block</h5>
+                    <input type="date" 
+                    <% if (restantes == 0 || limiteFecha == 'invalid') { %> 
+                        disabled  
+                    <% } %>
+                    <% if (flag == 'FUSB') { %>
+                        value="<%= fechaUso %>"
+                    <% } %> 
+                    name="fecha" id="fechaUso" required>
+                    <% if (flag == 'FUSB') { %>
+                        <%- include('componentes/cartas/cartaErrorFU.ejs') %>
+                    <% } %>
+                </div>
+                <br>   
+                
+                <div class="center" style="padding-top: 20px;">
+                    <button class="btn waves-effect waves-light green" 
+                    <% if (restantes == 0 || limiteFecha == 'invalid') { %> 
+                        disabled 
+                    <% } %> 
+                    type="submit" name="action" style="margin-bottom: 50px;">Enviar<i class="material-icons right">send</i>
+                    </button>
+                </div>      
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('../includes/footer.ejs') %>

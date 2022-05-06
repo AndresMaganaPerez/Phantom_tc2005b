@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotor</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+
+
+</head>
+
+<body>
+
+
+
+    <ul id="slide-out" class="sidenav">
+        <li>
+            <div class="user-view">
+                <div>
+                    <img src="https://pbs.twimg.com/media/DSA7yP3VAAAsiUM.png"
+                        style="width: 201px; height: 85px; margin-bottom: 20px;">
+                </div>
+                <div style="display: inline-flex;">
+                    <a href="#user"><i class="material-icons medium">account_circle</i></a>
+                    <h5 style="padding-left: 20px;">Diego Rodriguez</h5>
+                </div>
+                <br>
+                <ul>
+                    <li><a href="#">General</a></li>
+                    <li><a href="#">Indicadores</a></li>
+                    <li><a href="#">Anuncios</a></li>
+                    <li><a href="#">Banner</a></li>
+                    <li><a href="#">Registrar Empleados</a></li>
+                </ul>
+            </div>
+            <br>
+        </li>
+        <div style="position: absolute; bottom: 10%;">
+            <a href="#" style="padding-left: 50px; display: inline-flex;">
+                <i class="material-icons small">exit_to_app</i>
+                <h6 style="padding-left: 5px;">Cerrar Sesión</h6>
+            </a>
+        </div>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons small"
+            style="padding: 20px;">menu</i></a>
+
+    <div class="row">
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s6 m6 l4" style="display: inline-flex;">
+            <a href="#user"><i class="large material-icons">account_circle</i></a>
+            <h5 style="padding-left: 20px; padding: 15px;">Diego Rodríguez</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1">
+            <h4><strong>Nómina</strong></h4>
+        </div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1">
+            <h4><strong>Departamento</strong></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l3">
+            <div class="card-panel grey">
+                <span class="black-text"><strong>A01709834</strong></span>
+            </div>
+        </div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l3">
+            <div class="card-panel grey">
+                <span class="black-text"><strong>Natdev</strong></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1">
+            <h4><strong>Email</strong></h4>
+        </div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1">
+            <h4><strong>Teléfono</strong></h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l3">
+            <div class="card-panel grey">
+                <span class="black-text"><strong>drodriguez@natgas.com.mx</strong></span>
+            </div>
+        </div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l3">
+            <input placeholder="4433567897" id="first_name" type="text" class="validate" style="margin-top: 30px">
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px; padding-right: 50px">
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1"></div>
+        <div class="col s1 m1 l1">
+            <a class="waves-effect waves-light btn-large blue darken-4">Guardar</a>
+        </div>
+    </div>
+<%- include('includes/sideBarAdmin.ejs') %>

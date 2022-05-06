@@ -1,0 +1,25 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+<h4 class="center">Estatus de Solicitudes de NGB</h4>
+
+<% if (rol == 'recursosHumanos') { %>
+    <%- include('componentes/botones/botonRealizarSol') %>
+<% } %>
+
+<% if (rol == 'admin') { %>
+    <%- include('componentes/botones/botonResponderSol.ejs') %>
+<% } %>
+
+<br>
+
+<%- include('componentes/bloques/dropDownMesArea.ejs') %>
+
+
+<% if (solicitudes.length > 0) { %>
+    <%- include('componentes/cartas/cartaConsultarEstatus.ejs') %>
+    <%- include('componentes/paginacion/paginacionEstatusNGB.ejs') %>
+<% } else{  %>
+    <h4 class="center">No hay Solicitudes de NGB</h4>
+<% } %>
+
+<%- include('../includes/footer.ejs') %>
+

@@ -1,0 +1,17 @@
+<% if (flag=='FFI' ) { %>
+    <span style="font-weight: 450; color: red;">
+        Fecha fin debe ser posterior o igual a la fecha de inicio
+    </span>
+    <script>
+        let elemento = document.getElementById("FF");
+        elemento.style = ("border: 1px solid; border-color: red;");
+    </script>
+<% } else if (flag=='FFSB' ) { %>
+    <span style="font-weight: 450; color: red;">
+    Fecha fin debe ser distinto de sábado o domingo
+    </span>
+    <script>
+        let elemento = document.getElementById("FF");
+        elemento.style = ("border: 1px solid; border-color: red;");
+    </script>
+<% } %>

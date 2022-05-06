@@ -1,0 +1,85 @@
+<% if (mesAnterior.length > 0) { %>
+    <% for (let indicador of indicadores) { %>
+        <% for (let indicadorAnterior of mesAnterior) { %>
+            <% if (indicador.TipoIndicadorID == 2) { %>
+                <% if (indicadorAnterior.TipoIndicadorID == 2) { %>
+                    <div class="col s12 m4 l13">
+                        <div class="card" style="border-radius: 1rem;">
+                            <% if(enpss[5].Valor == 0){ %> 
+                                <h3 style="text-align: left; padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 25px">No hay indicador del mes</h3>
+                            <% } else{ %> 
+                                <h2 style="text-align: left; padding-top: 50px; padding-left: 50px;"><%= enpss[5].Valor %> <span style="font-size: large;">ENPS Actual</span></h2>
+                            <% } %> 
+                            <div id="enps1" hidden><%= enpss[0].Valor %></div>
+                            <div id="enps2" hidden><%= enpss[1].Valor %></div>
+                            <div id="enps3" hidden><%= enpss[2].Valor %></div>
+                            <div id="enps4" hidden><%= enpss[3].Valor %></div>
+                            <div id="enps5" hidden><%= enpss[4].Valor %></div>
+                            <div id="enps6" hidden><%= enpss[5].Valor %></div>
+                            <div id="mes1" hidden><%= meses[0] %></div>
+                            <div id="mes2" hidden><%= meses[1] %></div>
+                            <div id="mes3" hidden><%= meses[2] %></div>
+                            <div id="mes4" hidden><%= meses[3] %></div>
+                            <div id="mes5" hidden><%= meses[4] %></div>
+                            <div id="mes6" hidden><%= meses[5] %></div>
+                            <canvas id="myChartENPS" style="height: 20px; width: 55px;"></canvas>
+                            <script>
+                                let myChartENPS = document.getElementById('myChartENPS').getContext('2d');
+                                let enps1 = document.getElementById('enps1').innerText;
+                                let enps2 = document.getElementById('enps2').innerText;
+                                let enps3 = document.getElementById('enps3').innerText;
+                                let enps4 = document.getElementById('enps4').innerText;
+                                let enps5 = document.getElementById('enps5').innerText;
+                                let enps6 = document.getElementById('enps6').innerText;
+                                let mes1 = document.getElementById('mes1').innerText;
+                                let mes2 = document.getElementById('mes2').innerText;
+                                let mes3 = document.getElementById('mes3').innerText;
+                                let mes4 = document.getElementById('mes4').innerText;
+                                let mes5 = document.getElementById('mes5').innerText;
+                                let mes6 = document.getElementById('mes6').innerText;
+                                let ENPS_Chart = new Chart(myChartENPS, {
+                                    type: 'bar',
+                                    data: {
+                                        labels:[mes1, mes2, mes3, mes4, mes5, mes6],
+                                        datasets:[{
+                                            label: 'Valor ENPS',
+                                            data:[
+                                                enps1,
+                                                enps2,
+                                                enps3,
+                                                enps4,
+                                                enps5,
+                                                enps6
+                                            ],
+                                            backgroundColor:'rgb(0,43,73,0.75)',
+                                            fill: true,
+                                        }]
+                                    },
+                                });
+                            </script>
+                            <% if (indicador.Valor < indicadorAnterior.Valor) { %>
+                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                                <h6 style="text-align: right; color: red; padding-top: 20px; padding-right: 20px;">
+                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                </h6>
+                            <% } else if (indicador.Valor > indicadorAnterior.Valor) { %>
+                                <% const porcentaje = ((indicador.Valor - indicadorAnterior.Valor)/indicadorAnterior.Valor)*100 %>
+                                <h6 style="text-align: right; color: green; padding-top: 20px; padding-right: 20px;">
+                                    <span>+</span>
+                                    <%= porcentaje.toFixed(2) %>% Desde el Mes Anterior
+                                </h6>
+                            <% } %>
+                            <div class="divider" style="margin-top: 20px;"></div>
+                            <div class="card-content">
+                                <h4 style="padding-bottom: 10px;">ENPS</h4>
+                                <% if(rol == "admin" || rol == "recursosHumanos") { %>
+                                    <a href="/reportes/modificar/<%= indicador.ValorIndicadorID %> " style="color:azure; background-color: #007DBA; padding: 10px 20px; margin-top: 40rem; font-size: 15px; text-decoration: none; border-radius: .5rem;">Editar</a><br>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            <% } %>
+        <% } %>
+    <% } %>
+<% } %>

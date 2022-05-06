@@ -1,0 +1,62 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+    <br><br>
+    <form action="/perfil/guardarNumeroTelefono" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
+        <div class="row center">
+            <div>
+                <%- include('componentes/bloques/bloqueIconoNombre.ejs') %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <div class="col s12 m4 l13">
+                <%- include('componentes/cartas/nomina.ejs') %>
+            </div>
+            <div class="col s12 m4 l13">
+                <%- include('componentes/cartas/departamento.ejs') %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <div class="col s12 m4 l13">
+                <%- include('componentes/cartas/email.ejs') %>
+            </div>
+            <div class="col s12 m4 l13">
+                <%- include('componentes/inputs/inputTelefono.ejs') %>
+            </div>
+        </div>
+        <% if (rol == 'admin') { %>
+        <div class="row">
+            <div class="col s12 m2 l13 push-m9">
+                <%- include('componentes/botones/botonGuardar.ejs') %>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="row"> 
+        <% if (rol== 'recursosHumanos' || rol== 'lider' || rol== 'operador') { %>
+            <div class="col s12 m3 l13"></div>
+            <div class="col s12 m2 l13">
+                <%- include('componentes/cartas/ngb.ejs') %>
+            </div>
+        <% } %>
+        <% if (rol == 'despachador') { %>
+            <div class="col s12 m4 l13"></div>
+        <% } %>
+            
+        <% if (rol != 'admin') { %>
+            <div class="col s12 m2 l13">
+                <%- include('componentes/cartas/vacLey.ejs') %>
+            </div>
+            <div class="col s12 m2 l13">
+                <%- include('componentes/cartas/vacPremio.ejs') %>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col s12 m2 l13 push-m9">
+                    <%- include('componentes/botones/botonGuardar.ejs') %>
+                </div>
+            </div> 
+        <% } %>
+    </form>
+<%- include('../includes/footer.ejs') %>

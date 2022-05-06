@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col s12 m2 l13"></div>
+    <div class="col s12 m8 l13">
+        <div class="card" style="border-radius: 15px;">
+            <div class="card-content" style="padding: 10px;">
+                <div class="row">
+                    <div class="col s12 m7 l13">
+                        <span class='txt'>
+                            <h5 style="margin-left: 5%;">
+                                <span style="font-weight: 600;">Fecha de solicitud:</span> <%= solicitud.fechaSolicitud.getDate() + '/' + (solicitud.fechaSolicitud.getMonth() + 1) + '/' + solicitud.fechaSolicitud.getFullYear() %>
+                            </h5>
+                        </span>
+                    </div>
+                    <div class="col s12 m2 l13"></div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m7 l13">
+                        <h6 style="margin-left: 5%;">
+                            <span style="font-weight: 600;">Nombre:</span> <%= solicitud.nombre + ' ' + solicitud.apellidoPaterno + ' ' + solicitud.apellidoMaterno %>
+                        </h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6 l13">
+                        <h6 style="margin-left: 1.8vw;">
+                           <span style="font-weight: 600;">Nomina: </span>
+                           <%= solicitud.idEmpleado %>
+                        </h6>
+                    </div>
+                    <div class="col s12 m1 l13"></div>
+                    <div class="col s12 m3 l13" style="display: inline-flex;">
+                        <%- include('../../componentes/botones/botonAceptado.ejs') %>
+                        <span style="margin-left: 2vw;"></span>
+                        <%- include('../../componentes/botones/botonRechazado.ejs') %>
+                    </div>
+                </div>
+                <div class="row">
+                    <h6 style="margin-left: 3.5%;">
+                        <span style="font-weight: 600;">
+                            Telefono: 
+                        </span>
+                            <%= solicitud.numTelefonico %>
+                    </h6>
+                </div>
+            </div>
+            <div class="row">
+                <h6 style="margin-left: 4.4%;">
+                    <span style="font-weight: 600;">
+                        Email: 
+                    </span>
+                        <%= solicitud.email %>
+                </h6>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>

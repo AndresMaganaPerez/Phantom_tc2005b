@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col s12 m2 l13"></div>
+    <div class="col s12 m8 l13">
+        <div class="card" style="border-radius: 15px;">
+            <div class="card-content" style="padding: 10px;">
+                <div class="row" style="margin-bottom: 10px;">
+                    <div class="col s12 m2 l13">
+                    </div>
+                    <div class="col s12 m8 l13"></div>
+                    <div class="col s12 m2 l13">
+                        <span style="margin-top: 10px; margin-left: 10px;"><h6>Fecha de publicación: <%= anuncio.Fecha.getDate()+'/'+anuncio.Fecha.getMonth()+'/'+anuncio.Fecha.getFullYear() %></h6></span>
+                    </div>
+
+                    <div class="col s12 m12 l13">
+                        <span class="card-title black-text text-darken-4" style="padding-left: 30px; color: #000; font-weight: 300px;"><h4><%= anuncio.Titulo %></h4></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center">
+                <% if (anuncio.recursoDigital != null) { %>
+                    <img src="<%= anuncio.recursoDigital %>" class="responsive-img" style="width: fit-content; height: 350px;">
+                <% } %>
+            </div>
+
+            <div class="card-content" style="padding-top:0px; padding-left: 30px;">
+                <p><%= anuncio.texto %></p>
+            </div>
+            <% if (rol == 'admin' || rol == 'recursosHumanos') { %>
+                <br>
+                <%- include ('../botones/botonModificarAnuncio.ejs') %>
+                <%- include ('../botones/botonEliminarAnuncio.ejs') %>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure -->
+<div id="anunciosModificar?idA=<%= anuncio.IdAnuncios %>&idRec=<%= anuncio.idRec %>" class="modal" style="height: 500px;">
+    <form action="/anuncios/modificar" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+        <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
+        
+        <input type="hidden" name="id_recurso_digital" value="<%= anuncio.idRec %>">
+        
+        <div class="modal-content">
+            <h5 style="text-align: center;">Modificar Anuncio</h5>
+            <p class="center">Fecha Actual: <%= fechaDeHoy %></p>
+
+            <li class="divider" style="margin-bottom: 20px;"></li>
+
+            <div style="padding: 0px 50px">
+                <label>
+                  <input type="checkbox" class="filled-in" checked="checked" name="pin">
+                  <span>¿Pinear el anuncio?</span>
+                </label>
+            </div>
+            <div style="padding: 0px 30px;">
+                <h5>Título:</h5>
+                <input placeholder="Ingresa el título aquí" id="Titulo" type="text" class="validate" name="titulo" value="<%= anuncio.Titulo %>" required>
+            </div>
+            <div class="input-field" style="padding: 0px 30px">
+                <h5>Contenido:</h5>
+                <textarea placeholder="Escriba aquí..." id="textareaTexto" type="text" class="materialize-textarea validate active" name="texto" required><%= anuncio.texto %></textarea>
+            </div>
+            
+            <div style="padding: 0px 30px;">
+                <h5>Fecha de expiración:</h5>
+                <input type="date" placeholder="AAAA-MM-DD" id="expiracion" name="expiracion" value="<%= anuncio.expiracion.getFullYear() + '-' + ('0' + (anuncio.expiracion.getMonth() + 1)).slice(-2) + '-' + ('0' + anuncio.expiracion.getDate()).slice(-2) %>" required>
+            </div>
+
+            <% if (flag == 'fail') { %>
+                <div class="center">
+                    <span style="font-weight: 450; color: red;">
+                        La fecha ingresada es incorrecta
+                    </span>
+                </div>
+
+                <script>
+                    let fecha = document.getElementById("expiracion");
+                    fecha.style = ("border: 1px solid; border-color: red;");
+                </script>
+            <% } %>
+
+            <div class="file-field input-field"style="padding: 0px 30px">
+                <div class="center">
+                    <h6>Imagen actual</h6>
+                    <% if (anuncio.recursoDigital != null) { %>
+                    <img class="responsive-img" src="<%= anuncio.recursoDigital %>" style="width: fit-content; height: 200px;">
+                    <% } %>
+                </div>
+                <div class="btn blue">
+                  <span>Subir imagen</span>
+                  <input type="file" accept="image/png, image/jpg, image/jpeg" name="image">
+                </div>
+                <div class="file-path-wrapper">
+                  <input class="file-path validate" type="text">
+                </div>
+            </div>
+            
+            <br>    
+            
+            <div class="left-align" style="padding-left: 30px; ">
+                <span style="font-weight: bold;">*</span> Los anuncios tienen una fecha de expiración de 2 meses
+            </div>
+
+            <div class="center" style="padding-top: 20px;">
+                <button class="btn waves-effect waves-light green" type="submit" name="action">Guardar
+                    <i class="material-icons right">send</i>
+                </button>
+                <a class="modal-close waves-effect btn red">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal Structure -->
+<div id="anunciosEliminar?idA=<%= anuncio.IdAnuncios %>" class="modal" style="height: 200px;">
+    <form action="/anuncios/eliminar" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+        <input type="hidden" name="id_anuncio" value="<%= anuncio.IdAnuncios %>">
+        <div class="modal-content">
+            <h5>¿Está seguro que desea eliminar el anuncio?</h5>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-large waves-effect red" type="submit" name="action">Aceptar</button>
+            <a class="modal-close waves-effect red btn">Cancelar</a>
+        </div>
+    </form>
+</div>

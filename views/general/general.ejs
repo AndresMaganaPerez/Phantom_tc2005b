@@ -1,0 +1,23 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+
+<div class="row" style="margin-top: 40px;">
+    <div class="col s12 m2 l13"></div>
+    <%- include('../includes/banner.ejs') %>
+    <%- include('components/cartas/cartaReportes.ejs') %>
+</div>
+
+
+
+<%- include('components/cartas/cartaAnuncios.ejs') %>
+
+    <div class="col s12 m4 l13">
+        <% if (rol =='lider'|| rol == 'operador'|| rol == 'recursosHumanos' || rol == 'admin') { %>
+        <%- include('components/cartas/cartaNGB.ejs') %>
+        <% } %>
+        <%- include('components/cartas/cartaVacaciones.ejs') %>
+    </div>
+    
+</div>
+
+<%- include('../includes/footer.ejs') %>

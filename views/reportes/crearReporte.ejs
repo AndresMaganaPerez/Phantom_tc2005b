@@ -1,0 +1,50 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+<h3 style="text-align: center; padding-bottom: 10px;">Nuevo Indicador</h3>
+
+<div class="row">
+    <div class="col s12 m4 l13"></div>
+    <div class="col s12 m4 l13">
+        <div class="card " style="border-radius: 15px;">
+            <form action="/reportes/nuevo" method="POST">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
+                <div style="padding: 20px 30px;">
+                    <% if (flag == 1) { %>
+                        <%- include('componentes/cartas/cartaRegistroExitoso.ejs') %>
+                    <% } else if (flag == "ERROR") { %>
+                        <%- include('componentes/cartas/cartaRegistroError.ejs') %>
+                    <% } %>
+                    <label for="tipoIndicador"><h5 style="color: black;">Tipo de Indicador</h5></label>
+                    <a data-target='dropdownTipos'></a>
+                    <select name="tipoIndicador" id="dropdownTipos" value="">
+                        <% if (indicadores.length > 0) { %>
+                            <% for (indicador of indicadores) { %>
+                                <option><%= indicador.TipoIndicadorID +" - " + indicador.Nombre %></option>
+                            <% } %>
+                        <% } else { %>
+                            <option value="" selected disabled>No hay tipos de indicadores Registrados</option>
+                            <% } %>
+                    </select>
+                </div>
+                <div class="input-field" style="padding: 0px 30px">
+                    <h5>Valor:</h5>
+                    <textarea placeholder="Ingresa el valor aquí" id="textareaTexto" class="materialize-textarea" name="valorIndicador" 
+                    <% if (indicadores.length < 1) { %>
+                        disabled
+                    <% } %> 
+                    required></textarea>
+                </div>
+                
+                <br>    
+                
+                <div class="center" style="padding-top: 10px;">
+                    <button class="btn waves-effect waves-light green" type="submit" name="action" style="margin-bottom: 50px;"
+                    <% if (indicadores.length < 1) { %>
+                        disabled
+                    <% } %>
+                    >Enviar
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+     
+<%- include('../includes/footer.ejs') %>

@@ -1,0 +1,13 @@
+<a style="font-weight: 600;" class="btn-large modal-trigger red" href="#modal1?empleado=<%= solicitud.idEmpleado %>">Rechazar</a>
+
+<div id="modal1?empleado=<%= solicitud.idEmpleado %>" class="modal">
+    <div class="modal-content">
+        <h4>¿Seguro que quieres rechazar la solicitud de registro?</h4>
+        <form action="/empleados/registrar_empleados/rechazar" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" >
+            <input name="idEmpleado" type="number" value="<%= solicitud.idEmpleado %>" hidden>
+            <button type="submit" class="btn green">Aceptar</button>
+            <a class="btn red modal-close">Cancelar</a>
+        </form>
+    </div>
+</div>

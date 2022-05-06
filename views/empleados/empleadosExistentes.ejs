@@ -1,0 +1,133 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+<h4 class="center">Empleados Registrados</h4>
+
+<%- include('componentes/botones/botonAceptarSolicitudes.ejs') %>
+
+<% if (flag == 'eliminarExitoso') { %>
+    <%- include('componentes/cartas/cartaEliminadoExitoso.ejs') %>
+<% } %>
+
+<div class="input-field col s12 m8 l13">
+    <input type="text" id="buscar" name="buscar" placeholder="">
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
+    <label for="buscar">Buscar empleado:</label>
+</div>
+
+
+
+<div class="row" id="busqueda_ajax">
+<% if (empleados.length > 0) { %>
+    <% for (empleado of empleados) { %>
+        <%- include('componentes/cartas/cartaEmpleado.ejs', {empleado: empleado})%>
+    <% } %>
+<% } else {  %>
+    <h4 class="center">No existen empleados registrados en la plataforma</h4>
+    <% } %>
+</div>
+
+<script>
+
+    const busqueda_async = () => {
+        const valor_busqueda = document.getElementById('buscar').value
+        const csrf = document.getElementById('_csrf').value
+        fetch('/empleados/buscar/' + valor_busqueda, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(result => {
+            return result.json();
+        }).then(data => {
+            console.log(data);
+            let respuesta = ''
+            for(let empleado of data){
+                console.log(data);
+                const fechaNac = new Date(empleado.fechaNac);
+                const fechaIngr = new Date(empleado.fechaIngr);
+                respuesta += '<div class="row">' +
+                                '<div class="col s12 m2 l13"></div>' +
+                                '<div class="col s12 m8 l13">' +
+                                    '<div class="card" style="border-radius: 15px;">'+
+                                        '<div class="card-content" style="padding: 10px;">'+
+                                            '<div class="row">' +
+                                                '<div class="col s12 m7 l13">'+
+                                                    '<span class="txt">'+
+                                                        '<h5 style="margin-left: 5%;">'+
+                                                            '<span style="font-weight: 600;">Nombre del Empleado:</span> ' + empleado.nombre + " " + empleado.apellidoPaterno + " " + empleado.apellidoMaterno +
+                                                        '</h5>'+
+                                                    '</span>'+
+                                                '</div>'+
+                                                '<div class="col s12 m2 l13"></div>'+
+                                            '</div>'+
+                                            '<div class="row">'+
+                                                '<div class="col s12 m7 l13">' +
+                                                    '<h6 style="margin-left: 5%;">'+
+                                                        '<span style="font-weight: 600;">Fecha de Nacimiento:</span> ' + fechaNac.getDate() + '/' + (fechaNac.getMonth() + 1) + '/' + fechaNac.getFullYear() +
+                                                    '</h6>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="row">' +
+                                                '<div class="col s12 m6 l13">' +
+                                                    '<h6 style="margin-left: 1.85vw;">' +
+                                                        '<span style="font-weight: 600;">Vacaciones Totales:</span> ' + empleado.vacacionesTotales +
+                                                        ' | <span style="font-weight: 600;">Natgas Blocks:</span> ' +
+                                                        empleado.cantidadNatgasBlocks +
+                                                    '</h6>'+
+                                                '</div>'+
+                                                '<div class="col s12 m1 l13"></div>' +
+                                                '<div class="col s12 m3 l13" style="display:inline-flex;">'+
+                                                    '<span style="font-weight: 600;"><a class="btn-large light-blue darken-3">Modificar</a></span>'+
+                                                    '<span style="margin-left:2vw;"></span>'+
+                                                    '<a href="#eliminar" class="btn-large red modal-trigger" style="font-weight: 600;">Eliminar</a>' +
+                                                    '<div id="eliminar" class="modal">' + 
+                                                        '<div class="modal-content">' + 
+                                                        '<h4>¿Estás seguro de que quieres eliminar a este empleado?</h4>' +
+                                                        '<form action="/empleados/empleados_registrados" method="POST">' +
+                                                            '<input type="hidden" name="_csrf" value="' + csrf + '">' +
+                                                            '<input name="delete" type="hidden" value="' + empleado.idEmpleado + '">' +
+                                                            '<input name="nombre" type="hidden" value="' + empleado.nombre + '">' +
+                                                            '<input name="apPat" type="hidden" value="' + empleado.apellidoPaterno + '">' +
+                                                            '<input name="apMat" type="hidden" value="' +  empleado.apellidoMaterno + '">' +
+                                                            '<button type="submit" class="btn green">Aceptar</button>' + '     ' +
+                                                            '<input type="button" class="btn red modal-close" value="Cancelar">' +
+                                                        '</form>' +
+                                                        '</div>' +
+                                                    '</div>' +
+                                                '</div>' +
+                                                '</div>' +
+                                            '<div class="row">'+
+                                                '<div class="col s12 m6 l13">'+
+                                                    '<h6 style="margin-left: 1.8vw;">'+
+                                                        '<span style="font-weight: 600;">Fecha de Ingreso: </span> '+
+                                                        fechaIngr.getDate() + '/' + (fechaIngr.getMonth() + 1) + '/' + fechaIngr.getFullYear() + ' |' + ' <span style="font-weight: 600;">Area: </span>' + empleado.nombreArea +
+                                                    '</h6>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="row">'+
+                                                '<h6 style="margin-left: 2.4vw;">'+
+                                                    '<span style="font-weight: 600;">'+
+                                                        'Numero Telefonico: '+
+                                                    '</span>'+
+                                                    empleado.numTelefonico + ' | ' +
+                                                    '<span style="font-weight: 600;"> Plaza: </span>' + empleado.nombrePlaza +' | ' +
+                                                    '<span style="font-weight: 600;"> Rol: </span>' + empleado.nombreRolEmpresa +
+                                                '</h6>'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<div class="card-image waves-effect waves-block waves-light"></div>'+
+                                    '</div>'+
+                                '</div>'+
+                            '</div>'
+            }
+            document.getElementById('busqueda_ajax').innerHTML = respuesta;
+            M.AutoInit();
+        }).catch(err =>{
+            console.log(err);
+        });
+    };
+
+    document.getElementById('buscar').onkeyup = busqueda_async;
+
+</script>
+
+<%- include('../includes/footer.ejs') %>

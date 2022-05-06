@@ -1,0 +1,7 @@
+<a href="<% if (rol == 'lider') { %> 
+    /natgas_blocks/solicitudes_natgas_block
+    <% } else if (rol == 'operador') { %>
+        /natgas_blocks/solicitar_mi_natgas_block
+    <% } else { %>    
+        /natgas_blocks/solicitudes_estatus_natgas_block
+    <% } %>">Solicitudes NGB</a>

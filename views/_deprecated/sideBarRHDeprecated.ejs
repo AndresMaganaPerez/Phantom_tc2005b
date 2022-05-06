@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natgas</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+    <link rel="stylesheet" href="/css/styles.css">
+
+</head>
+
+<body style="background-color: #f8f9fe">
+<div class="navbar-fixed">    
+    <nav style="background-color: #002b49;" >
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo center" style="pointer-events: none;">
+                <img src="../../Images/LogoTest.png" style="width: 150px; height:50px; padding-top: 10px;">
+            </a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="left hide-on-med-and-down">
+                <li><%- include('botonesNavbar/botonGeneral.ejs') %></li>
+                <li><%- include('botonesNavbar/botonIndicador.ejs') %></li>
+                <li><%- include('botonesNavbar/botonAnuncios.ejs') %></li>
+                <li><%- include('botonesNavbar/botonBanner.ejs') %></li>
+                <li><%- include('dropdown/dropDownSolicitudes.ejs') %></li>
+                <li><%- include('botonesNavbar/botonRegistrarEmpleados.ejs') %></li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+                <li><%- include('botonesNavbar/botonLogout.ejs') %></li>
+            </ul>
+        </div>
+    </nav>
+</div> 
+    <ul class="sidenav" id="mobile-demo">
+        <div class="user-view">
+            <li>
+                <div class="row">
+                    <%- include('botonesSidebar/botonPerfil.ejs') %>
+                </div>
+            </li>
+            <li><%- include('botonesSidebar/botonGeneral.ejs') %></li>
+            <li><%- include('botonesSidebar/botonIndicador.ejs') %></li>
+            <li><%- include('botonesSidebar/botonAnuncios.ejs') %></li>
+            <li><%- include('botonesSidebar/botonBanner.ejs') %></li>
+            <li><%- include('botonesSidebar/botonNGB.ejs') %></li>
+            <li><%- include('botonesSidebar/botonVacaciones.ejs') %></li>
+            <li><%- include('botonesSidebar/botonRegistrarEmpleados.ejs') %></li>
+            <li>
+                <%- include('botonesSidebar/botonLogout.ejs') %>
+            </li>
+        </div>
+    </ul>
+</body>
+
+</html>

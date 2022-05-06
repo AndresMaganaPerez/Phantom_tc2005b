@@ -1,0 +1,19 @@
+<div class="col s12 m1 l13">
+    <span style="font-weight: 600;"><a class="waves-effect waves-light btn-large modal-trigger green" href="#modal2?idSol=<%= solicitud.idSolicitud %>&fI=<%= solicitud.fechaInicio %>&fF=<%= solicitud.fechaFin %>">Aceptar</a></span>
+</div>
+
+<div id="modal2?idSol=<%= solicitud.idSolicitud %>&fI=<%= solicitud.fechaInicio %>&fF=<%= solicitud.fechaFin %>" class="modal">
+    <div class="modal-content">
+        <h4>¿Estas seguro de que quieres aceptar la solicitud de vacación?</h4>
+        <form action="/vacaciones/solicitudes_vacaciones/aceptar" method="POST">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" id="_csrf" >
+            <input type="text" value="<%= solicitud.idEmpleado %>" name="idEmpleado" hidden>
+            <input type="text" value="<%= solicitud.fechaInicio %>" name="fechaInicio" hidden>
+            <input type="text" value="<%= solicitud.fechaFin %>" name="fechaFin" hidden>
+            <input type="text" value="<%= solicitud.idSolicitud %>" name="idSolicitud" hidden>
+            <input type="submit" class="btn green" style="color: white;" value="Aceptar" name="b_aceptar">
+            <a class="modal-close btn red">Cancelar</a>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,68 @@
+<%- include('../includes/sideBarGeneral.ejs') %>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            M.AutoInit();
+        });
+    </script>
+
+    <!-- Reportes -->
+    <div class=" row center">
+        <h3 style="margin-bottom:25px">Indicadores</h3>
+    </div>
+    <div class="row center">
+        <%- include('componentes/bloques/dropdowns/dropdownNombre.ejs') %>
+    </div>
+    <div class="row center">
+        <!-- SOLO RECURSOS HUMANOS Y EL ADMIN PUEDEN AGREGAR UN INDICADOR  (mhernandez es rh y 91900 es admin)-->
+        <% if (rol == 'recursosHumanos' || rol == 'admin') { %>
+            <%- include('componentes/botones/agregarIndicador.ejs') %>
+        <% } %>
+    </div>
+    <div class="row">
+        <div class="col s12 m2 l13"></div>
+        <h6>Mostrando Indicadores del Mes de <%= nombreMes %></h6>
+    </div>
+    <% if(indicadores.length > 0 && nombreIndicador == "fail") { %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartasIndicadores.ejs') %>
+        </div>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartasIndicadores2.ejs') %>
+        </div>
+        
+    <% } else if(indicadores.length > 0 && nombreIndicador == "NPS"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaNPS.ejs') %>
+        </div>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "ENPS"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaENPS.ejs') %>
+        </div>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Reducción de CO2"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaCO2.ejs') %>
+        </div>  
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Hombres y Mujeres"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaHombresMujeres.ejs') %>
+        </div>
+    <%} else if(indicadores.length > 0 && nombreIndicador == "Mujeres"){ %>
+        <div class="row">
+            <div class="col s12 m2 l13"></div>
+            <%- include('componentes/bloques/cartas/cartaMujeres.ejs') %>
+        </div>
+    <% } else{ %>
+        <h4 class="center">No Hay ningun tipo de Indicador para este Mes</h4>
+    <% } %>
+    
+    
+<%- include('../includes/footer.ejs') %>

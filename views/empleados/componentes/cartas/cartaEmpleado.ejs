@@ -1,0 +1,61 @@
+<div class="row">
+    <div class="col s12 m2 l13"></div>
+    <div class="col s12 m8 l13">
+        <div class="card" style="border-radius: 15px;" data-sol-id="<%=empleado.idEmpleado %>">
+            <div class="card-content" style="padding: 10px;">
+                <div class="row">
+                    <div class="col s12 m7 l13">
+                        <span class='txt'>
+                            <h5 style="margin-left: 5%;">
+                                <span style="font-weight: 600;">Nombre del Empleado:</span> <%= empleado.nombre + " " + empleado.apellidoPaterno + " " + empleado.apellidoMaterno %>
+                            </h5>
+                        </span>
+                    </div>
+                    <div class="col s12 m2 l13"></div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m7 l13">
+                        <h6 style="margin-left: 5%;">
+                            <span style="font-weight: 600;">Fecha de Nacimiento:</span> <%= empleado.fechaNac.getDate() + '/' + (empleado.fechaNac.getMonth() + 1) + '/' + empleado.fechaNac.getFullYear()  %>
+                        </h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6 l13">
+                        <h6 style="margin-left: 1.85vw;">
+                            <span style="font-weight: 600;">Vacaciones Totales:</span> <%= empleado.vacacionesTotales%> |
+                            <span style="font-weight: 600;">Natgas Blocks:</span> <%= empleado.cantidadNatgasBlocks%>
+                        </h6>
+                    </div>
+                    <div class="col s12 m1 l13"></div>
+                    <div class="col s12 m2 l13" style="display:inline-flex;">
+                        <%- include('../botones/botonModificar.ejs') %>
+                        <span style="margin-left:2vw;"></span>
+                        <%- include('../botones/botonEliminar.ejs',{idEmpleado: empleado.idEmpleado}) %>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 m6 l13">
+                        <h6 style="margin-left: 1.8vw;">
+                           <span style="font-weight: 600;">Fecha de Ingreso: </span>
+                           <%= empleado.fechaIngr.getDate() + '/' + (empleado.fechaIngr.getMonth() + 1) + '/' + empleado.fechaIngr.getFullYear() %> |
+                           <span style="font-weight: 600;">Area:</span> <%= empleado.nombreArea %>
+                        </h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <h6 style="margin-left: 2.4vw;">
+                        <span style="font-weight: 600;">
+                            Numero Telefonico: 
+                        </span>
+                            <%= empleado.numTelefonico%> | 
+                        <span style="font-weight: 600;">Plaza:</span> <%= empleado.nombrePlaza %> | 
+                        <span style="font-weight: 600;">Rol:</span> <%= empleado.nombreRolEmpresa %>
+                    </h6>
+                </div>
+            </div>
+            <div class="card-image waves-effect waves-block waves-light"></div>
+        </div>
+    </div>
+</div>
