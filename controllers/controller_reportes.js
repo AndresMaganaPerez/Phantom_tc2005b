@@ -281,6 +281,7 @@ exports.reportes = (request, response, next) => {
 };
 
 exports.nuevo_reporte = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarIndicador')) {
     console.log("Nuevo Reporte");
     Reportes.fecthTipos().then(([rows, fieldData]) => {
         console.log("All from tabla tipo_indicadores")
@@ -295,10 +296,13 @@ exports.nuevo_reporte = (request, response, next) => {
     }).catch((error) => {
         console.log(error);
     });
-
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.post_nuevo_reporte = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarIndicador')) {
     const month = ["01","02","03","04","05","06","07","08","09","10","11","12"];
     const d = new Date();
     let mes = month[d.getMonth()]-1;
@@ -355,10 +359,13 @@ exports.post_nuevo_reporte = (request, response, next) => {
     }).catch((error) => {
         console.log(error);
     });
-
+    } else {
+        response.redirect('/Unauthorized');
+    }
 }
 
 exports.modificar_reporte = (request, response, next) => {
+    if (request.session.privilegios.includes('modificarIndicador')) {
     console.log("Modificar Reporte");
     const idIndicador = request.params.idIndicador = '' ? '' : request.params.idIndicador;
     console.log("ID del Indicador a Editar: " + idIndicador)
@@ -376,10 +383,13 @@ exports.modificar_reporte = (request, response, next) => {
     }).catch((err) => {
         console.log(err);
     });
-    
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.post_modificar_reporte = (request, response, next) => {
+    if (request.session.privilegios.includes('modificarIndicador')) {
     const idIndicador = request.body.idIndicador;
     const valor = request.body.valor
     const valorNuevo = request.body.nuevoValor;
@@ -400,8 +410,9 @@ exports.post_modificar_reporte = (request, response, next) => {
     }).catch((err) => {
         console.log(err);
     });
-
-    
+    } else {
+        response.redirect('/Unauthorized');
+    }    
 };
 
 

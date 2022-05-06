@@ -18,6 +18,7 @@ const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET)
 const resultadosPorPagina = 10;
 
 exports.solicitarVacaciones = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarVacacion')) {
     console.log(request.body);
     const date = new Date();
     const fechaSolAux = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
@@ -37,10 +38,12 @@ exports.solicitarVacaciones = (request, response, next) => {
     .catch((error) => {
         console.log(error);
     })
-
+    } else {
+        response.redirect('/Unauthorized');
+    } 
 };
 
-exports.cancelarSolicitud = (request, response, next) =>{
+exports.cancelarSolicitud = (request, response, next) => {
     function diasVacaciones(fechaI, fechaF) {
         let fechaInicio = new Date(fechaI);
         const fechaFin = new Date(fechaF);
@@ -190,6 +193,7 @@ exports.descarga = (request, response, next) => {
 
 // Controlador para desplegar las solicitudes enviadas al lider en sesión.
 exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarEstatusVacacion')) {
     const flag = '';
     Solicitudes.fetchSolVacParaLider(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
@@ -206,6 +210,10 @@ exports.solicitudesVacacionesSinEstatus = (request, response, next) => {
         .catch((err) => {
             console.log(err);
         });
+    } else {
+        response.redirect('/Unauthorized');
+    }
+
 };
 
 // Controlador para Aceptar Solicitudes de Vacaciones
@@ -319,6 +327,7 @@ exports.rechazarSolicitudesEstatus = (request, response, next) => {
 }
 
 exports.estatusMisVacaciones = (request, response, next) => {
+    if (request.session.privilegios.includes('consultarVac')) {
     Solicitudes.fetchMisVacaciones(request.session.empleado.idEmpleado)
         .then(([rows, fieldData]) => {
             const currentDate = new Date();
@@ -366,9 +375,11 @@ exports.estatusMisVacaciones = (request, response, next) => {
         .catch((err) => {
             console.log(err);
         });
+    }
 }
 
 exports.postSolicitarVacaciones = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarVacacion')) {
     const vacacion = new Solicitudes(request.session.empleado.idEmpleado, request.body.fechaInicio, request.body.fechaFin, request.body.fechaReanudacion, request.body.suplente);
     
     function diasVacaciones(fechaI, fechaF) {
@@ -447,10 +458,13 @@ exports.postSolicitarVacaciones = (request, response, next) => {
     .catch((error) => {
         console.log(error);
     });
-
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.estatusVacaciones = (request, response, next) => {
+    if (request.session.privilegios.includes('consultarVacAdmRH')) {
     Solicitudes.fetchAllVacaciones().then(([rows, fieldData]) => {
         const data = rows;
         const monar = '';
@@ -503,6 +517,9 @@ exports.estatusVacaciones = (request, response, next) => {
         }).catch((error) => {
             console.log(error);
         });
+    } else {
+        response.redirect('/Unauthorized');
+    }    
 };
 
 // Funcion Filtrar solicitudes de vacaciones por Mes y Área
