@@ -14,6 +14,7 @@ const storage = new Storage({
 const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET)
 
 exports.banners = (request, response, next) => {
+    if (request.session.privilegios.includes('consultarBanner')) {
 
     const flag = request.session.flag;
     delete request.session.flag;
@@ -30,9 +31,17 @@ exports.banners = (request, response, next) => {
                 flag: flag
             });
         })
+        .catch((error) => {
+            console.log(error);
+        })
+    } else {
+        response.redirect('/Unauthorized');
+    }     
 };
 
 exports.vistaAgregarBanner = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarBanner')) {
+
     console.log('Crear nuevo banner');
     let date = new Date(); // Modificar dentro del paréntesis la fecha para hacer pruebas. Ej. ('Dec 10, 2022')
     date.setMonth(date.getMonth() + 2);
@@ -50,9 +59,13 @@ exports.vistaAgregarBanner = (request, response, next) => {
         date: dateStr,
         flag: flag
     });
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.agregarBanner = (request, response, next) => {
+    if (request.session.privilegios.incldues('registrarBanner')){
     console.log('Creación en proceso');
 
     const today = new Date();
@@ -111,6 +124,9 @@ exports.agregarBanner = (request, response, next) => {
             flag: flag
         });
     }
+    } else {
+        response.redirect('/Unauthorized');
+    } 
 };
 
 exports.eliminarBanner = (request, response, next) => {

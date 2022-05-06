@@ -41,6 +41,7 @@ exports.anuncios = (request, response, next) => {
 };
 
 exports.nuevoAnuncio = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarAnuncio')) {
     const flag = '';
     
     response.render('anuncios/crearAnuncio',{
@@ -50,9 +51,13 @@ exports.nuevoAnuncio = (request, response, next) => {
         fechaDeHoy: datetime,
         flag: flag
     });
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.postAnuncio = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarAnuncio')) {
     let date= new Date();
     let today = Date.now();
     let mes = date.getMonth() + 1;
@@ -116,6 +121,9 @@ exports.postAnuncio = (request, response, next) => {
             fechaDeHoy: datetime,
             flag: flag
         });
+    }
+    } else {
+        response.redirect('/Unauthorized');
     }
 };
 
