@@ -190,6 +190,7 @@ exports.logout = (request, response, next) => {
 }
 
 exports.formEmpleados = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarEmpleados')) {
     empleados.fetchEmpleadosSinRegistrar()
     .then(([empleado, fieldData]) => {
         empleados.fetchAreas()
@@ -232,9 +233,13 @@ exports.formEmpleados = (request, response, next) => {
     .catch((error) => {
         console.log(error);
     });
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.registrarEmpleado = (request, response, next) => {
+
     empleados.findRegistroEmpleado(request.body.idEmpleado)
     .then(([empleado, fieldData]) => {
         const infoEmpleado = empleado[0];
@@ -397,6 +402,7 @@ exports.rechazarRegistroEmpleado = (request, response, next) => {
 };
 
 exports.usuarios = (request,response,next) =>{
+    if (request.session.privilegios.includes('consultarEmpleado')) {
     if(request.session.rol == "admin"){
         empleados.fetchEmpleadoYRolADMIN(request.session.empleado.idEmpleado)
     .then(([rows,fieldData]) =>{
@@ -411,7 +417,7 @@ exports.usuarios = (request,response,next) =>{
     }).catch((error) => {
         console.log(error);
     });
-    }else{
+    } else {
 
     empleados.fetchEmpleadoYRol()
     .then(([rows,fieldData]) =>{
@@ -426,10 +432,14 @@ exports.usuarios = (request,response,next) =>{
     }).catch((error) => {
         console.log(error);
     });
-}
+    }
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.buscarUsuario = (request, response, next) => {
+    if (request.session.privilegios.includes('consultarEmpleado')) {
     if(request.session.rol == "admin"){
         empleados.fetchEmpleadoADMIN(request.session.empleado.idEmpleado, request.params.criterio)
     .then(([rows,FieldData]) => {
@@ -440,7 +450,10 @@ exports.buscarUsuario = (request, response, next) => {
     .then(([rows,FieldData]) => {
         response.status(200).json(rows);
     }).catch(error =>{console.log(error);})
-}
+    }
+    } else {
+        response.redirect('/Unauthorized');
+    }
 }
 
 exports.borrarUsuario = (request, response, next) => {

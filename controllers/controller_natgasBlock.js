@@ -8,6 +8,7 @@ const datetime = currentdate.getDate() + "/"
 const resultadosPorPagina = 10;
 
 exports.solicitarNatgasBlock = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarNGB')) {
     console.log(request.body);
     console.log("Solicitar mi Natgas Block");
     NGB.getUltimaSolcitud(request.session.empleado.idEmpleado)
@@ -29,10 +30,13 @@ exports.solicitarNatgasBlock = (request, response, next) => {
         });
         //console.log(rows);
     }).catch((err) =>{console.log(err)});
-    
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.postDeSolicitud = (request,response,next) => {
+    if (request.session.privilegios.includes('registrarNGB')) {
     const fechaUso = new Date(request.body.fecha);
     const flag = fechaUso.getUTCDay() == 0 || fechaUso.getUTCDay() == 6 ? 'FUSB' : 'success';
     if (flag == 'success'){
@@ -85,9 +89,13 @@ exports.postDeSolicitud = (request,response,next) => {
             console.log(error);
         });
     }
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarEstatusNGB')) {
     NGB.fetchNGBPorAceptar(request.session.empleado.idEmpleado).then(([rows, fieldData]) => {
         const flag = '';
         response.render('natgasBlock/aceptarEstatusSolicitudesNGB', {
@@ -100,9 +108,13 @@ exports.solicitudesAceptarNatgasBlock = (request, response, next) => {
     }).catch((err) => {
         console.log(err);
     });
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
+    if (request.session.privilegios.includes('consultarEstatusNGB')) {
     console.log("Consultar Solicitudes NGB");
     NGB.fetchAreas()
     .then(([areas, fieldData]) => {
@@ -145,9 +157,13 @@ exports.solicitudesEstatusNatgasBlock = (request, response, next) => {
     .catch((error) => {
         console.log(error);
     })
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 exports.aceptarNGB = (request, response, next) => {
+    if (request.session.privilegios.includes('registrarEstatusNGB')) {
     const flag = 'ngbAceptada';
     NGB.getNGBInfo(request.body.idngb)
     .then(([ngb,fieldData]) => {
@@ -174,6 +190,9 @@ exports.aceptarNGB = (request, response, next) => {
     .catch((error) => {
         console.log(error);
     })
+    } else {
+        response.redirect('/Unauthorized');
+    }
 };
 
 // Funcion Filtrar solicitudes de NGB por Mes
